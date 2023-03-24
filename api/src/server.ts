@@ -6,6 +6,8 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
+import AppError from './utils/appError';
+import globalErrorHandler from './controllers/error.controllers';
 
 const app = express()
   .use(express.json({ limit: '10kb' }))
@@ -17,6 +19,8 @@ app.enable('trust proxy');
 app.options('*', cors());
 
 app.enable('trust proxy');
+
+console.log('env: ', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -48,11 +52,18 @@ app.use(
 app.use(compression());
 
 //routes
-
-app.all('*', (req: Request, res: Response, next: NextFunction) => {
-  //here handling error
+app.get('/api/v1/example', (req, res, next) => {
+  return res.status(200).json({
+    ok: true,
+  });
 });
 
-// app.use(/* globalErrorHandler */);
+app.all('*', (req: Request, res: Response, next: NextFunction) => {
+  return next(
+    new AppError(`Can't find ${req.originalUrl} on this server!`, 404),
+  );
+});
+
+app.use(globalErrorHandler);
 
 export default app;
