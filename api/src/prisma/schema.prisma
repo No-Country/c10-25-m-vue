@@ -9,3 +9,85 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserRole {
+  user
+  vet
+  admin
+}
+
+enum UserStatus {
+  active
+  inactive
+  banned
+}
+
+enum AppointmentStatus {
+  pending
+  completed
+  cancelled
+}
+
+model User {
+  id                Int        @id @default(autoincrement())
+  name              String
+  surname           String
+  email             String
+  password          String
+  passwordChangedAt DateTime
+  role              UserRole
+  status            UserStatus
+  Vet               Vet[]
+  Pet               Pet[]
+  Review            Review[]
+}
+
+model Vet {
+  id          Int           @id @default(autoincrement())
+  phone       String
+  speciality  String
+  user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     Int
+  status      Boolean
+  Review      Review[]
+  Appointment Appointment[]
+}
+
+model Animal {
+  id     Int     @id @default(autoincrement())
+  name   String
+  status Boolean
+  Pet    Pet[]
+}
+
+model Pet {
+  id          Int           @id @default(autoincrement())
+  name        String
+  animal      Animal        @relation(fields: [animal_id], references: [id], onDelete: Cascade)
+  animal_id   Int
+  user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     Int
+  status      Boolean
+  Appointment Appointment[]
+}
+
+model Review {
+  id      Int    @id @default(autoincrement())
+  comment String
+  score   Int
+  vet     Vet    @relation(fields: [vet_id], references: [id], onDelete: Cascade)
+  vet_id  Int
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id Int
+}
+
+model Appointment {
+  id     Int               @id @default(autoincrement())
+  date   DateTime
+  reason String
+  vet    Vet               @relation(fields: [vet_id], references: [id], onDelete: Cascade)
+  vet_id Int
+  pet    Pet               @relation(fields: [pet_id], references: [id], onDelete: Cascade)
+  pet_id Int
+  status AppointmentStatus
+}
