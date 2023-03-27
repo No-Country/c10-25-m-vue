@@ -32,11 +32,13 @@ model User {
   id                Int        @id @default(autoincrement())
   name              String
   surname           String
-  email             String
+  email             String     @unique
   password          String
-  passwordChangedAt DateTime
+  passwordChangedAt DateTime?
   role              UserRole
-  status            UserStatus
+  status            UserStatus @default(active)
+  created_at        DateTime   @default(now())
+  updated_at        DateTime   @updatedAt
   Vet               Vet[]
   Pet               Pet[]
   Review            Review[]
@@ -48,16 +50,20 @@ model Vet {
   speciality  String
   user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     Int
-  status      Boolean
+  status      Boolean       @default(true)
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
   Review      Review[]
   Appointment Appointment[]
 }
 
 model Animal {
-  id     Int     @id @default(autoincrement())
-  name   String
-  status Boolean
-  Pet    Pet[]
+  id         Int      @id @default(autoincrement())
+  name       String
+  status     Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  Pet        Pet[]
 }
 
 model Pet {
@@ -67,27 +73,33 @@ model Pet {
   animal_id   Int
   user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     Int
-  status      Boolean
+  status      Boolean       @default(true)
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
   Appointment Appointment[]
 }
 
 model Review {
-  id      Int    @id @default(autoincrement())
-  comment String
-  score   Int
-  vet     Vet    @relation(fields: [vet_id], references: [id], onDelete: Cascade)
-  vet_id  Int
-  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id Int
+  id         Int      @id @default(autoincrement())
+  comment    String
+  score      Int
+  vet        Vet      @relation(fields: [vet_id], references: [id], onDelete: Cascade)
+  vet_id     Int
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Appointment {
-  id     Int               @id @default(autoincrement())
-  date   DateTime
-  reason String
-  vet    Vet               @relation(fields: [vet_id], references: [id], onDelete: Cascade)
-  vet_id Int
-  pet    Pet               @relation(fields: [pet_id], references: [id], onDelete: Cascade)
-  pet_id Int
-  status AppointmentStatus
+  id         Int               @id @default(autoincrement())
+  date       DateTime
+  reason     String
+  vet        Vet               @relation(fields: [vet_id], references: [id], onDelete: Cascade)
+  vet_id     Int
+  pet        Pet               @relation(fields: [pet_id], references: [id], onDelete: Cascade)
+  pet_id     Int
+  status     AppointmentStatus @default(pending)
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
 }

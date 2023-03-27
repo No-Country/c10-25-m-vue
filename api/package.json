@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Back End for pet-clinic",
   "main": "index.js",
+  "prisma": {
+    "seed": "node --require esbuild-register src/prisma/seed.ts"
+  },
   "scripts": {
     "build": "tsc -p .",
     "start:dev": "nodemon src/index.ts",
