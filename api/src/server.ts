@@ -18,8 +18,6 @@ const app = express()
 app.enable('trust proxy');
 app.options('*', cors());
 
-app.enable('trust proxy');
-
 console.log('env: ', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'development') {
@@ -36,18 +34,7 @@ app.use('/api', limiter);
 
 app.use(xss());
 
-app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price',
-    ],
-  }),
-);
+app.use(hpp());
 
 app.use(compression());
 
