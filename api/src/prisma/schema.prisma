@@ -36,6 +36,7 @@ model User {
   password          String
   passwordChangedAt DateTime?
   role              UserRole
+  profileImageUrl   String?
   status            UserStatus @default(active)
   created_at        DateTime   @default(now())
   updated_at        DateTime   @updatedAt
@@ -60,6 +61,7 @@ model Vet {
 model Animal {
   id         Int      @id @default(autoincrement())
   name       String
+  image      String?
   status     Boolean  @default(true)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
