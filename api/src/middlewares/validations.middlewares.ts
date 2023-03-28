@@ -16,20 +16,24 @@ const validateFields = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const createUserValidator = [
-  body('name', 'the name is required').not().isEmpty(),
-  body('surname', 'the surname is required').not().isEmpty(),
-  body('email', 'the email is required').not().isEmpty(),
-  body('email', 'The email must be a correct format').isEmail(),
+  body('name').not().isEmpty().withMessage('the name is required'),
+  body('surname').not().isEmpty().withMessage('the surname is required'),
+  body('email')
+    .not()
+    .isEmpty()
+    .withMessage('the email is required')
+    .isEmail()
+    .withMessage('The email must be a correct format'),
   body('password')
     .isLength({ min: 8, max: 16 })
-    .withMessage('La contraseña debe tener entre 8 y 16 caracteres')
+    .withMessage('Password must be between 8 and 16 characters')
     .matches(/[a-z]/)
-    .withMessage('La contraseña debe contener al menos una letra minúscula')
+    .withMessage('Password must contain at least one lowercase letter')
     .matches(/[A-Z]/)
-    .withMessage('La contraseña debe contener al menos una letra mayúscula')
+    .withMessage('Password must contain at least one capital letter')
     .matches(/[0-9]/)
-    .withMessage('La contraseña debe contener al menos un número')
+    .withMessage('Password must contain at least one number')
     .matches(/[$&+,:;=?@#|'<>.^*()%!-]/)
-    .withMessage('La contraseña debe contener al menos un caracter especial'),
+    .withMessage('Password must contain at least one special character'),
   validateFields,
 ];

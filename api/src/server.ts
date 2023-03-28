@@ -1,13 +1,15 @@
+import AppError from './utils/appError';
 import compression from 'compression';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
+import globalErrorHandler from './controllers/error.controllers';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
-import AppError from './utils/appError';
-import globalErrorHandler from './controllers/error.controllers';
+
+import authRouter from './routes/auth.routes';
 
 const app = express()
   .use(express.json({ limit: '10kb' }))
@@ -39,11 +41,7 @@ app.use(hpp());
 app.use(compression());
 
 //routes
-app.get('/api/v1/example', (req, res, next) => {
-  return res.status(200).json({
-    ok: true,
-  });
-});
+app.use('/api/v1/auth', authRouter);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
   return next(

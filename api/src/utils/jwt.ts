@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const generateJWT = (id: number) => {
+export const generateJWT = (id: number): Promise<string> => {
   return new Promise((resolve, reject) => {
     const payload = { id };
 
@@ -16,7 +16,7 @@ export const generateJWT = (id: number) => {
           reject(err);
         }
 
-        resolve(token);
+        resolve(token!);
       },
     );
   });
