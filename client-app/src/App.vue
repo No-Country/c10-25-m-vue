@@ -23,12 +23,13 @@ export default defineComponent({
 });
 </script>
 
-<style lang="sass">
-.App {
+<style lang="scss">
+
+.App{
   text-align: center;
   position: relative;
   width: 100%;
   height: 100%;
-  border:2px solid red;
+  border:2px solid red;           
 }
 </style>
