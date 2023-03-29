@@ -9,7 +9,9 @@ import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
 
-import authRouter from './routes/auth.routes';
+import router from './routes/index';
+
+import { StatusCodes } from 'http-status-codes';
 
 const app = express()
   .use(express.json({ limit: '10kb' }))
@@ -41,11 +43,14 @@ app.use(hpp());
 app.use(compression());
 
 //routes
-app.use('/api/v1/auth', authRouter);
+app.use('/api/v1', router);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
   return next(
-    new AppError(`Can't find ${req.originalUrl} on this server!`, 404),
+    new AppError(
+      `Can't find ${req.originalUrl} on this server!`,
+      StatusCodes.BAD_REQUEST,
+    ),
   );
 });
 
