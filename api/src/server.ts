@@ -1,13 +1,17 @@
+import AppError from './utils/appError';
 import compression from 'compression';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
+import globalErrorHandler from './controllers/error.controllers';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
-import AppError from './utils/appError';
-import globalErrorHandler from './controllers/error.controllers';
+
+import router from './routes/index';
+
+import { StatusCodes } from 'http-status-codes';
 
 const app = express()
   .use(express.json({ limit: '10kb' }))
@@ -39,15 +43,14 @@ app.use(hpp());
 app.use(compression());
 
 //routes
-app.get('/api/v1/example', (req, res, next) => {
-  return res.status(200).json({
-    ok: true,
-  });
-});
+app.use('/api/v1', router);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
   return next(
-    new AppError(`Can't find ${req.originalUrl} on this server!`, 404),
+    new AppError(
+      `Can't find ${req.originalUrl} on this server!`,
+      StatusCodes.BAD_REQUEST,
+    ),
   );
 });
 
