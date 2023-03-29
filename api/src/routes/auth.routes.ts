@@ -2,11 +2,17 @@ import express from 'express';
 import upload from './../utils/multer';
 
 //middlewares
-import { createUserValidator } from './../middlewares/validations.middlewares';
-import { validIfExistEmail } from './../middlewares/auth.middlewares';
+import {
+  createUserValidator,
+  LoginValidation,
+} from './../middlewares/validations.middlewares';
+import {
+  validIfExistEmail,
+  validIfExistUserByEmail,
+} from './../middlewares/auth.middlewares';
 
 //controllers
-import { signup } from './../controllers/auth.controllers';
+import { signin, signup } from './../controllers/auth.controllers';
 
 const router = express.Router();
 
@@ -17,5 +23,7 @@ router.post(
   validIfExistEmail,
   signup,
 );
+
+router.post('/signin', LoginValidation, validIfExistUserByEmail, signin);
 
 export default router;
