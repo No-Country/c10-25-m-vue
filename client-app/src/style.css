@@ -4,6 +4,7 @@
   --bg-btn:#3A57E8;
   --text-nav:#2E46BA;
   --text-light-btn:#FFFFFF;
+  --bg-footer:#E3E8FC;
 }
 
 * {
@@ -20,7 +21,8 @@
 body {
   scroll-behavior: smooth;
   background-color: var(--color-bg);
-  line-height: 1.8em;
+  margin: 0;
+  padding: 0;
   position: relative;
   height: 100vh;
 }

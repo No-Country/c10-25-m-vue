@@ -1,6 +1,6 @@
 <template>
     <div class="header-container-with-logo-nav-registration">
-        <img src="../../assets/vue.svg" alt="" class="logo">
+        <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="" class="logo">
         <nav>
             <ul v-for="(elementosNav, index) in navItems" :key="index">
                 <li>{{ elementosNav }}</li>
@@ -23,7 +23,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'Header',
   setup() {
-const navItems = ref(['elemento1', 'elemento2', 'elemento3']);
+const navItems = ref(['Inicio', 'Servicios', 'Por qué elegirnos']);
 
 return {
     navItems,
@@ -41,20 +41,29 @@ return {
     justify-content: space-between;
     align-items: center;
     background: var(--bg-header);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .header-container-with-logo-nav-registration .logo{
     margin-left: 15px;
+    width: 50px;
 }
 
 .header-container-with-logo-nav-registration nav {
     display: inline-flex;
-    gap: 12px;
+    gap: 20px;
 }
 
 .header-container-with-logo-nav-registration nav ul li{
     color:var(--text-nav);
-    gap: 5px;
+    gap: 15px;
+    margin-left: 10px;
+    cursor:pointer;
+   
+}
+
+.header-container-with-logo-nav-registration nav ul li:hover{
+    text-decoration: underline;
 }
 
 
