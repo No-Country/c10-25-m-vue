@@ -1,3 +1,8 @@
+/* font-family title */
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+/* font-family text */
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Jost&display=swap');
+
 :root {
   --color-bg: #FFFFFF;
   --bg-header: #FFFFFF;
@@ -5,7 +10,9 @@
   --text-nav:#2E46BA;
   --text-light-btn:#FFFFFF;
   --bg-footer:#E3E8FC;
+  --text-footer:#383B43;
 }
+
 
 * {
   margin: 0;
