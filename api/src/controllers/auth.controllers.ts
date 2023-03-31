@@ -77,3 +77,33 @@ export const signin = catchAsync(
     });
   },
 );
+
+export const renewToken = catchAsync(
+  async (req: URequest, res: Response, next: NextFunction) => {
+    const { id } = req.sessionUser;
+
+    const token = await generateJWT(id);
+
+    const user = await db.user.findFirst({
+      where: {
+        id,
+        status: 'active',
+      },
+    });
+
+    if (!user) {
+      return next(new AppError('User not found', StatusCodes.NOT_FOUND));
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  },
+);
