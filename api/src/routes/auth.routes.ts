@@ -9,7 +9,7 @@ import {
 import {
   validIfExistEmail,
   validIfExistUserByEmail,
-} from './../middlewares/auth.middlewares';
+} from './../middlewares/user.middlewares';
 
 //controllers
 import { signin, signup } from './../controllers/auth.controllers';

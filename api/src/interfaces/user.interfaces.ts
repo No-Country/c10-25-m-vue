@@ -18,6 +18,7 @@ export interface User {
   updated_at: Date;
 }
 
-interface URequest extends Request {
+export interface URequest extends Request {
   user?: any;
+  sessionUser?: any;
 }
