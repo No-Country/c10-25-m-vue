@@ -7,10 +7,10 @@
             </ul>
         </nav>
         <div class="btn-container-session">
-            <button>
-                Inicio Sesion
+            <button @click="toggleBackground"  v-bind:class="!noBackground ? 'no-background' : 'btn__on-background'">
+              Inicio de Sesion
             </button>
-            <button>
+            <button @click="toggleBackground" :class="noBackground ? 'no-background' : 'btn__on-background'" >
                 Registrate
             </button>
         </div>
@@ -18,22 +18,47 @@
 </template>
 
 <script  lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  name: 'Header',
+import { ref, Ref } from 'vue';
+ 
+export default {
   setup() {
 const navItems = ref(['Inicio', 'Servicios', 'Por qué elegirnos']);
+const noBackground: Ref<boolean> = ref(false);
 
 return {
     navItems,
+    noBackground,
+    toggleBackground,
 };
+
+
+function toggleBackground() {
+      noBackground.value = !noBackground.value;
+    }
+
   },
-});
+}
+
 </script>
 
 <style lang="scss" scoped>
+.no-background {
+ background-color: transparent !important;
+ color: #2E46BA;
 
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+width: 133px;
+height: 51px;
+border-radius: 4px;
+
+cursor: pointer;
+}
 .header-container-with-logo-nav-registration{
     width: 100%;
     height: 80px;
@@ -73,9 +98,17 @@ return {
     margin-right: 15px;
 }
 
-.btn-container-session button{
+.btn-container-session .btn__on-background {
 background: var(--bg-btn);
-padding: 10px;
+box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+width: 133px;
+height: 51px;
 border-radius: 4px;
 color:var(--text-light-btn);
 cursor: pointer;
