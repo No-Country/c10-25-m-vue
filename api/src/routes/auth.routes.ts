@@ -12,7 +12,8 @@ import {
 } from './../middlewares/user.middlewares';
 
 //controllers
-import { signin, signup } from './../controllers/auth.controllers';
+import { renewToken, signin, signup } from './../controllers/auth.controllers';
+import { protect } from '../middlewares/auth.middlewares';
 
 const router = express.Router();
 
@@ -25,5 +26,9 @@ router.post(
 );
 
 router.post('/signin', LoginValidation, validIfExistUserByEmail, signin);
+
+router.use(protect);
+
+router.get('/renew', renewToken);
 
 export default router;
