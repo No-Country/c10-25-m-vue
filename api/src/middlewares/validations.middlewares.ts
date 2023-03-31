@@ -37,3 +37,7 @@ export const createUserValidator = [
     .withMessage('Password must contain at least one special character'),
   validateFields,
 ];
+
+export const createAnimalValidator = [
+  body('name').not().isEmpty().withMessage('Name is required')
+]
