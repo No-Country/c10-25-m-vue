@@ -34,6 +34,9 @@ return {
 
 <style lang="scss" scoped>
 
+
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
 .header-container-with-logo-nav-registration{
     width: 100%;
     height: 80px;
@@ -59,6 +62,7 @@ return {
     gap: 15px;
     margin-left: 10px;
     cursor:pointer;
+    font-family: 'Jost', sans-serif;
    
 }
 
@@ -71,6 +75,7 @@ return {
     display: flex;
     gap: 10px;
     margin-right: 15px;
+    font-family: 'Jost', sans-serif;
 }
 
 .btn-container-session button{
@@ -79,6 +84,7 @@ padding: 10px;
 border-radius: 4px;
 color:var(--text-light-btn);
 cursor: pointer;
+font-family: 'Jost', sans-serif;
 }
 
 </style>

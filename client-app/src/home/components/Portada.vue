@@ -1,6 +1,6 @@
 <template>
     <div class="portada-container-with-fondo">
-        <img src="../../assets/home_img/imagen_home_cuerpo.jpg" alt="" class="portada_veterinaria">
+        <img src="../../assets/home_img/imagen_home_cuerpo.png" alt="" class="portada_veterinaria">
     </div>
 </template>
 
