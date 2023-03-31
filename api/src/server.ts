@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import AppError from './utils/appError';
 import compression from 'compression';
 import cors from 'cors';
@@ -10,8 +11,6 @@ import rateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
 
 import router from './routes/index';
-
-import { StatusCodes } from 'http-status-codes';
 
 const app = express()
   .use(express.json({ limit: '10kb' }))
