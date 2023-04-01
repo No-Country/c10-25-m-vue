@@ -1,39 +1,66 @@
 <template>
     <div class="header-container-with-logo-nav-registration">
-        <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="" class="logo">
+        <img src="../../assets/home_img/logo_huellitas.png" alt="" class="logo">
         <nav>
             <ul v-for="(elementosNav, index) in navItems" :key="index">
                 <li>{{ elementosNav }}</li>
             </ul>
         </nav>
         <div class="btn-container-session">
-            <button>
-                Inicio Sesion
+            <button @click="toggleBackground"  v-bind:class="!noBackground ? 'no-background' : 'btn__on-background'">
+              Iniciar sesión
             </button>
-            <button>
-                Registrate
+            <button @click="toggleBackground" :class="noBackground ? 'no-background' : 'btn__on-background'" >
+                Registrarme
             </button>
         </div>
     </div>
 </template>
 
 <script  lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  name: 'Header',
+import { ref, Ref } from 'vue';
+ 
+export default {
   setup() {
 const navItems = ref(['Inicio', 'Servicios', 'Por qué elegirnos']);
+const noBackground: Ref<boolean> = ref(false);
 
 return {
     navItems,
+    noBackground,
+    toggleBackground,
 };
+
+
+function toggleBackground() {
+      noBackground.value = !noBackground.value;
+    }
+
   },
-});
+}
+
 </script>
 
 <style lang="scss" scoped>
 
+
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+.no-background {
+ background-color: transparent !important;
+ color: #2E46BA;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+width: auto;
+height: 51px;
+border-radius: 4px;
+font-family: 'Jost', sans-serif;
+font-size: 1.25rem;
+cursor: pointer;
+}
 .header-container-with-logo-nav-registration{
     width: 100%;
     height: 80px;
@@ -42,11 +69,13 @@ return {
     align-items: center;
     background: var(--bg-header);
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  
 }
 
 .header-container-with-logo-nav-registration .logo{
     margin-left: 15px;
-    width: 50px;
+    cursor: pointer;
+    
 }
 
 .header-container-with-logo-nav-registration nav {
@@ -57,8 +86,10 @@ return {
 .header-container-with-logo-nav-registration nav ul li{
     color:var(--text-nav);
     gap: 15px;
+    font-size: 1.25rem;
     margin-left: 10px;
     cursor:pointer;
+    font-family: 'Jost', sans-serif;
    
 }
 
@@ -71,14 +102,25 @@ return {
     display: flex;
     gap: 10px;
     margin-right: 15px;
+    font-family: 'Jost', sans-serif;
 }
 
-.btn-container-session button{
+.btn-container-session .btn__on-background {
 background: var(--bg-btn);
-padding: 10px;
+box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+width: auto;
+height: 51px;
+font-size: 1.25rem;
 border-radius: 4px;
 color:var(--text-light-btn);
 cursor: pointer;
+font-family: 'Jost', sans-serif;
 }
 
 </style>

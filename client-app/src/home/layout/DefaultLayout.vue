@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header>
+    <header >
       <!-- header content goes here -->
       <Header></Header>
     </header>
@@ -30,3 +30,12 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+header{
+  
+  position: relative;
+  z-index: 10;
+}
+
+</style>

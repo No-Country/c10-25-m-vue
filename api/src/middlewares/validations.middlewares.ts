@@ -41,3 +41,22 @@ export const createUserValidator = [
 export const createAnimalValidator = [
   body('name').not().isEmpty().withMessage('Name is required')
 ]
+export const LoginValidation = [
+  body('email')
+    .notEmpty()
+    .withMessage('The email is required')
+    .isEmail()
+    .withMessage('The email must be a correct format'),
+  body('password')
+    .isLength({ min: 8, max: 16 })
+    .withMessage('Password must be between 8 and 16 characters')
+    .matches(/[a-z]/)
+    .withMessage('Password must contain at least one lowercase letter')
+    .matches(/[A-Z]/)
+    .withMessage('Password must contain at least one capital letter')
+    .matches(/[0-9]/)
+    .withMessage('Password must contain at least one number')
+    .matches(/[$&+,:;=?@#|'<>.^*()%!-]/)
+    .withMessage('Password must contain at least one special character'),
+  validateFields,
+];
