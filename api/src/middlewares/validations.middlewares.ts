@@ -60,3 +60,4 @@ export const LoginValidation = [
     .withMessage('Password must contain at least one special character'),
   validateFields,
 ];
+
