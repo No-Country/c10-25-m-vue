@@ -45,12 +45,13 @@ return {
 .portada-container-with-fondo .portada_veterinaria{
   width: 100%;
     height: 572px;
-    background-image: url(../../assets/home_img/imagen_home_cuerpo.png);
+    background-image: url(../../assets/home_img/imagen_home_cuerpo4k.png);
     position:relative;
     background-size: cover;
-    margin-top: -8.8%;
+    margin-top: -2.5%;
     background-repeat: no-repeat;
     z-index: 8;
+    background-position: bottom;
 }
 
 .grid-container {
