@@ -7,12 +7,13 @@
             </ul>
         </nav>
         <div class="btn-container-session">
-            <button @click="toggleBackground, goToLogin()"  v-bind:class="!noBackground ? 'no-background' : 'btn__on-background'">
+            <button @click="toggleBackground(), goToLogin()"  :class="!noBackground ? 'no-background' : 'btn__on-background'">
               Iniciar sesión
             </button>
-            <button @click="toggleBackground, goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
+            <button @click="toggleBackground(), goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
                 Registrarme
             </button>
+            {{noBackground}}
         </div>
     </div>
 </template>
