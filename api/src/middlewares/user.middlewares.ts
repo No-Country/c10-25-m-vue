@@ -16,7 +16,9 @@ export const validIfExistEmail = catchAsync(
       },
     });
 
-    if (user && ['inactive', 'banned'].includes(user.status)) {
+    console.log(user);
+
+    if (user && user.status === 'active') {
       //TODO: cambiar status a active
       return next(
         new AppError(`already exist an user with email: ${email}`, 400),
