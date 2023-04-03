@@ -1,16 +1,16 @@
 <template>
     <div class="header-container-with-logo-nav-registration">
-        <img src="../../assets/home_img/logo_huellitas.png" alt="" class="logo">
+        <img @click="goToHome()" src="../../assets/home_img/logo_huellitas.png" alt="" class="logo">
         <nav>
             <ul v-for="(elementosNav, index) in navItems" :key="index">
                 <li>{{ elementosNav }}</li>
             </ul>
         </nav>
         <div class="btn-container-session">
-            <button @click="toggleBackground"  v-bind:class="!noBackground ? 'no-background' : 'btn__on-background'">
+            <button @click="toggleBackground, goToLogin()"  v-bind:class="!noBackground ? 'no-background' : 'btn__on-background'">
               Iniciar sesión
             </button>
-            <button @click="toggleBackground" :class="noBackground ? 'no-background' : 'btn__on-background'" >
+            <button @click="toggleBackground, goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
                 Registrarme
             </button>
         </div>
@@ -19,16 +19,34 @@
 
 <script  lang="ts">
 import { ref, Ref } from 'vue';
- 
+import { useRouter } from 'vue-router'; 
 export default {
   setup() {
 const navItems = ref(['Inicio', 'Servicios', 'Por qué elegirnos']);
 const noBackground: Ref<boolean> = ref(false);
 
+const router = useRouter();
+
+function goToLogin() {
+  router.push('/login');
+}
+
+function goToRegister() {
+  router.push('/register');
+}
+
+function goToHome() {
+  router.push('/');
+}
+
+
 return {
     navItems,
     noBackground,
     toggleBackground,
+    goToHome,
+    goToLogin,
+    goToRegister
 };
 
 
@@ -69,6 +87,8 @@ cursor: pointer;
     align-items: center;
     background: var(--bg-header);
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    position: relative;
   
 }
 

@@ -94,20 +94,18 @@ text-align: center;
   color: white;
   font-family: 'Jost', sans-serif;
   border: none;
-padding: 8px 16px;
-gap: 10px;
-height: 62px;
-background: #3A57E8;
-box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
-border-radius: 10px;
-font-family: 'Jost';
-font-style: normal;
-font-weight: 400;
-font-size: 26px;
-line-height: 175%;
-margin-top:3%;
-cursor: pointer;
-color: #FFFFFF;
+  padding: 8px 16px;
+  gap: 10px;
+  height: 62px;
+  background: #3A57E8;
+  box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  margin-top:3%;
+  cursor: pointer;
+  color: #FFFFFF;
 }
 
 
