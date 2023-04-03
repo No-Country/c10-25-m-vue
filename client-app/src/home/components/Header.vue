@@ -13,7 +13,7 @@
             <button @click="toggleBackground(), goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
                 Registrarme
             </button>
-            {{noBackground}}
+           
         </div>
     </div>
 </template>
