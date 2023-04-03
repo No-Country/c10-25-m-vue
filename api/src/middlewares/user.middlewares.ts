@@ -36,6 +36,13 @@ export const validIfExistUserByEmail = catchAsync(
         email,
         status: 'active',
       },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        email: true,
+        profileImageUrl: true,
+      },
     });
 
     if (!user) {
@@ -44,6 +51,35 @@ export const validIfExistUserByEmail = catchAsync(
           `User with email: ${email}, not found`,
           StatusCodes.NOT_FOUND,
         ),
+      );
+    }
+
+    req.user = user;
+    next();
+  },
+);
+
+export const validIfExistUserById = catchAsync(
+  async (req: URequest, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    const user = await db.user.findFirst({
+      where: {
+        id: +id,
+        status: 'active',
+      },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        email: true,
+        profileImageUrl: true,
+      },
+    });
+
+    if (!user) {
+      return next(
+        new AppError(`User with id: ${id}, not found`, StatusCodes.NOT_FOUND),
       );
     }
 

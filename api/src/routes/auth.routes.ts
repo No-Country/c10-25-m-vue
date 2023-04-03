@@ -12,7 +12,8 @@ import {
 } from './../middlewares/user.middlewares';
 
 //controllers
-import { renewToken, signin, signup } from './../controllers/auth.controllers';
+import { signup, signin, renewToken } from './../controllers/auth.controllers';
+
 import { protect } from '../middlewares/auth.middlewares';
 
 const router = express.Router();
