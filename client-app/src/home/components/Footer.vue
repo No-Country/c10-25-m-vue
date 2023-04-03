@@ -47,11 +47,10 @@
 
 .container-footer{
     width: 100%;
-    height: 100%;
     background: var(--bg-footer);
-    padding:20px;
+    padding:1em;
     display: flex;
-    gap: 10px;
+    gap: 1em;
     
     color: var(--text-footer);
     font-family: Jost;
@@ -62,17 +61,18 @@
 }
 .logo_footer{
     display: flex;
-    padding: 20px;
+    padding: 1em; 
 
 }
 .logo_footer img{
-    width:150px;
-    height: 150px;
+    width: 7rem;
+    height: 7rem;
 }
 .titulo_footer{
-    width: 200px;
-    height: 150px;
-    margin-top: 40px;
+    width: 8rem;
+    height: 7rem;
+    margin-top: 1.6rem;
+
     display: block;
     align-self:center;
 
@@ -89,7 +89,7 @@
 
 }
 .contacto h3{
-    width: 140px;
+    width: 6rem;
     text-align: center;
     font-weight: 600;
 }
