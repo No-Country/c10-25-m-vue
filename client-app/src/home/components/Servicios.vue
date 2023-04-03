@@ -17,12 +17,12 @@
         </div>
         <p>Cirugía e internación</p>
       </li>
-      <li class="servicios_item items-b">
+      <li class="servicios_item items-b" id="farmacia">
         <div><img src="../../assets/home_img/pharmacy.png" alt="farmacia">
         </div>
         <p>Farmacia</p>
       </li>
-      <li class="servicios_item items-b">
+      <li class="servicios_item items-b" id="vacunacion">
         <div><img src="../../assets/home_img/jeringa.png" alt="jeringa">
         </div>
         <p>Vacunación</p>
@@ -61,6 +61,7 @@
 .servicios_list{
   margin: 2rem;
   padding: 2em;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(12, 2fr);
   grid-template-rows: repeat(2, 2fr);
@@ -71,11 +72,19 @@
   grid-column: span 4;
 }
 .items-b{
-  grid-column: span 6;
+  position: absolute;
+  top:60%;
+}
+#farmacia{
+  left: 27%;
+}
+#vacunacion{
+  right: 26%;
 }
 .servicios_item{
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
 }
 .servicios_item div{
