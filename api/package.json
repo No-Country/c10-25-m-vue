@@ -11,7 +11,8 @@
     "start:dev": "nodemon src/index.ts",
     "start:prod": "SET NODE_ENV=production&nodemon src/index.ts",
     "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "lint:fix": "eslint src --fix",
+    "primsa:gen":"npx prisma generate --schema=./src/prisma/schema.prisma"
   },
   "author": "c10-25-m-vue",
   "license": "ISC",
