@@ -39,7 +39,8 @@ export const createUserValidator = [
 ];
 
 export const createAnimalValidator = [
-  body('name').not().isEmpty().withMessage('Name is required')
+  body('name').not().isEmpty().withMessage('Name is required'),
+  validateFields
 ]
 export const LoginValidation = [
   body('email')

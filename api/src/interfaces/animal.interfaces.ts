@@ -1,8 +1,9 @@
 import { Response, Request } from "express";
 
-export interface AnimalRequest extends Request {
+export interface CreateAnimalRequest extends Request {
   body: {
-    id: number
+    name: string
+    image: string
   }
 
 }
