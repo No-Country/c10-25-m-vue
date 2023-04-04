@@ -62,3 +62,14 @@ export const LoginValidation = [
   validateFields,
 ];
 
+export const updateUserValidator = [
+  body('name').not().isEmpty().withMessage('the name is required'),
+  body('surname').not().isEmpty().withMessage('the surname is required'),
+  body('email')
+    .not()
+    .isEmpty()
+    .withMessage('the email is required')
+    .isEmail()
+    .withMessage('The email must be a correct format'),
+  validateFields,
+];
