@@ -22,3 +22,8 @@ export interface URequest extends Request {
   user?: any;
   sessionUser?: any;
 }
+
+export interface ApRequest extends Request {
+  appointment?: any;
+  vet?: any;
+}
