@@ -69,3 +69,34 @@ export const updateUserValidator = [
     .withMessage('The email must be a correct format'),
   validateFields,
 ];
+
+export const createAppointmentValidation = [
+  body('date').notEmpty().withMessage('The date is required'),
+  body('reason').notEmpty().withMessage('The reason is required'),
+  body('vetId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  body('petId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  validateFields,
+];
+
+export const updateAppointmentValidation = [
+  body('date').notEmpty().withMessage('The date is required'),
+  body('vetId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  body('petId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  validateFields,
+];
