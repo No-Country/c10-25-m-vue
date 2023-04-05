@@ -42,7 +42,7 @@ type Appointment = {
 };
 
 function getUser(): Array<User> {
-  const password = 'pass123456';
+  const password = 'Pass123456*';
 
   const hashedPassword = bcrypt.hashSync(password, 10);
 

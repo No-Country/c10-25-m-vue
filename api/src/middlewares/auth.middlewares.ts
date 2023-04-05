@@ -8,6 +8,13 @@ import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
 import { URequest } from '../interfaces/user.interfaces';
 
+/* This code exports a middleware function called `protect` that checks if a user is logged in and has
+a valid token. It does this by checking the `Authorization` header of the request for a bearer
+token. If a token is found, it verifies the token using the `jsonwebtoken` library and retrieves the
+user associated with the token from the database. If the user is found and their status is active,
+the user object is added to the `sessionUser` property of the request object and the next middleware
+function is called. If the user is not found or their status is not active, an error is returned
+with a 401 or 403 status code. */
 export const protect = catchAsync(
   async (req: URequest, res: Response, next: NextFunction) => {
     let token: string = '';
@@ -63,6 +70,11 @@ export const protect = catchAsync(
   },
 );
 
+/* `protectAccountOwner` is a middleware function that checks if the user in the session is the owner
+of the account being accessed. It does this by comparing the `id` of the `user` object in the
+request with the `id` of the `sessionUser` object in the request. If the `id`s do not match, it
+returns an error with a 401 status code. This middleware function is used to restrict access to
+certain routes that can only be accessed by the owner of the account. */
 export const protectAccountOwner = catchAsync(
   async (req: URequest, res: Response, next: NextFunction) => {
     const { user, sessionUser } = req;
@@ -75,6 +87,15 @@ export const protectAccountOwner = catchAsync(
   },
 );
 
+/**
+ * The function restricts access to certain routes based on user roles.
+ * @param roles - a rest parameter that allows the function to accept any number of arguments as an
+ * array.
+ * @returns A middleware function that checks if the role of the user in the session matches any of the
+ * roles passed as arguments. If the user's role is not included in the roles array, it will return an
+ * error with a 403 status code. If the user's role is included in the roles array, it will call the
+ * next middleware function.
+ */
 export const restrictTo = (...roles) => {
   return (req: URequest, res: Response, next: NextFunction) => {
     if (!roles.includes(req.sessionUser.role)) {

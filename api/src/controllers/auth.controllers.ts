@@ -10,6 +10,8 @@ import storage from './../utils/firebase';
 import AppError from '../utils/appError';
 import { URequest } from './../interfaces/user.interfaces';
 
+/* This code exports a function called `signup` that handles the registration of a new user. It takes
+in a request, response, and next function as parameters. */
 export const signup = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, surname, email, password } = req.body;
@@ -18,6 +20,7 @@ export const signup = catchAsync(
       storage,
       `users/${Date.now()}-${req.file?.originalname}`,
     );
+
     const imgUploaded = await uploadBytes(imgRef, req.file?.buffer!);
 
     const salt = await bcrypt.genSalt(+process.env.BC_ROUNDS! || 10);
@@ -37,6 +40,7 @@ export const signup = catchAsync(
         name: true,
         surname: true,
         email: true,
+        profileImageUrl: true,
       },
     });
 
@@ -51,6 +55,11 @@ export const signup = catchAsync(
   },
 );
 
+/* This code exports a function called `signin` that handles the authentication of a user. It takes in
+a request, response, and next function as parameters. It checks if the provided email and password
+match with the user's credentials in the database. If the credentials are correct, it generates a
+JWT token and sends it back to the client along with the user's information. If the credentials are
+incorrect, it returns an error message. */
 export const signin = catchAsync(
   async (req: URequest, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
@@ -78,6 +87,12 @@ export const signin = catchAsync(
   },
 );
 
+/* This code exports a function called `renewToken` that generates a new JWT token for an authenticated
+user. It takes in a request, response, and next function as parameters. It first extracts the user's
+ID from the request's `sessionUser` property. It then generates a new JWT token using the user's ID.
+It then queries the database to find the user with the provided ID and checks if the user is active.
+If the user is not found or is not active, it returns an error message. If the user is found and is
+active, it sends back a success response with the new JWT token and the user's information. */
 export const renewToken = catchAsync(
   async (req: URequest, res: Response, next: NextFunction) => {
     const { id } = req.sessionUser;
