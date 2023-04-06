@@ -57,3 +57,46 @@ export const LoginValidation = [
     .withMessage('Password must contain at least one special character'),
   validateFields,
 ];
+
+export const updateUserValidator = [
+  body('name').not().isEmpty().withMessage('the name is required'),
+  body('surname').not().isEmpty().withMessage('the surname is required'),
+  body('email')
+    .not()
+    .isEmpty()
+    .withMessage('the email is required')
+    .isEmail()
+    .withMessage('The email must be a correct format'),
+  validateFields,
+];
+
+export const createAppointmentValidation = [
+  body('date').notEmpty().withMessage('The date is required'),
+  body('reason').notEmpty().withMessage('The reason is required'),
+  body('vetId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  body('petId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  validateFields,
+];
+
+export const updateAppointmentValidation = [
+  body('date').notEmpty().withMessage('The date is required'),
+  body('vetId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  body('petId')
+    .notEmpty()
+    .withMessage('The vetId is required')
+    .isNumeric()
+    .withMessage('vetId must be a number'),
+  validateFields,
+];
