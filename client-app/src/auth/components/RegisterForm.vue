@@ -19,8 +19,6 @@
                         <InputWithLabel class="form-row" placeholder="Teléfono" :errors="errors.phone" id="telefono" label="Teléfono" v-model:value="phone" />
                         <InputWithLabel class="form-row" placeholder="Contraseña" :errors="errors.password" id="contraseña" label="Contraseña" v-model:value="password" />
                         <InputWithLabel class="form-row" placeholder="Repetir contraseña" :errors="errors.confirmPassword" id="repetirContraseña" label="Repetir contraseña" v-model:value="confirmPassword" />
-
-                        
                     </div>
                     <div class="container_btn">
                     <button type="submit">Registrare</button>
@@ -44,7 +42,7 @@ interface FormValues {
     name:string;
     surname:string;
     email: string;
-    phone: number;
+    phone: string;
     password: string;
     confirmPassword: string;
 }
