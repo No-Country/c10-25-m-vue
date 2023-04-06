@@ -16,7 +16,7 @@
 
           <div class="form-options">
             <label> <input v-model="terms" type="checkbox" /> Recordar inicio de sesión </label>
-            <a href="#">¿Olvidó su contraseña?</a>
+            <router-link to="/#">¿Olvidó su contraseña?</router-link>
           </div>
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
@@ -173,6 +173,10 @@ form input {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  width: 100%;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
 }
 
 form button {
@@ -233,6 +237,17 @@ input[type="checkbox"] {
 }
 
 .login-form p a {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  text-decoration-line: underline;
+
+  color: #3A57E8;
+}
+
+.form-options a{
   font-family: 'Jost';
   font-style: normal;
   font-weight: 400;
