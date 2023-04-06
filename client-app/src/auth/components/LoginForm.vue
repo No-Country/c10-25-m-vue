@@ -5,17 +5,33 @@
         <img :src="imagenPortadaLogin" alt="Login Image" />
       </div>
       <div class="login-form">
+
         <LogoInterno />
         <h1>Iniciar sesión</h1>
         <form @submit="onSubmit">
-          <InputWithLabel placeholder="Correo electronico" :errors="errors.email" id="email" label="Email"
-            v-model:value="email" />
 
-          <InputWithLabel placeholder="Password" :errors="errors.password" id="password" label="Password"
-            v-model:value="password" />
+          <InputWithLabel
+            placeholder="Correo electronico"
+            id="email"
+            label="Email"
+            v-model:value="email"
+            @blur="validateEmail"
+            :errors="errors.email"
+          />
+
+          <InputWithLabel
+            placeholder="Password"
+            :errors="errors.password"
+            id="password"
+            label="Password"
+            @blur="validatePassword"
+            v-model:value="password"
+          />
 
           <div class="form-options">
-            <label> <input v-model="terms" type="checkbox" /> Recordar inicio de sesión </label>
+            <label>
+                <input v-model="terms" type="checkbox" /> Recordar inicio de sesión
+            </label>
             <router-link to="/#">¿Olvidó su contraseña?</router-link>
           </div>
           <div class="container_btn">
@@ -28,17 +44,14 @@
   </div>
 </template>
 
-<script  lang="ts">
-import { defineComponent, ref } from "vue";
+<script lang="ts">
+import { defineComponent, ref, reactive } from "vue";
 import { ErrorMessage, useForm } from "vee-validate";
-import { useRouter } from 'vue-router';
-import LogoInterno from '../../shared/LogoInterno.vue'
-import InputWithLabel from '../../shared/InputWithLabel.vue'
+import LogoInterno from "../../shared/LogoInterno.vue";
+import InputWithLabel from "../../shared/InputWithLabel.vue";
 import * as yup from "yup";
-
 // Imagenes preparadas para production
 import imagenPortadaLogin from "../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png";
-
 
 interface FormValues {
   email: string;
@@ -46,45 +59,94 @@ interface FormValues {
 }
 
 const schema = yup.object<FormValues>({
-  email: yup.string().email().required('Email es requerido.'),
-  password: yup.string().required('Contraseña incorrecta. Por favor, intentá de nuevo.').min(8, 'La contraseña debe tener más de 8 caracteres.')
+  email: yup
+    .string()
+    .email()
+    .required("Email es requerido."),
+  password: yup
+    .string()
+    .required("Contraseña incorrecta. Por favor, intentá de nuevo.")
+    .min(8, "La contraseña debe tener más de 8 caracteres."),
 });
 
 export default defineComponent({
   name: "LoginForm",
   components: {
-    ErrorMessage,
-    LogoInterno,
-    InputWithLabel
+        ErrorMessage,
+        LogoInterno,
+        InputWithLabel,
   },
+
   setup() {
-    const min = ref(8);
-    const router = useRouter();
-    const { useFieldModel, errors, handleSubmit, validate } = useForm({
-      validationSchema: schema,
+    const terms =ref(false);
+    const { handleSubmit, resetForm } = useForm();
+    const email = ref('');
+    const password = ref('');
+
+    const errors = reactive({
+      email: "",
+      password: "",
     });
 
-    const [email, password, terms] = useFieldModel(['email', 'password', 'terms']);
-    const onSubmit = handleSubmit((values) => {
-      alert(JSON.stringify(values, null, 2));
-    });
 
-    function goToLogin() {
-      router.push('/login');
-    }
 
-    function goToRegister() {
-      router.push('/register');
+
+    const validateEmail = async () => {
+      try {
+        await schema.validateAt("email", { email: email.value });
+        errors.email = '';
+      } catch (err) {
+        if (err instanceof Error) {
+          errors.email = err.message;
+        }
+      }
+    };
+
+    const validatePassword = async () => {
+      try {
+        await schema.validateAt('password', { password: password.value });
+        errors.password = '';
+      } catch (err) {
+        if (err instanceof Error) {
+        errors.password = err.message;
+        }
+      }
+    };
+
+
+    const onSubmit = handleSubmit(async (values) => {
+  try {
+    await schema.validateSync(
+      { email: email.value, password: password.value },
+      { abortEarly: false }
+    );
+    // Submit form
+    alert(JSON.stringify({email: email.value, password: password.value }));
+    resetForm();
+  } catch (err) {
+    if (err instanceof yup.ValidationError) {
+      err.inner.forEach((error) => {
+        if (error.path === 'email') {
+          errors.email = error.message;
+        } else if (error.path === 'password') {
+          errors.password = error.message;
+        }
+      });
     }
+  }
+});
+
 
     return {
-      validate,
       email,
       password,
       terms,
       schema,
       errors,
       imagenPortadaLogin,
+      validateEmail,
+      validatePassword,
+      resetForm,
       onSubmit,
     };
   },
@@ -99,16 +161,13 @@ export default defineComponent({
 }
 
 .login-container h1 {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 500;
   font-size: 33px;
   line-height: 48px;
-  /* identical to box height */
   padding: 10px;
-
   color: #060859;
-
 }
 
 .login-grid {
@@ -128,25 +187,21 @@ export default defineComponent({
   align-items: center;
 }
 
-
 form {
   display: flex;
   flex-direction: column;
-
   text-align: left;
   gap: 5px;
 }
 
 form label {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 175%;
-  /* identical to box height, or 28px */
-
   text-transform: capitalize;
-  color: #383B43;
+  color: #383b43;
 }
 
 .container__form--login {
@@ -174,9 +229,9 @@ form input {
   justify-content: space-between;
   width: 100%;
   width: 100%;
-    gap: 6px;
-    justify-content: center;
-    align-items: center;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
 }
 
 form button {
@@ -193,19 +248,16 @@ form button {
   font-style: normal;
   font-weight: 400;
   font-size: 26px;
-
   cursor: pointer;
   color: #ffffff;
 }
 
 form button:hover {
-
-  background: #4F62C1;
+  background: #4f62c1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 input[type="checkbox"] {
-  /* styles for checkboxes */
   width: 20px;
   height: 20px;
 }
@@ -225,36 +277,35 @@ input[type="checkbox"] {
   padding: 9px;
 }
 
-
 .login-form p {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
 
-  color: #383B43;
+  color: #383b43;
 }
 
 .login-form p a {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
   text-decoration-line: underline;
 
-  color: #3A57E8;
+  color: #3a57e8;
 }
 
-.form-options a{
-  font-family: 'Jost';
+.form-options a {
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
   text-decoration-line: underline;
 
-  color: #3A57E8;
+  color: #3a57e8;
 }
 </style>
