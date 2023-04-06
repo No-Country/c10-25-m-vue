@@ -2,33 +2,36 @@
   <div class="login-container">
     <div class="login-grid">
       <div class="login-image">
-        <img src="../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png" alt="Login Image" />
+        <img
+          :src="imagenPortadaLogin"
+          alt="Login Image" />
       </div>
       <div class="login-form">
-  <img src="../../assets/auth/Veterinaria_logotipo-removebg-preview 1.png" alt="Logo" class="logo">
+        <img :src="imagenLogoLogin" alt="Logo" class="logo">
 
-  <form>
-    <label for="email">email</label>
-    <input type="email" id="email" placeholder="Correo electrónico">
-    <label for="password">password</label>
-    <input type="password" id="password" placeholder="Contraseña">
-    <div class="form-options">
-      <label>
-        <input type="checkbox"> Recordar inicio de sesión
-      </label>
-      <a href="#">¿Olvidó su contraseña?</a>
-    </div>
-    <button type="submit">Iniciar sesión</button>
-  </form>
-  <p>¿No tienes cuenta? <a href="#">Regístrate</a></p>
-</div>
+        <form>
+          <label for="email">email</label>
+          <input type="email" id="email" required placeholder="Correo electrónico">
+          <label for="password">password</label>
+          <input type="password" id="password" requerid placeholder="Contraseña">
+          <div class="form-options">
+            <label>
+              <input type="checkbox"> Recordar inicio de sesión
+            </label>
+            <a href="#">¿Olvidó su contraseña?</a>
+          </div>
+          <button type="submit">Iniciar sesión</button>
+        </form>
+        <p>¿No tienes cuenta? <a href="#">Regístrate</a></p>
+      </div>
     </div>
   </div>
 </template>
 
 <script  lang="ts">
 import { defineComponent, ref } from 'vue'
-
+import imagenPortadaLogin from '../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png';
+import imagenLogoLogin from '../../assets/auth/Veterinaria_logotipo-removebg-preview 1.png';
 export default defineComponent({
   name: 'LoginForm',
   setup() {
@@ -42,7 +45,10 @@ export default defineComponent({
     return {
       email,
       password,
+      imagenPortadaLogin,
+      imagenLogoLogin,
       submitForm
+
     }
   }
 })
@@ -80,31 +86,33 @@ export default defineComponent({
 form {
   display: flex;
   flex-direction: column;
- 
+
 
   text-align: left;
   gap: 10px;
 }
 
-.container__form--login{
+.container__form--login {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
 }
-form label{
+
+form label {
   text-align: left;
-  
+
 }
 
-form input{
-padding: 8px 16px;
-width: 436px;
-height: 44px;
-background: #FFFFFF;
-border: 1px solid #3A57E8;
-border-radius: 4px;
+form input {
+  padding: 8px 16px;
+  width: 436px;
+  height: 44px;
+  background: #FFFFFF;
+  border: 1px solid #3A57E8;
+  border-radius: 4px;
 }
+
 .form-options {
   display: flex;
   justify-content: space-between;
@@ -112,7 +120,7 @@ border-radius: 4px;
 
 }
 
-form button{
+form button {
   background-color: #3A57E8;
   color: white;
   font-family: 'Jost', sans-serif;
@@ -126,10 +134,10 @@ form button{
   font-style: normal;
   font-weight: 400;
   font-size: 26px;
-  margin-top:3%;
+  margin-top: 3%;
   cursor: pointer;
   color: #FFFFFF;
-  
+
 }
 
 input[type="checkbox"] {
@@ -140,7 +148,4 @@ input[type="checkbox"] {
 
 
 
-.form-options p{
- 
-}
-</style>
+.form-options p {}</style>
