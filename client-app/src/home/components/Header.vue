@@ -7,7 +7,7 @@
             </ul>
         </nav>
         <div class="btn-container-session">
-            <button @click="toggleBackground(), goToLogin()"  :class="!noBackground ? 'no-background' : 'btn__on-background'">
+            <button @click="toggleBackground(), goToLogin()"  :class="!noBackground ? 'no-background' : 'btn__on-backgroundLogin'">
               Iniciar sesión
             </button>
             <button @click="toggleBackground(), goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
@@ -140,6 +140,24 @@ height: 51px;
 font-size: 1.25rem;
 border-radius: 4px;
 color:var(--text-light-btn);
+cursor: pointer;
+font-family: 'Jost', sans-serif;
+}
+.btn-container-session .btn__on-backgroundLogin {
+background: var(--bg-btnLight);
+box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+border:1px solid #2E46BA;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+width: auto;
+height: 51px;
+font-size: 1.25rem;
+border-radius: 4px;
+color:var(--text-light-btnLogin);
 cursor: pointer;
 font-family: 'Jost', sans-serif;
 }
