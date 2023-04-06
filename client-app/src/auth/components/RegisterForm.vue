@@ -70,7 +70,6 @@ export default defineComponent({
 
         const { useFieldModel, errors, handleSubmit, validate } = useForm<FormValues>({
       validationSchema: schema,
-      validateOnInput: false
     });
 
         const [name, surname, email, phone, password, confirmPassword ] = useFieldModel([ 'name', 'surname', 'email', 'phone', 'password', 'confirmPassword']);

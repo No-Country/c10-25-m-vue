@@ -8,10 +8,12 @@
         <LogoInterno />
         <h1>Iniciar sesión</h1>
         <form @submit="onSubmit">
-          <InputWithLabel placeholder="Correo electronico" :errors="errors.email" id="email" label="Email" v-model:value="email" />
-       
-          <InputWithLabel placeholder="Password" :errors="errors.password" id="password" label="Password" v-model:value="password" />
-          
+          <InputWithLabel placeholder="Correo electronico" :errors="errors.email" id="email" label="Email"
+            v-model:value="email" />
+
+          <InputWithLabel placeholder="Password" :errors="errors.password" id="password" label="Password"
+            v-model:value="password" />
+
           <div class="form-options">
             <label> <input v-model="terms" type="checkbox" /> Recordar inicio de sesión </label>
             <a href="#">¿Olvidó su contraseña?</a>
@@ -60,7 +62,6 @@ export default defineComponent({
     const router = useRouter();
     const { useFieldModel, errors, handleSubmit, validate } = useForm({
       validationSchema: schema,
-      validateOnInput: false
     });
 
     const [email, password, terms] = useFieldModel(['email', 'password', 'terms']);
