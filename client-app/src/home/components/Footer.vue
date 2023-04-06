@@ -22,9 +22,9 @@
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="seguinos">
             <h3>Seguinos</h3>
-            <ul class="seguinos">
+            <ul class="seguinos_items">
                 <li><a href="#"><img src="../../assets/home_img/001-facebook.png"></a></li>
                 <li><a href="#"><img src="../../assets/home_img/004-instagram.png"></a></li>
                 <li><a href="#"><img src="../../assets/home_img/003-twitter.png"></a></li>
@@ -62,30 +62,31 @@ export default defineComponent({
 .container-footer{
     width: 100%;
     background: var(--bg-footer);
-    padding:1em;
-    display: flex;
-    gap: 1em;
-    
+    padding: 1em 1em 2em 1em;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 1fr;
+    justify-items: center;
     color: var(--text-footer);
     font-family: Jost;
     font-size: small;
+    position: relative;
 }
-.container-footer li{
-    margin: 1rem;
-}
+
 .logo_footer{
+    margin-left: 2rem;
     display: flex;
-    padding: 1em; 
+    justify-content: center;
+    align-items: center;
 
 }
 .logo_footer img{
-    width: 7rem;
-    height: 7rem;
+    width: 8rem;
+    height: 8rem;
 }
 .titulo_footer{
     width: 8rem;
     height: 7rem;
-    margin-top: 1.6rem;
+    margin-top: 3rem;
 
     display: block;
     align-self:center;
@@ -102,54 +103,65 @@ export default defineComponent({
     text-align: center;
 
 }
+.contacto{
+    margin:0.5rem 3rem 0 1.5rem;
+}
 .contacto h3{
     width: 6rem;
     text-align: center;
     font-weight: 600;
 }
 .contacto_items{
+    padding: 1em;
     display: flex;
+    gap: 1em ;
+    
 }
-
+.contacto_items ul{
+    display: grid;
+    row-gap: 1.5em;
+}
 .contacto li{
     font-size: smaller;
     text-align: left;
-}
 
-.seguinos  {
-    display:flex;
-    justify-content: center;
+}
+.seguinos{
+    margin:0.5rem 0 0 2em;
 }
 .seguinos h3{
+    width: 5rem;
     font-weight: 600;
+    text-align: left;
 }
-.pawprint_footer{
-    width: 80%;
-    position:relative;
-    
+.seguinos_items {
+    padding-top: 1em;
+    display:flex;
+    justify-content: center;
+    gap: 2em;
 }
 
 #paw1{
     position: absolute;
-    top: 30%;
-    left: 2%;
+    top: 45%;
+    right: 9%;
     
 }
 #paw2{
     position: absolute;
-    top: 35%;
-    left: 30%;
+    top: 50%;
+    right: 4%;
 
 }
 #paw3{
     position: absolute;
-    top: 60%;
-    left: 10%;
+    top: 70%;
+    right: 9%;
 
 }#paw4{
     position: absolute;
-    top: 65%;
-    left: 40%;
+    top: 75%;
+    right: 4%;
     
 }
 </style>
