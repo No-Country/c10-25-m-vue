@@ -1,5 +1,7 @@
 <template>
-  <h2>footer 2</h2>
+  <button>
+    Editar
+  </button>
 </template>
 
 <script lang="ts" setup>
