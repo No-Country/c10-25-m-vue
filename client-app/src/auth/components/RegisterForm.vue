@@ -108,14 +108,14 @@ export default defineComponent({
  
 
 
-    const errors = reactive({
-        name: '',
-        email: '',
-        password: '',
-        surname: '',
-        phone: '',
-        confirmPassword:''
-  });
+    const errors: FormValues = {
+        name: "",
+        email: "",
+        password: "",
+        surname: "",
+        phone: "",
+        confirmPassword:""
+  };
 
   const { handleSubmit, resetForm } = useForm();
   
