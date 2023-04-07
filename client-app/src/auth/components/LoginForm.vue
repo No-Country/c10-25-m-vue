@@ -10,27 +10,15 @@
         <h1>Iniciar sesión</h1>
         <form @submit="onSubmit">
 
-          <InputWithLabel
-            placeholder="Correo electronico"
-            id="email"
-            label="Email"
-            v-model:value="email"
-            @blur="validateEmail"
-            :errors="errors.email"
-          />
+          <InputWithLabel placeholder="Correo electronico" id="email" label="Email" v-model:value="email"
+            @blur="validateEmail" :errors="errors.email" />
 
-          <InputWithLabel
-            placeholder="Password"
-            :errors="errors.password"
-            id="password"
-            label="Password"
-            @blur="validatePassword"
-            v-model:value="password"
-          />
+          <InputWithLabel placeholder="Password" :errors="errors.password" id="password" label="Password"
+            @blur="validatePassword" v-model:value="password" />
 
           <div class="form-options">
             <label>
-                <input v-model="terms" type="checkbox" /> Recordar inicio de sesión
+              <input v-model="terms" type="checkbox" /> Recordar inicio de sesión
             </label>
             <router-link to="/#">¿Olvidó su contraseña?</router-link>
           </div>
@@ -58,7 +46,7 @@ interface FormValues {
   password: string;
 }
 
-const schema = yup.object<FormValues>({
+const schema = yup.object({
   email: yup
     .string()
     .email()
@@ -72,23 +60,21 @@ const schema = yup.object<FormValues>({
 export default defineComponent({
   name: "LoginForm",
   components: {
-        ErrorMessage,
-        LogoInterno,
-        InputWithLabel,
+    ErrorMessage,
+    LogoInterno,
+    InputWithLabel,
   },
 
   setup() {
-    const terms =ref(false);
-    const { handleSubmit, resetForm } = useForm();
+    const terms = ref(false);
     const email = ref('');
     const password = ref('');
+    const { handleSubmit, resetForm } = useForm();
 
     const errors = reactive({
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     });
-
-
 
 
     const validateEmail = async () => {
@@ -108,33 +94,32 @@ export default defineComponent({
         errors.password = '';
       } catch (err) {
         if (err instanceof Error) {
-        errors.password = err.message;
+          errors.password = err.message;
         }
       }
     };
 
 
     const onSubmit = handleSubmit(async (values) => {
-  try {
-    await schema.validateSync(
-      { email: email.value, password: password.value },
-      { abortEarly: false }
-    );
-    // Submit form
-    alert(JSON.stringify({email: email.value, password: password.value }));
-    resetForm();
-  } catch (err) {
-    if (err instanceof yup.ValidationError) {
-      err.inner.forEach((error) => {
-        if (error.path === 'email') {
-          errors.email = error.message;
-        } else if (error.path === 'password') {
-          errors.password = error.message;
+      try {
+        await schema.validateSync(
+          { email: email.value, password: password.value },
+          { abortEarly: false }
+        );
+        alert(JSON.stringify({ email: email.value, password: password.value }));
+        resetForm();
+      } catch (err) {
+        if (err instanceof yup.ValidationError) {
+          err.inner.forEach((error) => {
+            if (error.path === 'email') {
+              errors.email = error.message;
+            } else if (error.path === 'password') {
+              errors.password = error.message;
+            }
+          });
         }
-      });
-    }
-  }
-});
+      }
+    });
 
 
     return {
