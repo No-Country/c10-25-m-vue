@@ -10,8 +10,7 @@
                 <div class="container__subtitle">
                 <h1>Registrate</h1>
                 <p>Completá tus datos para comenzar.</p>
-               </div>
-               {{ errors }}
+           
                 <form @submit="onSubmit">
                     <div class="form-group">
 
@@ -49,6 +48,7 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
   
 <script  lang="ts">
@@ -71,17 +71,17 @@ interface FormValues {
 const schema = yup.object({
   name: yup
     .string()
-    .required(),  
+    .required('Nombre es requerido'),  
   surname: yup
     .string()
-    .required(),  
+    .required('Apellido es requerido'),  
   email: yup
     .string()
     .email()
     .required('Email es requerido.'),
   phone: yup
     .string()
-    .required(),  
+    .required('Telefono es requerido'),  
   password: yup
     .string()
     .required('Contraseña incorrecta. Por favor, intentá de nuevo.').min(8, 'La contraseña debe tener más de 8 caracteres.'),
@@ -105,9 +105,7 @@ export default defineComponent({
         const surname = ref('');
         const phone = ref('');
         const confirmPassword = ref('');
-        const { handleSubmit, resetForm } = useForm({
-        validationSchema: schema,
-    });
+ 
 
 
     const errors = reactive({
@@ -119,6 +117,8 @@ export default defineComponent({
         confirmPassword:''
   });
 
+  const { handleSubmit, resetForm } = useForm();
+  
 
   const validateName = async () => {
       try {
@@ -337,7 +337,7 @@ form {
     flex-direction: column;
     text-align: left;
     gap: 10px;
-    width:90%;
+    width:100%;
 }
 
 .container__form--login {
