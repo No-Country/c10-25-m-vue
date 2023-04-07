@@ -116,7 +116,7 @@ export default defineComponent({
         surname: '',
         phone: '',
         confirmPassword:''
-    });
+    }) as FormValues;
 
   const { handleSubmit, resetForm } = useForm();
   
