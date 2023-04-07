@@ -1,7 +1,7 @@
 <template>
     <div class="container-footer">
         <div class="logo_footer">
-            <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="Logo">
+            <img :src="imagenLogo" alt="Logo">
             <div class="titulo_footer">
                 <h2>Huellitas</h2>
                 <p>Clínica Veterinaria</p>
@@ -31,16 +31,30 @@
             </ul>
         </div>
         <div class="pawprint_footer">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw1">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw2">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw3">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw4">
+            <img :src="imagenHuellas" alt="pawprint" id="paw1">
+            <img :src="imagenHuellas" alt="pawprint" id="paw2">
+            <img :src="imagenHuellas" alt="pawprint" id="paw3">
+            <img :src="imagenHuellas" alt="pawprint" id="paw4">
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import imagenLogo from '../../assets/home_img/Veterinaria_logotipo.png';
+import imagenHuellas from '../../assets/home_img/pawprint 1.png';
 
+export default defineComponent({
+  name: 'Footer',
+  setup() {
+
+    return {
+        imagenLogo,
+        imagenHuellas
+
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
