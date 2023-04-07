@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="id">{{ label }}</label>
-        <input :id="id" :value="value" :placeholder="placeholder" @input="onInput" />
+        <input :id="id" :value="value" :placeholder="placeholder" @input="onInput" @blur="onBlur" />
         <span class="error_form">{{ errors }}</span>
     </div>
 </template>
@@ -33,7 +33,7 @@ export default defineComponent({
             required: true
         }
     },
-    emits: ['update:value'],
+    emits: ['update:value', 'blur'],
     setup(props, { emit }) {
         const onInput = (event: Event) => {
             const target = event.target as HTMLInputElement;
@@ -42,7 +42,11 @@ export default defineComponent({
             }
         };
 
-        return { onInput };
+        const onBlur = () => {
+        emit('blur');
+        };
+
+        return { onInput, onBlur };
     }
 });
 </script>
