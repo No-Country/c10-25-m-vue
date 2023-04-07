@@ -66,6 +66,7 @@ interface FormValues {
     phone: string;
     password: string;
     confirmPassword: string;
+    [key: string]: string;
 }
 
 const schema = yup.object({
