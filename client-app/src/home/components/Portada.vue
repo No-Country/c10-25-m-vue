@@ -3,12 +3,7 @@
         <div alt="" class="portada_veterinaria"></div>
         <div class="grid-container">
           <div class="grid-item">
-            <div class="pawprints">
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            </div>
+           <HuellasAnimation/>
           </div>
           <div class="grid-item">
             <h1>Tu mascota merece la mejor atención</h1>
@@ -17,12 +12,7 @@
           </div>
           <div class="grid-item">
             <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
-            <div class="pawprints">
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
-            </div>
+            <HuellasAnimation/>
           </div>
         </div>
     </div>
@@ -30,9 +20,12 @@
 
 <script  lang="ts">
 import { defineComponent  } from 'vue';
-
+import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 export default defineComponent({
   name: 'Portada',
+  components:{
+    HuellasAnimation
+  },
   setup() {
 
 
@@ -126,80 +119,5 @@ background: #4f62c1;
 }
 
 
-.pawprints {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-  }
 
-  .pawprint {
-  width: 81px;
-  margin: 0px 0;
-  opacity: 0;
-  animation: stepping 8s infinite;
-}
-  .pawprint:nth-child(4),
-.pawprint:nth-child(3) {
-  animation-name: stepping1;
-}
-
-.pawprint:nth-child(2),
-.pawprint:nth-child(1) {
-  animation-name: stepping2;
-}
-
-.pawprint:nth-child(4),
-.pawprint:nth-child(2) {
-  padding-right: 25px;
-  margin-right: 25px;
-}
-
-.pawprint:nth-child(3),
-.pawprint:nth-child(1) {
-  padding-left: 25px;
-  margin-left: 25px;
-}
-
-.pawprint:nth-child(4) {
-  animation-delay: 0s;
-}
-
-.pawprint:nth-child(3) {
-  animation-delay: 1s;
-}
-
-.pawprint:nth-child(2) {
-  animation-delay: 2s;
-}
-
-.pawprint:nth-child(1) {
-  animation-delay: 3s;
-}
-
-@keyframes stepping1 {
-  0%,
-  50% {
-    opacity: 0;
-    transform: translateY(0px);
-  }
-  60%,
-  90% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes stepping2 {
-  0%,
-  50% {
-    opacity: 0;
-    transform: translateY(0px);
-  }
-  60%,
-  80% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 </style>

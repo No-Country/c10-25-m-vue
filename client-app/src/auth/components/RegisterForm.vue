@@ -5,7 +5,8 @@
                 <img :src="imagenPortadaRegister"
                     alt="Login Image" />
             </div>
-            <div class="login-form">
+       
+            <div class="login-form" v-if="isComponentVisible">
                 <LogoInterno/>
                 <div class="container__subtitle">
                 <h1>Registrate</h1>
@@ -47,13 +48,20 @@
 
             </div>
         </div>
+      
+        
     </div>
+    <div class="login-form" v-if="!isComponentVisible">
+        
+        <AccountCreationSuccess />
+      </div>
     </div>
 </template>
   
 <script  lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
 import InputWithLabel from '../../shared/InputWithLabel.vue'
+import AccountCreationSuccess from './AccountCreationSuccess.vue'
 import imagenPortadaRegister from '../../assets/auth/primer-plano-gato-lamiendo-oreja-conejo-aislado-blanco-removebg-preview 1.png';
 import LogoInterno from '../../shared/LogoInterno.vue'
 import * as yup from "yup";
@@ -97,7 +105,8 @@ export default defineComponent({
     name: 'RegisterForm',
     components:{
         LogoInterno,
-        InputWithLabel
+        InputWithLabel,
+        AccountCreationSuccess
     },
     setup() {
         const name = ref('');
@@ -106,7 +115,7 @@ export default defineComponent({
         const surname = ref('');
         const phone = ref('');
         const confirmPassword = ref('');
- 
+       const isComponentVisible = ref(true);
 
 
     const errors = reactive({
@@ -203,6 +212,7 @@ export default defineComponent({
       },
       { abortEarly: false }
     );
+    isComponentVisible.value= false,
     alert(
       JSON.stringify({
         name: name.value,
@@ -240,6 +250,7 @@ export default defineComponent({
             confirmPassword,
             errors,
             imagenPortadaRegister,
+            isComponentVisible,
             validateName,
             validateEmail,
             validatePassword,
@@ -336,6 +347,7 @@ color: #383B43;
     padding: 10px;
     justify-content: center;
     align-items: center;
+    width:100%;
 }
 
 .form-row {
