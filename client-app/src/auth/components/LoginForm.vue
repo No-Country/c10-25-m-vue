@@ -44,6 +44,7 @@ import imagenPortadaLogin from "../../assets/auth/gato-domestico-mullido-gris-pe
 interface FormValues {
   email: string;
   password: string;
+  [key: string]: string;
 }
 
 const schema = yup.object({
@@ -107,7 +108,8 @@ export default defineComponent({
           { abortEarly: false }
         );
         alert(JSON.stringify({ email: email.value, password: password.value }));
-        resetForm();
+          email.value = "",
+          password.value = ""
       } catch (err) {
         if (err instanceof yup.ValidationError) {
           err.inner.forEach((error) => {
@@ -143,6 +145,9 @@ export default defineComponent({
   background-image: url(../../assets/auth/fonto_auth.png);
   background-size: cover;
   background-position: center;
+  height:89vh;
+  display: flex;
+    justify-content: center;
 }
 
 .login-container h1 {

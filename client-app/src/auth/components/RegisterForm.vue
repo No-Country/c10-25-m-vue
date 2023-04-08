@@ -156,7 +156,9 @@ export default defineComponent({
 
     const validateConfirmPassword = async () => {
       try {
-        await schema.validateAt('confirmPassword', { confirmPassword: confirmPassword.value });
+        await schema.validateAt('confirmPassword', { 
+          password: password.value,
+          confirmPassword: confirmPassword.value });
         errors.confirmPassword = '';
       } catch (err) {
         if (err instanceof Error) {
@@ -211,7 +213,13 @@ export default defineComponent({
         email: email.value,
       })
     );
-    resetForm();
+          email.value = "",
+          password.value = "",
+          name.value = "",
+          phone.value = "", 
+          surname.value = "",
+          confirmPassword.value = ""
+
   } catch (err) {
     if (err instanceof yup.ValidationError) {
       err.inner.forEach((error) => {
@@ -263,6 +271,9 @@ form button:hover {
     background-image: url(../../assets/auth/fonto_auth.png);
     background-size: cover;
     background-position: center;
+    height:89vh;
+    display: flex;
+    justify-content: center;
 }
 
 .container_btn {
