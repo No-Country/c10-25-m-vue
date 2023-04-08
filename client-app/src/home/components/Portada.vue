@@ -3,7 +3,12 @@
         <div alt="" class="portada_veterinaria"></div>
         <div class="grid-container">
           <div class="grid-item">
-            <img src="../../assets/home_img/huellas_portada.png" alt="Imagen izquierda">
+            <div class="pawprints">
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            </div>
           </div>
           <div class="grid-item">
             <h1>Tu mascota merece la mejor atención</h1>
@@ -11,7 +16,13 @@
             <button>Reservar un turno</button>
           </div>
           <div class="grid-item">
-            <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha">
+            <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
+            <div class="pawprints">
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            </div>
           </div>
         </div>
     </div>
@@ -114,4 +125,80 @@ background: #4f62c1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+
+.pawprints {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pawprint {
+  width: 85px;
+  margin: 0px 0;
+  opacity: 0;
+  animation: stepping 8s infinite;
+}
+  .pawprint:nth-child(4),
+.pawprint:nth-child(3) {
+  animation-name: stepping1;
+}
+
+.pawprint:nth-child(2),
+.pawprint:nth-child(1) {
+  animation-name: stepping2;
+}
+
+.pawprint:nth-child(4),
+.pawprint:nth-child(2) {
+  padding-right: 20px;
+  margin-right: 25px;
+}
+
+.pawprint:nth-child(3),
+.pawprint:nth-child(1) {
+  padding-left: 20px;
+  margin-left: 25px;
+}
+
+.pawprint:nth-child(4) {
+  animation-delay: 0s;
+}
+
+.pawprint:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.pawprint:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.pawprint:nth-child(1) {
+  animation-delay: 3s;
+}
+
+@keyframes stepping1 {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  60%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stepping2 {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  60%,
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
