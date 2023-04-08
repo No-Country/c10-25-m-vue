@@ -3,7 +3,7 @@
         <div alt="" class="portada_veterinaria"></div>
         <div class="grid-container">
           <div class="grid-item">
-            <img src="../../assets/home_img/huellas_portada.png" alt="Imagen izquierda">
+           <HuellasAnimation/>
           </div>
           <div class="grid-item">
             <h1>Tu mascota merece la mejor atención</h1>
@@ -11,7 +11,8 @@
             <button>Reservar un turno</button>
           </div>
           <div class="grid-item">
-            <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha">
+            <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
+            <HuellasAnimation/>
           </div>
         </div>
     </div>
@@ -19,9 +20,12 @@
 
 <script  lang="ts">
 import { defineComponent  } from 'vue';
-
+import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 export default defineComponent({
   name: 'Portada',
+  components:{
+    HuellasAnimation
+  },
   setup() {
 
 
@@ -108,6 +112,12 @@ text-align: center;
   cursor: pointer;
   color: #FFFFFF;
 }
+
+.grid-item button:hover{
+background: #4f62c1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 
 
 </style>

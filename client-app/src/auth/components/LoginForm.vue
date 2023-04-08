@@ -8,6 +8,7 @@
 
         <LogoInterno />
         <h1>Iniciar sesión</h1>
+        
         <form @submit="onSubmit">
 
           <InputWithLabel placeholder="Correo electronico" id="email" label="Email" v-model:value="email"
@@ -18,9 +19,9 @@
 
           <div class="form-options">
             <label>
-              <input v-model="terms" type="checkbox" /> Recordar inicio de sesión
+              <input v-model="terms" type="checkbox" />Recordarme
             </label>
-            <router-link to="/#">¿Olvidó su contraseña?</router-link>
+            <router-link to="/#">Olvidé mi contraseña</router-link>
           </div>
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
@@ -44,6 +45,7 @@ import imagenPortadaLogin from "../../assets/auth/gato-domestico-mullido-gris-pe
 interface FormValues {
   email: string;
   password: string;
+  [key: string]: string;
 }
 
 const schema = yup.object({
@@ -107,7 +109,8 @@ export default defineComponent({
           { abortEarly: false }
         );
         alert(JSON.stringify({ email: email.value, password: password.value }));
-        resetForm();
+          email.value = "",
+          password.value = ""
       } catch (err) {
         if (err instanceof yup.ValidationError) {
           err.inner.forEach((error) => {
@@ -143,6 +146,9 @@ export default defineComponent({
   background-image: url(../../assets/auth/fonto_auth.png);
   background-size: cover;
   background-position: center;
+  height:89vh;
+  // display: flex;
+  //   justify-content: center;
 }
 
 .login-container h1 {
@@ -151,7 +157,7 @@ export default defineComponent({
   font-weight: 500;
   font-size: 33px;
   line-height: 48px;
-  padding: 10px;
+  padding-top: 5%;
   color: #060859;
 }
 
@@ -177,6 +183,7 @@ form {
   flex-direction: column;
   text-align: left;
   gap: 5px;
+  width:436px;
 }
 
 form label {
@@ -215,7 +222,7 @@ form input {
   width: 100%;
   width: 100%;
   gap: 6px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -289,8 +296,10 @@ input[type="checkbox"] {
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
+  color: #3a57e8;
+}
+.form-options a:hover {
   text-decoration-line: underline;
-
   color: #3a57e8;
 }
 </style>
