@@ -4,10 +4,10 @@
         <div class="grid-container">
           <div class="grid-item">
             <div class="pawprints">
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
             </div>
           </div>
           <div class="grid-item">
@@ -18,10 +18,10 @@
           <div class="grid-item">
             <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
             <div class="pawprints">
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
-            <img class="pawprint" src="../../assets/home_img/pawprint 1.png" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
+            <img class="pawprint" src="../../assets/home_img/pawprint.svg" alt="Pawprint" />
             </div>
           </div>
         </div>
@@ -130,10 +130,11 @@ background: #4f62c1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
   }
 
   .pawprint {
-  width: 85px;
+  width: 81px;
   margin: 0px 0;
   opacity: 0;
   animation: stepping 8s infinite;
@@ -150,13 +151,13 @@ background: #4f62c1;
 
 .pawprint:nth-child(4),
 .pawprint:nth-child(2) {
-  padding-right: 20px;
+  padding-right: 25px;
   margin-right: 25px;
 }
 
 .pawprint:nth-child(3),
 .pawprint:nth-child(1) {
-  padding-left: 20px;
+  padding-left: 25px;
   margin-left: 25px;
 }
 

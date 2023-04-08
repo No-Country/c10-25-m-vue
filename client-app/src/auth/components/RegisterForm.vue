@@ -319,7 +319,7 @@ color: #383B43;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
     padding-top:15px;
     
@@ -342,14 +342,16 @@ color: #383B43;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width:250px;
 }
 
 form {
     display: flex;
     flex-direction: column;
     text-align: left;
-    gap: 10px;
+    gap: 15px;
     width:100%;
+    width:436px;
 }
 
 .container__form--login {
