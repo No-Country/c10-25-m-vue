@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="id">{{ label }}</label>
-        <input :id="id" :value="value" :placeholder="placeholder" @input="onInput" @blur="onBlur" />
+        <input :id="id" :value="value" :type="type" :placeholder="placeholder" @input="onInput" @blur="onBlur" />
         <span class="error_form">{{ errors }}</span>
     </div>
 </template>
@@ -23,6 +23,10 @@ export default defineComponent({
         errors: {
             type: String,
             required: false
+        },
+        type:{
+            type: String,
+            required: true
         },
         value: {
             type:  String,
