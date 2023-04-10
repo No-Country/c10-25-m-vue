@@ -17,13 +17,12 @@ export const readVets = catchAsync(
 
 export const createVet = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        const { name, lastName, phone, email } = req.body;
+        const { phone, speciality, user_id} = req.body;
         const vet = await db.vet.create({
             data: {
-                name,
-                lastName,
                 phone,
-                email
+                speciality,
+                user_id
             }
         })
         return res.status(StatusCodes.CREATED).json({
@@ -39,16 +38,15 @@ export const createVet = catchAsync(
 export const updateVet = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
-        const { name, lastName, phone, email } = req.body;
+        const { phone, speciality, user_id } = req.body;
         const vet = await db.vet.update({
             where: {
                 id: Number(id)
             },
             data: {
-                name,
-                lastName,
                 phone,
-                email
+                speciality,
+                user_id
             }
         })
         return res.status(StatusCodes.OK).json({
@@ -76,4 +74,10 @@ export const deleteVet = catchAsync(
     }
 );
 
+ 
+
 export default {readVets,createVet,updateVet,deleteVet};
+
+
+
+  

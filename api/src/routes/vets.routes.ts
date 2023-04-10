@@ -1,27 +1,20 @@
 import { Router } from "express";
 import { createVet, deleteVet, readVets, updateVet } from "../controllers/vets.controllers";
-import { db } from "../database/db.server";
+import { createVetValidator, updateVetValidator } from "../middlewares/validations.middlewares";
+
 
 const router=Router();
 
 router.get("/",readVets);
 
 //crearVet
-router.post("/createVet",createVet);
+router.post("/createVet",createVetValidator,createVet);
 
 //agregarVet
-router.put("/:id", updateVet);
+router.put("/:id",updateVetValidator,updateVet);
 
 //eliminarVet
 router.delete("/:id",deleteVet);
-
-
-
-
-
-
-
-
 
 
 

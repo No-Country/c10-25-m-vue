@@ -69,3 +69,25 @@ export const updateUserValidator = [
     .withMessage('The email must be a correct format'),
   validateFields,
 ];
+
+
+//CreateVetValidator
+
+export const createVetValidator = [
+  body('speciality').not().isEmpty().withMessage('the speciality is required'),
+  body('user_id').not().isEmpty().withMessage('user_id is required'),
+  body('phone').not().isEmpty().withMessage('a valid number is required'),
+    
+
+  validateFields,
+];
+
+//UpdateVetValidator
+
+export const updateVetValidator = [
+  body('speciality').not().isEmpty().withMessage('the speciality is required'),
+  body('user_id').not().isEmpty().withMessage('user_id is required'),
+  body('phone').not().isEmpty().withMessage('a valid number is required'),
+  
+  validateFields,
+]
