@@ -5,7 +5,7 @@
     <img class="bg_diferentes" id="paw_bg2" src="../../assets/home_img/big_pawprint_home.png"  alt="">
     <img class="bg_diferentes" id="paw_bg3" src="../../assets/home_img/big_pawprint_home.png"  alt="">
     <div class="diferentes_item">
-      <img src="../../assets/home_img/bulldog-at-vet 1.png" alt="">
+      <img :src="imagenPortadabulldog" alt="">
       <div class="descripcion">
         <h3>Atención de calidad las 24hs</h3>
         <p>Nuestros expertos están disponibles para cuidar de tu mascota en todo momento.</p>
@@ -22,8 +22,19 @@
 
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" >
+import { defineComponent, ref } from 'vue'
+import imagenPortadabulldog from '../../assets/home_img/bulldog-at-vet 1.png';
 
+export default defineComponent({
+  name: 'Diferentes',
+  setup() {
+
+    return {
+      imagenPortadabulldog
+    }
+  }
+})
 </script>
 
 <style scoped>
