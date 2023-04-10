@@ -1,9 +1,9 @@
 <template>
-  <h2>footer 2</h2>
+  <Pets></Pets>
 </template>
 
 <script lang="ts" setup>
-
+import Pets from '../components/Pets.vue'
 </script>
 
 <style scoped>

@@ -4,9 +4,9 @@
       <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="Logo" id="logo_user">
     </div>
     <div class="fondo_azul">
-      <div class="perfil_deco">
-        <img src="../../assets/user_img/cat perfil.png" alt="gato">
-        <h1>Mi perfil</h1>
+      <div class="mascotas_deco">
+        <img src="../../assets/pets_img/deco-pets.png" alt="gato">
+        <h1>Mis mascotas</h1>
       </div>
     </div>
     <div class="pawprint_user">
@@ -55,18 +55,19 @@
   background-size: cover;
   background-position: center;
 }
-.perfil_deco{
-  height: 10rem;
-  margin-top: 1.1rem;
-  margin-right: 6rem;
+.mascotas_deco{
+  height: 12rem;
+  margin-left: 11rem;
   display:inline-flex;
+  flex-direction: row-reverse;
   justify-content: center;
-  
-}
-.perfil_deco img{
 
 }
-.perfil_deco h1{
+.mascotas_deco img{
+  height: 14.2rem;
+  margin-top: -3rem;
+}
+.mascotas_deco h1{
   font-family: Jost;
   font-weight: 700;
   color: white;

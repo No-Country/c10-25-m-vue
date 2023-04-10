@@ -1,6 +1,5 @@
 <template>
   <BgUser></BgUser>
-    <DecoUser></DecoUser>
     <div class="datos_user">
       <div class="logo_chico_user">
         <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="logo">
@@ -31,9 +30,8 @@
 </template>
 
 <script lang="ts" setup>
-import BgUser from '../../shared/BgUser.vue';
-import DecoUser from './DecoUser.vue';
-import EditarBtn from './EditarBtn.vue';
+import BgUser from './BgUser.vue';
+import EditarBtn from '../../shared/EditarBtn.vue';
 </script>
 
 <style scoped>
