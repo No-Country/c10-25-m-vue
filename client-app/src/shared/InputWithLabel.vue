@@ -63,7 +63,7 @@ label {
     font-size: 16px;
     line-height: 175%;
     /* identical to box height, or 28px */
-
+    margin-bottom: 6px;
     text-transform: capitalize;
     color: #383B43;
 }

@@ -143,6 +143,10 @@ color:var(--text-light-btn);
 cursor: pointer;
 font-family: 'Jost', sans-serif;
 }
+.btn-container-session .btn__on-background:hover{
+background: #4f62c1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 .btn-container-session .btn__on-backgroundLogin {
 background: var(--bg-btnLight);
 box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
@@ -160,6 +164,14 @@ border-radius: 4px;
 color:var(--text-light-btnLogin);
 cursor: pointer;
 font-family: 'Jost', sans-serif;
+}
+.btn-container-session .btn__on-backgroundLogin:hover{
+  background: var(--bg-btnLight);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.no-background:hover{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 </style>

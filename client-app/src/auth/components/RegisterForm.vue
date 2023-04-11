@@ -5,7 +5,8 @@
                 <img :src="imagenPortadaRegister"
                     alt="Login Image" />
             </div>
-            <div class="login-form">
+       
+            <div class="login-form" v-if="isComponentVisible">
                 <LogoInterno/>
                 <div class="container__subtitle">
                 <h1>Registrate</h1>
@@ -47,13 +48,20 @@
 
             </div>
         </div>
+      
+        
     </div>
+    <div class="login-form" v-if="!isComponentVisible">
+        
+        <AccountCreationSuccess />
+      </div>
     </div>
 </template>
   
 <script  lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
 import InputWithLabel from '../../shared/InputWithLabel.vue'
+import AccountCreationSuccess from './AccountCreationSuccess.vue'
 import imagenPortadaRegister from '../../assets/auth/primer-plano-gato-lamiendo-oreja-conejo-aislado-blanco-removebg-preview 1.png';
 import LogoInterno from '../../shared/LogoInterno.vue'
 import * as yup from "yup";
@@ -66,6 +74,7 @@ interface FormValues {
     phone: string;
     password: string;
     confirmPassword: string;
+    [key: string]: string;
 }
 
 const schema = yup.object({
@@ -96,7 +105,8 @@ export default defineComponent({
     name: 'RegisterForm',
     components:{
         LogoInterno,
-        InputWithLabel
+        InputWithLabel,
+        AccountCreationSuccess
     },
     setup() {
         const name = ref('');
@@ -105,7 +115,7 @@ export default defineComponent({
         const surname = ref('');
         const phone = ref('');
         const confirmPassword = ref('');
- 
+       const isComponentVisible = ref(true);
 
 
     const errors = reactive({
@@ -115,7 +125,7 @@ export default defineComponent({
         surname: '',
         phone: '',
         confirmPassword:''
-  });
+    }) as FormValues;
 
   const { handleSubmit, resetForm } = useForm();
   
@@ -155,7 +165,9 @@ export default defineComponent({
 
     const validateConfirmPassword = async () => {
       try {
-        await schema.validateAt('confirmPassword', { confirmPassword: confirmPassword.value });
+        await schema.validateAt('confirmPassword', { 
+          password: password.value,
+          confirmPassword: confirmPassword.value });
         errors.confirmPassword = '';
       } catch (err) {
         if (err instanceof Error) {
@@ -200,6 +212,7 @@ export default defineComponent({
       },
       { abortEarly: false }
     );
+    isComponentVisible.value= false,
     alert(
       JSON.stringify({
         name: name.value,
@@ -210,7 +223,13 @@ export default defineComponent({
         email: email.value,
       })
     );
-    resetForm();
+          email.value = "",
+          password.value = "",
+          name.value = "",
+          phone.value = "", 
+          surname.value = "",
+          confirmPassword.value = ""
+
   } catch (err) {
     if (err instanceof yup.ValidationError) {
       err.inner.forEach((error) => {
@@ -231,6 +250,7 @@ export default defineComponent({
             confirmPassword,
             errors,
             imagenPortadaRegister,
+            isComponentVisible,
             validateName,
             validateEmail,
             validatePassword,
@@ -262,6 +282,9 @@ form button:hover {
     background-image: url(../../assets/auth/fonto_auth.png);
     background-size: cover;
     background-position: center;
+    height:89vh;
+    display: flex;
+    justify-content: center;
 }
 
 .container_btn {
@@ -307,7 +330,7 @@ color: #383B43;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
     padding-top:15px;
     
@@ -324,20 +347,23 @@ color: #383B43;
     padding: 10px;
     justify-content: center;
     align-items: center;
+    width:100%;
 }
 
 .form-row {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width:250px;
 }
 
 form {
     display: flex;
     flex-direction: column;
     text-align: left;
-    gap: 10px;
+    gap: 15px;
     width:100%;
+    width:436px;
 }
 
 .container__form--login {
