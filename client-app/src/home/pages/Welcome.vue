@@ -1,17 +1,16 @@
 <template>
- <div class="App">
-    <router-view></router-view>
-</div>
+    <div>
+<h1>Welcome</h1>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-
 export default defineComponent({
-  name: 'MyComponent',
+  name: 'Welcome',
   components: {
-   
+ 
   },
   setup() {
     const message = 'This is my Contenido del component!';
@@ -20,13 +19,6 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
-
-.App{
-  text-align: center;
-  position: relative;
-  width: 100%;
-  height: 100%;        
-}
 </style>
