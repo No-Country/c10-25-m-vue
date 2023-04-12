@@ -1,14 +1,23 @@
 <template>
     <div>
         <label :for="id">{{ label }}</label>
-        <input :id="id" :value="value" :placeholder="placeholder" @input="onInput" @blur="onBlur" />
+        <div class="input-wrapper">
+        <input :id="id" :value="value" :type="inputType" :placeholder="placeholder" @input="onInput" @blur="onBlur" 
+        :style="errors ? 'border:1px solid #C03221;' : ''"
+        />
+        <span class="eye-input" v-if="type === 'password'" @click="togglePasswordVisibility" >
+            <img v-if="showPassword" src="../assets/auth/eye_open.svg" alt="">
+            <img v-else src="../assets/auth/eye_close.svg" alt="">
+        </span>
+        </div>
         <span class="error_form">{{ errors }}</span>
     </div>
 </template>
   
 <script lang="ts">
-import { defineComponent } from 'vue';
-
+import { defineComponent, ref, computed } from 'vue';
+import ImagenEyeOpenInput from '../assets/auth/eye_open.svg'
+import ImagenEyeCloseInput from '../assets/auth/eye_close.svg'
 export default defineComponent({
     name: 'InputWithLabel',
     props: {
@@ -24,6 +33,10 @@ export default defineComponent({
             type: String,
             required: false
         },
+        type:{
+            type: String,
+            required: true
+        },
         value: {
             type:  String,
             required: true
@@ -35,6 +48,8 @@ export default defineComponent({
     },
     emits: ['update:value', 'blur'],
     setup(props, { emit }) {
+
+        const showPassword = ref(false);
         const onInput = (event: Event) => {
             const target = event.target as HTMLInputElement;
             if (target) {
@@ -46,7 +61,17 @@ export default defineComponent({
         emit('blur');
         };
 
-        return { onInput, onBlur };
+        const togglePasswordVisibility =  () => {
+            showPassword.value = !showPassword.value;
+        };
+        const inputType = computed(() => {
+            return props.type === 'password' && showPassword.value ? 'text' : props.type;
+        });
+
+        
+        return { onInput, onBlur, togglePasswordVisibility,  inputType, showPassword,
+                 ImagenEyeOpenInput, ImagenEyeCloseInput
+            };
     }
 });
 </script>
@@ -55,7 +80,19 @@ div {
     display: flex;
     flex-direction: column;
 }
+.input-wrapper {
+    position: relative;
+}
 
+.eye-input {
+    position: absolute;
+    background: none;
+    cursor:pointer;
+    right: 8px;
+    top: 55%;
+    transform: translateY(-50%);
+    /* Agrega más estilos para el botón aquí */
+}
 label {
     font-family: 'Jost';
     font-style: normal;
@@ -76,6 +113,7 @@ form input {
     border: 1px solid #3a57e8;
     border-radius: 4px;
 }
+
 
 .error_form {
   font-family: 'Jost';

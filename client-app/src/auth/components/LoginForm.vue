@@ -11,10 +11,10 @@
         
         <form @submit="onSubmit">
 
-          <InputWithLabel placeholder="Correo electronico" id="email" label="Email" v-model:value="email"
+          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="email"
             @blur="validateEmail" :errors="errors.email" />
 
-          <InputWithLabel placeholder="Password" :errors="errors.password" id="password" label="Password"
+          <InputWithLabel placeholder="Password" type="password" :errors="errors.password" id="password" label="Password"
             @blur="validatePassword" v-model:value="password" />
 
           <div class="form-options">
