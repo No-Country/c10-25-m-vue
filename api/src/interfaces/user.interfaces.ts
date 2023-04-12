@@ -23,7 +23,7 @@ export interface URequest extends Request {
   sessionUser?: any;
 }
 
-export interface ApRequest extends Request {
+export interface ApRequest extends URequest {
   appointment?: any;
   vet?: any;
 }

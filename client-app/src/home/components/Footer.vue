@@ -1,7 +1,7 @@
 <template>
     <div class="container-footer">
         <div class="logo_footer">
-            <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="Logo">
+            <img :src="imagenLogo" alt="Logo">
             <div class="titulo_footer">
                 <h2>Huellitas</h2>
                 <p>Clínica Veterinaria</p>
@@ -22,120 +22,248 @@
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="seguinos">
             <h3>Seguinos</h3>
-            <ul class="seguinos">
+            <ul class="seguinos_items">
                 <li><a href="#"><img src="../../assets/home_img/001-facebook.png"></a></li>
                 <li><a href="#"><img src="../../assets/home_img/004-instagram.png"></a></li>
                 <li><a href="#"><img src="../../assets/home_img/003-twitter.png"></a></li>
             </ul>
         </div>
         <div class="pawprint_footer">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw1">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw2">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw3">
-            <img src="../../assets/home_img/pawprint 1.png" alt="pawprint" id="paw4">
+            <img :src="imagenHuellas" alt="pawprint" id="paw1">
+            <img :src="imagenHuellas" alt="pawprint" id="paw2">
+            <img :src="imagenHuellas" alt="pawprint" id="paw3">
+            <img :src="imagenHuellas" alt="pawprint" id="paw4">
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import imagenLogo from '../../assets/home_img/Veterinaria_logotipo.png';
+import imagenHuellas from '../../assets/home_img/pawprint 1.png';
 
+export default defineComponent({
+  name: 'Footer',
+  setup() {
+
+    return {
+        imagenLogo,
+        imagenHuellas
+
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-
 .container-footer{
-    width: 100%;
+    width:100%;
     background: var(--bg-footer);
-    padding:1em;
-    display: flex;
-    gap: 1em;
+    padding: 1em 1em 2em 1em;
+    display: inline-flex;
+    flex-direction: column;
+    justify-self: center;
+    
+
     
     color: var(--text-footer);
     font-family: Jost;
-    font-size: small;
+    font-size: 1.125rem;
+    position: relative;
 }
-.container-footer li{
-    margin: 1rem;
-}
+
 .logo_footer{
+    height: 2rem;
+    margin: auto;
     display: flex;
-    padding: 1em; 
-
+    justify-content: center;
+    align-items: center;
+    
 }
+
 .logo_footer img{
-    width: 7rem;
-    height: 7rem;
+    width: 1.75rem;
+    height: 1.75rem;
 }
-.titulo_footer{
-    width: 8rem;
-    height: 7rem;
-    margin-top: 1.6rem;
 
+.titulo_footer{
     display: block;
     align-self:center;
-
+    
 }
 .titulo_footer h2{
     color: var(--bg-btn);
     font-family: Bubblegum Sans;
     font-weight: 400;
-    font-size: xx-large;
-}
-.titulo_footer p{
-    color: black;
-    text-align: center;
-
-}
-.contacto h3{
-    width: 6rem;
-    text-align: center;
-    font-weight: 600;
-}
-.contacto_items{
-    display: flex;
-}
-
-.contacto li{
-    font-size: smaller;
+    font-size: 1rem;
     text-align: left;
 }
+.titulo_footer p{
+    width: max-content;
+    color: black;
+    text-align: left;
+    font-size: 0.75rem;
+    
+}
+.contacto{
+    width: 10rem;
+    margin: 1rem auto;
+    
+}
+.contacto h3{
+    
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.contacto_items{
+    font-size: 0.625rem;
+    margin:1rem 0 0.3rem 0 ;
+    
+    display: inline-flex;
+    gap: 1em   
+}
 
-.seguinos  {
-    display:flex;
-    justify-content: center;
+.contacto_items ul{
+    display: grid;
+    row-gap: 1.5em;
+    
+}
+.contacto li{
+    font-size: 0.625rem;
+    text-align: left;
+
+}
+
+.seguinos{
+    margin: auto;
 }
 .seguinos h3{
+    
     font-weight: 600;
+    font-size:0.8rem;
+    text-align: center;
+}
+.seguinos_items {
+    margin: 1rem 0 1rem 0;
+    
+    display:flex;
+    justify-content: center;
+    gap: 3em;
 }
 .pawprint_footer{
-    width: 80%;
-    position:relative;
+    display: none;
+}
+@media (min-width: 618px){
+    .container-footer{
+        width:100%;
+    }
+    .logo_footer{
+        margin: 1rem 2rem 2rem 2rem;
+    }
+}
+@media (min-width: 900px) {
+    .container-footer{
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr 1fr;
+        justify-items: center;
+    }
+
+    .logo_footer{
+        width: auto;
+        height: auto;
+        
+        margin: 0 3rem 0 2rem;
+    }
+    .logo_footer img{
+        width: 8rem;
+        height: 8rem;
+    }
+    .titulo_footer{
+        width: 8rem;
+        height: 7rem;
+        margin-top: 3rem;
+        
+    }
+    .titulo_footer h2{
+        text-align: center;
+        font-size: 2.25rem;
+    }
+    .titulo_footer p{
+        text-align: center;
+        font-size: 1.25rem;
+    }
+    .contacto{
+        width: auto;
+        margin:0.5rem 3rem 0 1.5rem;
+    }
+    .contacto h3{
+        width: 7rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+    .contacto_items{
+        width: auto;
+        font-size: 1.125rem;
+        margin: auto;
+        padding: 1em;
+        display: flex;
+        gap: 1em ;
+        
+    }
+    .contacto_items ul{
+        display: grid;
+        row-gap: 1.5em;
+    }
+    .contacto li{
+        font-size: 1.125rem;
+    }
+
+    .seguinos{
+        width: auto;
+        margin:0.5rem 0 0 2em;
+    }
+    .seguinos h3{
+        width: 5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-align: left;
+    }
+    .seguinos_items {
+        margin: auto;
+        padding-top: 1em;
+        gap: 2em;
+    }
+    .pawprint_footer{
+        display: block;
+    }
+    #paw1{
+        position: absolute;
+        top: 45%;
+        right: 9%;
+        
+    }
+    #paw2{
+        position: absolute;
+        top: 50%;
+        right: 4%;
+    
+    }
+    #paw3{
+        position: absolute;
+        top: 70%;
+        right: 9%;
+    
+    }#paw4{
+        position: absolute;
+        top: 75%;
+        right: 4%;
+        
+    }
     
 }
 
-#paw1{
-    position: absolute;
-    top: 30%;
-    left: 2%;
-    
-}
-#paw2{
-    position: absolute;
-    top: 35%;
-    left: 30%;
-
-}
-#paw3{
-    position: absolute;
-    top: 60%;
-    left: 10%;
-
-}#paw4{
-    position: absolute;
-    top: 65%;
-    left: 40%;
-    
-}
 </style>

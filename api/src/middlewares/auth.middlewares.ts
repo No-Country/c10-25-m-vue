@@ -79,11 +79,14 @@ export const protectAccountOwner = catchAsync(
   async (req: URequest, res: Response, next: NextFunction) => {
     const { user, sessionUser } = req;
 
+    console.log(user.id, sessionUser.id);
+
     if (user.id !== sessionUser.id) {
       return next(
         new AppError('You do not own this account.', StatusCodes.UNAUTHORIZED),
       );
     }
+    next();
   },
 );
 

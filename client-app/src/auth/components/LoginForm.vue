@@ -2,50 +2,143 @@
   <div class="login-container">
     <div class="login-grid">
       <div class="login-image">
-        <img src="../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png" alt="Login Image" />
+        <img :src="imagenPortadaLogin" alt="Login Image" />
       </div>
       <div class="login-form">
-  <img src="../../assets/auth/Veterinaria_logotipo-removebg-preview 1.png" alt="Logo" class="logo">
 
-  <form>
-    <label for="email">email</label>
-    <input type="email" id="email" placeholder="Correo electrónico">
-    <label for="password">password</label>
-    <input type="password" id="password" placeholder="Contraseña">
-    <div class="form-options">
-      <label>
-        <input type="checkbox"> Recordar inicio de sesión
-      </label>
-      <a href="#">¿Olvidó su contraseña?</a>
-    </div>
-    <button type="submit">Iniciar sesión</button>
-  </form>
-  <p>¿No tienes cuenta? <a href="#">Regístrate</a></p>
-</div>
+        <LogoInterno />
+        <h1>Iniciar sesión</h1>
+        
+        <form @submit="onSubmit">
+
+          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="email"
+            @blur="validateEmail" :errors="errors.email" />
+
+          <InputWithLabel placeholder="Password" type="password" :errors="errors.password" id="password" label="Password"
+            @blur="validatePassword" v-model:value="password" />
+
+          <div class="form-options">
+            <label>
+              <input v-model="terms" type="checkbox" />Recordarme
+            </label>
+            <router-link to="/#">Olvidé mi contraseña</router-link>
+          </div>
+          <div class="container_btn">
+            <button type="submit">Iniciar sesión</button>
+          </div>
+        </form>
+        <p>¿No tienes cuenta? <router-link to="/register">Regístrate</router-link></p>
+      </div>
     </div>
   </div>
 </template>
 
-<script  lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref, reactive } from "vue";
+import { ErrorMessage, useForm } from "vee-validate";
+import LogoInterno from "../../shared/LogoInterno.vue";
+import InputWithLabel from "../../shared/InputWithLabel.vue";
+import * as yup from "yup";
+// Imagenes preparadas para production
+import imagenPortadaLogin from "../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png";
+
+interface FormValues {
+  email: string;
+  password: string;
+  [key: string]: string;
+}
+
+const schema = yup.object({
+  email: yup
+    .string()
+    .email()
+    .required("Email es requerido."),
+  password: yup
+    .string()
+    .required("Contraseña incorrecta. Por favor, intentá de nuevo.")
+    .min(8, "La contraseña debe tener más de 8 caracteres."),
+});
 
 export default defineComponent({
-  name: 'LoginForm',
-  setup() {
-    const email = ref('')
-    const password = ref('')
+  name: "LoginForm",
+  components: {
+    ErrorMessage,
+    LogoInterno,
+    InputWithLabel,
+  },
 
-    function submitForm() {
-      // Lógica para enviar el formulario
-    }
+  setup() {
+    const terms = ref(false);
+    const email = ref('');
+    const password = ref('');
+    const { handleSubmit, resetForm } = useForm();
+
+    const errors = reactive({
+      email: '',
+      password: '',
+    });
+
+
+    const validateEmail = async () => {
+      try {
+        await schema.validateAt("email", { email: email.value });
+        errors.email = '';
+      } catch (err) {
+        if (err instanceof Error) {
+          errors.email = err.message;
+        }
+      }
+    };
+
+    const validatePassword = async () => {
+      try {
+        await schema.validateAt('password', { password: password.value });
+        errors.password = '';
+      } catch (err) {
+        if (err instanceof Error) {
+          errors.password = err.message;
+        }
+      }
+    };
+
+
+    const onSubmit = handleSubmit(async (values) => {
+      try {
+        await schema.validateSync(
+          { email: email.value, password: password.value },
+          { abortEarly: false }
+        );
+        alert(JSON.stringify({ email: email.value, password: password.value }));
+          email.value = "",
+          password.value = ""
+      } catch (err) {
+        if (err instanceof yup.ValidationError) {
+          err.inner.forEach((error) => {
+            if (error.path === 'email') {
+              errors.email = error.message;
+            } else if (error.path === 'password') {
+              errors.password = error.message;
+            }
+          });
+        }
+      }
+    });
+
 
     return {
       email,
       password,
-      submitForm
-    }
-  }
-})
+      terms,
+      schema,
+      errors,
+      imagenPortadaLogin,
+      validateEmail,
+      validatePassword,
+      resetForm,
+      onSubmit,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -53,6 +146,19 @@ export default defineComponent({
   background-image: url(../../assets/auth/fonto_auth.png);
   background-size: cover;
   background-position: center;
+  height:89vh;
+  // display: flex;
+  //   justify-content: center;
+}
+
+.login-container h1 {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 33px;
+  line-height: 48px;
+  padding-top: 5%;
+  color: #060859;
 }
 
 .login-grid {
@@ -72,75 +178,128 @@ export default defineComponent({
   align-items: center;
 }
 
-.logo {
-  width: 100px;
-  height: 100px;
-}
-
 form {
   display: flex;
   flex-direction: column;
- 
-
   text-align: left;
-  gap: 10px;
+  gap: 5px;
+  width:436px;
 }
 
-.container__form--login{
+form label {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 175%;
+  text-transform: capitalize;
+  color: #383b43;
+}
+
+.container__form--login {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
 }
-form label{
+
+form label {
   text-align: left;
-  
 }
 
-form input{
-padding: 8px 16px;
-width: 436px;
-height: 44px;
-background: #FFFFFF;
-border: 1px solid #3A57E8;
-border-radius: 4px;
+form input {
+  padding: 8px 16px;
+  width: 436px;
+  height: 44px;
+  background: #ffffff;
+  border: 1px solid #3a57e8;
+  border-radius: 4px;
 }
+
 .form-options {
   display: flex;
   justify-content: space-between;
   width: 100%;
-
+  width: 100%;
+  gap: 6px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-form button{
-  background-color: #3A57E8;
+form button {
+  background-color: #3a57e8;
   color: white;
-  font-family: 'Jost', sans-serif;
+  font-family: "Jost", sans-serif;
   border: none;
   padding: 8px 16px;
   gap: 10px;
   height: 62px;
-  background: #3A57E8;
+  background: #3a57e8;
   box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
   border-radius: 10px;
   font-style: normal;
   font-weight: 400;
   font-size: 26px;
-  margin-top:3%;
   cursor: pointer;
-  color: #FFFFFF;
-  
+  color: #ffffff;
+}
+
+form button:hover {
+  background: #4f62c1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 input[type="checkbox"] {
-  /* styles for checkboxes */
   width: 20px;
   height: 20px;
 }
 
+.form-options label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
 
+.container_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 9px;
+}
 
-.form-options p{
- 
+.login-form p {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+
+  color: #383b43;
+}
+
+.login-form p a {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  text-decoration-line: underline;
+
+  color: #3a57e8;
+}
+
+.form-options a {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  color: #3a57e8;
+}
+.form-options a:hover {
+  text-decoration-line: underline;
+  color: #3a57e8;
 }
 </style>

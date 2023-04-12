@@ -45,8 +45,15 @@ export const validExistAppointmen = catchAsync(
       },
       include: {
         vet: true,
+        pet: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
+
+    console.log(appointment);
 
     if (!appointment) {
       return next(
@@ -56,7 +63,7 @@ export const validExistAppointmen = catchAsync(
         ),
       );
     }
-
+    req.user = appointment.pet.user;
     req.appointment = appointment;
     next();
   },
