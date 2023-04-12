@@ -1,4 +1,8 @@
 import {
+  restrictTo,
+  protectAccountOwner,
+} from './../middlewares/auth.middlewares';
+import {
   createAppointmentValidation,
   updateAppointmentValidation,
 } from './../middlewares/validations.middlewares';
@@ -47,10 +51,16 @@ router
     validVetIdReqBody,
     validPetIdReqBody,
     verifyVetAvailability,
+    protectAccountOwner,
     updateAppointment,
   )
-  .delete(validExistAppointmen, deleteAppointment);
+  .delete(validExistAppointmen, protectAccountOwner, deleteAppointment);
 
-router.patch('/:id/completed', validExistAppointmen, markCompletedAppointment);
+router.patch(
+  '/:id/completed',
+  validExistAppointmen,
+  restrictTo('vet', 'admin'),
+  markCompletedAppointment,
+);
 
 export default router;

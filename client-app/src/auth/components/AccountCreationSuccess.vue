@@ -1,83 +1,85 @@
 <template>
-            <div class="container__CreationSuccess">
-                <LogoInterno/>
-                <div class="container__subtitle">
-                <CheckSucess/>
-                <h1>¡Creaste tu cuenta con éxito!</h1>
-                <p>A continuación, ingresá tu email y contraseña para reservar tu primer turno.</p>
-                <div class="container_btn">
-                    <button type="submit">Continuar</button>
-                    </div>
+    <div class="container__CreationSuccess">
+        <LogoInterno />
+        <div class="container__subtitle">
+            <CheckSucess />
+            <h1>¡Creaste tu cuenta con éxito!</h1>
+            <p>A continuación, ingresá tu email y contraseña para reservar tu primer turno.</p>
+            <div class="container_btn">
+            
+                <button @click="goToLogin()" type="submit">Continuar</button>
             </div>
-          
         </div>
-  
+
+    </div>
 </template>
 
 <script  lang="ts">
 import imagenCheckSuccess from "../../assets/auth/AccountCreationSuccess.png";
 import LogoInterno from '../../shared/LogoInterno.vue'
 import CheckSucess from '../components/svg/CheckSuccess.vue'
-import { defineComponent  } from 'vue';
-
+import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router'; 
 export default defineComponent({
-  name: 'AccountCreationSuccess',
-  components:{
-    LogoInterno,
-    CheckSucess
-  },
-  setup() {
+    name: 'AccountCreationSuccess',
+    components: {
+        LogoInterno,
+        CheckSucess
+    },
+    setup() {
+        const router = useRouter();
 
+        function goToLogin() {
+        router.push('/login');
+        }
 
-return {
-    imagenCheckSuccess 
-};
-  },
+        return {
+            imagenCheckSuccess,
+            goToLogin
+        };
+    },
 });
 </script>
 
 <style lang="scss" scoped>
+.container__CreationSuccess {
 
-
-.container__CreationSuccess{
-    
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height:100%;
+    height: 100%;
     width: 100%;
-    align-items:center;
+    align-items: center;
 }
 
-.container__subtitle h1
-{
+.container__subtitle h1 {
 
-font-family: 'Jost';
-font-style: normal;
-font-weight: 400;
-font-size: 32px;
-line-height: 46px;
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 46px;
 
-color: #060859;
+    color: #060859;
 }
 
 .container__subtitle p {
     font-family: 'Jost';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 26px;
-text-align: center;
-width: 360px;
-color: #383B43;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    width: 360px;
+    color: #383B43;
 }
 
 .container_btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  padding: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 9px;
 }
 
 .container_btn button {
@@ -101,8 +103,7 @@ color: #383B43;
 }
 
 .container_btn button:hover {
-  background: #4f62c1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #4f62c1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
 </style>

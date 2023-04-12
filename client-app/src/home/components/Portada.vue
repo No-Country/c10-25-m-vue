@@ -1,61 +1,61 @@
 <template>
-    <div class="portada-container-with-fondo">
-        <div alt="" class="portada_veterinaria"></div>
-        <div class="grid-container">
-          <div class="grid-item">
-           <HuellasAnimation/>
-          </div>
-          <div class="grid-item">
-            <h1>Tu mascota merece la mejor atención</h1>
-            <p>Somos un equipo de profesionales comprometidos con la salud y el <br>bienestar de tu mascota. ¡Reservá tu turno y conocenos!</p>
-            <button>Reservar un turno</button>
-          </div>
-          <div class="grid-item">
-            <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
-            <HuellasAnimation/>
-          </div>
-        </div>
+  <div class="portada-container-with-fondo">
+    <div alt="" class="portada_veterinaria"></div>
+    <div class="grid-container">
+      <div class="grid-item">
+        <HuellasAnimation />
+      </div>
+      <div class="grid-item">
+        <h1>Tu mascota merece la mejor atención</h1>
+        <p>Somos un equipo de profesionales comprometidos con la salud y el <br>bienestar de tu mascota. ¡Reservá tu turno
+          y conocenos!</p>
+        <button>Reservar un turno</button>
+      </div>
+      <div class="grid-item">
+        <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
+        <HuellasAnimation />
+      </div>
     </div>
+  </div>
 </template>
 
 <script  lang="ts">
-import { defineComponent  } from 'vue';
+import { defineComponent } from 'vue';
 import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 export default defineComponent({
   name: 'Portada',
-  components:{
+  components: {
     HuellasAnimation
   },
   setup() {
 
 
-return {
-    
-};
+    return {
+
+    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 
 
-.portada-container-with-fondo{
-    width: 100%;
-    height: 100%;
+.portada-container-with-fondo {
+  width: 100%;
+  height: 100%;
 }
 
-.portada-container-with-fondo .portada_veterinaria{
+.portada-container-with-fondo .portada_veterinaria {
   width: 100%;
-    height: 572px;
-    background-image: url(../../assets/home_img/dog-portada.png);
-    position:relative;
-    background-size: cover;
-    margin-top: -2.5%;
-    background-repeat: no-repeat;
-    z-index: 8;
-    background-position: bottom;
+  height: 572px;
+  background-image: url(../../assets/home_img/imagen_home_cuerpo4k.png);
+  position: relative;
+  background-size: cover;
+  margin-top: -2.5%;
+  background-repeat: no-repeat;
+  z-index: 8;
+  background-position: bottom;
 }
 
 .grid-container {
@@ -65,33 +65,34 @@ return {
 
 .grid-item {
   text-align: center;
+  padding-top:3%;
 }
 
-.grid-item h1{
+.grid-item h1 {
   color: #232D42;
   font-family: 'Jost';
-font-style: normal;
-font-weight: 700;
-font-size: 2.5rem;
-line-height: 61px;
-text-align: center;
-font-family: 'Jost', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.625rem;
+  line-height: 61px;
+  text-align: center;
+  font-family: 'Jost', sans-serif;
 }
 
-.grid-item p{
-  color:#383B43;
+.grid-item p {
+  color: #383B43;
   font-family: 'Jost';
-font-style: normal;
-font-weight: 400;
-font-size: 24px;
-line-height: 35px;
-text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
 
 }
 
 .grid-item img {
   max-width: 100%;
-  margin:2px;
+  margin: 2px;
 }
 
 .grid-item button {
@@ -108,16 +109,13 @@ text-align: center;
   font-style: normal;
   font-weight: 400;
   font-size: 26px;
-  margin-top:3%;
+  margin-top: 3%;
   cursor: pointer;
   color: #FFFFFF;
 }
 
-.grid-item button:hover{
-background: #4f62c1;
+.grid-item button:hover {
+  background: #4f62c1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-
-
 </style>
