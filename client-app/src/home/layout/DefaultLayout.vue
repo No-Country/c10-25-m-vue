@@ -5,7 +5,7 @@
       <Header></Header>
     </header>
     <main>
-      <slot></slot>
+      <router-view></router-view>
     </main>
     <footer>
       <!-- footer content goes here -->

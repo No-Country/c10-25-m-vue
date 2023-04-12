@@ -1,5 +1,4 @@
 <template>
-
       <!-- Contenido de la vista de inicio aquí -->
       <Portada></Portada>
       <Servicios></Servicios>
