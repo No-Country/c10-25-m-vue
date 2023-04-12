@@ -2,14 +2,14 @@
     <div>
       <header>
         <!-- header contentsp goes here -->
-        <span>header Dashboard</span>
+        <HeaderDashboard/>
       </header>
       <main>
       <router-view></router-view>
     </main>
       <footer>
         <!-- footer content goes here -->
-        <Footer></Footer>
+        <Footer/>
       </footer>
     </div>
 </template>
@@ -17,10 +17,12 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import Footer from "../components/Footer.vue";
+  import HeaderDashboard from "../components/Dashboard/HeaderDashboard.vue"
   export default defineComponent({
     name: 'DefaultLayout',
     components: {
-      Footer
+      Footer,
+      HeaderDashboard
     },
     setup() {
       const message = 'This is my component!';
