@@ -3,109 +3,95 @@ import { StatusCodes } from "http-status-codes";
 import { db } from "../database/db.server";
 import AppError from "../utils/appError";
 import catchAsync from "../utils/catchAsync";
-
+import { capFirst } from "../utils/capitalizateFirst";
+import { ref, uploadBytes } from "firebase/storage";
+import storage from "../utils/firebase";
+import { AnimalRequest } from "../interfaces/animal.interfaces";
+/*TO DO:
+ Separar en dos rutas los read animals. 
+ Cambiar las respuestas
+ Crear rutas separadas para los updates
+ Crear referencia para guardado de imagenes
+*/
 export const readAnimals = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.query
-    //get all animals
-    if (!id) {
-      const result = await db.animal.findMany()
-      return res.json({
-        status: 'success',
-        data: result
-      })
-    }
-    //get one animal
-    if (isNaN(parseInt(id.toString()))) {
-      next(
-        new AppError('id must be just a number', StatusCodes.BAD_REQUEST)
-      )
-      return
-    }
 
-    const result = await db.animal.findUnique({
-      where: {
-        id: parseInt(id.toString())
-      }
-    })
-
-    if (!result) {
-      next(new AppError('Animal not found', StatusCodes.NOT_FOUND))
-      return
-    }
+    const animals = await db.animal.findMany()
     return res.json({
       status: 'success',
-      data: result
+      result: animals.length,
+      animals: animals
     })
-
   }
 )
 
-export const createAnimals = catchAsync(
+export const readAnimal = catchAsync(
+  async (req: AnimalRequest, res: Response, next: NextFunction) => {
+    const animal = req.animal
+    
+    return res.json({
+      status: 'success',
+      animal
+    })
+  }
+)
+
+export const createAnimal = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, image } = req.body
-    const animal:string = `${name[0].toString().toUpperCase()}${name.slice(1).toLowerCase()}`
+    const animalName: string = capFirst(name)
 
-    if(await db.animal.findFirst({where:{name:animal}})){
-      next(new AppError('Animal already exists',StatusCodes.BAD_REQUEST))
-      return
-    }
-    const result = await db.animal.create({
+    const imgRef = ref(
+      storage,
+      `animal/${Date.now()}-${req.file?.originalname}`,
+    );
+
+    const imgUploaded = await uploadBytes(imgRef, req.file?.buffer!)
+
+    const animal = await db.animal.create({
       data: {
-        name: animal,
-        image: image ? image : 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fthenounproject.com%2Fbrowse%2Ficons%2Fterm%2Fanimals%2F&psig=AOvVaw28RyNfEfDt996ND-VusM0L&ust=1680611880008000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKjtgqPdjf4CFQAAAAAdAAAAABAE'
+        name: animalName,
+        image: image ? imgUploaded.metadata.fullPath : 'https://thenounproject.com/api/private/icons/13643/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0&token=gAAAAABkNqkBGzMVewzcJSGNAxN6luZCpttf2fWwxUfcI-NfqD5v4k5QwxeTYRJsAiW5kzedRmEhyQpFfiUA43636U3VgpFIcA%3D%3D'
       }
     })
     return res.status(StatusCodes.CREATED).json({
       status: 'success',
-      data: result
+      message: 'The animal has been created successfully',
+      animal,
+
     })
   })
 
 export const updateAnimals = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params
-    const { data } = req.body
-    data.name= `${data.name[0].toString().toUpperCase()}${data.name.slice(1).toLowerCase()}`
-    if (isNaN(parseInt(id))) {
-      next(new AppError('id must be a number', StatusCodes.BAD_REQUEST))
-      return
-    }
+    const { name, image } = req.body
 
-    if(!(await db.animal.findUnique({where:{id:parseInt(id)}}))){
-      next(new AppError("Animal not found",StatusCodes.NOT_FOUND))
-      return
-    }
-    const result = await db.animal.update({
+    const animal = await db.animal.update({
       where: {
-        id: parseInt(id)
+        id: +id
       },
-      data: data,
+      data: {
+        name: capFirst(name),
+        image
+      },
     })
     return res.status(StatusCodes.OK).json({
       status: 'success',
-      data: result
+      animal
     })
   })
 
 export const deleteAnimals = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params
-    if (isNaN(parseInt(id))) {
-      next(new AppError('id must be a number', StatusCodes.BAD_REQUEST))
-      return
-    }
-    if(!(await db.animal.findUnique({where:{id:parseInt(id)}}))){
-      next(new AppError("Animal not found",StatusCodes.NOT_FOUND))
-      return
-    }
-    const result = await db.animal.delete({
+    const animal = await db.animal.delete({
       where: {
-        id: parseInt(id)
+        id: +id
       }
     })
     return res.json({
       status: 'success',
-      data: result
+      animal
     })
   })

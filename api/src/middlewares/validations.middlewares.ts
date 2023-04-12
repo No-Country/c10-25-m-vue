@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { body } from 'express-validator';
 
-const validateFields = (req: Request, res: Response, next: NextFunction) => {
+export const validateFields = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -38,10 +38,6 @@ export const createUserValidator = [
   validateFields,
 ];
 
-export const createAnimalValidator = [
-  body('name').not().isEmpty().withMessage('Name is required'),
-  validateFields
-]
 export const LoginValidation = [
   body('email')
     .notEmpty()

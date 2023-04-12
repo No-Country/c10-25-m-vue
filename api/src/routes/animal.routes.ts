@@ -1,12 +1,37 @@
 import { Router } from "express";
-import { createAnimals, deleteAnimals, readAnimals, updateAnimals } from "../controllers/animal.controllers";
-import { createAnimalValidator } from "../middlewares/validations.middlewares";
+import { createAnimal, deleteAnimals, readAnimal, readAnimals, updateAnimals } from "../controllers/animal.controllers";
+import { createAnimalValidator, validIfExistAnimalByName, validIfExistAnimalById, updateAnimalValidator } from "../middlewares/animal.middlewares";
+import upload from "../utils/multer";
+import { isParamsIdANumber } from "../utils/isParamsIdANumber";
 
 const router = Router()
 
-router.post('/',createAnimalValidator ,createAnimals)
-router.get('/', readAnimals)
-router.put('/:id', updateAnimals)
-router.delete('/:id', deleteAnimals)
+router
+  .route('/')
+  .get(readAnimals)
+  .post(
+    upload.single('image'),
+    createAnimalValidator,
+    validIfExistAnimalByName,
+    createAnimal
+  )
 
+router
+  .route('/:id')
+  .get(
+    isParamsIdANumber,
+    validIfExistAnimalById,
+    readAnimal
+  )
+  .put(
+    upload.single('image'),
+    updateAnimalValidator,
+    isParamsIdANumber,
+    validIfExistAnimalById,
+    updateAnimals
+    )
+  .delete(
+    validIfExistAnimalById,
+    isParamsIdANumber,
+    deleteAnimals)
 export default router

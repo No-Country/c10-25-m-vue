@@ -5,5 +5,8 @@ export interface CreateAnimalRequest extends Request {
     name: string
     image: string
   }
+}
 
+export interface AnimalRequest extends Request {
+    animal?: any
 }
