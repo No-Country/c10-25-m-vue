@@ -121,12 +121,3 @@ export const updateAppointmentValidation = [
   validateFields,
 ];
 
-export const createReviewValidator = [
-  body('comment').notEmpty().withMessage('The comment is required'),
-  body('score').not().isEmpty().withMessage('the comment is required'),
-];
-
-export const updateReviewValidator = [
-  body('comment').notEmpty().withMessage('The comment is required'),
-  body('score').not().isEmpty().withMessage('the comment is required'),
-]
