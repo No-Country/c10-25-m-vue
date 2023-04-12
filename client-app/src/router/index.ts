@@ -4,7 +4,8 @@
   import DefaultLayout from '../home/layout/DefaultLayout.vue'
   import DashboardLayout from '../home/layout/DashboardLayout.vue'
   import Welcome from '../home/pages/Welcome.vue'
-
+  import UserView from '../user/router/index'
+  import PetsView from '../animal/router/pets'
   
   const router = createRouter({
     history: createWebHistory(),
@@ -31,8 +32,22 @@
             path: '',
             name: 'Welcome',
             component: Welcome
-          }
+          },
         ]
+      },
+      {
+        path: '/userview',
+        component: DashboardLayout,
+        children: [
+            ...UserView
+         ]
+      },
+      {
+        path: '/pets',
+        component: DashboardLayout,
+        children: [
+            ...PetsView
+         ]
       },
     ]
   })

@@ -1,13 +1,13 @@
 <template>
   <div class="diferentes_container">
-    <h2>Descubrí lo que nos hace diferentes</h2>
+    <h2>Por qué elegirnos</h2>
     <img class="bg_diferentes" id="paw_bg1" src="../../assets/home_img/big_pawprint_home.png"  alt="">
     <img class="bg_diferentes" id="paw_bg2" src="../../assets/home_img/big_pawprint_home.png"  alt="">
     <img class="bg_diferentes" id="paw_bg3" src="../../assets/home_img/big_pawprint_home.png"  alt="">
     <div class="diferentes_item">
       <img :src="imagenPortadabulldog" alt="">
       <div class="descripcion">
-        <h3>Atención de calidad las 24hs</h3>
+        <h3>Atención de calidad las 24 hs</h3>
         <p>Nuestros expertos están disponibles para cuidar de tu mascota en todo momento.</p>
       </div>
     </div>
