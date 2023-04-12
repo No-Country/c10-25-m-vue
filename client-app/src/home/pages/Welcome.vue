@@ -5,7 +5,7 @@
             <img class="subLogo" :src="LogoImg" alt="">
 
             <h1>¡Hola Agustin!</h1>
-            <img class="portada-img" src="../../assets/welcome_img/imagen header 1.png" alt="">
+            <img class="portada-img" :src="PortadaImg" alt="">
         </div>
     </div>
 </template>
@@ -13,6 +13,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import LogoImg from '../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png'
+import PortadaImg from '../../assets/welcome_img/imagen header 1.png'
 export default defineComponent({
   name: 'Welcome',
   components: {
@@ -20,7 +21,7 @@ export default defineComponent({
   },
   setup() {
     const message = 'This is my Contenido del component!';
-    return { message, LogoImg };
+    return { message, LogoImg, PortadaImg };
   },
 });
 </script>
