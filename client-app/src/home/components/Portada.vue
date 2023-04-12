@@ -49,7 +49,7 @@ return {
 .portada-container-with-fondo .portada_veterinaria{
   width: 100%;
     height: 572px;
-    background-image: url(../../assets/home_img/imagen_home_cuerpo4k.png);
+    background-image: url(../../assets/home_img/dog-portada.png);
     position:relative;
     background-size: cover;
     margin-top: -2.5%;
@@ -72,7 +72,7 @@ return {
   font-family: 'Jost';
 font-style: normal;
 font-weight: 700;
-font-size: 2.825rem;
+font-size: 2.5rem;
 line-height: 61px;
 text-align: center;
 font-family: 'Jost', sans-serif;

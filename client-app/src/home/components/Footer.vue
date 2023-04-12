@@ -59,7 +59,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .container-footer{
-    width: max-content;
+    width:100%;
     background: var(--bg-footer);
     padding: 1em 1em 2em 1em;
     display: inline-flex;
@@ -70,12 +70,13 @@ export default defineComponent({
     
     color: var(--text-footer);
     font-family: Jost;
-    font-size: small;
+    font-size: 1.125rem;
     position: relative;
 }
 
 .logo_footer{
-    margin: 1rem 12.6rem 2rem 12.6rem;
+    height: 2rem;
+    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,8 +84,8 @@ export default defineComponent({
 }
 
 .logo_footer img{
-    width: 3rem;
-    height: 3rem;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 .titulo_footer{
@@ -96,28 +97,31 @@ export default defineComponent({
     color: var(--bg-btn);
     font-family: Bubblegum Sans;
     font-weight: 400;
-    font-size: xx-large;
+    font-size: 1rem;
+    text-align: left;
 }
 .titulo_footer p{
+    width: max-content;
     color: black;
-    text-align: center;
+    text-align: left;
+    font-size: 0.75rem;
     
 }
 .contacto{
-    width: 100%;
-    margin: auto;
+    width: 10rem;
+    margin: 1rem auto;
+    
 }
 .contacto h3{
-    width: 100%;
+    
     text-align: center;
     font-weight: 600;
-    font-size: large;
+    font-size: 0.8rem;
 }
 .contacto_items{
-    width: min-content;
-    margin-left: 2rem;
-    margin-bottom: 1rem;
-    padding: 1em;
+    font-size: 0.625rem;
+    margin:1rem 0 0.3rem 0 ;
+    
     display: inline-flex;
     gap: 1em   
 }
@@ -125,26 +129,26 @@ export default defineComponent({
 .contacto_items ul{
     display: grid;
     row-gap: 1.5em;
+    
 }
 .contacto li{
-    font-size: smaller;
+    font-size: 0.625rem;
     text-align: left;
 
 }
 
 .seguinos{
-    width: 100%;
     margin: auto;
 }
 .seguinos h3{
     
     font-weight: 600;
-    font-size: large;
+    font-size:0.8rem;
     text-align: center;
 }
 .seguinos_items {
     margin: 1rem 0 1rem 0;
-    padding-top: 1em;
+    
     display:flex;
     justify-content: center;
     gap: 3em;
@@ -154,7 +158,7 @@ export default defineComponent({
 }
 @media (min-width: 618px){
     .container-footer{
-        width: 50rem;
+        width:100%;
     }
     .logo_footer{
         margin: 1rem 2rem 2rem 2rem;
@@ -162,15 +166,16 @@ export default defineComponent({
 }
 @media (min-width: 900px) {
     .container-footer{
-        width: 100%;
-    
         display: grid;
         grid-template-columns: 1fr 4fr 1fr 1fr;
         justify-items: center;
     }
 
     .logo_footer{
-        margin-left: 2rem;    
+        width: auto;
+        height: auto;
+        
+        margin: 0 3rem 0 2rem;
     }
     .logo_footer img{
         width: 8rem;
@@ -182,21 +187,39 @@ export default defineComponent({
         margin-top: 3rem;
         
     }
+    .titulo_footer h2{
+        text-align: center;
+        font-size: 2.25rem;
+    }
+    .titulo_footer p{
+        text-align: center;
+        font-size: 1.25rem;
+    }
     .contacto{
+        width: auto;
         margin:0.5rem 3rem 0 1.5rem;
     }
     .contacto h3{
-        width: 6rem;
+        width: 7rem;
         text-align: center;
         font-weight: 600;
+        font-size: 1.25rem;
     }
     .contacto_items{
-        width:auto;
+        width: auto;
+        font-size: 1.125rem;
         margin: auto;
         padding: 1em;
         display: flex;
         gap: 1em ;
         
+    }
+    .contacto_items ul{
+        display: grid;
+        row-gap: 1.5em;
+    }
+    .contacto li{
+        font-size: 1.125rem;
     }
 
     .seguinos{
@@ -205,11 +228,13 @@ export default defineComponent({
     }
     .seguinos h3{
         width: 5rem;
+        font-size: 1.25rem;
         font-weight: 600;
         text-align: left;
     }
     .seguinos_items {
         margin: auto;
+        padding-top: 1em;
         gap: 2em;
     }
     .pawprint_footer{
