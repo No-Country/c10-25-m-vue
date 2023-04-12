@@ -5,7 +5,19 @@ import { db } from "../database/db.server";
 
 export const readVets = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        const vets = await db.vet.findMany();
+        const vets = await db.vet.findMany({
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        surname: true,
+                        email: true,
+                        profileImageUrl: true,
+                    }
+                }
+            }
+        });
         return res.status(StatusCodes.OK).json({
             status: "success",
             vets
@@ -17,12 +29,10 @@ export const readVets = catchAsync(
 
 export const createVet = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        const { phone, speciality, user_id} = req.body;
+        const { user_id, speciality, phone } = req.body;
         const vet = await db.vet.create({
             data: {
-                phone,
-                speciality,
-                user_id
+                user_id, speciality, phone
             }
         })
         return res.status(StatusCodes.CREATED).json({
@@ -44,9 +54,7 @@ export const updateVet = catchAsync(
                 id: Number(id)
             },
             data: {
-                phone,
-                speciality,
-                user_id
+                user_id, speciality, phone
             }
         })
         return res.status(StatusCodes.OK).json({
@@ -74,10 +82,66 @@ export const deleteVet = catchAsync(
     }
 );
 
- 
 
-export default {readVets,createVet,updateVet,deleteVet};
+//Encontrar vet por Especialidad
+
+export const vetSpeciality = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { speciality } = req.params;
+        const vet = await db.vet.findMany({
+            where: {
+                speciality: speciality
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        surname: true,
+                        email: true,
+                        profileImageUrl: true,
+                    }
+                }
+            }
+        })
+        return res.status(StatusCodes.OK).json({
+            status: "success",
+            vet
+        })
+    }
+);
+
+//Encontrar vet por ID
+
+export const findVetById = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { id } = req.params;
+        const vet = await db.vet.findUnique({
+            where: {
+                id: Number(id)
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        surname: true,
+                        email: true,
+                        profileImageUrl: true,
+                    }
+                }
+            }
+        })
+        return res.status(StatusCodes.OK).json({
+            status: "success",
+            vet
+        })
+    }
+);
 
 
 
-  
+export default { readVets, createVet, updateVet, deleteVet, vetSpeciality, findVetById };
+
+
+

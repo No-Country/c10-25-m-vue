@@ -4,7 +4,7 @@ import { body } from 'express-validator';
 
 const validateFields = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
-
+  console.log(req.body)
   if (!errors.isEmpty()) {
     return res.status(400).json({
       status: 'error',
@@ -74,10 +74,9 @@ export const updateUserValidator = [
 //CreateVetValidator
 
 export const createVetValidator = [
-  body('speciality').not().isEmpty().withMessage('the speciality is required'),
   body('user_id').not().isEmpty().withMessage('user_id is required'),
+  body('speciality').not().isEmpty().withMessage('the speciality is required'),
   body('phone').not().isEmpty().withMessage('a valid number is required'),
-    
 
   validateFields,
 ];
@@ -88,7 +87,7 @@ export const updateVetValidator = [
   body('speciality').not().isEmpty().withMessage('the speciality is required'),
   body('user_id').not().isEmpty().withMessage('user_id is required'),
   body('phone').not().isEmpty().withMessage('a valid number is required'),
-  
+
   validateFields,
 ]
 export const createAppointmentValidation = [
@@ -121,3 +120,13 @@ export const updateAppointmentValidation = [
     .withMessage('vetId must be a number'),
   validateFields,
 ];
+
+export const createReviewValidator = [
+  body('comment').notEmpty().withMessage('The comment is required'),
+  body('score').not().isEmpty().withMessage('the comment is required'),
+];
+
+export const updateReviewValidator = [
+  body('comment').notEmpty().withMessage('The comment is required'),
+  body('score').not().isEmpty().withMessage('the comment is required'),
+]
