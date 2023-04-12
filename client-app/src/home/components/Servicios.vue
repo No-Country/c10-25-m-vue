@@ -1,6 +1,6 @@
 <template>
   <div class="servicios_container">
-    <h2>Nuestros Servicios</h2>
+    <h2>Nuestros servicios</h2>
 
     <ul class="servicios_list">
       <li class="servicios_item items-a">
@@ -41,7 +41,7 @@
   width: 100%;
   margin-top: 2rem;
   padding: 2rem;
-  background-image:url(../../assets/home_img/bg_servicios_home.png) ;
+  background-image:url(../../assets/home_img/fondo-2.png) ;
   background-size: cover;
   background-position: relative;
 
@@ -90,6 +90,10 @@
 .servicios_item div{
   width: 6rem;
   height: 6rem;
+
+  box-sizing: content-box;
+  padding: 7px;
+  
   background-color:var(--bg-icons);
   border: solid 2px var(--bg-btn);
   border-radius: 50%;
