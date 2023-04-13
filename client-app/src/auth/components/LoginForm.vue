@@ -38,9 +38,10 @@ import { defineComponent, ref, reactive } from "vue";
 import { ErrorMessage, useForm } from "vee-validate";
 import LogoInterno from "../../shared/LogoInterno.vue";
 import InputWithLabel from "../../shared/InputWithLabel.vue";
+import { useRouter } from 'vue-router'; 
+import { useUserStore } from '../../store/auth/user';
+import imagenPortadaLogin from "../../assets/auth/Veterinaria_logo.png";
 import * as yup from "yup";
-// Imagenes preparadas para production
-import imagenPortadaLogin from "../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png";
 
 interface FormValues {
   email: string;
@@ -68,6 +69,7 @@ export default defineComponent({
   },
 
   setup() {
+    const userStore = useUserStore();
     const terms = ref(false);
     const email = ref('');
     const password = ref('');
@@ -77,6 +79,12 @@ export default defineComponent({
       email: '',
       password: '',
     });
+
+    const router = useRouter();
+
+      function goToWelcome() {
+        router.push('/welcome');
+      }
 
 
     const validateEmail = async () => {
@@ -108,9 +116,34 @@ export default defineComponent({
           { email: email.value, password: password.value },
           { abortEarly: false }
         );
-        alert(JSON.stringify({ email: email.value, password: password.value }));
-          email.value = "",
+        
+      // Enviar petición HTTP POST al endpoint de inicio de sesión
+      const response = await fetch('http://localhost:3001/api/v1/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email.value,
+          password: password.value
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Actualizar estado de la aplicación con información del usuario autenticado
+        userStore.user = data.user;
+        goToWelcome();
+        email.value = "",
           password.value = ""
+      } else {
+        // Manejar error
+        alert("Error...");
+      }
+
+
+
+         
       } catch (err) {
         if (err instanceof yup.ValidationError) {
           err.inner.forEach((error) => {
@@ -134,6 +167,7 @@ export default defineComponent({
       imagenPortadaLogin,
       validateEmail,
       validatePassword,
+      goToWelcome,
       resetForm,
       onSubmit,
     };

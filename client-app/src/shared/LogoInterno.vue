@@ -13,20 +13,21 @@
 
 <script lang="ts">
 import { defineComponent, defineProps  } from 'vue'
-import imagenLogoLogin from "../assets/auth/Veterinaria_logotipo-removebg-preview 1.png";
+import imagenLogoLogin from "../assets/auth/Veterinaria_logotipo-removebg-preview 1.png"
 export default defineComponent({
-  
+  name: 'LogoInterno',
     setup () {
+    
   const props = defineProps({
     widthLogo: {
         type: String,
         required: true,
-        default: '130px',
+        default: '100px',
       },
     heightLogo: {
         type: String,
         required: true,
-        default: '130px',
+        default: '100px',
       },
       });
 
