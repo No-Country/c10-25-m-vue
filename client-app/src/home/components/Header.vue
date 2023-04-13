@@ -7,7 +7,7 @@
             </ul>
         </nav>
         <div class="btn-container-session">
-            <button @click="toggleBackground(), goToLogin()"  :class="!noBackground ? 'no-background' : 'btn__on-backgroundLogin'">
+            <button @click="toggleBackground(), goToLogin()"  :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'">
               Iniciar sesión
             </button>
             <button @click="toggleBackground(), goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
@@ -80,6 +80,22 @@ font-family: 'Jost', sans-serif;
 font-size: 1.25rem;
 cursor: pointer;
 }
+.no-backgroundLogin {
+ background-color: transparent !important;
+ color: #2E46BA;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+width: auto;
+height: 51px;
+border-radius: 4px;
+font-family: 'Jost', sans-serif;
+font-size: 1.25rem;
+cursor: pointer;
+}
 .header-container-with-logo-nav-registration{
     width: 100%;
     height: 80px;
@@ -116,6 +132,7 @@ cursor: pointer;
 
 .header-container-with-logo-nav-registration nav ul li:hover{
     text-decoration: underline;
+    color: #0E1C5F;
 }
 
 
@@ -168,8 +185,15 @@ font-family: 'Jost', sans-serif;
 .btn-container-session .btn__on-backgroundLogin:hover{
   background: var(--bg-btnLight);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border:1px solid #2E46BA;
 }
 
+.no-backgroundLogin:hover {
+  border:1px solid #2E46BA;
+}
+.no-backgroundLogin:hover{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 .no-background:hover{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

@@ -2,7 +2,7 @@ import UserView from '../pages/UserView.vue'
 
 export default [
   {
-    path:'/',
+    path:'/userview',
     name: 'userview',
     component: UserView
   },

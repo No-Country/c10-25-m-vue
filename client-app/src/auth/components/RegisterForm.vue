@@ -1,61 +1,54 @@
 <template>
-    <div class="login-container">
-        <div class="login-grid">
-            <div class="login-image">
-                <img :src="imagenPortadaRegister"
-                    alt="Login Image" />
-            </div>
-       
-            <div class="login-form" v-if="isComponentVisible">
-                <LogoInterno/>
-                <div class="container__subtitle">
-                <h1>Registrate</h1>
-                <p>Completá tus datos para comenzar.</p>
-           
-                <form @submit="onSubmit">
-                    <div class="form-group">
+  <div class="login-container">
+    <div class="login-grid">
+      <div class="login-image">
+        <img :src="imagenPortadaRegister" alt="Login Image" />
+      </div>
 
-                        <InputWithLabel class="form-row" placeholder="Nombre" 
-                        v-model:value="name" id="nombre" label="Nombre" 
-                        @blur="validateName" :errors="errors.name"
-                        />
+      <div class="login-form" v-if="isComponentVisible">
+        <LogoInterno />
+        <div class="container__subtitle">
+          <h1>Registrate</h1>
+          <p>Completá tus datos para comenzar.</p>
 
-                        <InputWithLabel class="form-row" placeholder="Apellido" 
-                        :errors="errors.surname" id="apellido" label="Apellido" 
-                        v-model:value="surname"   @blur="validateSurname"/>
+          <form @submit="onSubmit">
+            <div class="form-group">
 
-                        <InputWithLabel class="form-row" placeholder="Email" 
-                        :errors="errors.email" id="email" label="Email" 
-                        v-model:value="email" @blur="validateEmail"/>
+              <InputWithLabel type="text" class="form-row" placeholder="Nombre" v-model:value="name" id="nombre" label="Nombre"
+                @blur="validateName" :errors="errors.name" />
 
-                        <InputWithLabel class="form-row" placeholder="Teléfono" 
-                        :errors="errors.phone" id="telefono" label="Teléfono" 
-                        v-model:value="phone" @blur="validatePhone"/>
+              <InputWithLabel type="text" class="form-row" placeholder="Apellido" :errors="errors.surname" id="apellido"
+                label="Apellido" v-model:value="surname" @blur="validateSurname" />
 
-                        <InputWithLabel class="form-row" placeholder="Contraseña" 
-                        :errors="errors.password" id="contraseña" label="Contraseña" 
-                        v-model:value="password" @blur="validatePassword"/>
+              <InputWithLabel type="text" class="form-row" placeholder="Email" :errors="errors.email" id="email" label="Email"
+                v-model:value="email" @blur="validateEmail" />
 
-                        <InputWithLabel class="form-row" placeholder="Repetir contraseña" 
-                        :errors="errors.confirmPassword" id="repetirContraseña" label="Repetir contraseña" 
-                        v-model:value="confirmPassword" @blur="validateConfirmPassword"/>
+              <InputWithLabel type="number" class="form-row" placeholder="Teléfono" :errors="errors.phone" id="telefono"
+                label="Teléfono" v-model:value="phone" @blur="validatePhone" />
 
-                    </div>
-                    <div class="container_btn">
-                    <button type="submit">Registrare</button>
-                    </div>
-                </form>
+              <InputWithLabel type="password" class="form-row" placeholder="Contraseña" :errors="errors.password" id="contraseña"
+                label="Contraseña" v-model:value="password" @blur="validatePassword" />
+
+              <InputWithLabel type="password" class="form-row" placeholder="Repetir contraseña" :errors="errors.confirmPassword"
+                id="repetirContraseña" label="Repetir contraseña" v-model:value="confirmPassword"
+                @blur="validateConfirmPassword" />
 
             </div>
+            <div class="container_btn">
+              <button type="submit">Registrare</button>
+            </div>
+          </form>
+
         </div>
-      
-        
+      </div>
+
+
     </div>
     <div class="login-form" v-if="!isComponentVisible">
-        
-        <AccountCreationSuccess />
-      </div>
+
+      <AccountCreationSuccess />
     </div>
+  </div>
 </template>
   
 <script  lang="ts">
@@ -68,29 +61,29 @@ import * as yup from "yup";
 import { useForm } from "vee-validate";
 
 interface FormValues {
-    name:string;
-    surname:string;
-    email: string;
-    phone: string;
-    password: string;
-    confirmPassword: string;
-    [key: string]: string;
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
+  [key: string]: string;
 }
 
 const schema = yup.object({
   name: yup
     .string()
-    .required('Nombre es requerido'),  
+    .required('Nombre es requerido'),
   surname: yup
     .string()
-    .required('Apellido es requerido'),  
+    .required('Apellido es requerido'),
   email: yup
     .string()
     .email()
     .required('Email es requerido.'),
   phone: yup
     .string()
-    .required('Telefono es requerido'),  
+    .required('Telefono es requerido'),
   password: yup
     .string()
     .required('Contraseña incorrecta. Por favor, intentá de nuevo.').min(8, 'La contraseña debe tener más de 8 caracteres.'),
@@ -102,35 +95,35 @@ const schema = yup.object({
 
 
 export default defineComponent({
-    name: 'RegisterForm',
-    components:{
-        LogoInterno,
-        InputWithLabel,
-        AccountCreationSuccess
-    },
-    setup() {
-        const name = ref('');
-        const email = ref('');
-        const password = ref('');
-        const surname = ref('');
-        const phone = ref('');
-        const confirmPassword = ref('');
-       const isComponentVisible = ref(true);
+  name: 'RegisterForm',
+  components: {
+    LogoInterno,
+    InputWithLabel,
+    AccountCreationSuccess
+  },
+  setup() {
+    const name = ref('');
+    const email = ref('');
+    const password = ref('');
+    const surname = ref('');
+    const phone = ref('');
+    const confirmPassword = ref('');
+    const isComponentVisible = ref(true);
 
 
     const errors = reactive({
-        name: '',
-        email: '',
-        password: '',
-        surname: '',
-        phone: '',
-        confirmPassword:''
+      name: '',
+      email: '',
+      password: '',
+      surname: '',
+      phone: '',
+      confirmPassword: ''
     }) as FormValues;
 
-  const { handleSubmit, resetForm } = useForm();
-  
+    const { handleSubmit, resetForm } = useForm();
 
-  const validateName = async () => {
+
+    const validateName = async () => {
       try {
         await schema.validateAt("name", { name: name.value });
         errors.name = '';
@@ -158,20 +151,21 @@ export default defineComponent({
         errors.password = '';
       } catch (err) {
         if (err instanceof Error) {
-        errors.password = err.message;
+          errors.password = err.message;
         }
       }
     };
 
     const validateConfirmPassword = async () => {
       try {
-        await schema.validateAt('confirmPassword', { 
+        await schema.validateAt('confirmPassword', {
           password: password.value,
-          confirmPassword: confirmPassword.value });
+          confirmPassword: confirmPassword.value
+        });
         errors.confirmPassword = '';
       } catch (err) {
         if (err instanceof Error) {
-        errors.confirmPassword = err.message;
+          errors.confirmPassword = err.message;
         }
       }
     };
@@ -182,7 +176,7 @@ export default defineComponent({
         errors.surname = '';
       } catch (err) {
         if (err instanceof Error) {
-        errors.surname = err.message;
+          errors.surname = err.message;
         }
       }
     };
@@ -193,84 +187,83 @@ export default defineComponent({
         errors.phone = '';
       } catch (err) {
         if (err instanceof Error) {
-        errors.phone = err.message;
+          errors.phone = err.message;
         }
       }
     };
 
 
     const onSubmit = handleSubmit(async (values) => {
-  try {
-    await schema.validate(
-      {
-        name: name.value,
-        password: password.value,
-        phone: phone.value,
-        surname: surname.value,
-        confirmPassword: confirmPassword.value,
-        email: email.value,
-      },
-      { abortEarly: false }
-    );
-    isComponentVisible.value= false,
-    alert(
-      JSON.stringify({
-        name: name.value,
-        password: password.value,
-        phone: phone.value,
-        surname: surname.value,
-        confirmPassword: confirmPassword.value,
-        email: email.value,
-      })
-    );
-          email.value = "",
+      try {
+        await schema.validate(
+          {
+            name: name.value,
+            password: password.value,
+            phone: phone.value,
+            surname: surname.value,
+            confirmPassword: confirmPassword.value,
+            email: email.value,
+          },
+          { abortEarly: false }
+        );
+        isComponentVisible.value = false,
+          alert(
+            JSON.stringify({
+              name: name.value,
+              password: password.value,
+              phone: phone.value,
+              surname: surname.value,
+              confirmPassword: confirmPassword.value,
+              email: email.value,
+            })
+          );
+        email.value = "",
           password.value = "",
           name.value = "",
-          phone.value = "", 
+          phone.value = "",
           surname.value = "",
           confirmPassword.value = ""
 
-  } catch (err) {
-    if (err instanceof yup.ValidationError) {
-      err.inner.forEach((error) => {
-        if (error.path) {
-          errors[error.path] = error.message;
+      } catch (err) {
+        if (err instanceof yup.ValidationError) {
+          err.inner.forEach((error) => {
+            if (error.path) {
+              errors[error.path] = error.message;
+            }
+          });
         }
-      });
+      }
+    });
+
+    return {
+      name,
+      surname,
+      email,
+      phone,
+      password,
+      confirmPassword,
+      errors,
+      imagenPortadaRegister,
+      isComponentVisible,
+      validateName,
+      validateEmail,
+      validatePassword,
+      validateSurname,
+      validateConfirmPassword,
+      validatePhone,
+      onSubmit
     }
   }
-});
-
-        return {
-            name,
-            surname,
-            email,
-            phone,
-            password,
-            confirmPassword,
-            errors,
-            imagenPortadaRegister,
-            isComponentVisible,
-            validateName,
-            validateEmail,
-            validatePassword,
-            validateSurname,
-            validateConfirmPassword,
-            validatePhone,
-            onSubmit
-        }
-    }
 })
 </script>
   
 <style scoped lang="scss">
+.container__subtitle {
+  display: flex;
 
-.container__subtitle{
-    display:flex;
-  
-flex-direction: column;
-line-height:25px;
-padding-top:5%;
+  flex-direction: column;
+  line-height: 25px;
+  padding-top: 5%;
 }
 
 form button:hover {
@@ -279,12 +272,12 @@ form button:hover {
 }
 
 .login-container {
-    background-image: url(../../assets/auth/fonto_auth.png);
-    background-size: cover;
-    background-position: center;
-    height:89vh;
-    display: flex;
-    justify-content: center;
+  background-image: url(../../assets/auth/fonto_auth.png);
+  background-size: cover;
+  background-position: center;
+  height: 89vh;
+  display: flex;
+  justify-content: center;
 }
 
 .container_btn {
@@ -300,7 +293,7 @@ form button:hover {
   font-style: normal;
   font-weight: 500;
   font-size: 33px;
- 
+
   /* identical to box height */
   padding-top: 10px;
 
@@ -309,104 +302,103 @@ form button:hover {
 }
 
 .login-form p {
-    font-family: 'Jost';
-font-style: normal;
-font-weight: 400;
-width:100%;
-font-size: 16px;
-padding:10px;
-/* identical to box height, or 28px */
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  /* identical to box height, or 28px */
 
 
-color: #383B43;
+  color: #383B43;
 }
+
 .login-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
 }
 
 .form-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 15px;
-    justify-content: center;
-    padding-top:15px;
-    
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 15px;
+  justify-content: center;
+  padding-top: 15px;
+
 }
 
 .login-image {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    width:100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .form-row {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width:250px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 250px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    gap: 15px;
-    width:100%;
-    width:436px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 15px;
+  width: 100%;
+  width: 436px;
 }
 
 .container__form--login {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 
 
 .form-options {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
 }
 
 form button {
-    background-color: #3A57E8;
-    color: white;
-    font-family: 'Jost', sans-serif;
-    border: none;
-    padding: 8px 16px;
-    gap: 10px;
-    height: 62px;
-    background: #3A57E8;
-    box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
-    border-radius: 10px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 26px;
-    margin-top: 3%;
-    cursor: pointer;
-    color: #FFFFFF;
+  background-color: #3A57E8;
+  color: white;
+  font-family: 'Jost', sans-serif;
+  border: none;
+  padding: 8px 16px;
+  gap: 10px;
+  height: 62px;
+  background: #3A57E8;
+  box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  margin-top: 3%;
+  cursor: pointer;
+  color: #FFFFFF;
 
 }
 
 input[type="checkbox"] {
-    /* styles for checkboxes */
-    width: 20px;
-    height: 20px;
+  /* styles for checkboxes */
+  width: 20px;
+  height: 20px;
 }
-
-
 </style>

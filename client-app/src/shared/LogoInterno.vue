@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="logo_container">
-            <img :src="imagenLogoLogin" alt="Logo" class="logo" width="130px" height="130px" />
+          
+            <img :src="imagenLogoLogin" alt="Logo" class="logo" :width="widthLogo" :height="heightLogo" />
             <div class="titulo_footer">
                     <h2>Huellitas</h2>
                     <p>Clínica Veterinaria</p>
@@ -11,13 +12,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, defineProps  } from 'vue'
 import imagenLogoLogin from "../assets/auth/Veterinaria_logotipo-removebg-preview 1.png";
 export default defineComponent({
+  
     setup () {
-        
+  const props = defineProps({
+    widthLogo: {
+        type: String,
+        required: true,
+        default: '130px',
+      },
+    heightLogo: {
+        type: String,
+        required: true,
+        default: '130px',
+      },
+      });
 
+  
         return {
+          ...props,
             imagenLogoLogin
         }
     }
@@ -32,10 +47,6 @@ export default defineComponent({
   gap:9px;
 }
 
-.logo {
-  width: 100px;
-  height: 100px;
-}
 
 .login-container h2{
   color: var(--bg-btn);
