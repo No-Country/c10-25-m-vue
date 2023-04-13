@@ -164,7 +164,7 @@ export default defineComponent({
         margin: 1rem 2rem 2rem 2rem;
     }
 }
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
     .container-footer{
         display: grid;
         grid-template-columns: 1fr 4fr 1fr 1fr;
@@ -236,7 +236,9 @@ export default defineComponent({
         margin: auto;
         padding-top: 1em;
         gap: 2em;
-    }
+    }   
+}
+    @media (min-width: 1444px) {
     .pawprint_footer{
         display: block;
     }
