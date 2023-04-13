@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, defineProps  } from 'vue'
-import imagenLogoLogin from "../assets/auth/Veterinaria_logotipo-removebg-preview 1.png"
+import imagenLogoLogin from '../assets/auth/Veterinaria_logo.png'
 export default defineComponent({
   name: 'LogoInterno',
     setup () {
@@ -48,6 +48,10 @@ export default defineComponent({
   gap:9px;
 }
 
+.logo{
+  width:100px;
+  height:100px;
+}
 
 .login-container h2{
   color: var(--bg-btn);
