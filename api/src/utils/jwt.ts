@@ -8,7 +8,7 @@ export const generateJWT = (id: number): Promise<string> => {
       payload,
       process.env.JWT_SECRET!,
       {
-         expiresIn: process.env.JWT_EXPIRE as string,
+        expiresIn: (process.env.JWT_EXPIRE as string) || '2h',
       },
       (err, token) => {
         if (err) {
