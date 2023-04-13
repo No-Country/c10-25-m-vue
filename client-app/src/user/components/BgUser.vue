@@ -1,24 +1,44 @@
 <template>
   <div class="bg_container">
     <div class="logo_portada_user">
-      <img src="../../assets/home_img/Veterinaria_logotipo.png" alt="Logo" id="logo_user">
+      <img :src="LogoVeter" alt="Logo" id="logo_user">
     </div>
     <div class="fondo_azul">
       <div class="perfil_deco">
-        <img src="../../assets/user_img/cat perfil.png" alt="gato">
+        <img :src="CatPrefil" alt="gato">
         <h1>Mi perfil</h1>
       </div>
     </div>
     <div class="pawprint_user">
-      <img src="../../assets/user_img/bg-pawprint.png" alt="huellas">
+      <img :src="Huellas" alt="huellas">
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import CatPrefil from '../../assets/user_img/cat perfil.png'
+import LogoVeter from '../../assets/home_img/Veterinaria_logotipo.png'
+import Huellas from '../../assets/user_img/bg-pawprint.png'
+
+export default {
+    components:{
+        
+    },
+  setup() {
+
+
+
+return {
+  CatPrefil,
+  Huellas,
+  LogoVeter
+};
+
+
+  },
+}
 
 </script>
-
 <style scoped>
 .bg_container{
   width: 100%;

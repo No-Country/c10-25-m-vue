@@ -1,8 +1,7 @@
 <template>
     <div>
         <div class="logo_container">
-          
-            <img :src="imagenLogoLogin" alt="Logo" class="logo" :width="widthLogo" :height="heightLogo" />
+            <img :src="imagenLogoLogin" alt="Logo" class="logo" width="63px" height="63px" />
             <div class="titulo_footer">
                     <h2>Huellitas</h2>
                     <p>Clínica Veterinaria</p>
@@ -12,34 +11,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps  } from 'vue'
-import imagenLogoLogin from "../assets/auth/Veterinaria_logotipo-removebg-preview 1.png";
+import { defineComponent } from 'vue'
+import imagenLogoLogin from "../assets/home_img/logoHeader.png";
 export default defineComponent({
-  
+  name: 'LogoHeader',
     setup () {
-  const props = defineProps({
-    widthLogo: {
-        type: String,
-        required: true,
-        default: '130px',
-      },
-    heightLogo: {
-        type: String,
-        required: true,
-        default: '130px',
-      },
-      });
+        
 
-  
         return {
-          ...props,
             imagenLogoLogin
         }
     }
 })
 </script>
-
-<style scoped lang="scss">
+<style lang="scss" scoped>
+/* font-family title */
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+/* font-family text */
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Jost&display=swap');
 .logo_container{
   display:flex;
   justify-content:center;
@@ -47,21 +36,24 @@ export default defineComponent({
   gap:9px;
 }
 
+.logo {
+  width: 63px;
+  height: 63px;
+}
 
-.login-container h2{
+.logo_container .titulo_footer h2{
   color: var(--bg-btn);
     font-family: Bubblegum Sans;
     font-weight: 400;
-    font-size: xx-large;
+    font-size: x-large;
+  
 }
 
-.login-container p{
+.logo_container p{
   font-family: 'Jost';
 font-style: normal;
 font-weight: 400;
-font-size: 24px;
-line-height: 35px;
-
+font-size: regular;
 color: #000000;
 }
 
