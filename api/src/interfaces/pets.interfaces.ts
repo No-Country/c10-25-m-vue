@@ -1,10 +1,27 @@
-import { NextFunction, Request, Response } from "express";
-import catchAsync from "../utils/catchAsync";
+import { Request } from "express";
+import { Animal, Appointment, Pet, User } from "@prisma/client";
 
-export const getPets = catchAsync(
-  async (req: Request, res: Response, next:NextFunction) => {
-    if(req.query.id){
-      
-    }
-  }
-)
+export interface PetEntity {
+  name: string;
+  petImage?: string
+  animal: Animal;
+  animal_id: number;
+  user: User 
+  user_id: number;
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  appointment?: Appointment[]
+} 
+
+export interface PetRequest extends Request {
+  pet?: any
+}
+
+export interface CreatePetRequest extends PetRequest{
+  body: any
+}
+
+export interface UpdatePetRequest extends PetRequest {
+  pet?: Pet
+}
