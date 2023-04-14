@@ -9,16 +9,16 @@ import { PetRequest } from "../interfaces/pets.interfaces";
 
 export const createPetValidator = [
   body('name').not().isEmpty().withMessage('the name is required'),
-  body('userId')
+  body('user_id')
     .notEmpty()
-    .withMessage('The userId is required')
+    .withMessage('The user_id is required')
     .isNumeric()
-    .withMessage('userId must be a number'),
-  body('animalId')
+    .withMessage('user_id must be a number'),
+  body('animal_id')
     .notEmpty()
-    .withMessage('The animalId is required')
+    .withMessage('The animal_id is required')
     .isNumeric()
-    .withMessage('animalId must be a number'),
+    .withMessage('animal_id must be a number'),
   validateFields,
 ];
 

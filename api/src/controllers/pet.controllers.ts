@@ -178,8 +178,8 @@ export const createNewPet = catchAsync(
       data: {
         name: capFirst(name),
         petImage: imgUploaded.metadata.fullPath,
-        animal_id,
-        user_id
+        animal_id: +animal_id,
+        user_id: +user_id
       }
     })
 
@@ -226,7 +226,7 @@ status and replace that value updating it.   */
 
 export const updatePetStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, petImage, status } = req.body
+    const { status } = req.body
     const { id } = req.params
 
     const pet = await db.pet.update({
@@ -280,7 +280,7 @@ export const updatePetImage = catchAsync(
 
 export const updatePetName = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, petImage, status } = req.body
+    const { name } = req.body
     const { id } = req.params
 
     const pet = await db.pet.update({

@@ -10,19 +10,19 @@ const router = Router()
 
 router
   .route('/')
+  .get(
+    /* restrictTo('admin', 'vet') */
+    getAllPets
+  )
+
+router
+  .route('/user/:id')
   .post(
     upload.single('petImage'),
     createPetValidator,
     isParamsIdANumber,
     createNewPet
   )
-  .get(
-    restrictTo('admin', 'vet'),
-    getAllPets
-  )
-
-router
-  .route('/user/:id')
   .get(
     isParamsIdANumber,
     validIfExistUserById,
@@ -37,8 +37,8 @@ router
     validPetExistenceById,
     updatePetImage
   )
+  
 router
-
   .patch(
     "/name/:id",
     isParamsIdANumber,
@@ -64,12 +64,12 @@ router
     isParamsIdANumber,
     validPetExistenceById,
     updateMyPet
-    )
+  )
   .delete(
     isParamsIdANumber,
     validPetExistenceById,
     deletePet
-    )
+  )
 
 
 
