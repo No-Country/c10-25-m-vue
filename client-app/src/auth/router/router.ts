@@ -1,19 +1,23 @@
 // auth/router.ts
-import LoginComponent from '../components/LoginForm.vue'
-import RegisterComponent from '../components/RegisterForm.vue'
+import { RouteRecordRaw } from "vue-router";
+import AuthLayout from "../layout/AuthLayout.vue";
+import LoginView from "../pages/LoginView.vue";
+import RegisterView from "../pages/RegisterView.vue";
 
-
-export default [
-  { 
-
-        path: '/login',
-        name: 'login',
-        component: LoginComponent
-     
-  },
-  {
-        path: '/register',
-        name: 'register',
-        component: RegisterComponent
-  }
-]
+export const authRouter: RouteRecordRaw = {
+  path: "/${}",
+  redirect: "/auth/login",
+  component: AuthLayout,
+  children: [
+    {
+      path: "/auth/login",
+      name: "login",
+      component: LoginView,
+    },
+    {
+      path: "/auth/register",
+      name: "register",
+      component: RegisterView,
+    },
+  ],
+};
