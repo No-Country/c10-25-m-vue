@@ -108,9 +108,4 @@ return {
     animation-timing-function: ease-in-out;
   }
 }
-@media (max-width:915px) {
-  .pawprint{
-    display: none;
-  }
-}
 </style>
