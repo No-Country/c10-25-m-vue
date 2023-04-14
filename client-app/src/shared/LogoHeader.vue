@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="logo_container">
+        <div @click="aHome()" class="logo_container">
             <img :src="imagenLogoLogin" alt="Logo" class="logo" width="63px" height="63px" />
             <div class="titulo_footer">
                     <h2>Huellitas</h2>
@@ -17,11 +17,12 @@ export default defineComponent({
   name: 'LogoHeader',
     setup () {
         
-
         return {
             imagenLogoLogin
         }
     }
+
+
 })
 </script>
 <style lang="scss" scoped>

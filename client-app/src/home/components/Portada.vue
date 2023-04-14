@@ -2,16 +2,16 @@
   <div class="portada-container-with-fondo">
     <div alt="" class="portada_veterinaria"></div>
     <div class="grid-container">
-      <div class="grid-item">
+      <div class="grid-item huellas">
         <HuellasAnimation />
       </div>
-      <div class="grid-item">
+      <div class="grid-item movile">
         <h1>Tu mascota merece la mejor atención</h1>
         <p>Somos un equipo de profesionales comprometidos con la salud y el <br>bienestar de tu mascota. ¡Reservá tu turno
           y conocenos!</p>
         <button>Reservar un turno</button>
       </div>
-      <div class="grid-item">
+      <div class="grid-item huellas">
         <!-- <img src="../../assets/home_img/huellas_portada.png" alt="Imagen derecha"> -->
         <HuellasAnimation />
       </div>
@@ -49,7 +49,7 @@ export default defineComponent({
 .portada-container-with-fondo .portada_veterinaria {
   width: 100%;
   height: 572px;
-  background-image: url(../../assets/home_img/imagen_home_cuerpo4k.png);
+  background-image: url(../../assets/home_img/dog-portada.png);
   position: relative;
   background-size: cover;
   margin-top: -2.5%;
@@ -117,5 +117,42 @@ export default defineComponent({
 .grid-item button:hover {
   background: #4f62c1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+@media (max-width:986px) {
+  .grid-item{
+    display: block;
+    align-self: center;
+  }
+  .grid-item h1{
+    outline: 2px solid green;
+    font-size: 1.8rem;
+    
+  }
+  .grid-item br{
+    display: none;
+  }
+  .grid-item p{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    
+    font-size: 1rem;
+    line-height: 1.438rem;
+    
+  }
+  .huellas{
+    width: 1px;
+  }
+}
+@media (max-width:579px) {
+  .movile{
+    width:100%;
+  }
+  .grid-item{
+    outline: 2px solid purple;
+  }
+  .grid-item h1{
+    font-size: 1.375rem;
+  }
+
 }
 </style>

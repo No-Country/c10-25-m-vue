@@ -1,10 +1,10 @@
 <template>
     <div class="header-container-with-logo-nav-registration">
         <img @click="goToHome()" src="../../assets/home_img/logo_huellitas.png" alt="" class="logo">
-        <nav>
-            <ul v-for="(elementosNav, index) in navItems" :key="index">
-                <li>{{ elementosNav }}</li>
-            </ul>
+        <nav>          
+          <ul v-for="(elementosNav, index) in navItems" :key="index">
+            <li>{{ elementosNav }}</li>
+          </ul> 
         </nav>
         <div class="btn-container-session">
             <button @click="toggleBackground(), goToLogin()"  :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'">
@@ -13,7 +13,6 @@
             <button @click="toggleBackground(), goToRegister()" :class="noBackground ? 'no-background' : 'btn__on-background'" >
                 Registrarme
             </button>
-           
         </div>
     </div>
 </template>
@@ -25,10 +24,9 @@ export default {
   setup() {
 const navItems = ref(['Inicio', 'Servicios', 'Por qué elegirnos']);
 const noBackground: Ref<boolean> = ref(false);
-
-const router = useRouter();
-
-function goToLogin() {
+  
+  const router = useRouter();
+  function goToLogin() {
   router.push('/login');
 }
 
@@ -39,7 +37,6 @@ function goToRegister() {
 function goToHome() {
   router.push('/');
 }
-
 
 return {
     navItems,

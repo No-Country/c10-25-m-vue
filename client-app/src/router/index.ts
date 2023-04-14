@@ -40,7 +40,7 @@
         component: DashboardLayout,
         children: [
             ...UserView
-         ]
+        ]
       },
       {
         path: '/pets',

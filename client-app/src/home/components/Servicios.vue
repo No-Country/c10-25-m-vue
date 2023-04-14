@@ -70,7 +70,7 @@
   display: grid;
   grid-template-columns: repeat(12, 2fr);
   grid-template-rows: repeat(2, 2fr);
-  gap: 4em;
+  gap: 1em; /* 4em */
   
 }
 .items-a{
