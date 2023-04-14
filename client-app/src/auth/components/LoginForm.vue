@@ -36,12 +36,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-import { ErrorMessage, useForm } from "vee-validate";
+import { ErrorMessage  } from "vee-validate";
 import LogoInterno from "../../shared/LogoInterno.vue";
 import InputWithLabel from "../../shared/InputWithLabel.vue";
 import useLoginForm from '../composables/useLoginForm';
-// import { useRouter } from 'vue-router'; 
-// import { useUserStore } from '../../store/auth/user';
 import imagenPortadaLogin from "../../assets/auth/gato-domestico.png";
 import * as yup from "yup";
 
@@ -72,7 +70,6 @@ export default defineComponent({
 
   setup() {
     const { state, onSubmit } = useLoginForm();
-    // const userStore = useUserStore();
     const terms = ref(false);
     const email = ref('');
     const password = ref('');
@@ -103,52 +100,6 @@ export default defineComponent({
         }
       }
     };
-
-
-    // const onSubmit = handleSubmit(async (values) => {
-    //   try {
-    //     await schema.validateSync(
-    //       { email: email.value, password: password.value },
-    //       { abortEarly: false }
-    //     );
-        
-    //   // Enviar petición HTTP POST al endpoint de inicio de sesión
-    //   const response = await fetch('http://localhost:3001/api/v1/auth/signin', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       email: email.value,
-    //       password: password.value
-    //     })
-    //   });
-
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     // Actualizar estado de la aplicación con información del usuario autenticado
-    //     userStore.user = data.user;
-    //     goToWelcome();
-    //     email.value = "",
-    //       password.value = ""
-    //   } else {
-    //     // Manejar error
-    //     alert("Error...");
-    //   }
-       
-    //   } catch (err) {
-    //     if (err instanceof yup.ValidationError) {
-    //       err.inner.forEach((error) => {
-    //         if (error.path === 'email') {
-    //           errors.email = error.message;
-    //         } else if (error.path === 'password') {
-    //           errors.password = error.message;
-    //         }
-    //       });
-    //     }
-    //   }
-    // });
-
 
     return {
       email,
