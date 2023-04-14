@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  engineType = "binary"
 }
 
 datasource db {
@@ -69,6 +70,7 @@ model Animal {
 model Pet {
   id          Int           @id @default(autoincrement())
   name        String
+  petImage    String?
   animal      Animal        @relation(fields: [animal_id], references: [id], onDelete: Cascade)
   animal_id   Int
   user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
