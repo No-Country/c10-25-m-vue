@@ -7,12 +7,12 @@
     "seed": "node --require esbuild-register src/prisma/seed.ts"
   },
   "scripts": {
-    "build": "tsc -p .",
     "start:dev": "nodemon src/index.ts",
-    "start:prod": "SET NODE_ENV=production&nodemon src/index.ts",
+    "start:prod": "SET NODE_ENV=production&npx prisma migrate --schema=./src/prisma/schema.prisma&npx prisma db push --schema=./src/prisma/schema.prisma&nodemon src/index.ts",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "primsa:gen":"npx prisma generate --schema=./src/prisma/schema.prisma"
+    "prisma:gen":"npx prisma generate --schema=./src/prisma/schema.prisma",
+    "prisma:push":"npx prisma db push --schema=./src/prisma/schema.prisma"
   },
   "author": "c10-25-m-vue",
   "license": "ISC",

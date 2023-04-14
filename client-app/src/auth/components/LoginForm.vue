@@ -11,11 +11,11 @@
         
         <form @submit="onSubmit">
 
-          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="email"
-            @blur="validateEmail" :errors="errors.email" />
+          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="state.email"
+            @blur="validateEmail" :errors="state.errors.email" />
 
-          <InputWithLabel placeholder="Password" type="password" :errors="errors.password" id="password" label="Password"
-            @blur="validatePassword" v-model:value="password" />
+          <InputWithLabel placeholder="Password" type="password" :errors="state.errors.password" id="password" label="Password"
+            @blur="validatePassword" v-model:value="state.password" />
 
           <div class="form-options">
             <label>
@@ -26,6 +26,7 @@
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
           </div>
+          <span class="error_form">{{ state.serverError }}</span> <!-- Mostrar el mensaje de error del -->
         </form>
         <p>¿No tienes cuenta? <router-link to="/register">Regístrate</router-link></p>
       </div>
@@ -38,9 +39,11 @@ import { defineComponent, ref, reactive } from "vue";
 import { ErrorMessage, useForm } from "vee-validate";
 import LogoInterno from "../../shared/LogoInterno.vue";
 import InputWithLabel from "../../shared/InputWithLabel.vue";
+import useLoginForm from '../composables/useLoginForm';
+// import { useRouter } from 'vue-router'; 
+// import { useUserStore } from '../../store/auth/user';
+import imagenPortadaLogin from "../../assets/auth/gato-domestico.png";
 import * as yup from "yup";
-// Imagenes preparadas para production
-import imagenPortadaLogin from "../../assets/auth/gato-domestico-mullido-gris-pelo-largo-mostrando-su-afecto-perro-marron-pelo-largo-removebg-preview 1.png";
 
 interface FormValues {
   email: string;
@@ -68,16 +71,16 @@ export default defineComponent({
   },
 
   setup() {
+    const { state, onSubmit } = useLoginForm();
+    // const userStore = useUserStore();
     const terms = ref(false);
     const email = ref('');
     const password = ref('');
-    const { handleSubmit, resetForm } = useForm();
 
     const errors = reactive({
       email: '',
       password: '',
     });
-
 
     const validateEmail = async () => {
       try {
@@ -102,27 +105,49 @@ export default defineComponent({
     };
 
 
-    const onSubmit = handleSubmit(async (values) => {
-      try {
-        await schema.validateSync(
-          { email: email.value, password: password.value },
-          { abortEarly: false }
-        );
-        alert(JSON.stringify({ email: email.value, password: password.value }));
-          email.value = "",
-          password.value = ""
-      } catch (err) {
-        if (err instanceof yup.ValidationError) {
-          err.inner.forEach((error) => {
-            if (error.path === 'email') {
-              errors.email = error.message;
-            } else if (error.path === 'password') {
-              errors.password = error.message;
-            }
-          });
-        }
-      }
-    });
+    // const onSubmit = handleSubmit(async (values) => {
+    //   try {
+    //     await schema.validateSync(
+    //       { email: email.value, password: password.value },
+    //       { abortEarly: false }
+    //     );
+        
+    //   // Enviar petición HTTP POST al endpoint de inicio de sesión
+    //   const response = await fetch('http://localhost:3001/api/v1/auth/signin', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       email: email.value,
+    //       password: password.value
+    //     })
+    //   });
+
+    //   if (response.ok) {
+    //     const data = await response.json();
+    //     // Actualizar estado de la aplicación con información del usuario autenticado
+    //     userStore.user = data.user;
+    //     goToWelcome();
+    //     email.value = "",
+    //       password.value = ""
+    //   } else {
+    //     // Manejar error
+    //     alert("Error...");
+    //   }
+       
+    //   } catch (err) {
+    //     if (err instanceof yup.ValidationError) {
+    //       err.inner.forEach((error) => {
+    //         if (error.path === 'email') {
+    //           errors.email = error.message;
+    //         } else if (error.path === 'password') {
+    //           errors.password = error.message;
+    //         }
+    //       });
+    //     }
+    //   }
+    // });
 
 
     return {
@@ -134,8 +159,8 @@ export default defineComponent({
       imagenPortadaLogin,
       validateEmail,
       validatePassword,
-      resetForm,
-      onSubmit,
+      state, 
+      onSubmit
     };
   },
 });
@@ -301,5 +326,19 @@ input[type="checkbox"] {
 .form-options a:hover {
   text-decoration-line: underline;
   color: #3a57e8;
+}
+.error_form {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 175%;
+  /* identical to box height, or 23px */
+
+  display: flex;
+  align-items: center;
+
+  color: #C03221;
+
 }
 </style>
