@@ -1,1 +1,0 @@
-Borrar una vez se creen archivos en la carpeta
