@@ -7,7 +7,6 @@
     "seed": "node --require esbuild-register src/prisma/seed.ts"
   },
   "scripts": {
-    "build": "tsc -p .",
     "start:dev": "nodemon src/index.ts",
     "start:prod": "SET NODE_ENV=production&npx prisma generate --schema=./src/prisma/schema.prisma&nodemon src/index.ts",
     "lint": "eslint src",
