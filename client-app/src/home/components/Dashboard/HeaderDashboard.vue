@@ -10,7 +10,6 @@
             <button   :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'">
               <img src="../../../assets/home_img/A.png" alt="">
             </button>
-           
         </div>
     </div>
 </template>
