@@ -12,11 +12,13 @@
       </div>
     </div>
     <div class="diferentes_item">
-      <div class="descripcion">
-        <h3>No necesitás hacer llamadas</h3>
-        <p>Reservá, cancelá y reprogramá turnos desde cualquier dispositivo.</p>
+      <div class="invert">
+        <div class="descripcion">
+          <h3>No necesitás hacer llamadas</h3>
+          <p>Reservá, cancelá y reprogramá turnos desde cualquier dispositivo.</p>
+        </div>
+        <img src="../../assets/home_img/woman_compu.png" alt="">
       </div>
-      <img src="../../assets/home_img/woman_compu.png" alt="">
     </div>
   </div>
 
@@ -78,6 +80,9 @@ export default defineComponent({
   align-content: center;
   
 }
+.invert{
+  display: flex;
+}
 .diferentes_item img{
   margin: 1rem;
 }
@@ -94,5 +99,70 @@ export default defineComponent({
 .descripcion p{
   padding: 1rem;
   font-weight: 400;
+}
+@media (max-width: 987px){
+  .bg_diferentes{
+    width: 15rem;
+  }
+  .diferentes_item{
+    width: 35rem;
+    height: 13rem;
+    margin: 1rem;
+  }
+  .diferentes_item img{
+    width: 10rem;
+    height: 10rem;
+    
+  }
+
+}
+@media (max-width:693px) {
+  .bg_diferentes{
+    display: none;
+    
+  }
+  .diferentes_container{
+    height: 50rem;
+  }
+  .diferentes_container h2{
+    font-size: 1.25rem;
+  }
+  .diferentes_item{
+    width: 20rem;
+    height: 15rem;
+    display: inline;
+    margin-top: 2rem;
+  }
+  .diferentes_item img{
+    width:7rem ;
+    height: 7rem;
+  }
+  .descripcion{
+    padding: 0;
+    text-align: center;
+  }
+  .descripcion h3{
+    margin: 1rem;
+    font-size: 1.125rem;
+  }
+  .descripcion p{
+    font-size: 1rem;
+  }
+  .invert{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 417px) {
+  .descripcion p{
+    padding: 2rem;
+  }
+  .invert img{
+    margin-top: 3rem; 
+  }
+  
 }
 </style>
