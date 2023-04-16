@@ -1,21 +1,22 @@
 import { reactive } from "vue";
-import * as yup from "yup";
 import { useUserStore } from "../../store/auth/user"; // Importar userStore
 import { useRouter } from "vue-router"; // Importar goToWelcome
 import { LoginFormValues } from '../interfaces/InterfacesAuth';
+import * as yup from "yup";
 
 const URL_API = "http://localhost:3001/api/v1/auth/signin";
 
 export default function useLoginForm() {
 //Aqui uso la interface, especifico el tipo de objeto que se está creando con la función 
-const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; serverError: string }>({
+const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; serverError: string; serverSuccess: string;  }>({
     email: '',
     password: '',
     errors: {
       email: '',
       password: ''
     },
-    serverError: ''
+    serverError: '',
+    serverSuccess: ''
 });
 
   const userStore = useUserStore();
@@ -51,15 +52,23 @@ const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; ser
 
       if (response.ok) {
         const data = await response.json();
+   
         // Actualizar estado de la aplicación con información del usuario autenticado
         userStore.user = data.user;
         goToWelcome();
+        loginFormState.serverSuccess = data.message; 
+        setTimeout(() => {
+          loginFormState.serverSuccess = "";
+        }, 5000);
         loginFormState.email = "";
         loginFormState.password = "";
       } else {
         // Manejar error del servidor
         const data = await response.json();
-        loginFormState.serverError = data.message;
+        loginFormState.serverError = data.message; 
+        setTimeout(() => {
+          loginFormState.serverError = "";
+        }, 5000);
       }
     } catch (err) {
       if (err instanceof yup.ValidationError) {
