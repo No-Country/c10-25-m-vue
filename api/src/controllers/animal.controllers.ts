@@ -27,7 +27,7 @@ export const readAnimals = catchAsync(
     return res.json({
       status: 'success',
       result: animals.length,
-      animals: animals
+      animals: animalsResolve
     })
   }
 )
