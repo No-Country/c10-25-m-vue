@@ -7,12 +7,8 @@
       <img class="portada-img" :src="PortadaImg" alt="" />
     </div>
 
-    <span 
-              v-if="loginFormState.serverSuccess"
-              :class="[
-              loginFormState.serverSuccess ? 'error-server-loginForm' : '',
-              { 'slide-fade': loginFormState.serverSuccess },
-              ]"><ErrorServer/>{{ loginFormState.serverSuccess }}</span>
+    <ServerMessage :type="'success'" :message="loginStore.serverSuccess ?? undefined" />
+
   </div>
 </template>
 
@@ -21,12 +17,16 @@ import { defineExpose } from "vue";
 import LogoImg from "../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png";
 import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
 import useLoginRequest from "../../auth/composables/useLoginRequest";
-import ErrorServer from "../../auth/components/svg/Error.vue";
+import ServerMessage from "../../auth/components/ServerMessage.vue";
+import { useLoginStore } from '../../store/auth/login'
+
 
 const { loginFormState } = useLoginRequest();
+const loginStore = useLoginStore()
 
 defineExpose({
-  loginFormState
+  loginFormState,
+  loginStore
 })
 
 </script>
@@ -60,4 +60,6 @@ defineExpose({
 
   color: #3a57e8;
 }
+
+
 </style>

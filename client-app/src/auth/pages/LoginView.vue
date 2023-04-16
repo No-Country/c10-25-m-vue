@@ -36,16 +36,7 @@
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
           </div>
-          
-          <span 
-              v-if="loginFormState.serverError"
-              :class="[
-              loginFormState.serverError ? 'error-server-loginForm' : '',
-              { 'slide-fade': loginFormState.serverError },
-              ]"><ErrorServer/>{{ loginFormState.serverError }}</span>
-          
-            
-          <!-- Mostrar el mensaje de error del -->
+          <ServerMessage :type="'error'" :message="loginStore.serverError ?? undefined" />
         </form>
         <p>
           ¿No tienes cuenta?
@@ -60,18 +51,17 @@
 import { ref, defineExpose } from "vue";
 import { validateEmail, validatePassword } from '../composables/validationLogin';
 import LogoInterno from "../../shared/LogoInterno.vue";
+import ServerMessage from "../components/ServerMessage.vue"
 import InputWithLabel from "../../shared/InputWithLabel.vue";
-import ErrorServer from "../components/svg/Error.vue"
 import useLoginRequest from "../composables/useLoginRequest";
 import imagenPortadaLogin from "../../assets/auth/gato-domestico.png";
+import { useLoginStore } from '../../store/auth/login'
 
 
-/*
-En Vue 3 con la opción setup, no necesitas registrar los componentes en la opción components 
-como lo harías en la opción data. En su lugar, puedes importar los componentes directamente en 
-el script y utilizarlos en la plantilla como etiquetas de componentes.*/
+const loginStore = useLoginStore()
 
 const { loginFormState, onSubmit } = useLoginRequest();
+
 // const userStore = useUserStore();
 const terms = ref(false);
 
@@ -83,15 +73,14 @@ const handlePasswordBlur = async () => {
   loginFormState.errors.password = await validatePassword(loginFormState.password);
 };
 
-/*la sintaxis de setup con la opción lang="ts"
-En este caso, debes asegurarte de que el objeto 
-que se devuelve esté dentro de una función defineExpose 
+/* función defineExpose 
 para exponer las propiedades a la plantilla */
 
 defineExpose({
   terms,
   loginFormState,
   onSubmit,
+  loginStore,
   handleEmailBlur,
   handlePasswordBlur
 })
@@ -269,35 +258,5 @@ input[type="checkbox"] {
   color: #c03221;
 }
 
-.error-server-loginForm{
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 16px;
-gap: 8px;
-position: absolute;
-width: 279px;
-height: 60px;
-left: 4533px;
-top: 6354px;
-background: #F2D6D3;
-border: 2px solid #C03221;
-border-radius: 4px;
-top: 87%;
-    left: 2%;
-}
-@keyframes slide-fade {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.slide-fade {
-  animation: slide-fade 0.5s ease-in-out forwards;
-}
+
 </style>

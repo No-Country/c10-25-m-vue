@@ -1,5 +1,6 @@
 import { reactive } from "vue";
 import { useUserStore } from "../../store/auth/user"; // Importar userStore
+import { useLoginStore } from '../../store/auth/login'
 import { useRouter } from "vue-router"; // Importar goToWelcome
 import { LoginFormValues } from '../interfaces/InterfacesAuth';
 import * as yup from "yup";
@@ -7,25 +8,31 @@ import * as yup from "yup";
 const URL_API = "http://localhost:3001/api/v1/auth/signin";
 
 export default function useLoginForm() {
-//Aqui uso la interface, especifico el tipo de objeto que se está creando con la función 
-const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; serverError: string; serverSuccess: string;  }>({
-    email: '',
-    password: '',
-    errors: {
+
+  const loginStore = useLoginStore()
+  //Aqui uso la interface, especifico el tipo de objeto que se está creando con la función 
+  const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; serverError: string | null; serverSuccess: string | null;  }>({
       email: '',
-      password: ''
-    },
-    serverError: '',
-    serverSuccess: ''
-});
+      password: '',
+      errors: {
+        email: '',
+        password: ''
+      },
+      serverError: loginStore.serverError,
+      serverSuccess: loginStore.serverSuccess,
+  });
+
 
   const userStore = useUserStore();
   const router = useRouter();
+  
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(8).required(),
   });
 
+
+  
   function goToWelcome() {
     router.push("/user/dashboard");
   }
@@ -56,19 +63,23 @@ const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; ser
         // Actualizar estado de la aplicación con información del usuario autenticado
         userStore.user = data.user;
         goToWelcome();
-        loginFormState.serverSuccess = data.message; 
+        
+        loginStore.setServerSuccess(data.message)
         setTimeout(() => {
-          loginFormState.serverSuccess = "";
-        }, 5000);
+          loginStore.setServerSuccess('')
+        }, 5000)
+
         loginFormState.email = "";
         loginFormState.password = "";
       } else {
         // Manejar error del servidor
         const data = await response.json();
-        loginFormState.serverError = data.message; 
+        
+        loginStore.setServerError(data.message)
         setTimeout(() => {
-          loginFormState.serverError = "";
-        }, 5000);
+          loginStore.setServerError('')
+        }, 5000)
+        
       }
     } catch (err) {
       if (err instanceof yup.ValidationError) {
@@ -81,8 +92,9 @@ const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; ser
         });
       } else if (err instanceof TypeError) {
         // Manejar error de red
-        loginFormState.serverError =
-          "Error de conexión. Por favor, inténtelo de nuevo más tarde.";
+        loginStore.setServerError(
+          'Error de conexión. Por favor, inténtelo de nuevo más tarde.'
+        );
       }
     }
   };
