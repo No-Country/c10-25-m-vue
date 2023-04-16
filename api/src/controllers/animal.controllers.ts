@@ -4,19 +4,26 @@ import { db } from "../database/db.server";
 import AppError from "../utils/appError";
 import catchAsync from "../utils/catchAsync";
 import { capFirst } from "../utils/capitalizateFirst";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import storage from "../utils/firebase";
 import { AnimalRequest } from "../interfaces/animal.interfaces";
-/*TO DO:
- Separar en dos rutas los read animals. 
- Cambiar las respuestas
- Crear rutas separadas para los updates
- Crear referencia para guardado de imagenes
-*/
+
 export const readAnimals = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
 
     const animals = await db.animal.findMany()
+
+    const animalsPromises = animals.map(async(animal) => {
+      const imgRef = ref(storage, animal.image!)
+      const url = await getDownloadURL(imgRef);
+      animal.image = url
+      return animal
+    })
+  
+    const animalsResolve = await Promise.all(animalsPromises)
+  
+
+
     return res.json({
       status: 'success',
       result: animals.length,
@@ -28,6 +35,11 @@ export const readAnimals = catchAsync(
 export const readAnimal = catchAsync(
   async (req: AnimalRequest, res: Response, next: NextFunction) => {
     const animal = req.animal
+
+    const imgRef = ref(storage, animal.image)
+    const url = await getDownloadURL(imgRef)
+
+    animal.image = url;
     
     return res.json({
       status: 'success',
