@@ -14,19 +14,19 @@
             type="text"
             id="email"
             label="Email"
-            v-model:value="state.email"
-            @blur="validateEmail"
-            :errors="state.errors.email"
+            v-model:value="loginFormState.email"
+            @blur="handleEmailBlur"
+            :errors="loginFormState.errors.email"
           />
 
           <InputWithLabel
             placeholder="Password"
             type="password"
-            :errors="state.errors.password"
+            :errors="loginFormState.errors.password"
             id="password"
             label="Password"
-            @blur="validatePassword"
-            v-model:value="state.password"
+            @blur="handlePasswordBlur"
+            v-model:value="loginFormState.password"
           />
 
           <div class="form-options">
@@ -36,7 +36,7 @@
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
           </div>
-          <span class="error_form">{{ state.serverError }}</span>
+          <span class="error_form">{{ loginFormState.serverError }}</span>
           <!-- Mostrar el mensaje de error del -->
         </form>
         <p>
@@ -49,106 +49,44 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, ref, reactive } from "vue";
-import { ErrorMessage, useForm } from "vee-validate";
+import { ref, defineExpose } from "vue";
+import { validateEmail, validatePassword } from '../composables/validationLogin';
 import LogoInterno from "../../shared/LogoInterno.vue";
 import InputWithLabel from "../../shared/InputWithLabel.vue";
 import useLoginForm from "../composables/useLoginForm";
-// import { useRouter } from 'vue-router';
-// import { useUserStore } from '../../store/auth/user';
 import imagenPortadaLogin from "../../assets/auth/gato-domestico.png";
-import * as yup from "yup";
 
-interface FormValues {
-  email: string;
-  password: string;
-  [key: string]: string;
-}
 
-const schema = yup.object({
-  email: yup.string().email().required("Email es requerido."),
-  password: yup
-    .string()
-    .required("Contraseña incorrecta. Por favor, intentá de nuevo.")
-    .min(8, "La contraseña debe tener más de 8 caracteres."),
-});
+/*
+En Vue 3 con la opción setup, no necesitas registrar los componentes en la opción components 
+como lo harías en la opción data. En su lugar, puedes importar los componentes directamente en 
+el script y utilizarlos en la plantilla como etiquetas de componentes.*/
 
-const { state, onSubmit } = useLoginForm();
+const { loginFormState, onSubmit } = useLoginForm();
 // const userStore = useUserStore();
 const terms = ref(false);
-const email = ref("");
-const password = ref("");
 
-const errors = reactive({
-  email: "",
-  password: "",
-});
-
-const validateEmail = async () => {
-  try {
-    await schema.validateAt("email", { email: email.value });
-    errors.email = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.email = err.message;
-    }
-  }
+const handleEmailBlur = async () => {
+  loginFormState.errors.email = await validateEmail(loginFormState.email);
 };
 
-const validatePassword = async () => {
-  try {
-    await schema.validateAt("password", { password: password.value });
-    errors.password = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.password = err.message;
-    }
-  }
+const handlePasswordBlur = async () => {
+  loginFormState.errors.password = await validatePassword(loginFormState.password);
 };
 
-// const onSubmit = handleSubmit(async (values) => {
-//   try {
-//     await schema.validateSync(
-//       { email: email.value, password: password.value },
-//       { abortEarly: false }
-//     );
+/*la sintaxis de setup con la opción lang="ts"
+En este caso, debes asegurarte de que el objeto 
+que se devuelve esté dentro de una función defineExpose 
+para exponer las propiedades a la plantilla */
 
-//   // Enviar petición HTTP POST al endpoint de inicio de sesión
-//   const response = await fetch('http://localhost:3001/api/v1/auth/signin', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       email: email.value,
-//       password: password.value
-//     })
-//   });
+defineExpose({
+  terms,
+  loginFormState,
+  onSubmit,
+  handleEmailBlur,
+  handlePasswordBlur
+})
 
-//   if (response.ok) {
-//     const data = await response.json();
-//     // Actualizar estado de la aplicación con información del usuario autenticado
-//     userStore.user = data.user;
-//     goToWelcome();
-//     email.value = "",
-//       password.value = ""
-//   } else {
-//     // Manejar error
-//     alert("Error...");
-//   }
-
-//   } catch (err) {
-//     if (err instanceof yup.ValidationError) {
-//       err.inner.forEach((error) => {
-//         if (error.path === 'email') {
-//           errors.email = error.message;
-//         } else if (error.path === 'password') {
-//           errors.password = error.message;
-//         }
-//       });
-//     }
-//   }
-// });
 </script>
 
 <style scoped lang="scss">
