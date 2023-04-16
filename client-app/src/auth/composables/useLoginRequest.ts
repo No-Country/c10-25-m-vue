@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { reactive } from "vue";
 import { useUserStore } from "../../store/auth/user"; // Importar userStore
 import { useLoginStore } from '../../store/auth/login'
@@ -46,19 +47,13 @@ export default function useLoginForm() {
       );
 
       // Enviar petición HTTP POST al endpoint de inicio de sesión
-      const response = await fetch(URL_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginFormState.email,
-          password: loginFormState.password,
-        }),
+      const response = await axios.post(URL_API, {
+        email: loginFormState.email,
+        password: loginFormState.password,
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = await response.data;
    
         // Actualizar estado de la aplicación con información del usuario autenticado
         userStore.user = data.user;
@@ -73,7 +68,7 @@ export default function useLoginForm() {
         loginFormState.password = "";
       } else {
         // Manejar error del servidor
-        const data = await response.json();
+        const data = await response.data;
         
         loginStore.setServerError(data.message)
         setTimeout(() => {

@@ -12,23 +12,31 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { defineExpose } from "vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useLoginStore } from '../../store/auth/login'
 import LogoImg from "../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png";
 import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
 import useLoginRequest from "../../auth/composables/useLoginRequest";
 import ServerMessage from "../../auth/components/ServerMessage.vue";
-import { useLoginStore } from '../../store/auth/login'
 
 
-const { loginFormState } = useLoginRequest();
-const loginStore = useLoginStore()
+export default defineComponent({
+  components: {
+    ServerMessage
+  },
+  setup() {
+    const { loginFormState } = useLoginRequest();
+    const loginStore = useLoginStore()
 
-defineExpose({
-  loginFormState,
-  loginStore
-})
-
+    return {
+      PortadaImg,
+      LogoImg,
+      loginFormState,
+      loginStore
+    }
+  }
+});
 </script>
 
 <style lang="scss" scoped>

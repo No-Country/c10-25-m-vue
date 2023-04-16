@@ -228,17 +228,8 @@ const onSubmit = handleSubmit(async (values) => {
       { abortEarly: false }
     );
     (isComponentVisible.value = false),
-      alert(
-        JSON.stringify({
-          name: name.value,
-          password: password.value,
-          phone: phone.value,
-          surname: surname.value,
-          confirmPassword: confirmPassword.value,
-          email: email.value,
-        })
-      );
-    (email.value = ""),
+
+      (email.value = ""),
       (password.value = ""),
       (name.value = ""),
       (phone.value = ""),

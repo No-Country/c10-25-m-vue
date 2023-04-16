@@ -5,91 +5,115 @@
         <img :src="imagenPortadaLogin" alt="Login Image" />
       </div>
       <div class="login-form">
+
         <LogoInterno />
         <h1>Iniciar sesión</h1>
-
+        
         <form @submit="onSubmit">
-          <InputWithLabel
-            placeholder="Correo electronico"
-            type="text"
-            id="email"
-            label="Email"
-            v-model:value="loginFormState.email"
-            @blur="handleEmailBlur"
-            :errors="loginFormState.errors.email"
-          />
 
-          <InputWithLabel
-            placeholder="Password"
-            type="password"
-            :errors="loginFormState.errors.password"
-            id="password"
-            label="Password"
-            @blur="handlePasswordBlur"
-            v-model:value="loginFormState.password"
-          />
+          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="loginFormState.email"
+            @blur="validateEmail" :errors="loginFormState.errors.email" />
+
+          <InputWithLabel placeholder="Password" type="password" :errors="loginFormState.errors.password" id="password" label="Password"
+            @blur="validatePassword" v-model:value="loginFormState.password" />
 
           <div class="form-options">
-            <label> <input v-model="terms" type="checkbox" />Recordarme </label>
+            <label>
+              <input v-model="terms" type="checkbox" />Recordarme
+            </label>
             <router-link to="/#">Olvidé mi contraseña</router-link>
           </div>
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
           </div>
-        
+          <span class="error_form">{{ loginFormState.serverError }}</span> <!-- Mostrar el mensaje de error del -->
         </form>
-        <p>
-          ¿No tienes cuenta?
-          <router-link to="/auth/register">Regístrate</router-link>
-        </p>
+        <p>¿No tienes cuenta? <router-link to="/register">Regístrate</router-link></p>
       </div>
     </div>
-    <ServerMessage :type="'error'" :message="loginStore.serverError ?? undefined" />
   </div>
 </template>
 
-<script lang="ts" >
-import { ref, defineComponent } from "vue";
-import { validateEmail, validatePassword } from '../composables/validationLogin';
-import { useLoginStore } from '../../store/auth/login'
+<script lang="ts">
 import LogoInterno from "../../shared/LogoInterno.vue";
-import ServerMessage from "../components/ServerMessage.vue"
 import InputWithLabel from "../../shared/InputWithLabel.vue";
-import useLoginRequest from "../composables/useLoginRequest";
+import useLoginRequest from '../composables/useLoginRequest';
 import imagenPortadaLogin from "../../assets/auth/gato-domestico.png";
+import { defineComponent, ref, reactive } from "vue";
+import { ErrorMessage  } from "vee-validate";
+import * as yup from "yup";
+
+interface FormValues {
+  email: string;
+  password: string;
+  [key: string]: string;
+}
+
+const schema = yup.object({
+  email: yup
+    .string()
+    .email()
+    .required("Email es requerido."),
+  password: yup
+    .string()
+    .required("Contraseña incorrecta. Por favor, intentá de nuevo.")
+    .min(8, "La contraseña debe tener más de 8 caracteres."),
+});
 
 export default defineComponent({
+  name: "LoginForm",
   components: {
-    ServerMessage,
+    ErrorMessage,
+    LogoInterno,
     InputWithLabel,
-    LogoInterno
   },
+
   setup() {
-// const userStore = useUserStore();
-const terms = ref(false);
-const loginStore = useLoginStore()
-const { loginFormState, onSubmit } = useLoginRequest();
+    const { loginFormState, onSubmit } = useLoginRequest();
+    const terms = ref(false);
+    const email = ref('');
+    const password = ref('');
 
-const handleEmailBlur = async () => {
-  loginFormState.errors.email = await validateEmail(loginFormState.email);
-};
+    const errors = reactive({
+      email: '',
+      password: '',
+    });
 
-const handlePasswordBlur = async () => {
-  loginFormState.errors.password = await validatePassword(loginFormState.password);
-};
+    const validateEmail = async () => {
+      try {
+        await schema.validateAt("email", { email: email.value });
+        errors.email = '';
+      } catch (err) {
+        if (err instanceof Error) {
+          errors.email = err.message;
+        }
+      }
+    };
 
+    const validatePassword = async () => {
+      try {
+        await schema.validateAt('password', { password: password.value });
+        errors.password = '';
+      } catch (err) {
+        if (err instanceof Error) {
+          errors.password = err.message;
+        }
+      }
+    };
 
-return {
-  terms,
-  loginStore,
-  loginFormState,
-  imagenPortadaLogin,
-  onSubmit,
-  handleEmailBlur,
-  handlePasswordBlur
-} 
-
-}
+    return {
+      email,
+      password,
+      terms,
+      schema,
+      errors,
+      imagenPortadaLogin,
+      validateEmail,
+      validatePassword,
+      loginFormState, 
+      onSubmit
+    };
+  },
 });
 </script>
 
@@ -98,7 +122,9 @@ return {
   background-image: url(../../assets/auth/fonto_auth.png);
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height:89vh;
+  // display: flex;
+  //   justify-content: center;
 }
 
 .login-container h1 {
@@ -133,7 +159,7 @@ form {
   flex-direction: column;
   text-align: left;
   gap: 5px;
-  width: 436px;
+  width:436px;
 }
 
 form label {
@@ -253,16 +279,17 @@ input[type="checkbox"] {
   color: #3a57e8;
 }
 .error_form {
-  font-family: "Jost";
+  font-family: 'Jost';
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 175%;
   /* identical to box height, or 23px */
+
   display: flex;
   align-items: center;
-  color: #c03221;
+
+  color: #C03221;
+
 }
-
-
 </style>
