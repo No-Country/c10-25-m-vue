@@ -110,7 +110,7 @@ export default function useRegistroForm() {
           signupStore.setServerError('')
         }, 5000)
       }
-    } catch (err) {
+    } catch (err: unknown) {
           if (err instanceof yup.ValidationError) {
             err.inner.forEach((error) => {
               if (error.path && error.path in signupFormState.errors) {
@@ -119,16 +119,36 @@ export default function useRegistroForm() {
             });
           } else if ((err as AxiosError).isAxiosError && (err as AxiosError).message === 'Network Error') {
             // Manejar error de red
-            setTimeout(() => {
+        
             signupStore.setServerError(
               'Error de conexión. Por favor, inténtelo de nuevo más tarde.'
             );
-          }, 2000)
-          } else {
-            // Manejar otros tipos de errores
-            // ...
-            console.log("Aqu: " + err);
+            setTimeout(() => {
+              signupStore.setServerError('')
+            }, 5000)
+          }  else if ((err as AxiosError).isAxiosError && (err as AxiosError).response) {
+            // Mostrar mensaje de error del servidor
+            const axiosError = err as AxiosError;
+            if (axiosError.response && axiosError.response.status === 400) {
+                const responseData = axiosError.response.data as { message: string };
+             
+                signupStore.setServerError(responseData.message);
+                setTimeout(() => {
+                    signupStore.setServerError('')
+                }, 5000)
+            } else if (axiosError.response && axiosError.response.status === 500) {
+              const responseData = axiosError.response.data as { message: string };
+             
+              signupStore.setServerError(
+                'Error de conexión. Por favor, inténtelo de nuevo más tarde.'
+              );
+              setTimeout(() => {
+                  signupStore.setServerError('')
+              }, 5000)
           } 
+        } else {
+            // Manejar otros tipos de errores
+        }
     }
   }
 
