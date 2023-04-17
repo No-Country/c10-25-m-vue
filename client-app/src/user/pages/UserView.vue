@@ -1,12 +1,18 @@
 <template>
   <BgUser />
-  <LogoPage />
-  <div class="button__position">
-    <EditarBtn v-model="isOpen" />
+
+  <div class="content">
+    <div>
+      <LogoPage />
+      <AddPhote />
+      <DetailUser />
+    </div>
+
+    <div class="button__position">
+      <EditarBtn v-model="isOpen" />
+    </div>
   </div>
-  <AddPhote />
-  <DetailUser />
-  <ModalUpdate :isOpen="isOpen" v-model="isOpen" />
+  <ModalUpdate :isOpen="isOpen" @selection="changeIsOpen" />
 </template>
 
 <script lang="ts" setup>
@@ -19,11 +25,24 @@ import { ref } from "vue";
 import ModalUpdate from "../components/modalUpdate.vue";
 
 const isOpen = ref<boolean>(false);
+
+const changeIsOpen = () => {
+  isOpen.value = !isOpen;
+};
 </script>
 
 <style scoped>
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: inherit;
+  width: 60%;
+  margin-right: 20%;
+  margin-left: 20%;
+  position: relative;
+}
 .button__position {
-  position: absolute;
-  right: 3%;
+  margin-top: 2.3rem;
 }
 </style>

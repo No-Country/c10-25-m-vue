@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, getCurrentInstance } from "vue";
+import useUser from "../composables/useUser";
 
 interface Props {
   isOpen: boolean;
 }
 
 const props = defineProps<Props>();
+const ctx = getCurrentInstance();
 
-const userData = ref({
-  name: "",
-  surname: "",
-  email: "",
+const { user, isError, isLoading, userMutation, updateUser } = useUser();
+
+watch(userMutation.isSuccess, () => {
+  // this.$emit("selection");
+  userMutation.reset();
+  console.log("exito");
+  ctx!.emit("selection");
 });
 </script>
 
@@ -18,17 +23,21 @@ const userData = ref({
   <div>
     <div v-if="props.isOpen" class="modal">
       <div class="modal-content">
-        <span class="close"><i class="fa-solid fa-xmark"></i></span>
+        <span class="close" @click="$emit('selection')"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
         <h2>Actualizar información</h2>
-        <form class="modal-form">
-          <label for="name">Nombre:</label>
-          <input type="text" id="name" v-model="userData.name" />
-          <label for="surname">Apellido:</label>
-          <input type="text" id="surname" v-model="userData.surname" />
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="userData.email" />
-          <button type="submit">Guardar</button>
-        </form>
+        <div v-if="user">
+          <form class="modal-form" @submit.prevent="updateUser(user)">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" v-model="user.name" required />
+            <label for="surname">Apellido:</label>
+            <input type="text" id="surname" v-model="user.surname" required />
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="user.email" required />
+            <button type="submit">Guardar</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

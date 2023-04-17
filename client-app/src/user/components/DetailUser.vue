@@ -18,7 +18,9 @@ const { user, isError, isLoading } = useUser();
     </ul>
 
     <!-- funcion que devuelva los datos -->
-    <ChangePassword />
+    <div class="btn__changed-password">
+      <ChangePassword />
+    </div>
   </div>
 </template>
 
@@ -27,16 +29,24 @@ const { user, isError, isLoading } = useUser();
   color: var(--text-footer);
   margin: 1rem 5rem 3rem 5.1rem;
 
+  width: 100%;
+
   font-family: Jost;
   font-weight: 600;
-  font-size: smaller;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  font-size: large;
   text-align: left;
 
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: end;
 }
 .detalle_user li {
   margin: 2rem;
+}
+
+.btn__changed-password {
+  margin-bottom: 2rem;
 }
 </style>

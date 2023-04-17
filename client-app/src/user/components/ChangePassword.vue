@@ -8,12 +8,8 @@
 .detalle_user button {
   height: 1.5em;
   color: var(--bg-btn);
-  background-color: white;
-  font-size: smaller;
+  background-color: transparent;
+  font-size: large;
   cursor: pointer;
-
-  position: absolute;
-  left: 20rem;
-  bottom: 2rem;
 }
 </style>

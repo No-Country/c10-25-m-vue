@@ -33,7 +33,7 @@
 .letra_nombre p {
   font-family: Jost;
   font-weight: 700;
-  font-size: smaller;
+  font-size: small;
   position: absolute;
   top: 0.5em;
   left: 0.98rem;
@@ -43,6 +43,6 @@
   color: var(--bg-btn);
   background-color: white;
   cursor: pointer;
-  font-size: smaller;
+  font-size: medium;
 }
 </style>

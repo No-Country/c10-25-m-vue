@@ -15,7 +15,7 @@
   margin: 2rem 4rem 2rem 4rem;
   font-family: Jost;
   font-weight: 600;
-  font-size: smaller;
+  font-size: larger;
   display: flex;
   justify-content: space-between;
 }
