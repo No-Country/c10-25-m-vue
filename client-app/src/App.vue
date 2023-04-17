@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-const message = "This is my Contenido del component!";
+import useRenew from "./composables/useRenew";
+
+useRenew();
 </script>
 
 <style lang="scss">
