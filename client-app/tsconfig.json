@@ -6,7 +6,6 @@
     "moduleResolution": "Node",
     "strict": true,
     "jsx": "preserve",
-    "types": ["vue@3.2"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
