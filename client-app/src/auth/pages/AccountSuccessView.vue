@@ -4,9 +4,9 @@
         <div class="login-image">
           <img :src="imagenPortadaRegister" alt="Login Image" />
         </div>
-      </div>
-      <div class="login-form">
+        <div class="login-form">
         <AccountCreationSuccess />
+      </div>
       </div>
       <ServerMessage :type="'error'" :message="signupStore.serverError ?? undefined" />
     </div>
@@ -38,6 +38,78 @@ setup() {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.container__subtitle {
+  display: flex;
 
+  flex-direction: column;
+  line-height: 25px;
+  padding-top: 5%;
+}
+
+form button:hover {
+  background: #4f62c1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.login-container {
+  background-image: url(../../assets/auth/fonto_auth.png);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 9px;
+}
+
+.login-form h1 {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 33px;
+
+  /* identical to box height */
+  padding-top: 10px;
+
+  color: #060859;
+}
+
+.login-form p {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  /* identical to box height, or 28px */
+
+  color: #383b43;
+}
+
+.login-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 15px;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.login-image {
+  display: flex;
+  justify-content: center;
+}
 </style>

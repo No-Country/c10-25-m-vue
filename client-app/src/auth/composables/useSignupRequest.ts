@@ -53,8 +53,8 @@ export default function useRegistroForm() {
       profileImageUrl: yup.string().required('La imagen de perfil es obligatoria')
   });
 
-  function goToWelcome() {
-    router.push("/user/dashboard");
+  function goToAccountSuccess() {
+    router.push("/auth/success");
   }
 
   const onSubmit = async (event: Event) => {
@@ -94,7 +94,7 @@ export default function useRegistroForm() {
         const data = await response.data;
      
         // Aqui la vista redict luego del registro exitoso
-        goToWelcome();
+        goToAccountSuccess();
           
         signupStore.setServerSuccess(data.message)
         setTimeout(() => {
