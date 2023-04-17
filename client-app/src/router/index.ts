@@ -4,6 +4,7 @@ import { petRouter } from "./../pets/router";
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../home/pages/Home.vue";
+import { appointmentRouter } from "../appointment/router";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -24,6 +25,10 @@ const router = createRouter({
     {
       ...petRouter,
       path: "/pet",
+    },
+    {
+      ...appointmentRouter,
+      path: "/appointment",
     },
     {
       path: "/:pathMatch(.*)*",
