@@ -2,16 +2,22 @@
 import { RouteRecordRaw } from "vue-router";
 import UserLayout from "../layout/UserLayout.vue";
 import Dashboard from "../pages/Dashboard.vue";
+import UserView from "../pages/UserView.vue";
 
 export const userRouter: RouteRecordRaw = {
-  path: "/${}",
+  path: "/",
   redirect: "/user/dashboard",
   component: UserLayout,
   children: [
     {
-      path: "/user/dashboard",
+      path: "/user/home",
       name: "dashboard",
       component: Dashboard,
+    },
+    {
+      path: "/user/profile",
+      name: "profile",
+      component: UserView,
     },
   ],
 };

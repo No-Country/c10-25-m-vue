@@ -3,13 +3,15 @@ import { reactive } from "vue";
 import { useLoginStore } from '../../store/auth/login'
 import { useRouter } from "vue-router"; // Importar goToWelcome
 import { LoginFormValues } from '../interfaces/InterfacesAuth';
+import { useUserStore } from '../../store/auth/user';
 import * as yup from "yup";
 
 const URL_API = "http://localhost:3001/api/v1/auth/signin";
 
 export default function useLoginForm() {
 
-  const loginStore = useLoginStore()
+  const loginStore = useLoginStore();
+  const userStore = useUserStore();
   //Aqui uso la interface, especifico el tipo de objeto que se está creando con la función 
   const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; serverError: string | null; serverSuccess: string | null;  }>({
       email: '',
@@ -22,17 +24,16 @@ export default function useLoginForm() {
       serverSuccess: loginStore.serverSuccess,
   });
 
-  const router = useRouter();
-  const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().min(8).required(),
-  });
+    const router = useRouter();
 
+    const schema = yup.object().shape({
+      email: yup.string().email().required(),
+      password: yup.string().min(8).required(),
+    });
 
-  
-  function goToWelcome() {
-    router.push("/user/dashboard");
-  }
+    function goToWelcome() {
+      router.push("/user/home");
+    }
 
   const onSubmit = async (event: Event) => {
     event.preventDefault();
@@ -50,7 +51,10 @@ export default function useLoginForm() {
 
       if (response.status === 200) {
         const data = await response.data;
+
+        localStorage.setItem('token', data.token);
    
+        userStore.setUser(data.user);
         // Actualizar estado de la aplicación con información del usuario autenticado
         goToWelcome();
         

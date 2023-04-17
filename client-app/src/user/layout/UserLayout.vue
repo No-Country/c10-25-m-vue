@@ -2,7 +2,7 @@
   <div>
     <header>
       <!-- header contentsp goes here -->
-      <HeaderDashboard />
+      <HeaderDashboard :links="routeLink" />
     </header>
     <main>
       <router-view></router-view>
@@ -17,6 +17,7 @@
 <script lang="ts" setup>
 import Footer from "../../shared/Footer.vue";
 import HeaderDashboard from "../../shared/HeaderDashboard.vue";
+import { routeLink } from "./../../router/link-routes";
 
 const message = "This is my component!";
 </script>
