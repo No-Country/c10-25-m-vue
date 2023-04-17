@@ -102,12 +102,15 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 }
 
 @media (max-width:986px) {
+  .portada-container-with-fondo .portada_veterinaria {
+  height: 368px;
+  background-image: url(../../assets/home_img/dog-portada-movile1.png);
+  }
   .grid-item{
     display: block;
     align-self: center;
   }
   .grid-item h1{
-    outline: 2px solid green;
     font-size: 1.8rem;
     
   }
@@ -127,11 +130,14 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
   }
 }
 @media (max-width:579px) {
-  .movile-title{
-    width:100%;
+  .portada-container-with-fondo .portada_veterinaria {
+  height: 216px;
+  background-image: url(../../assets/home_img/dog-portada-movile2.png);
   }
-  .grid-item{
-    outline: 2px solid purple;
+  .grid-container{
+    width:90%;
+    display: inline-flex;
+    flex-direction: column;
   }
   .grid-item h1{
     font-size: 1.375rem;

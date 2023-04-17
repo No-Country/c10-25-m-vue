@@ -6,26 +6,31 @@
       alt=""
       class="logo"
     />
-    <nav>
-      <ul v-for="(elementosNav, index) in navItems" :key="index">
-        <li>{{ elementosNav }}</li>
-      </ul>
-    </nav>
-    <div class="btn-container-session">
-      <button
-        @click="toggleBackground(), goToLogin()"
-        :class="
-          !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-        "
-      >
-        Iniciar sesión
-      </button>
-      <button
-        @click="toggleBackground(), goToRegister()"
-        :class="noBackground ? 'no-background' : 'btn__on-background'"
-      >
-        Registrarme
-      </button>
+    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+      <nav>
+        <ul v-for="(elementosNav, index) in navItems" :key="index">
+          <li><a :href="elementosNav.value">{{ elementosNav.name }}</a></li>
+        </ul>
+      </nav>
+      <div class="btn-container-session">
+        <button
+          @click="toggleBackground(), goToLogin()"
+          :class="
+            !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'">
+          Iniciar sesión
+        </button>
+        <button
+          @click="toggleBackground(), goToRegister()"
+          :class="noBackground ? 'no-background' : 'btn__on-background'"
+        >
+          Registrarme
+        </button>
+      </div>
+    </div>
+    <div class="burger">
+      <button @click="movileNavActivo=!movileNavActivo">
+        <img src="../../assets/home_img/menu_icon.png" alt="menu hamburguesa">
+      </button>  
     </div>
   </div>
 </template>
@@ -34,7 +39,13 @@
 import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 
-const navItems = ref(["Inicio", "Servicios", "Por qué elegirnos"]);
+
+const navItems = ref([
+  {name: 'Inicio', value:'/'},
+  {name:'Servicios', value:'#servicios'},
+  {name:'Por qué elegirnos', value:'#eleginos'}
+]);
+
 const noBackground: Ref<boolean> = ref(false);
 
 const router = useRouter();
@@ -53,11 +64,13 @@ function goToHome() {
 
 function toggleBackground() {
   noBackground.value = !noBackground.value;
-}
+};
+
+let movileNavActivo = false
+
 </script>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
 .no-background {
   background-color: transparent !important;
   color: #2e46ba;
@@ -101,18 +114,20 @@ function toggleBackground() {
   z-index: 10;
   position: relative;
 }
-
 .header-container-with-logo-nav-registration .logo {
   margin-left: 15px;
   cursor: pointer;
 }
-
+.movile-nav{
+  width: 80%;
+  display: flex;
+}
 .header-container-with-logo-nav-registration nav {
   display: inline-flex;
   gap: 20px;
 }
 
-.header-container-with-logo-nav-registration nav ul li {
+.header-container-with-logo-nav-registration nav ul li a {
   color: var(--text-nav);
   gap: 15px;
   font-size: 1.25rem;
@@ -121,7 +136,7 @@ function toggleBackground() {
   font-family: "Jost", sans-serif;
 }
 
-.header-container-with-logo-nav-registration nav ul li:hover {
+.header-container-with-logo-nav-registration nav ul li a:hover {
   text-decoration: underline;
   color: #0e1c5f;
 }
@@ -186,5 +201,66 @@ function toggleBackground() {
 }
 .no-background:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.burger{
+  display: none;
+}
+@media (max-width:930px) {
+  .movile-nav{
+    width: 100%;
+    height: max-content;
+    margin: 15rem 0 0 0;
+    
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    
+    display:none; 
+    // inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 30px;
+    
+  }
+  .activo{
+    display: inline-flex;
+  }
+  .header-container-with-logo-nav-registration nav{
+    display: inline-block;
+  }
+  .header-container-with-logo-nav-registration li{
+    padding: 15px;
+  }
+  .btn-container-session{
+    width: 10rem;
+    margin: auto;
+    margin-bottom: 15px;
+    gap: 30px;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+  }
+  .btn-container-session .btn__on-background {
+    border-radius: 20px;
+    padding: 10px;
+  }
+  .btn-container-session .no-backgroundLogin{
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+
+  }
+  .burger{
+    background-color: transparent;
+    margin-right: 3rem;
+    display: block;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
 }
 </style>

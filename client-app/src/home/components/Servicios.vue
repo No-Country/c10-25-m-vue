@@ -1,5 +1,5 @@
 <template>
-  <div class="servicios_container">
+  <div class="servicios_container" id="servicios">
     <h2>Nuestros servicios</h2>
     <ul class="servicios_list">
       <li class="servicios_item items_a item_left">
@@ -130,7 +130,7 @@
     flex-direction:row-reverse ;
   }
   #farmacia{
-    margin-right: 6.5rem;
+    margin-right: 20rem;
   }
   .servicios_item div{
     width: 5rem;
@@ -145,6 +145,9 @@
     font-size: 1.25rem;
   }
 }
+#farmacia{
+    margin-right: 4rem;
+  }
 @media (max-width: 430px) {
   .servicios_item div{
     width: 2.5rem;
@@ -154,6 +157,9 @@
   .servicios_item img{
     width: 1.5rem;
     height: 1.5rem;
+  }
+  #farmacia{
+    margin-right: 3rem;
   }
 }
 
