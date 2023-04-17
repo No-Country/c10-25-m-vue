@@ -1,11 +1,16 @@
 <template>
-  <Pets></Pets>
+  <BgPets />
+
+  <div>
+    mascotas
+
+    <!-- <EditarBtn /> -->
+  </div>
 </template>
 
 <script lang="ts" setup>
-import Pets from '../components/Pets.vue'
+import EditarBtn from "../../shared/EditarBtn.vue";
+import BgPets from "../components/BgPets.vue";
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
