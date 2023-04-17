@@ -4,7 +4,7 @@
   <div>
     mascotas
 
-    <EditarBtn></EditarBtn>
+    <!-- <EditarBtn ></EditarBtn> -->
     
   </div>
 </template>
