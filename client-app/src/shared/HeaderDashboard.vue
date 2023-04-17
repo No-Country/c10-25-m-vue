@@ -1,11 +1,14 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
     <Logo />
-    <nav>
+    <!-- <nav>
       <ul v-for="(elementosNav, index) in navItems" :key="index">
         <li>{{ elementosNav }}</li>
       </ul>
-    </nav>
+    </nav> -->
+    <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
+      link.title
+    }}</RouterLink>
     <div class="btn-container-session">
       <button
         :class="
@@ -22,26 +25,18 @@
 import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 import Logo from "./LogoHeader.vue";
+import type { RouterLink } from "../router/link-routes";
 
-const navItems = ref(["Inicio", "Mi perfil", "Mis mascotas", "Mis turnos"]);
+interface Props {
+  links: RouterLink[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  links: () => [],
+});
+
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
-
-function goToWelcome() {
-  router.push("/welcome");
-}
-
-function goToRegister() {
-  router.push("/register");
-}
-
-function goToHome() {
-  router.push("/");
-}
-
-function toggleBackground() {
-  noBackground.value = !noBackground.value;
-}
 </script>
 
 <style lang="scss" scoped>
