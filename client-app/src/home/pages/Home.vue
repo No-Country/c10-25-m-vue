@@ -5,16 +5,16 @@
   </header>
   <Portada></Portada>
   <Servicios></Servicios>
-  <Diferentes></Diferentes>
+  <Eleginos></Eleginos>
   <footer>
     <Footer></Footer>
   </footer>
 </template>
 
 <script lang="ts" setup>
+import Header from "../components/Header.vue";
 import Portada from "../components/Portada.vue";
 import Servicios from "../components/Servicios.vue";
-import Diferentes from "../components/Diferentes.vue";
-import Header from "../components/Header.vue";
+import Eleginos from "../components/Eleginos.vue";
 import Footer from "../../shared/Footer.vue";
 </script>

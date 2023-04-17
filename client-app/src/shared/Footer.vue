@@ -147,7 +147,7 @@ import imagenHuellas from "./../assets/home_img/pawprint 1.png";
     margin: 1rem 2rem 2rem 2rem;
   }
 }
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
   .container-footer {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr 1fr;
@@ -202,7 +202,6 @@ import imagenHuellas from "./../assets/home_img/pawprint 1.png";
   .contacto li {
     font-size: 1.125rem;
   }
-
   .seguinos {
     width: auto;
     margin: 0.5rem 0 0 2em;
