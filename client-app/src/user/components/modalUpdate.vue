@@ -28,7 +28,7 @@ watch(userMutation.isSuccess, () => {
         ></span>
         <h2>Actualizar información</h2>
         <div v-if="user">
-          <form class="modal-form" @submit.prevent="updateUser(user)">
+          <form class="modal-form" @submit.prevent="updateUser(user!)">
             <label for="name">Nombre:</label>
             <input type="text" id="name" v-model="user.name" required />
             <label for="surname">Apellido:</label>

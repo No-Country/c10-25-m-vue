@@ -12,7 +12,7 @@ const getUser = async (id: number): Promise<User> => {
   return data.user;
 };
 
-const updateUser = async (user: any) => {
+const updateUser = async (user: User) => {
   console.log(user);
   await clinicApi.patch(`/users/${user.id}`, user, getConfig());
 };
