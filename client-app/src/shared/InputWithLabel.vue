@@ -2,13 +2,20 @@
     <div>
         <label :for="id">{{ label }}</label>
         <div class="input-wrapper">
-        <input :id="id" :value="value" :type="inputType" :placeholder="placeholder" @input="onInput" @blur="onBlur" 
-        :style="errors ? 'border:1px solid #C03221;' : ''"
-        />
-        <span class="eye-input" v-if="type === 'password'" @click="togglePasswordVisibility" >
-            <img v-if="showPassword" src="../assets/auth/eye_open.svg" alt="">
-            <img v-else src="../assets/auth/eye_close.svg" alt="">
-        </span>
+            <input 
+                :id="id" 
+                :value="value" 
+                :type="inputType" 
+                :placeholder="placeholder" 
+                @input="onInput" 
+                @blur="onBlur"
+                :accept="accept"
+                :style="errors ? 'border:1px solid #C03221;' : ''" />
+
+            <span class="eye-input" v-if="type === 'password'" @click="togglePasswordVisibility">
+                <img v-if="showPassword" src="../assets/auth/eye_open.svg" alt="">
+                <img v-else src="../assets/auth/eye_close.svg" alt="">
+            </span>
         </div>
         <span class="error_form">{{ errors }}</span>
     </div>
@@ -33,13 +40,17 @@ export default defineComponent({
             type: String,
             required: false
         },
-        type:{
+        type: {
             type: String,
             required: true
         },
         value: {
-            type:  String,
-            required: true
+            type: String,
+            required: false
+        },
+        accept: {
+            type: String,
+            required: false
         },
         placeholder: {
             type: String,
@@ -58,20 +69,21 @@ export default defineComponent({
         };
 
         const onBlur = () => {
-        emit('blur');
+            emit('blur');
         };
 
-        const togglePasswordVisibility =  () => {
+        const togglePasswordVisibility = () => {
             showPassword.value = !showPassword.value;
         };
         const inputType = computed(() => {
             return props.type === 'password' && showPassword.value ? 'text' : props.type;
         });
 
-        
-        return { onInput, onBlur, togglePasswordVisibility,  inputType, showPassword,
-                 ImagenEyeOpenInput, ImagenEyeCloseInput
-            };
+
+        return {
+            onInput, onBlur, togglePasswordVisibility, inputType, showPassword,
+            ImagenEyeOpenInput, ImagenEyeCloseInput
+        };
     }
 });
 </script>
@@ -80,6 +92,7 @@ div {
     display: flex;
     flex-direction: column;
 }
+
 .input-wrapper {
     position: relative;
 }
@@ -87,12 +100,13 @@ div {
 .eye-input {
     position: absolute;
     background: none;
-    cursor:pointer;
+    cursor: pointer;
     right: 8px;
     top: 55%;
     transform: translateY(-50%);
     /* Agrega más estilos para el botón aquí */
 }
+
 label {
     font-family: 'Jost';
     font-style: normal;
@@ -116,17 +130,17 @@ form input {
 
 
 .error_form {
-  font-family: 'Jost';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 175%;
-  /* identical to box height, or 23px */
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 175%;
+    /* identical to box height, or 23px */
 
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 
-  color: #C03221;
+    color: #C03221;
 
 }
 </style>

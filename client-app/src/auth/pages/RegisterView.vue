@@ -14,70 +14,82 @@
           <form @submit="onSubmit">
             <div class="form-group">
               <InputWithLabel
-                type="text"
-                class="form-row"
-                placeholder="Nombre"
-                v-model:value="name"
-                id="nombre"
-                label="Nombre"
-                @blur="validateName"
-                :errors="errors.name"
-              />
+                    type="text"
+                    class="form-row"
+                    placeholder="Nombre"
+                    v-model:value="signupFormState.name"
+                    id="nombre"
+                    label="Nombre"
+                    @blur="handleNameBlur"
+                    :errors="signupFormState.errors.name"
+                  />
 
-              <InputWithLabel
-                type="text"
-                class="form-row"
-                placeholder="Apellido"
-                :errors="errors.surname"
-                id="apellido"
-                label="Apellido"
-                v-model:value="surname"
-                @blur="validateSurname"
-              />
+                  <InputWithLabel
+                    type="text"
+                    class="form-row"
+                    placeholder="Apellido"
+                    :errors="signupFormState.errors.surname"
+                    id="apellido"
+                    label="Apellido"
+                    v-model:value="signupFormState.surname"
+                    @blur="handleSurnameBlur"
+                  />
 
-              <InputWithLabel
-                type="text"
-                class="form-row"
-                placeholder="Email"
-                :errors="errors.email"
-                id="email"
-                label="Email"
-                v-model:value="email"
-                @blur="validateEmail"
-              />
+                  <InputWithLabel
+                    type="text"
+                    class="form-row"
+                    placeholder="Email"
+                    :errors="signupFormState.errors.email"
+                    id="email"
+                    label="Email"
+                    v-model:value="signupFormState.email"
+                    @blur="handleEmailBlur"
+                  />
 
-              <InputWithLabel
-                type="number"
-                class="form-row"
-                placeholder="Teléfono"
-                :errors="errors.phone"
-                id="telefono"
-                label="Teléfono"
-                v-model:value="phone"
-                @blur="validatePhone"
-              />
+                  <InputWithLabel
+                    type="number"
+                    class="form-row"
+                    placeholder="Teléfono"
+                    :errors="signupFormState.errors.phone"
+                    id="telefono"
+                    label="Teléfono"
+                    v-model:value="signupFormState.phone"
+                    @blur="handlePhoneBlur"
+                  />
 
-              <InputWithLabel
-                type="password"
-                class="form-row"
-                placeholder="Contraseña"
-                :errors="errors.password"
-                id="contraseña"
-                label="Contraseña"
-                v-model:value="password"
-                @blur="validatePassword"
-              />
+                  <InputWithLabel
+                    type="password"
+                    class="form-row"
+                    placeholder="Contraseña"
+                    :errors="signupFormState.errors.password"
+                    id="contraseña"
+                    label="Contraseña"
+                    v-model:value="signupFormState.password"
+                    @blur="handlePasswordBlur"
+                  />
 
-              <InputWithLabel
-                type="password"
-                class="form-row"
-                placeholder="Repetir contraseña"
-                :errors="errors.confirmPassword"
-                id="repetirContraseña"
-                label="Repetir contraseña"
-                v-model:value="confirmPassword"
-                @blur="validateConfirmPassword"
-              />
+                  <InputWithLabel
+                    type="password"
+                    class="form-row"
+                    placeholder="Repetir contraseña"
+                    :errors="signupFormState.errors.confirmPassword"
+                    id="repetirContraseña"
+                    label="Repetir contraseña"
+                    v-model:value="signupFormState.confirmPassword"
+                    @blur="handleConfirmPasswordBlur"
+                  />
+
+                  <InputWithLabel
+                    type="file"
+                    class="form-row"
+                    placeholder="imagen de perfil"
+                    :errors="signupFormState.errors.profileImageUrl"
+                    id="profileImageUrl"
+                    label="URL de imagen de perfil"
+                    @change="handleFileChange"
+                    @blur="handleProfileImageUrlBlur"
+                    accept="image/png"
+                  />
             </div>
             <div class="container_btn">
               <button type="submit">Registrare</button>
@@ -89,171 +101,89 @@
     <div class="login-form" v-if="!isComponentVisible">
       <AccountCreationSuccess />
     </div>
+    <ServerMessage :type="'error'" :message="signupStore.serverError ?? undefined" />
   </div>
 </template>
 
-<script lang="ts" setup>
-import { defineComponent, ref, reactive } from "vue";
+<script lang="ts">
+import { defineComponent, ref } from "vue";
 import InputWithLabel from "../../shared/InputWithLabel.vue";
 import AccountCreationSuccess from "../components/AccountCreationSuccess.vue";
 import imagenPortadaRegister from "../../assets/auth/primer-plano-gato-lamiendo-oreja-conejo-aislado-blanco-removebg-preview 1.png";
 import LogoInterno from "../../shared/LogoInterno.vue";
-import * as yup from "yup";
-import { useForm } from "vee-validate";
+import ServerMessage from "../components/ServerMessage.vue"
+import useSignupRequest from "../composables/useSignupRequest";
+import { useSignupStore } from '../../store/auth/signup'
+import { validateName, validateSurname, validateEmail, validatePhone, validatePassword, 
+         validateConfirmPassword, validateProfileImageUrl } from '../composables/validationSignup';
 
-interface FormValues {
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
-  [key: string]: string;
+export default defineComponent({
+  components: {
+    LogoInterno,
+    ServerMessage,
+    InputWithLabel,
+    AccountCreationSuccess
+  },
+  
+setup() {
+  const signupStore = useSignupStore()
+  const isComponentVisible = ref(true);
+  const { signupFormState, onSubmit } = useSignupRequest();
+
+  const handleNameBlur = async () => {
+      signupFormState.errors.name = await validateName(signupFormState.name);
+    };
+
+    const handleSurnameBlur = async () => {
+      signupFormState.errors.surname = await validateSurname(signupFormState.surname);
+    };
+
+    const handleEmailBlur = async () => {
+      signupFormState.errors.email = await validateEmail(signupFormState.email);
+    };
+
+    const handlePhoneBlur = async () => {
+      signupFormState.errors.phone = await validatePhone(signupFormState.phone);
+    };
+
+    const handlePasswordBlur = async () => {
+      signupFormState.errors.password = await validatePassword(signupFormState.password);
+    };
+
+    const handleConfirmPasswordBlur = async () => {
+      signupFormState.errors.confirmPassword = await validateConfirmPassword(signupFormState.confirmPassword, signupFormState.password);
+    };
+
+    const handleProfileImageUrlBlur = async () => {
+      signupFormState.errors.profileImageUrl = await validateProfileImageUrl(signupFormState.profileImageUrl);
+    };
+
+    const handleFileChange = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      const file: File = (target.files as FileList)[0];
+      signupFormState.profileImageUrl = file;
+      // Aquí puedes actualizar el valor de signupFormState.profileImageUrl con el archivo seleccionado
+    };
+
+  return {
+      signupStore,
+      imagenPortadaRegister,
+      signupFormState,
+      isComponentVisible,
+      handleNameBlur,
+      handleSurnameBlur,
+      handleEmailBlur,
+      handlePhoneBlur,
+      handlePasswordBlur,
+      handleConfirmPasswordBlur,
+      handleProfileImageUrlBlur,
+      handleFileChange,
+      onSubmit
+  }
+
 }
+})
 
-const schema = yup.object({
-  name: yup.string().required("Nombre es requerido"),
-  surname: yup.string().required("Apellido es requerido"),
-  email: yup.string().email().required("Email es requerido."),
-  phone: yup.string().required("Telefono es requerido"),
-  password: yup
-    .string()
-    .required("Contraseña incorrecta. Por favor, intentá de nuevo.")
-    .min(8, "La contraseña debe tener más de 8 caracteres."),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password")], "Las contraseñas deben coincidir")
-    .required("La confirmación de la contraseña es requerida"),
-});
-
-const name = ref("");
-const email = ref("");
-const password = ref("");
-const surname = ref("");
-const phone = ref("");
-const confirmPassword = ref("");
-const isComponentVisible = ref(true);
-
-const errors = reactive({
-  name: "",
-  email: "",
-  password: "",
-  surname: "",
-  phone: "",
-  confirmPassword: "",
-}) as FormValues;
-
-const { handleSubmit, resetForm } = useForm();
-
-const validateName = async () => {
-  try {
-    await schema.validateAt("name", { name: name.value });
-    errors.name = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.name = err.message;
-    }
-  }
-};
-
-const validateEmail = async () => {
-  try {
-    await schema.validateAt("email", { email: email.value });
-    errors.email = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.email = err.message;
-    }
-  }
-};
-
-const validatePassword = async () => {
-  try {
-    await schema.validateAt("password", { password: password.value });
-    errors.password = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.password = err.message;
-    }
-  }
-};
-
-const validateConfirmPassword = async () => {
-  try {
-    await schema.validateAt("confirmPassword", {
-      password: password.value,
-      confirmPassword: confirmPassword.value,
-    });
-    errors.confirmPassword = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.confirmPassword = err.message;
-    }
-  }
-};
-
-const validateSurname = async () => {
-  try {
-    await schema.validateAt("surname", { surname: surname.value });
-    errors.surname = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.surname = err.message;
-    }
-  }
-};
-
-const validatePhone = async () => {
-  try {
-    await schema.validateAt("phone", { phone: phone.value });
-    errors.phone = "";
-  } catch (err) {
-    if (err instanceof Error) {
-      errors.phone = err.message;
-    }
-  }
-};
-
-const onSubmit = handleSubmit(async (values) => {
-  try {
-    await schema.validate(
-      {
-        name: name.value,
-        password: password.value,
-        phone: phone.value,
-        surname: surname.value,
-        confirmPassword: confirmPassword.value,
-        email: email.value,
-      },
-      { abortEarly: false }
-    );
-    (isComponentVisible.value = false),
-      alert(
-        JSON.stringify({
-          name: name.value,
-          password: password.value,
-          phone: phone.value,
-          surname: surname.value,
-          confirmPassword: confirmPassword.value,
-          email: email.value,
-        })
-      );
-    (email.value = ""),
-      (password.value = ""),
-      (name.value = ""),
-      (phone.value = ""),
-      (surname.value = ""),
-      (confirmPassword.value = "");
-  } catch (err) {
-    if (err instanceof yup.ValidationError) {
-      err.inner.forEach((error) => {
-        if (error.path) {
-          errors[error.path] = error.message;
-        }
-      });
-    }
-  }
-});
 </script>
 
 <style scoped lang="scss">
