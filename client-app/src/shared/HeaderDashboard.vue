@@ -1,24 +1,22 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
     <Logo />
-    <div class="movile-nav">
-      <nav>
-        <ul v-for="(elementosNav, index) in navItems" :key="index">
-          <li><a :href="elementosNav.value">{{ elementosNav.name }}</a></li>
-        </ul>
-      </nav>
-      <div class="btn-container-session">
-        <button
-          :class="
-            !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'">
-          <img src="./../assets/home_img/A.png" alt="" />
-        </button>
-      </div>
-    </div>
-    <div class="burger">
-      <button >
-        <img src="../assets/home_img/menu_icon.png" alt="menu hamburguesa">
-      </button>  
+    <!-- <nav>
+      <ul v-for="(elementosNav, index) in navItems" :key="index">
+        <li>{{ elementosNav }}</li>
+      </ul>
+    </nav> -->
+    <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
+      link.title
+    }}</RouterLink>
+    <div class="btn-container-session">
+      <button
+        :class="
+          !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+        "
+      >
+        <img src="./../assets/home_img/A.png" alt="" />
+      </button>
     </div>
   </div>
 </template>
@@ -27,32 +25,18 @@
 import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 import Logo from "./LogoHeader.vue";
+import type { RouterLink } from "../router/link-routes";
 
-const navItems = ref([
-  {name: 'Inicio', value:'/'},
-  {name:'Mi perfil', value:'/user'},
-  {name:'Mis mascotas', value:'/pets'},
-  {name:'Mis turnos', value:'/'}
-]);
+interface Props {
+  links: RouterLink[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  links: () => [],
+});
 
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
-
-function goToWelcome() {
-  router.push("/welcome");
-}
-
-function goToRegister() {
-  router.push("/register");
-}
-
-function goToHome() {
-  router.push("/");
-}
-
-function toggleBackground() {
-  noBackground.value = !noBackground.value;
-}
 </script>
 
 <style lang="scss" scoped>

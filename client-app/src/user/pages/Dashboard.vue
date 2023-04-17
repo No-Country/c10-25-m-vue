@@ -1,21 +1,31 @@
+<script lang="ts" setup>
+import { storeToRefs } from "pinia";
+import { useLoginStore } from '../../store/auth/login'
+import LogoImg from "../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png";
+import ServerMessage from "../../auth/components/ServerMessage.vue";
+import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
+import { useUserStore } from "../../store/auth/user";
+
+
+const store = useUserStore();
+const { user } = storeToRefs(store);
+const loginStore = useLoginStore()
+
+</script>
+
 <template>
   <div class="welcome-container">
     <div class="container-welcome--perfil">
       <img class="subLogo" :src="LogoImg" alt="" />
 
-      <h1>¡Hola Agustin!</h1>
+      <h1>¡Hola {{ user?.name }}!</h1>
       <img class="portada-img" :src="PortadaImg" alt="" />
     </div>
+
+    <ServerMessage :type="'success'" :message="loginStore.serverSuccess ?? undefined" />
+
   </div>
 </template>
-
-<script lang="ts" setup>
-import LogoImg from "../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png";
-import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
-
-const message = "This is my Contenido del component!";
-</script>
-
 <style lang="scss" scoped>
 .welcome-container {
   height: 89vh;
@@ -45,4 +55,6 @@ const message = "This is my Contenido del component!";
 
   color: #3a57e8;
 }
+
+
 </style>

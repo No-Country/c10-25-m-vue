@@ -18,6 +18,4 @@
 import Footer from "../../shared/Footer.vue";
 import HeaderDashboard from "../../shared/HeaderDashboard.vue";
 import { routeLink } from "./../../router/link-routes";
-
-const message = "This is my component!";
 </script>

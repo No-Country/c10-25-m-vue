@@ -1,24 +1,25 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
+import { ref } from "vue";
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
-interface UserData {
-    id: string;
-    name: string;
-    email: string;
-  }
+export const useUserStore = defineStore("user", () => {
+  const user = ref<User | null>();
 
-export const useUserStore = defineStore({
-  id: 'user',
-  state: () => ({
-    user: null as UserData | null
-  }),
-  actions: {
+  return {
+    //State propiertes
+    user,
+    //getters
 
-    
-    setUser(userData: UserData) {
-      this.user = userData;
+    //actions
+    setUser(userData: User) {
+      user.value = userData;
     },
     clearUser() {
-      this.user = null;
-    }
-  }
+      user.value = null;
+    },
+  };
 });

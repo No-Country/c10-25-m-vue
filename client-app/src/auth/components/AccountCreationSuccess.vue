@@ -30,7 +30,7 @@ export default defineComponent({
         const router = useRouter();
 
         function goToLogin() {
-        router.push('/login');
+        router.push('/auth/login');
         }
 
         return {
@@ -50,6 +50,7 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     align-items: center;
+    gap:25px;
 }
 
 .container__subtitle h1 {
