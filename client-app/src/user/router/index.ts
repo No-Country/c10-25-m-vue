@@ -5,7 +5,7 @@ import Dashboard from "../pages/Dashboard.vue";
 import UserView from "../pages/UserView.vue";
 
 export const userRouter: RouteRecordRaw = {
-  path: "/${}",
+  path: "/",
   redirect: "/user/dashboard",
   component: UserLayout,
   children: [
