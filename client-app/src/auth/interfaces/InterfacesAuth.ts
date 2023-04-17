@@ -11,5 +11,15 @@ export interface LoginFormValues {
     phone: string;
     password: string;
     confirmPassword: string;
-    [key: string]: string;
+    profileImageUrl: File | null;
+  }
+
+  export interface RegisterFormErrors {
+    name: string;
+    surname: string;
+    email: string;
+    phone: string;
+    password: string;
+    confirmPassword: string;
+    profileImageUrl: string; // El tipo sigue siendo 'string' porque es un mensaje de error
   }

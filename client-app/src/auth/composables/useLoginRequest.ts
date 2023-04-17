@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { reactive } from "vue";
-import { useUserStore } from "../../store/auth/user"; // Importar userStore
 import { useLoginStore } from '../../store/auth/login'
 import { useRouter } from "vue-router"; // Importar goToWelcome
 import { LoginFormValues } from '../interfaces/InterfacesAuth';
@@ -23,10 +22,7 @@ export default function useLoginForm() {
       serverSuccess: loginStore.serverSuccess,
   });
 
-
-  const userStore = useUserStore();
   const router = useRouter();
-  
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(8).required(),
@@ -56,7 +52,6 @@ export default function useLoginForm() {
         const data = await response.data;
    
         // Actualizar estado de la aplicación con información del usuario autenticado
-        userStore.user = data.user;
         goToWelcome();
         
         loginStore.setServerSuccess(data.message)
