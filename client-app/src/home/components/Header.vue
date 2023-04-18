@@ -120,7 +120,11 @@ let movileNavActivo = false
 }
 .movile-nav{
   width: 80%;
-  display: flex;
+  display: inline-flex;
+  justify-content:space-evenly;
+  align-content: center;
+  align-items: center;
+
 }
 .header-container-with-logo-nav-registration nav {
   display: inline-flex;
@@ -210,6 +214,7 @@ let movileNavActivo = false
     width: 100%;
     height: max-content;
     margin: 15rem 0 0 0;
+    z-index: 11;
     
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -258,8 +263,34 @@ let movileNavActivo = false
     background-color: transparent;
     margin-right: 3rem;
     display: block;
-    z-index: 10;
+    z-index: 12;
     cursor: pointer;
+  }
+  
+}
+@media (max-width: 530px) {
+  .header-container-with-logo-nav-registration{
+    justify-content: space-around;
+  }
+  .header-container-with-logo-nav-registration .logo{
+    width: 30%;
+    z-index: 1;
+  }
+  .burger{
+    margin-right: 5%;
+  }
+  .movile-nav{
+    width: 90%;
+  }
+}
+@media (max-width:410px) {
+  .movile-nav{
+    position: absolute;
+    right: 5%;
+  }
+  .burger{
+    position: absolute;
+    right: 5%;
   }
   
 }

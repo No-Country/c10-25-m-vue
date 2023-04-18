@@ -99,6 +99,8 @@ return {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  display: flex;
+    justify-content: center;
 }
 
 .login-container h1 {
@@ -111,21 +113,45 @@ return {
   color: #060859;
 }
 
-.login-grid {
+
+@media (max-width: 800px) {
+
+  .login-image{
+    display:none;
+  }
+  /* Estilos específicos para dispositivos móviles */
+  .login-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+}
+
+@media (min-width: 800px) {
+
+  /* Estilos específicos para dispositivos móviles */
+  .login-image {
+  display: flex;
+  justify-content: center;
+}
+
+  .login-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
 }
 
-.login-image {
-  display: flex;
-  justify-content: center;
 }
+
+
+
 
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+    height: 90%;
 }
 
 form {

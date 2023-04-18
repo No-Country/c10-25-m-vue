@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="logo_container">
+        <div class="logo_container" @click="goToHome()">
             <img :src="imagenLogoLogin" alt="Logo" class="logo" width="63px" height="63px" />
             <div class="titulo_footer">
                     <h2>Huellitas</h2>
@@ -13,13 +13,19 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import imagenLogoLogin from "../assets/home_img/logoHeader.png";
+import { useRouter } from "vue-router"; // Importar goToWelcome
 export default defineComponent({
   name: 'LogoHeader',
     setup () {
-        
 
+      const router = useRouter();
+
+      function goToHome() {
+        router.push("/user/home");
+      }
         return {
-            imagenLogoLogin
+            imagenLogoLogin,
+            goToHome
         }
     }
 })
@@ -34,6 +40,7 @@ export default defineComponent({
   justify-content:center;
   align-items:center;
   gap:9px;
+  cursor:pointer;
 }
 
 .logo {

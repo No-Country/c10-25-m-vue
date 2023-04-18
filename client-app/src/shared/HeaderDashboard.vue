@@ -57,6 +57,19 @@ const router = useRouter();
   margin-left: 15px;
   cursor: pointer;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: 'Jost';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 175%;
+/* identical to box height, or 42px */
+
+
+color: #2E46BA;
+}
 .movile-nav{
   width: 80%;
   display: flex;

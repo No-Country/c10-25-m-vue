@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AxiosError } from "axios";
 import { reactive } from "vue";
 import { useLoginStore } from "../../store/auth/login";
 import { useRouter } from "vue-router"; // Importar goToWelcome
@@ -88,11 +89,18 @@ export default function useLoginForm() {
             loginFormState.errors.password = error.message;
           }
         });
-      } else if (err instanceof TypeError) {
+      } else if (
+        (err as AxiosError).isAxiosError &&
+        (err as AxiosError).message === "Network Error"
+      ) {
         // Manejar error de red
+
         loginStore.setServerError(
           "Error de conexión. Por favor, inténtelo de nuevo más tarde."
         );
+        setTimeout(() => {
+          loginStore.setServerError("");
+        }, 5000);
       }
     }
   };
