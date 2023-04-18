@@ -21,7 +21,7 @@ export const validIfExistEmail = catchAsync(
       },
     });
 
-    console.log(user);
+/*     console.log(user); */
 
     if (user && user.status === 'active') {
       //TODO: cambiar status a active
@@ -50,7 +50,7 @@ export const validIfExistUserByEmail = catchAsync(
       },
     });
 
-    console.log(user);
+/*     console.log(user); */
 
     if (!user) {
       return next(
@@ -85,6 +85,7 @@ export const validIfExistUserById = catchAsync(
         name: true,
         surname: true,
         email: true,
+        phone: true,
         profileImageUrl: true,
       },
     });

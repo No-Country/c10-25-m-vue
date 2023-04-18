@@ -146,7 +146,7 @@ export const createNewPet = catchAsync(
 
     const imgRef = ref(
       storage,
-      `animal/${Date.now()}-]${req.file?.originalname}`
+      `pet/${Date.now()}-${req.file?.originalname}`
     )
     const imgUploaded = await uploadBytes(imgRef, req.file?.buffer!)
 
@@ -180,6 +180,13 @@ export const createNewPet = catchAsync(
         petImage: imgUploaded.metadata.fullPath,
         animal_id: +animal_id,
         user_id: +user_id
+      },
+      select : {
+        id: true,
+        name: true,
+        petImage: true,
+        animal: {select: {id: true, name: true, image: true}},
+        user: {select: {name: true, surname: true, id: true}}
       }
     })
 
@@ -257,7 +264,6 @@ export const updatePetImage = catchAsync(
       `animal/${Date.now()}-]${req.file?.originalname}`
     )
     const imgUploaded = await uploadBytes(imgRef, req.file?.buffer!)
-
 
     const pet = await db.pet.update({
       where: {

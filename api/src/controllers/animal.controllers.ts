@@ -50,7 +50,7 @@ export const readAnimal = catchAsync(
 
 export const createAnimal = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, image } = req.body
+    const { name } = req.body
     const animalName: string = capFirst(name)
 
     const imgRef = ref(
@@ -63,7 +63,7 @@ export const createAnimal = catchAsync(
     const animal = await db.animal.create({
       data: {
         name: animalName,
-        image: image ? imgUploaded.metadata.fullPath : 'https://thenounproject.com/api/private/icons/13643/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0&token=gAAAAABkNqkBGzMVewzcJSGNAxN6luZCpttf2fWwxUfcI-NfqD5v4k5QwxeTYRJsAiW5kzedRmEhyQpFfiUA43636U3VgpFIcA%3D%3D'
+        image: imgUploaded ? imgUploaded.metadata.fullPath : 'animal/1681787945282-Veterinaria_logotipo.png'
       }
     })
     return res.status(StatusCodes.CREATED).json({
