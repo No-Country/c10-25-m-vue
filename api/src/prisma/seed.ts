@@ -8,23 +8,26 @@ type User = {
   surname: string;
   email: string;
   password: string;
+  phone: string;
+  profileImageUrl: string;
   role: UserRole;
 };
 
 type Vet = {
-  phone: string;
   speciality: string;
   user_id: number;
 };
 
 type Animal = {
   name: string;
+  image: string
 };
 
 type Pet = {
   name: string;
   animal_id: number;
   user_id: number;
+  petImage: string
 };
 
 type Review = {
@@ -51,50 +54,64 @@ function getUser(): Array<User> {
       name: 'jhon',
       surname: 'doe',
       email: 'jhondoe@gmail.com',
+      phone: '+51 111 1111',
       password: hashedPassword,
       role: UserRole.admin,
+      profileImageUrl:'users/1681795826528-subject_1.png',
     },
     {
       name: 'juan',
       surname: 'morales',
       email: 'juanmorales@gmail.com',
+      phone: '+52 222 2222',
       password: hashedPassword,
       role: UserRole.user,
+      profileImageUrl:'users/1681796125395-subject_2.png',
     },
     {
       name: 'sofia',
       surname: 'bessonart',
       email: 'sofia@gmail.com',
+      phone: '+53 333 3333',
       password: hashedPassword,
       role: UserRole.vet,
+      profileImageUrl:'users/1681796384350-subject_4.png',
     },
     {
-      name: 'ricardo',
-      surname: 'jimenes',
-      email: 'ricardo@gmail.com',
+      name: 'yamila',
+      surname: 'quiroga',
+      email: 'yamiquiroga@gmail.com',
+      phone: '+54 444 4444',
       password: hashedPassword,
       role: UserRole.vet,
+      profileImageUrl:'users/1681796400656-subject_5.png',
     },
     {
-      name: 'melina',
-      surname: 'villalba',
-      email: 'velinavillalba@gmail.com',
+      name: 'ailin',
+      surname: 'castillo',
+      email: 'ailincastillo@gmail.com',
+      phone: '+55 555 5555',
       password: hashedPassword,
       role: UserRole.vet,
+      profileImageUrl:'users/1681796421157-subject_6.png',
     },
     {
       name: 'gabriel',
       surname: 'jalil',
       email: 'jalu@gmail.com',
+      phone: '+56 666 6666',
       password: hashedPassword,
       role: UserRole.vet,
+      profileImageUrl:'users/1681795826528-subject_1.png',
     },
     {
       name: 'luis',
       surname: 'avendaño',
       email: 'luis@gmail.com',
+      phone: '+57 777 7777',
       password: hashedPassword,
       role: UserRole.user,
+      profileImageUrl:'users/1681796204015-subject_3.png',
     },
   ];
 }
@@ -102,22 +119,18 @@ function getUser(): Array<User> {
 function getVet(): Array<Vet> {
   return [
     {
-      phone: '+52 111 111 111',
       speciality: 'animales pequeños',
       user_id: 3,
     },
     {
-      phone: '+52 222 222 222',
       speciality: 'animales grandes',
       user_id: 4,
     },
     {
-      phone: '+52 333 333 333',
       speciality: 'fauna silvestre',
       user_id: 5,
     },
     {
-      phone: '+52 444 444 444',
       speciality: 'animales exoticos',
       user_id: 6,
     },
@@ -128,15 +141,19 @@ function getAnimals(): Array<Animal> {
   return [
     {
       name: 'Perro',
+      image:'animal/1681788237730-dog-pet.png',
     },
     {
       name: 'Gato',
+      image:'animal/1681788304928-cat-pet.png',
     },
     {
       name: 'Conejo',
+      image:'animal/1681788357441-rabbit-pet.png',
     },
     {
       name: 'Pájaro',
+      image:'animal/1681788438581-deco-pets.png',
     },
   ];
 }
@@ -145,16 +162,19 @@ function getPets(): Array<Pet> {
   return [
     {
       name: 'Fido',
+      petImage:'pet/1681797173399-Fido.jpg',
       animal_id: 1,
       user_id: 7,
     },
     {
       name: 'Garfield',
+      petImage:'pet/1681797209042-garfield.jpeg',
       animal_id: 2,
       user_id: 2,
     },
     {
       name: 'Bugs',
+      petImage:'pet/1681797276680-bugs.jpg',
       animal_id: 3,
       user_id: 2,
     },
@@ -263,7 +283,9 @@ async function seed() {
           name: user.name,
           surname: user.surname,
           email: user.email,
+          phone: user.phone,
           password: user.password,
+          profileImageUrl: user.profileImageUrl,
           role: user.role,
         },
       });

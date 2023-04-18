@@ -3,7 +3,7 @@ import catchAsync from '../utils/catchAsync';
 import { StatusCodes } from 'http-status-codes';
 import { URequest } from '../interfaces/user.interfaces';
 import { db } from '../database/db.server';
-import { getDownloadURL, ref } from '@firebase/storage';
+import { uploadBytes, getDownloadURL, ref } from '@firebase/storage';
 import storage from '../utils/firebase';
 
 /* This code exports a function named `findUsers` that uses the `catchAsync` middleware to handle any
@@ -22,6 +22,7 @@ export const findUsers = catchAsync(
         name: true,
         surname: true,
         email: true,
+        phone: true,
         profileImageUrl: true,
       },
     });
@@ -68,7 +69,7 @@ response with a status code of 200 (OK) and a success message. */
 export const updateUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const { name, surname, email } = req.body;
+    const { name, surname, email, phone } = req.body;
 
     await db.user.update({
       where: { id: +id },
@@ -76,6 +77,7 @@ export const updateUser = catchAsync(
         name: name.toLowerCase(),
         surname: surname.toLowerCase(),
         email: email.toLowerCase(),
+        phone: phone
       },
     });
 
@@ -87,6 +89,36 @@ export const updateUser = catchAsync(
     });
   },
 );
+
+
+/* This function 'updateProfileImage' it only updates the profiel image of the user. 
+The updated values are obtained from the request body. The function returns a JSON
+response with a status code of 200 (OK) and a success message. */
+
+export const updateProfileImage = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params
+
+    const imgRef = ref(
+      storage,
+      `users/${Date.now()}-${req.file?.originalname}`,
+    );
+
+    const imgUploaded = await uploadBytes(imgRef, req.file?.buffer!);
+
+    await db.user.update({
+      where: { id: +id },
+      data: {
+       profileImageUrl: imgUploaded.metadata.fullPath
+      },
+    });
+
+    return res.status(StatusCodes.OK).json({
+      status: 'success',
+      message: 'The user profile image has been updated!',
+    });
+  }
+)
 
 /* This code exports a function named `deleteUser` that uses the `catchAsync` middleware to handle any
 errors that may occur during the execution of the function. The function updates a user's status to
