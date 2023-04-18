@@ -106,6 +106,16 @@
   align-items: center;
   
 }
+@media (max-width:1132px){
+  .servicios_item div{
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+  .servicios_container{
+    font-size: 1.5rem;
+  }
+  
+}
 
 @media (max-width:984px) {
   
@@ -131,10 +141,6 @@
   }
   #farmacia{
     margin-right: 20rem;
-  }
-  .servicios_item div{
-    width: 5rem;
-    height: 5rem;
   }
 }
 @media (max-width: 516px) {
@@ -162,5 +168,4 @@
     margin-right: 3rem;
   }
 }
-
 </style>
