@@ -50,6 +50,10 @@ const hasAppointments = ref(true);
         </div>
       </span>
         <button>Reservar un turno</button>
+
+        <div class="pawprint_user">
+      <img src="../../assets/user_img/bg-pawprint.png" alt="huellas">
+    </div>
       </div>
     </div>
 
@@ -62,6 +66,12 @@ const hasAppointments = ref(true);
   </div>
 </template>
 <style lang="scss" scoped>
+
+.pawprint_user{
+  position: absolute;
+    top: -17%;
+    right: 9%;
+}
 
 .time-appoinment{
   display:inline-flex;
@@ -193,7 +203,7 @@ color: #383B43;
 
 .container-welcome-reservas{
   background: #e5e5e5;
-height: 405px;
+height: 515px;
 }
 .container-welcome--perfil h1 {
   font-family: "Jost";
