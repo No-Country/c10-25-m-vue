@@ -12,9 +12,7 @@ export const useUserStore = defineStore("user", () => {
   return {
     //State propiertes
     user,
-    //getters
-
-    //actions
+    
     setUser(userData: User) {
       user.value = userData;
     },

@@ -7,10 +7,10 @@
     <main>
       <router-view></router-view>
     </main>
-    <footer>
+   
       <!-- footer content goes here -->
       <Footer />
-    </footer>
+    
   </div>
 </template>
 

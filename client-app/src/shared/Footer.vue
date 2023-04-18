@@ -1,6 +1,7 @@
 <template>
-  <div class="container-footer">
-    <div class="logo_footer">
+<footer :style="(!isOnHomePage && isOnDashboardPage) ? 'background:#e5e5e5;' : ''">
+  <div :class="(isAuthenticated && !isOnHomePage) ? 'fondo-footer-sessionOn' : 'container-footer'">
+    <div class="logo_footer" @click="goToHome()">
       <img :src="imagenLogo" alt="Logo" />
       <div class="titulo_footer">
         <h2>Huellitas</h2>
@@ -22,7 +23,7 @@
         </ul>
       </div>
     </div>
-    <div class="seguinos">
+    <div :class="isAuthenticated ? 'seguinos-sessionOn ' : 'seguinos'" >
       <h3>Seguinos</h3>
       <ul class="seguinos_items">
         <li>
@@ -36,21 +37,89 @@
         </li>
       </ul>
     </div>
-    <div class="pawprint_footer">
+ 
+    <div class="pawprint_footer" v-if="(isOnHomePage)">
       <img :src="imagenHuellas" alt="pawprint" id="paw1" />
       <img :src="imagenHuellas" alt="pawprint" id="paw2" />
       <img :src="imagenHuellas" alt="pawprint" id="paw3" />
       <img :src="imagenHuellas" alt="pawprint" id="paw4" />
     </div>
   </div>
+</footer>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" >
+import { defineComponent, onMounted, ref, computed } from 'vue';
 import imagenLogo from "./../assets/home_img/Veterinaria_logotipo.png";
 import imagenHuellas from "./../assets/home_img/pawprint 1.png";
+import { useUserStore } from './../store/auth/user';
+import { useRouter } from "vue-router"; // Importar goToWelcome
+import clinicApi from "../api/clinic-api";
+import getConfig from "../utils/getConfig";
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+    
+    const userStore = useUserStore();
+    let isAuthenticated = ref(false);
+    const isOnHomePage =  computed(() => router.currentRoute.value.name === 'home');
+    const isOnDashboardPage =  computed(() => router.currentRoute.value.name === 'dashboard');
+    function goToHome() {
+      router.push("/");
+    }
+
+    onMounted(async () => {
+      const token = localStorage.getItem('token');    
+      if (token) {
+        try {
+          await clinicApi.get("/auth/renew", getConfig());
+          console.log(getConfig())
+          console.log("Si se esta ejecutando..."+ JSON.stringify(userStore.user))
+          isAuthenticated.value = !!userStore.user;
+        } catch (error) {
+          // handle authentication error
+          console.log("Aqui ele erro..."+ error)
+        }
+      }
+    });
+
+    return {
+      isAuthenticated,
+      imagenHuellas,
+      imagenLogo,
+      isOnHomePage,
+      isOnDashboardPage,
+      goToHome
+
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
+
+
+.fondo-footer-sessionOn{
+  background-image: url(/src/assets/home_img/footer_logeado.png);
+    height: 308px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: space-evenly;
+    padding: 3em 1em 0em 1em;
+    display: flex;
+    max-width: 100%;
+    color: var(--text-footer);
+    font-family: Jost;
+    font-size: 1.125rem;
+    position: relative;
+    align-items: center;
+  }
+
+.seguinos-sessionOn {
+    width: auto;
+    margin: 0.5rem 0 0 2em;
+    padding-bottom: 8%;
+}
 .container-footer {
   width: 100%;
   background: var(--bg-footer);
@@ -58,7 +127,7 @@ import imagenHuellas from "./../assets/home_img/pawprint 1.png";
   display: inline-flex;
   flex-direction: column;
   justify-self: center;
-
+  height:262px;
   color: var(--text-footer);
   font-family: Jost;
   font-size: 1.125rem;
@@ -71,6 +140,7 @@ import imagenHuellas from "./../assets/home_img/pawprint 1.png";
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor:pointer;
 }
 
 .logo_footer img {
@@ -157,7 +227,6 @@ import imagenHuellas from "./../assets/home_img/pawprint 1.png";
   .logo_footer {
     width: auto;
     height: auto;
-
     margin: 0 3rem 0 2rem;
   }
   .logo_footer img {
