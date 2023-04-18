@@ -4,23 +4,21 @@ import { useUserStore } from "../../store/user";
 import clinicApi from "../../api/clinic-api";
 import { ref, watch } from "vue";
 import { usePetsStore } from "../../store/pets";
+import type { Pet, RespPet } from "../interfaces/pet.interface";
 
-const getPets = async (userId: number) => {
-  const { data } = await clinicApi.get(`/pets/user/${userId}`);
+const getPets = async (userId: number): Promise<Pet[]> => {
+  console.log("----: ", userId);
+  const { data } = await clinicApi.get<RespPet>(`/pets/user/${userId}`);
 
-  console.log(data);
+  return data.pets;
 };
 
-const usePets = () => {
-  const userStore = useUserStore();
-  const { user } = storeToRefs(userStore);
-  console.log(user.value);
-
+const usePets = (userId: number) => {
   const petStore = usePetsStore();
   const { pets } = storeToRefs(petStore);
 
-  const { isLoading, data } = useQuery(["pets-user", user.value?.id], () => {
-    getPets(user.value?.id!);
+  const { isLoading, data } = useQuery(["pets-user", userId], () => {
+    return userId ? getPets(userId) : [];
   });
 
   watch(data, (pets) => {
@@ -30,7 +28,7 @@ const usePets = () => {
   return {
     //propierties
     isLoading,
-    data,
+    pets,
   };
 };
 
