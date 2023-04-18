@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { useLoginStore } from '../../store/auth/login'
+import { useLoginStore } from "../../store/auth/login";
 import LogoImg from "../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png";
 import ServerMessage from "../../auth/components/ServerMessage.vue";
 import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
-import { useUserStore } from "../../store/auth/user";
 import { ref } from "vue";
+import { useUserStore } from "../../store/user";
 
 const store = useUserStore();
 const { user } = storeToRefs(store);
@@ -26,7 +26,6 @@ const hasAppointments = ref(true);
         Próximos turnos
       </span>
       <div class="container-info-inter">
-
         <span class="container-info-appoinment">
         <span v-if="!hasAppointments" class="texto-interno">Todavía no tenés próximos turnos.</span>
         <div class="appoinments">
@@ -53,8 +52,11 @@ const hasAppointments = ref(true);
         <button>Reservar un turno</button>
       </div>
     </div>
-    <ServerMessage :type="'success'" :message="loginStore.serverSuccess ?? undefined" />
 
+    <ServerMessage
+      :type="'success'"
+      :message="loginStore.serverSuccess ?? undefined"
+    />
 
   </div>
 </template>
@@ -202,6 +204,4 @@ height: 405px;
   letter-spacing: 0.05em;
   color: #3a57e8;
 }
-
-
 </style>
