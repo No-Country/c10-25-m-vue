@@ -113,19 +113,19 @@ export default defineComponent({
 <style lang="scss" scoped>
 .fondo-footer-sessionOn {
   background-image: url(/src/assets/home_img/footer_logeado.png);
-  height: 308px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  justify-content: space-evenly;
-  padding: 3em 1em 0em 1em;
-  display: flex;
-  max-width: 100%;
-  color: var(--text-footer);
-  font-family: Jost;
-  font-size: 1.125rem;
-  position: relative;
-  align-items: center;
-}
+    height: 308px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: space-around;
+    padding: 3em 1em 0em 1em;
+    display: flex;
+    max-width: 100%;
+    color: var(--text-footer);
+    font-family: Jost;
+    font-size: 1.125rem;
+    position: relative;
+    align-items: center;
+  }
 
 .seguinos-sessionOn {
   width: auto;
