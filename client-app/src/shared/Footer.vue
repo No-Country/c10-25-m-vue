@@ -104,7 +104,7 @@ export default defineComponent({
     height: 308px;
     background-repeat: no-repeat;
     background-size: cover;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding: 3em 1em 0em 1em;
     display: flex;
     max-width: 100%;
