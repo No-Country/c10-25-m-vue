@@ -4,6 +4,7 @@
     <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
       link.title
     }}</RouterLink>
+    <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
     <div class="btn-container-session">
       <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
       ">
@@ -27,6 +28,8 @@ interface Props {
   links: RouterLink[];
 }
 
+const userid = 2;
+
 const props = withDefaults(defineProps<Props>(), {
   links: () => [],
 });
@@ -44,7 +47,8 @@ const router = useRouter();
   display: inline-flex;
   justify-content: space-evenly;
   align-items: center;
-  background: var(--bg-menu-user);
+  // background: var(--bg-menu-user);
+  background-color: #fffefe;
   z-index: 10;
   position: relative;
   padding-left: 10px;
@@ -101,9 +105,7 @@ a {
   font-size: 24px;
   line-height: 175%;
   /* identical to box height, or 42px */
-
-
-  color: #2E46BA;
+  color: #2e46ba;
 }
 
 .movile-nav {
@@ -148,8 +150,8 @@ a {
 .burger {
   display: none;
 }
+@media (max-width: 930px) {
 
-@media (max-width:930px) {
   .movile-nav {
     width: 100%;
     height: max-content;
@@ -167,19 +169,15 @@ a {
     gap: 30px;
 
   }
-
   .activo {
     display: inline-flex;
   }
-
   .header-container-with-logo-nav-registration {
     height: 80px;
   }
-
   .header-container-with-logo-nav-registration nav {
     display: inline-block;
   }
-
   .header-container-with-logo-nav-registration li {
     padding: 15px;
   }
@@ -197,14 +195,12 @@ a {
     border-radius: 20px;
     padding: 10px;
   }
-
+  
   .btn-container-session .no-backgroundLogin {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
-
   }
-
   .burger {
     background-color: var(--bg-menu-user);
     margin-right: 3rem;
@@ -212,7 +208,5 @@ a {
     z-index: 10;
     cursor: pointer;
   }
-
 }
 </style>
-
