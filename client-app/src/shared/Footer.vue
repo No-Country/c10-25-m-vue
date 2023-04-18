@@ -1,84 +1,99 @@
 <template>
-<footer :style="(!isOnHomePage && isOnDashboardPage) ? 'background:#e5e5e5;' : ''">
-  <div :class="(isAuthenticated && !isOnHomePage) ? 'fondo-footer-sessionOn' : 'container-footer'">
-    <div class="logo_footer" @click="goToHome()">
-      <img :src="imagenLogo" alt="Logo" />
-      <div class="titulo_footer">
-        <h2>Huellitas</h2>
-        <p>Clínica Veterinaria</p>
+  <footer
+    :style="!isOnHomePage && isOnDashboardPage ? 'background:#e5e5e5;' : ''"
+  >
+    <div
+      :class="
+        isAuthenticated && !isOnHomePage
+          ? 'fondo-footer-sessionOn'
+          : 'container-footer'
+      "
+    >
+      <div class="logo_footer" @click="goToHome()">
+        <img :src="imagenLogo" alt="Logo" />
+        <div class="titulo_footer">
+          <h2>Huellitas</h2>
+          <p>Clínica Veterinaria</p>
+        </div>
+      </div>
+      <div class="contacto">
+        <h3>Contacto</h3>
+        <div class="contacto_items">
+          <ul class="">
+            <li>Teléfono</li>
+            <li>Dirección</li>
+            <li>E-mail</li>
+          </ul>
+          <ul class="">
+            <li>+54 9 547896</li>
+            <li>Av. Corrientes 123 - Cordoba, Argentina</li>
+            <li>huellitasveterinaria@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div :class="isAuthenticated ? 'seguinos-sessionOn ' : 'seguinos'">
+        <h3>Seguinos</h3>
+        <ul class="seguinos_items">
+          <li>
+            <a href="#"><img src="./../assets/home_img/001-facebook.png" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="./../assets/home_img/004-instagram.png" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="./../assets/home_img/003-twitter.png" /></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pawprint_footer" v-if="isOnHomePage">
+        <img :src="imagenHuellas" alt="pawprint" id="paw1" />
+        <img :src="imagenHuellas" alt="pawprint" id="paw2" />
+        <img :src="imagenHuellas" alt="pawprint" id="paw3" />
+        <img :src="imagenHuellas" alt="pawprint" id="paw4" />
       </div>
     </div>
-    <div class="contacto">
-      <h3>Contacto</h3>
-      <div class="contacto_items">
-        <ul class="">
-          <li>Teléfono</li>
-          <li>Dirección</li>
-          <li>E-mail</li>
-        </ul>
-        <ul class="">
-          <li>+54 9 547896</li>
-          <li>Av. Corrientes 123 - Cordoba, Argentina</li>
-          <li>huellitasveterinaria@gmail.com</li>
-        </ul>
-      </div>
-    </div>
-    <div :class="isAuthenticated ? 'seguinos-sessionOn ' : 'seguinos'" >
-      <h3>Seguinos</h3>
-      <ul class="seguinos_items">
-        <li>
-          <a href="#"><img src="./../assets/home_img/001-facebook.png" /></a>
-        </li>
-        <li>
-          <a href="#"><img src="./../assets/home_img/004-instagram.png" /></a>
-        </li>
-        <li>
-          <a href="#"><img src="./../assets/home_img/003-twitter.png" /></a>
-        </li>
-      </ul>
-    </div>
- 
-    <div class="pawprint_footer" v-if="(isOnHomePage)">
-      <img :src="imagenHuellas" alt="pawprint" id="paw1" />
-      <img :src="imagenHuellas" alt="pawprint" id="paw2" />
-      <img :src="imagenHuellas" alt="pawprint" id="paw3" />
-      <img :src="imagenHuellas" alt="pawprint" id="paw4" />
-    </div>
-  </div>
-</footer>
+  </footer>
 </template>
 
-<script lang="ts" >
-import { defineComponent, onMounted, ref, computed } from 'vue';
+<script lang="ts">
+import { defineComponent, onMounted, ref, computed } from "vue";
 import imagenLogo from "./../assets/home_img/Veterinaria_logotipo.png";
 import imagenHuellas from "./../assets/home_img/pawprint 1.png";
-import { useUserStore } from './../store/auth/user';
+
 import { useRouter } from "vue-router"; // Importar goToWelcome
 import clinicApi from "../api/clinic-api";
 import getConfig from "../utils/getConfig";
+import { useUserStore } from "../store/user";
 export default defineComponent({
   setup() {
     const router = useRouter();
-    
+
     const userStore = useUserStore();
     let isAuthenticated = ref(false);
-    const isOnHomePage =  computed(() => router.currentRoute.value.name === 'home');
-    const isOnDashboardPage =  computed(() => router.currentRoute.value.name === 'dashboard');
+    const isOnHomePage = computed(
+      () => router.currentRoute.value.name === "home"
+    );
+    const isOnDashboardPage = computed(
+      () => router.currentRoute.value.name === "dashboard"
+    );
     function goToHome() {
       router.push("/");
     }
 
     onMounted(async () => {
-      const token = localStorage.getItem('token');    
+      const token = localStorage.getItem("token");
       if (token) {
         try {
           await clinicApi.get("/auth/renew", getConfig());
-          console.log(getConfig())
-          console.log("Si se esta ejecutando..."+ JSON.stringify(userStore.user))
+          console.log(getConfig());
+          console.log(
+            "Si se esta ejecutando..." + JSON.stringify(userStore.user)
+          );
           isAuthenticated.value = !!userStore.user;
         } catch (error) {
           // handle authentication error
-          console.log("Aqui ele erro..."+ error)
+          console.log("Aqui ele erro..." + error);
         }
       }
     });
@@ -89,17 +104,14 @@ export default defineComponent({
       imagenLogo,
       isOnHomePage,
       isOnDashboardPage,
-      goToHome
-
+      goToHome,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-
-
-.fondo-footer-sessionOn{
+.fondo-footer-sessionOn {
   background-image: url(/src/assets/home_img/footer_logeado.png);
     height: 308px;
     background-repeat: no-repeat;
@@ -116,9 +128,9 @@ export default defineComponent({
   }
 
 .seguinos-sessionOn {
-    width: auto;
-    margin: 0.5rem 0 0 2em;
-    padding-bottom: 8%;
+  width: auto;
+  margin: 0.5rem 0 0 2em;
+  padding-bottom: 8%;
 }
 .container-footer {
   width: 100%;
@@ -127,7 +139,7 @@ export default defineComponent({
   display: inline-flex;
   flex-direction: column;
   justify-self: center;
-  height:262px;
+  height: 262px;
   color: var(--text-footer);
   font-family: Jost;
   font-size: 1.125rem;
@@ -140,7 +152,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .logo_footer img {

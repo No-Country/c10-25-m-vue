@@ -1,6 +1,6 @@
 import { watch } from "vue";
 import { useQuery } from "@tanstack/vue-query";
-import { useUserStore } from "./../store/auth/user";
+import { useUserStore } from "../store/user";
 import clinicApi from "../api/clinic-api";
 import getConfig from "../utils/getConfig";
 import { LoginResp, LoginUser } from "./../user/interfaces/login.interface";
