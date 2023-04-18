@@ -1,32 +1,24 @@
 <template>
- <div class="App">
+  <div class="App">
     <router-view></router-view>
-</div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import useRenew from "./composables/useRenew";
 
-
-export default defineComponent({
-  name: 'MyComponent',
-  components: {
-   
-  },
-  setup() {
-    const message = 'This is my Contenido del component!';
-    return { message };
-  },
-});
+useRenew();
 </script>
 
 <style lang="scss">
-
-
-.App{
+.App {
   text-align: center;
   position: relative;
   width: 100%;
-  height: 100%;        
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
 }
 </style>

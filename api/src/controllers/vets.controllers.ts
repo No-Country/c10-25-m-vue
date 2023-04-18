@@ -13,6 +13,7 @@ export const readVets = catchAsync(
                         name: true,
                         surname: true,
                         email: true,
+                        phone: true,
                         profileImageUrl: true,
                     }
                 }
@@ -29,10 +30,10 @@ export const readVets = catchAsync(
 
 export const createVet = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        const { user_id, speciality, phone } = req.body;
+        const { user_id, speciality } = req.body;
         const vet = await db.vet.create({
             data: {
-                user_id, speciality, phone
+                user_id, speciality
             }
         })
         return res.status(StatusCodes.CREATED).json({
@@ -48,13 +49,13 @@ export const createVet = catchAsync(
 export const updateVet = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
-        const { phone, speciality, user_id } = req.body;
+        const { speciality, user_id } = req.body;
         const vet = await db.vet.update({
             where: {
                 id: Number(id)
             },
             data: {
-                user_id, speciality, phone
+                user_id, speciality
             }
         })
         return res.status(StatusCodes.OK).json({
@@ -99,6 +100,7 @@ export const vetSpeciality = catchAsync(
                         name: true,
                         surname: true,
                         email: true,
+                        phone: true,
                         profileImageUrl: true,
                     }
                 }
@@ -127,6 +129,7 @@ export const findVetById = catchAsync(
                         name: true,
                         surname: true,
                         email: true,
+                        phone: true,
                         profileImageUrl: true,
                     }
                 }

@@ -4,23 +4,30 @@ import { db } from "../database/db.server";
 import AppError from "../utils/appError";
 import catchAsync from "../utils/catchAsync";
 import { capFirst } from "../utils/capitalizateFirst";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import storage from "../utils/firebase";
 import { AnimalRequest } from "../interfaces/animal.interfaces";
-/*TO DO:
- Separar en dos rutas los read animals. 
- Cambiar las respuestas
- Crear rutas separadas para los updates
- Crear referencia para guardado de imagenes
-*/
+
 export const readAnimals = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
 
     const animals = await db.animal.findMany()
+
+    const animalsPromises = animals.map(async(animal) => {
+      const imgRef = ref(storage, animal.image!)
+      const url = await getDownloadURL(imgRef);
+      animal.image = url
+      return animal
+    })
+  
+    const animalsResolve = await Promise.all(animalsPromises)
+  
+
+
     return res.json({
       status: 'success',
       result: animals.length,
-      animals: animals
+      animals: animalsResolve
     })
   }
 )
@@ -28,6 +35,11 @@ export const readAnimals = catchAsync(
 export const readAnimal = catchAsync(
   async (req: AnimalRequest, res: Response, next: NextFunction) => {
     const animal = req.animal
+
+    const imgRef = ref(storage, animal.image)
+    const url = await getDownloadURL(imgRef)
+
+    animal.image = url;
     
     return res.json({
       status: 'success',
@@ -38,7 +50,7 @@ export const readAnimal = catchAsync(
 
 export const createAnimal = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, image } = req.body
+    const { name } = req.body
     const animalName: string = capFirst(name)
 
     const imgRef = ref(
@@ -51,7 +63,7 @@ export const createAnimal = catchAsync(
     const animal = await db.animal.create({
       data: {
         name: animalName,
-        image: image ? imgUploaded.metadata.fullPath : 'https://thenounproject.com/api/private/icons/13643/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0&token=gAAAAABkNqkBGzMVewzcJSGNAxN6luZCpttf2fWwxUfcI-NfqD5v4k5QwxeTYRJsAiW5kzedRmEhyQpFfiUA43636U3VgpFIcA%3D%3D'
+        image: imgUploaded ? imgUploaded.metadata.fullPath : 'animal/1681787945282-Veterinaria_logotipo.png'
       }
     })
     return res.status(StatusCodes.CREATED).json({

@@ -24,6 +24,7 @@ export const createUserValidator = [
     .withMessage('the email is required')
     .isEmail()
     .withMessage('The email must be a correct format'),
+  body('phone').not().isEmpty().withMessage('the phone is required'),
   body('password')
     .isLength({ min: 8, max: 16 })
     .withMessage('Password must be between 8 and 16 characters')
@@ -67,6 +68,7 @@ export const updateUserValidator = [
     .withMessage('the email is required')
     .isEmail()
     .withMessage('The email must be a correct format'),
+  body('phone').not().isEmpty().withMessage('the phone is required'),
   validateFields,
 ];
 
@@ -76,7 +78,6 @@ export const updateUserValidator = [
 export const createVetValidator = [
   body('user_id').not().isEmpty().withMessage('user_id is required').isNumeric().withMessage('Must be a number'),
   body('speciality').not().isEmpty().withMessage('the speciality is required'),
-
   body('phone').not().isEmpty().withMessage('a valid number is required'),
 
   validateFields,
@@ -86,7 +87,7 @@ export const createVetValidator = [
 
 export const updateVetValidator = [
   body('speciality').not().isEmpty().withMessage('the speciality is required'),
-  body('user_id').not().isEmpty().withMessage('user_id is required').isNumeric().withMessage('Must be a number'),
+  body('user_id').not().isEmpty().withMessage('user_id is required'),
   body('phone').not().isEmpty().withMessage('a valid number is required'),
 
   validateFields,

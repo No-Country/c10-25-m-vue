@@ -1,56 +1,40 @@
-  import { createRouter, createWebHistory } from 'vue-router'
-  import homeroutes from '../home/router/index'
-  import authroutes from '../auth/router/router'
-  import DefaultLayout from '../home/layout/DefaultLayout.vue'
-  import DashboardLayout from '../home/layout/DashboardLayout.vue'
-  import Welcome from '../home/pages/Welcome.vue'
-  import UserView from '../user/router/index'
-  import PetsView from '../animal/router/pets'
-  
-  const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-      {
-        path: '/',
-        component: DefaultLayout,
-        children: [
-            ...homeroutes
-        ]
-      },
-      {
-        path: '/',
-        component: DefaultLayout,
-        children: [
-            ...authroutes
-        ]
-      },
-      {
-        path: '/welcome',
-        component: DashboardLayout,
-        children: [
-          {
-            path: '',
-            name: 'Welcome',
-            component: Welcome
-          },
-        ]
-      },
-      {
-        path: '/userview',
-        component: DashboardLayout,
-        children: [
-            ...UserView
-         ]
-      },
-      {
-        path: '/pets',
-        component: DashboardLayout,
-        children: [
-            ...PetsView
-         ]
-      },
-    ]
-  })
+import { userRouter } from "./../user/router/index";
+import { authRouter } from "./../auth/router/router";
+import { petRouter } from "./../pets/router";
+import { createRouter, createWebHistory } from "vue-router";
 
+import Home from "../home/pages/Home.vue";
+import { appointmentRouter } from "../appointment/router";
 
-export default router
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Home,
+    },
+    {
+      ...authRouter,
+      path: "/auth",
+    },
+    {
+      ...userRouter,
+      path: "/user",
+    },
+    {
+      ...petRouter,
+      path: "/pet",
+    },
+    {
+      ...appointmentRouter,
+      path: "/appointment",
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: () => ({ name: "home" }),
+    },
+  ],
+});
+
+export default router;
