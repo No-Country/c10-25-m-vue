@@ -1,23 +1,19 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
     <Logo />
-    <!-- <nav>
-      <ul v-for="(elementosNav, index) in navItems" :key="index">
-        <li>{{ elementosNav }}</li>
-      </ul>
-    </nav> -->
     <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
       link.title
     }}</RouterLink>
     <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
     <div class="btn-container-session">
-      <button
-        :class="
-          !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-        "
-      >
+      <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+      ">
         <img src="./../assets/home_img/A.png" alt="" />
       </button>
+      <span v-if="isLogoutModalOpen" class="logout-btn">
+        <p @click="logout">
+          Cerrar Sesión</p>
+      </span>
     </div>
   </div>
 </template>
@@ -27,7 +23,7 @@ import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 import Logo from "./LogoHeader.vue";
 import type { RouterLink } from "../router/link-routes";
-
+import useLogoutModal from '../auth/composables/useLogoutModal';
 interface Props {
   links: RouterLink[];
 }
@@ -38,8 +34,10 @@ const props = withDefaults(defineProps<Props>(), {
   links: () => [],
 });
 
+const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
+
 </script>
 
 <style lang="scss" scoped>
@@ -57,22 +55,59 @@ const router = useRouter();
   padding: 12px;
 }
 
+.logout-btn {
+  width: 225px;
+  height: 72px;
+  position: absolute;
+  top: 81px;
+  right: -80px;
+  background: #EBF1FA;
+  border: 3px solid #3A57E8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  display: flex;
+
+  p {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
+    justify-content: center;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #383B43;
+    cursor:pointer
+  }
+
+  p:hover{
+    text-decoration: underline;
+  }
+}
+
 .header-container-with-logo-nav-registration .logo {
   margin-left: 15px;
   cursor: pointer;
 }
+
 a {
   text-decoration: none;
   color: inherit;
-  font-family: "Jost";
+  font-family: 'Jost';
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 175%;
   /* identical to box height, or 42px */
-
   color: #2e46ba;
 }
+
 .movile-nav {
   width: 80%;
   display: flex;
@@ -83,6 +118,7 @@ a {
   display: inline-flex;
   gap: 2rem;
 }
+
 .header-container-with-logo-nav-registration nav ul li a {
   color: var(--text-navDashboard);
   gap: 15px;
@@ -97,7 +133,9 @@ a {
   gap: 10px;
   margin-right: 15px;
   font-family: "Jost", sans-serif;
+  position: relative;
 }
+
 .btn-container-session button {
   width: 72px;
   height: 72px;
@@ -108,10 +146,12 @@ a {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
+
 .burger {
   display: none;
 }
 @media (max-width: 930px) {
+
   .movile-nav {
     width: 100%;
     height: max-content;
@@ -127,6 +167,7 @@ a {
     justify-content: center;
     align-content: center;
     gap: 30px;
+
   }
   .activo {
     display: inline-flex;
@@ -140,6 +181,7 @@ a {
   .header-container-with-logo-nav-registration li {
     padding: 15px;
   }
+
   .btn-container-session {
     width: 10rem;
     margin: auto;
@@ -148,10 +190,12 @@ a {
 
     display: inline-block;
   }
+
   .btn-container-session .btn__on-background {
     border-radius: 20px;
     padding: 10px;
   }
+  
   .btn-container-session .no-backgroundLogin {
     padding: 10px;
     border-radius: 20px;

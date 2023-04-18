@@ -12,6 +12,7 @@
           <li><a :href="elementosNav.value">{{ elementosNav.name }}</a></li>
         </ul>
       </nav>
+  
       <div class="btn-container-session">
         <button
           @click="toggleBackground(), goToLogin()"
