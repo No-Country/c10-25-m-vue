@@ -5,6 +5,7 @@ import clinicApi from "../api/clinic-api";
 import getConfig from "../utils/getConfig";
 import { LoginResp, LoginUser } from "./../user/interfaces/login.interface";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
 const getNewToken = async (): Promise<LoginUser> => {
   const { data } = await clinicApi.get<LoginResp>("/auth/renew", getConfig());
@@ -15,10 +16,16 @@ const getNewToken = async (): Promise<LoginUser> => {
 const useRenew = () => {
   const store = useUserStore();
   const { user } = storeToRefs(store);
+  const router = useRouter();
 
-  const { isLoading, data } = useQuery<LoginUser>(["user"], () =>
+  const { isLoading, data, isError } = useQuery<LoginUser>(["user"], () =>
     getNewToken()
   );
+
+  if (isError) {
+    console.log("me ejecute");
+    // router.push("/auth/login");
+  }
 
   watch(data, (user) => {
     if (user)
