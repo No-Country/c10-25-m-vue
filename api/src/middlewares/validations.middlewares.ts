@@ -119,3 +119,15 @@ export const updateAppointmentValidation = [
   validateFields,
 ];
 
+//REVIEW VALIDACIONES
+export const createReviewValidator = [
+  body('comment').notEmpty().withMessage('The comment is required'),
+  body('score').not().isEmpty().withMessage('the comment is required').isNumeric().withMessage("Score must be a number"),
+  validateFields,
+];
+
+export const updateReviewValidator = [
+  body('comment').notEmpty().withMessage('The comment is required'),
+  body('score').not().isEmpty().withMessage('the comment is required').isNumeric().withMessage("Score must be a number"),
+  validateFields,
+];
