@@ -15,13 +15,13 @@ export const routeLink: RouterLink[] = [
     name: "profile",
     title: "Mi Perfil",
   },
+  // {
+  //   path: "/pet/user",
+  //   name: "pets",
+  //   title: "Mis mascotas",
+  // },
   {
-    path: "/pet/user",
-    name: "pets",
-    title: "Mis mascotas",
-  },
-  {
-    path: "/user/my-turns",
+    path: "/appointment/my-turns",
     name: "turns",
     title: "Mis turnos",
   },

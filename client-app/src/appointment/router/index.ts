@@ -5,6 +5,8 @@ import SelectVet from "../pages/SelectVet.vue";
 import SelectDate from "../pages/SelectDate.vue";
 import PetData from "../pages/PetData.vue";
 import Confirmation from "../pages/Confirmation.vue";
+import MyTurns from "../pages/MyTurns.vue";
+import Abstract from "../pages/Abstract.vue";
 
 export const appointmentRouter: RouteRecordRaw = {
   path: "/${}",
@@ -34,7 +36,12 @@ export const appointmentRouter: RouteRecordRaw = {
     {
       path: "/appointment/abstract",
       name: "appointment-abstract",
-      component: Confirmation,
+      component: Abstract,
+    },
+    {
+      path: "/appointment/my-turns",
+      name: "appointment-myturns",
+      component: MyTurns,
     },
   ],
 };

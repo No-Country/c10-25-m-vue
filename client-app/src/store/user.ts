@@ -12,7 +12,7 @@ export const useUserStore = defineStore("user", () => {
   return {
     //State propiertes
     user,
-    
+
     setUser(userData: User) {
       user.value = userData;
     },
