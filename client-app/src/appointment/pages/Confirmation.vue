@@ -3,10 +3,10 @@
 <template>
   <div class="confirmation">
   <div class="bg_turnos">
-    <img src="../../assets/appointment_img/dog-turnos.png" alt="perrito con computadora">
+    <img src="../../assets/appointment_img_png/dog-turnos.png" alt="perrito con computadora">
   </div>
     <div class="bloque_confirmation">
-      <img src="../../assets/appointment_img/tilde-confirmation.png" alt="tilde verificado">
+      <img src="../../assets/appointment_img_png/tilde-confirmation.png" alt="tilde verificado">
       <h2>¡Turno confirmado!</h2>
       <p>Te enviamos un email con los detalles de tu turno</p>
       <button>Ver en Mis turnos</button>
@@ -23,19 +23,17 @@
   font-family: 'Jost';
   font-size: 1.375rem;
   font-weight: 500;
-
-  background-color: var(--bg-menu-user);
   
 }
 .bg_turnos{
   height: 133px;
-  background-image: url(../../assets/appointment_img/bg-turnos.png);
+  background-image: url(../../assets/appointment_img_png/bg-turnos.png);
   background-repeat: no-repeat;
   background-size: cover;
 
 }
 .bg_turnos img{
-  margin-top: -1.6rem;
+  margin-top: -2.4rem;
 }
 
 .bloque_confirmation{

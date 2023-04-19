@@ -1,9 +1,9 @@
 <template>
   <div class="abstract">
-    <img class="pawprint" src="../../assets/home_img/Veterinaria_logotipo.png" alt="">
+    <img class="pawprint" src="../../assets/home_img/Veterinaria_logotipo.png" alt="logo">
     <div class="bg_portada">
       <h2>Mis turnos</h2>
-      <img class="dog" src="../../assets/appointment_img/dog-turnos.png" alt="">
+      <img class="dog" src="../../assets/appointment_img_png/dog-turnos.png" alt="perro con computadora">
     </div>
     <div class="pawprint_bg">
       <img :src="Huellas" alt="huellas">
@@ -14,21 +14,21 @@
         <div class="datos">
           <ul class="fecha">
             <li>
-              <img src="../../assets/appointment_img/calendar-ico.png" alt="calendario">
+              <img src="../../assets/appoinment_img/calender.svg" alt="calendario">
               <p>18/04/2023</p>
             </li>
             <li>
-              <img src="../../assets/appointment_img/reloj-ico.png" alt="reloj">
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj">
               <p>10:00</p>
             </li>
           </ul>
           <ul class="vet">
             <li>
-              <img src="../../assets/appointment_img/vet-ico.png" alt="veterinario">
+              <img src="../../assets/appoinment_img/female.svg" alt="veterinario">
               <p>Moreira, Valentina - cardiólogia</p>
             </li>
             <li>
-              <img src="../../assets/appointment_img/perrito-ico.png" alt="perro">
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro">
               <p>Terry</p>
             </li>
           </ul>
@@ -65,7 +65,6 @@ return {
   Huellas,
 };
 
-
   },
 }
 </script>
@@ -74,7 +73,7 @@ return {
 .abstract{
   height: 100%;
   color: var(--text-footer);
-  background-color: var(--bg-menu-user);
+  background-color: var(--color-bg);
   font-family: Jost;
   font-size:1rem ;
   font-weight: 500;
@@ -88,7 +87,7 @@ return {
 }
 .bg_portada{
   width: 100%;
-  background-image: url(../../assets/appointment_img/bg-mis-turnos.png);
+  background-image: url(../../assets/appointment_img_png/bg-mis-turnos.png);
   background-repeat: no-repeat;
   background-size: cover;
   
@@ -107,7 +106,7 @@ return {
   font-weight: 700;
 }
 .dog{
-  margin-bottom: -0.838rem;
+  margin-bottom: -1.3rem;
 }
 .detalle{
   width: 80%;
@@ -132,14 +131,14 @@ return {
 }
 .bloque_detalle{
   width: 45%;
+  margin: 2rem 0 2rem 0 ;
   background-color:var(--bg-header) ;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 15px;
-  margin: 2rem 0 2rem ;
 }
 .datos{
-  margin:2rem 2rem 1rem 2rem;
+  margin:3rem 2rem 1rem 2rem;
   display: inline-flex;
   flex-direction: column;
   justify-content: left;
@@ -172,6 +171,7 @@ return {
 }
 .btns{
   width: 100%;
+  margin-bottom: 1.5rem;
   display: inline-flex;
   justify-content: right;
   align-content:right;
