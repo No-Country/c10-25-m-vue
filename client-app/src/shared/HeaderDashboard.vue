@@ -6,13 +6,16 @@
     }}</RouterLink>
     <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
     <div class="btn-container-session">
-      <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-      ">
+      <button
+        @click="toggleLogoutModal"
+        :class="
+          !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+        "
+      >
         <img src="./../assets/home_img/A.png" alt="" />
       </button>
       <span v-if="isLogoutModalOpen" class="logout-btn">
-        <p @click="logout">
-          Cerrar Sesión</p>
+        <p @click="logout">Cerrar Sesión</p>
       </span>
     </div>
   </div>
@@ -23,10 +26,13 @@ import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 import Logo from "./LogoHeader.vue";
 import type { RouterLink } from "../router/link-routes";
-import useLogoutModal from '../auth/composables/useLogoutModal';
+import useLogoutModal from "../auth/composables/useLogoutModal";
+import useRenew from "../composables/useRenew";
 interface Props {
   links: RouterLink[];
 }
+
+useRenew();
 
 const userid = 2;
 
@@ -37,7 +43,6 @@ const props = withDefaults(defineProps<Props>(), {
 const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
-
 </script>
 
 <style lang="scss" scoped>
@@ -61,14 +66,14 @@ const router = useRouter();
   position: absolute;
   top: 81px;
   right: -80px;
-  background: #EBF1FA;
-  border: 3px solid #3A57E8;
+  background: #ebf1fa;
+  border: 3px solid #3a57e8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   display: flex;
 
   p {
-    font-family: 'Jost';
+    font-family: "Jost";
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -82,11 +87,11 @@ const router = useRouter();
     width: 100%;
     background: none;
     border: none;
-    color: #383B43;
-    cursor:pointer
+    color: #383b43;
+    cursor: pointer;
   }
 
-  p:hover{
+  p:hover {
     text-decoration: underline;
   }
 }
@@ -99,7 +104,7 @@ const router = useRouter();
 a {
   text-decoration: none;
   color: inherit;
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -151,7 +156,6 @@ a {
   display: none;
 }
 @media (max-width: 930px) {
-
   .movile-nav {
     width: 100%;
     height: max-content;
@@ -167,7 +171,6 @@ a {
     justify-content: center;
     align-content: center;
     gap: 30px;
-
   }
   .activo {
     display: inline-flex;
@@ -195,7 +198,7 @@ a {
     border-radius: 20px;
     padding: 10px;
   }
-  
+
   .btn-container-session .no-backgroundLogin {
     padding: 10px;
     border-radius: 20px;
