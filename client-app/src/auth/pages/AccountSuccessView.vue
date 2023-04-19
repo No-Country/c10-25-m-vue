@@ -61,6 +61,36 @@ form button:hover {
   justify-content: center;
 }
 
+@media (min-width: 800px) {
+  .login-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+.login-image {
+  display: flex;
+  justify-content: center;
+}
+
+}
+
+// mobile
+@media (max-width: 800px) {
+  .login-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+  }
+
+  .login-image {
+ display: none;
+ 
+}
+}
+
+
 .container_btn {
   display: flex;
   justify-content: center;
@@ -93,11 +123,6 @@ form button:hover {
   color: #383b43;
 }
 
-.login-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-}
 
 .form-group {
   display: grid;
@@ -108,8 +133,5 @@ form button:hover {
   padding-top: 15px;
 }
 
-.login-image {
-  display: flex;
-  justify-content: center;
-}
+
 </style>

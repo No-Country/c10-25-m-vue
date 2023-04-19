@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/vue-query";
 import clinicApi from "../../api/clinic-api";
 import type { User, UserRes } from "./../interfaces/user.interface";
 import { ref, computed, watch } from "vue";
-import { useUserStore } from "../../store/auth/user";
+import { useUserStore } from "../../store/user";
 import getConfig from "../../utils/getConfig";
 
 const getUser = async (id: number): Promise<User> => {
