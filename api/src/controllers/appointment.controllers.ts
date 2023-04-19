@@ -2,8 +2,8 @@ import { StatusCodes } from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 import catchAsync from '../utils/catchAsync';
 import { db } from '../database/db.server';
-import { ApRequest } from '../interfaces/user.interfaces';
-import { async } from '@firebase/util';
+import { ApRequest, URequest } from '../interfaces/user.interfaces';
+import { AppointmentStatus } from '@prisma/client';
 
 /* This code exports a function named `findAllAppointment` which is an asynchronous function that
 retrieves all appointments with a status of "pending" from the database using the
@@ -28,6 +28,81 @@ export const findAllAppointment = catchAsync(
     });
   },
 );
+
+/*  */
+export const getMyAppointments = catchAsync(
+  async (req: URequest, res: Response, next: NextFunction) => {
+    const status = req.query.status
+    const { sessionUser } = req
+    if (!status) {
+      const appointments = await db.user.findUnique({
+        where: {
+          id: sessionUser.id
+        },
+        select: {
+          Pet: {
+            select: {
+              Appointment: {
+                select: {
+                  id: true,
+                  date: true,
+                  reason: true,
+                  vet: true,
+                  status: true
+                }
+              },
+              animal: {
+                select: {
+                  id: true,
+                  name: true,
+                  image: true
+                }
+              }
+            }
+          }
+        }
+      })
+      return res.status(StatusCodes.OK).json({
+        status: 'success',
+        appointments: appointments
+      })
+    }
+
+    const appointments = await db.user.findUnique({
+      where: {
+        id: sessionUser.id
+      },
+      select: {
+        Pet: {
+          select: {
+            Appointment: {
+              where: {
+                status: status
+              },
+              select: {
+                id: true,
+                date: true,
+                reason: true,
+                vet: true,
+                pet: {
+                  select: {
+                    animal: true
+                  }
+                }
+
+              }
+            }
+          }
+        }
+      }
+    })
+
+    return res.status(StatusCodes.OK).json({
+    status : 'success',
+    appointments:appointments
+    })
+  }
+)
 
 /* This code exports a function named `findOneAppointment` which is an asynchronous function that
 retrieves a single appointment from the database using the `req.appointment` property. It then sends

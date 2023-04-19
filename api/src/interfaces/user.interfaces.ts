@@ -1,3 +1,4 @@
+import { AppointmentStatus } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 
 export interface UserRespPrisma {
@@ -22,6 +23,9 @@ export interface User {
 export interface URequest extends Request {
   user?: any;
   sessionUser?: any;
+  query:{
+    status: AppointmentStatus
+  }
 }
 
 export interface ApRequest extends URequest {
