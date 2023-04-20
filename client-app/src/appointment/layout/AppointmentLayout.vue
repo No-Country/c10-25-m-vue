@@ -1,5 +1,5 @@
 <template>
-  <div class="container-appointment">
+  <div class="">
     <header>
       <!-- header contentsp goes here -->
       <HeaderDashboard :links="routeLink" />
@@ -9,7 +9,7 @@
     </main>
     <footer>
       <!-- footer content goes here -->
-      <Footer />
+      <!-- <Footer /> -->
     </footer>
   </div>
 </template>
