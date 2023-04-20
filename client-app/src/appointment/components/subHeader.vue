@@ -17,10 +17,10 @@
 
 <script setup lang="ts">
   import Huellas from "../../assets/appoinment_img/huellas_appointment.png"
-  </script>
+  
+</script>
 
 <style scoped lang="scss">
-
 $primary-color: #3A57E8;
 $secondary-color: #EBF1FA;
 $font-family: 'Jost';
