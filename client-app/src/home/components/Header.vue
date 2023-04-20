@@ -31,7 +31,7 @@
     </div>
     <div class="burger">
       <button @click="movileNavActivo=!movileNavActivo">
-        <img src="../../assets/home_img/menu_icon.png" alt="menu hamburguesa">
+        <img src="../../assets/home_img/menu_icon.svg" alt="menu hamburguesa">
       </button>  
     </div>
   </div>
@@ -121,9 +121,9 @@ let movileNavActivo = false
   cursor: pointer;
 }
 .movile-nav{
-  width: 80%;
+  width: 100%;
   display: inline-flex;
-  justify-content:space-evenly;
+  justify-content:space-between;
   align-content: center;
   align-items: center;
 
@@ -289,10 +289,15 @@ let movileNavActivo = false
   .movile-nav{
     position: absolute;
     right: 5%;
+    top:-220px;
   }
   .burger{
     position: absolute;
     right: 5%;
+
+    button {
+      background:none;
+    }
   }
   
 }
