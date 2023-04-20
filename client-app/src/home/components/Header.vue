@@ -1,12 +1,13 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
-    <img
+ 
+    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+      <img
       @click="goToHome()"
       src="../../assets/home_img/logo_huellitas.png"
       alt=""
       class="logo"
     />
-    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
       <nav>
         <ul v-for="(elementosNav, index) in navItems" :key="index">
           <li><a :href="elementosNav.value">{{ elementosNav.name }}</a></li>

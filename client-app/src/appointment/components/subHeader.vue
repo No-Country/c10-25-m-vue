@@ -78,4 +78,8 @@ $font-family: 'Jost';
      font-weight:700; 
    }
 }
+
+.dog {
+   margin-top:-1.9375rem; 
+}
 </style>

@@ -3,9 +3,9 @@
     <SubHeader/>
     <ReservationFlow>
               <div class="container-header">
-                <div class="header">
-                  Seleccionar profesionales
-                </div>
+                  <div class="header">
+                    Seleccionar profesionales
+                  </div>
             <SearchVets/>
               </div>
               <ul class="professionals-list">
@@ -90,6 +90,7 @@ $font-family: 'Jost';
       align-items: center;
       align-content: center;
       padding-left:9px;
+      gap:10px;
       &:hover {
          cursor:pointer; 
          background:#B6C2FF; 
@@ -99,7 +100,7 @@ $font-family: 'Jost';
        display:flex; 
        align-items:center; 
        padding-left:7px;
-
+      
       
      }
 

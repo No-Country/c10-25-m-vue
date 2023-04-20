@@ -137,9 +137,7 @@ $font-family: 'Jost';
 
 
 
-.dog {
-   margin-top:-1.9375rem; 
-}
+
 
 .detalle {
    width:80%; 
