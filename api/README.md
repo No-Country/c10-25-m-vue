@@ -6,12 +6,12 @@ Este backend pertenece al proyecto _Huellitas Clínica Veterinaria_
 
 >Indice
 >-  [Tecnologías](#las-tecnologías-utilizadas-son-las-siguientes)
->- [Backend Local]()
->   - [Requisitos ]()
->   - [Preparación]()
->       - [Variables de Entorno]()
->   - [Scripts]()
->- [Desarrolladores]()
+>- [Backend Local](#desplegar-backend-a-nivel-local)
+>   - [Requisitos ](#requisitos-del-proyecto)
+>   - [Preparación](#preparación)
+>       - [Variables de Entorno](#variables-de-entorno)
+>   - [Scripts](#scripts-del-proyecto)
+>- [Desarrolladores](#desarolladores-del-backend)
 
 ### Las tecnologías utilizadas son las siguientes:
 
@@ -39,6 +39,7 @@ Luego de estar seguro y tener instalados los requisitos necesarios para correr e
 >3. Deberás crear una nueva base de datos en tu PostgreSQL. Conserva el nombre, lo necesitaras para las variables de entorno.
 >4. Definir las varialbes de entorno para que funcione el proyecto. Las variables de entorno son las siguientes: 
 >
+> ### Variables de Entorno
 >```js
 >PORT = 3001
 >
@@ -60,17 +61,46 @@ Luego de estar seguro y tener instalados los requisitos necesarios para correr e
 >FIREBASE_STORAGE=//el storage de tú proyecto de firebase
 >FIREBASE_API_ID=//La api_id de tú proyecto de firebase
 >```
->> _Cabe aclarar que no debes poner ningun nombre de las variables a de como están escritas. Sino, el proyecto no funcionará._
+>> _Cabe aclarar que no debes poner ningun nombre de las variables de forma diferente a de como están escritas. Sino, el proyecto no funcionará._
 >
 >
 >5. Ejecutar los sigueintes comandos desde la consola, estando colocado en api.
 >
 >```bash
-># Para instalar las dependencias del proyecto
->npm i
->npm run prisma:gen
->npm run primsa:push
+> # Para instalar las dependencias del proyecto
+> npm i
+> # Generará las tablas y conectará las tablas con tu base de datos
+> npm run prisma:gen
+> npm run primsa:push
+> # Opcional: Llenará tu base de datos con un mockup
+> npx prisma db seed
 >```
 
+### Scripts del proyecto
 
-> .env example
+El proyecto posee unos scripts para ejecutar con npm que harán diferentes cosas.
+
+```bash
+npm run start:dev 
+# Ejecutara nodemon sobre index.js. levantará el proyecto en forma developer
+
+npm run start:prod 
+# Levantará el servidor como producción, cambiando variables y generando coneccíon y tablas con la base de datos.
+
+npm run lint 
+# Ejecutará Eslint para corroborar que se siga una estructura
+
+npm run lint:fix 
+# Correjira con eslint la estructura construida para aquellos errores modificables que no alteran el funcionamiento
+
+npm run prisma:gen 
+# Conectará y generará la información necesaria para conectarse con al base de datos
+
+npm run prisma:push 
+# Subirá los esquemas del proyecto creando tablas en la base de datos.
+```
+
+## Desarolladores del backend:
+- Luis Miguel Avedaño
+- Gabriel Isaac Jalil
+- Juan Pablo Morales
