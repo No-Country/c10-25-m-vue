@@ -1,20 +1,16 @@
 <template>
   <div class="abstract">
-    <img
-      class="pawprint"
-      src="../../assets/home_img/Veterinaria_logotipo.png"
-      alt="logo"
-    />
-    <div class="bg_portada">
-      <h2>Mis turnos</h2>
-      <img
-        class="dog"
-        src="../../assets/appointment_img_png/dog-turnos.png"
-        alt="perro con computadora"
+    <HeroAppointment />
+    <div class="detalle" v-if="confirmedAppointments.length > 0">
+      <h3>Turnos Pendientes</h3>
+      <MyTurnCard
+        v-for="appointment of confirmedAppointments"
+        :appointment="appointment"
+        :key="appointment.id"
       />
     </div>
-    <div class="pawprint_bg">
-      <img :src="Huellas" alt="huellas" />
+    <div class="detalle" v-else>
+      <h3>No tienes turnos pendientes</h3>
     </div>
     <div class="detalle">
       <h3>Turnos confirmados</h3>
@@ -161,19 +157,73 @@
           <button class="btn_cancelar">Cancelar</button>
         </div>
       </div>
--->
+      -->
 
       <h3>Turnos cancelados</h3>
+    <div class="detalle" v-if="cancelledAppointments.length > 0">
+      <h3>Turno cancelados</h3>
+      <MyTurnCard
+        v-for="appointment of cancelledAppointments"
+        :appointment="appointment"
+        :key="appointment.id"
+      />
     </div>
-    <div class="otros_turnos">
-      <p>Todavía no tenés turnos cancelados.</p>
+    <div class="otros_turnos" v-else>
+      <p>Todavía no tienes turnos cancelados</p>
     </div>
+    <div class="detalle" v-if="completedAppointments.length > 0">
+      <h3>Turno Realizados</h3>
+      <MyTurnCard
+        v-for="appointment of completedAppointments"
+        :appointment="appointment"
+        :key="appointment.id"
+      />
+    </div>
+    <div class="otros_turnos" v-else>
+      <p>Todavía no tienes turnos cancelados</p>
+    </div>
+  </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Huellas from "../../assets/user_img/bg-pawprint.png";
+import MyTurnCard from "../components/MyTurnCard.vue";
+import HeroAppointment from "../components/HeroAppointment.vue";
+import useAppointments from "../composables/useAppointments";
+import { computed } from "@vue/reactivity";
+
+const { appointments } = useAppointments("pending");
+
+// Filtra los turnos confirmados
+const confirmedAppointments = computed(() => {
+  if (!appointments.value) {
+    return [];
+  }
+  return appointments.value.filter(
+    (appointment) => appointment.status === "pending"
+  );
+});
+
+const cancelledAppointments = computed(() => {
+  if (!appointments.value) {
+    return [];
+  }
+  return appointments.value.filter(
+    (appointment) => appointment.status === "cancelled"
+  );
+});
+
+const completedAppointments = computed(() => {
+  if (!appointments.value) {
+    return [];
+  }
+  return appointments.value.filter(
+    (appointment) => appointment.status === "completed"
+  );
+});
 </script>
+
+datos fecha vet btns btn_reprogramar btn_cancelar
 
 <style scoped>
 .abstract {

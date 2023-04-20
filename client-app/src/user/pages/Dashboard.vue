@@ -25,7 +25,8 @@ const hasAppointments = ref(true);
       <div class="container-info-inter">
         <span class="container-info-appoinment">
           <span v-if="!hasAppointments" class="texto-interno"
-            >Todavía no tenés próximos turnos.</span>
+            >Todavía no tenés próximos turnos.</span
+          >
           <div class="appoinments">
             <div class="time-appoinment">
               <span>
@@ -46,22 +47,25 @@ const hasAppointments = ref(true);
             <div class="pets-icon">
               <span>
                 <img src="../../assets/appoinment_img/pets.svg" alt="" />
-                Terry</span>
+                Terry</span
+              >
             </div>
           </div>
           <div class="locations">
             <span>
-              <img src="../../assets/appoinment_img/female.svg" alt="">
-              Moreira, Valentina - Cardióloga</span>
+              <img src="../../assets/appoinment_img/female.svg" alt="" />
+              Moreira, Valentina - Cardióloga</span
+            >
           </div>
           <div class="pets-icon">
             <span>
-              <img src="../../assets/appoinment_img/pets.svg" alt="">
-              Terry</span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="" />
+              Terry</span
+            >
           </div>
         </span>
 
-<!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
+        <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
 
         <div class="appoinments">
           <div class="time-appoinment">
@@ -197,6 +201,10 @@ const hasAppointments = ref(true);
 
       -->
         <button>Reservar un turno</button>
+
+        <div class="pawprint_user">
+          <img src="../../assets/user_img/bg-pawprint.png" alt="huellas" />
+        </div>
       </div>
     </div>
 
@@ -207,6 +215,12 @@ const hasAppointments = ref(true);
   </div>
 </template>
 <style lang="scss" scoped>
+.pawprint_user {
+  position: absolute;
+  top: -17%;
+  right: 9%;
+}
+
 .time-appoinment {
   display: inline-flex;
   gap: 10px;
@@ -235,31 +249,30 @@ const hasAppointments = ref(true);
     gap: 8px;
   }
 }
-.appoinments{
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    width: 300px;
-    height: auto;
-    padding: 16px 27px;
-    gap: 19px;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Jost';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 175%;
-    color: #383B43;
+.appoinments {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 300px;
+  height: auto;
+  padding: 16px 27px;
+  gap: 19px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 175%;
+  color: #383b43;
 }
 
-.container-info-appoinment{
-  width:100%;
+.container-info-appoinment {
+  width: 100%;
   padding: 0 5% 0 5%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  
 }
 .welcome-container {
   background-color: #fffefe;
@@ -340,8 +353,8 @@ const hasAppointments = ref(true);
 }
 
 .container-welcome-reservas {
-  background-color: #fffefe;
-  height: 405px;
+  background: #fffefe;
+  height: 515px;
 }
 .container-welcome--perfil h1 {
   font-family: "Jost";
@@ -354,12 +367,12 @@ const hasAppointments = ref(true);
   color: #3a57e8;
 }
 @media (max-width: 1040px) {
-  .container-info-appoinment{
+  .container-info-appoinment {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 700px) {
-  .container-info-appoinment{
+  .container-info-appoinment {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
@@ -367,8 +380,8 @@ const hasAppointments = ref(true);
     align-items: center;
   }
 }
-@media (min-width:1444px) {
-  .container-info-appoinment{
+@media (min-width: 1444px) {
+  .container-info-appoinment {
     grid-template-columns: repeat(4, 1fr);
   }
 }

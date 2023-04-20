@@ -5,10 +5,14 @@ import clinicApi from "../../api/clinic-api";
 import { ref, watch } from "vue";
 import { usePetsStore } from "../../store/pets";
 import type { Pet, RespPet } from "../interfaces/pet.interface";
+import getConfig from "../../utils/getConfig";
 
 const getPets = async (userId: number): Promise<Pet[]> => {
   console.log("----: ", userId);
-  const { data } = await clinicApi.get<RespPet>(`/pets/user/${userId}`);
+  const { data } = await clinicApi.get<RespPet>(
+    `/pets/user/${userId}`,
+    getConfig()
+  );
 
   return data.pets;
 };

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <header>
       <!-- header contentsp goes here -->
       <HeaderDashboard :links="routeLink" />
@@ -19,3 +19,11 @@ import Footer from "../../shared/Footer.vue";
 import HeaderDashboard from "../../shared/HeaderDashboard.vue";
 import { routeLink } from "../../router/link-routes";
 </script>
+<style lang="scss" scoped>
+.container-appointment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+</style>
