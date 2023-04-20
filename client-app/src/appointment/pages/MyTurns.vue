@@ -52,6 +52,117 @@
           <button class="btn_cancelar">Cancelar</button>
         </div>
       </div>
+
+      <!-- !agregando turnos, hay 2 lineas vacias por bloque
+
+      <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+                src="../../assets/appoinment_img/calender.svg"
+                alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+                src="../../assets/appoinment_img/female.svg"
+                alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div>
+      </div>
+
+
+      <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+                src="../../assets/appoinment_img/calender.svg"
+                alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+                src="../../assets/appoinment_img/female.svg"
+                alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div>
+      </div>
+
+
+      <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+                src="../../assets/appoinment_img/calender.svg"
+                alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+                src="../../assets/appoinment_img/female.svg"
+                alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div>
+      </div>
+-->
+
       <h3>Turnos cancelados</h3>
     </div>
     <div class="otros_turnos">
@@ -104,8 +215,11 @@ import Huellas from "../../assets/user_img/bg-pawprint.png";
 }
 .detalle {
   width: 80%;
-  margin: 2rem 0 1rem 0;
-  display: inline-block;
+  margin: 2rem 5rem 1rem 8rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 .pawprint_bg {
   position: relative;
@@ -121,14 +235,19 @@ import Huellas from "../../assets/user_img/bg-pawprint.png";
   text-align: left;
   font-size: 1.5rem;
   font-weight: 700;
+
+  grid-column: span 3;
 }
 .bloque_detalle {
-  width: 45%;
+  width: min-max(300px, 45%);
+  
   margin: 2rem 0 2rem 0;
+
   background-color: var(--bg-header);
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 15px;
+
 }
 .datos {
   margin: 3rem 2rem 1rem 2rem;
@@ -196,4 +315,45 @@ import Huellas from "../../assets/user_img/bg-pawprint.png";
   margin: 1rem;
   font-size: 1.25rem;
 }
+@media (max-width: 1243px) {
+  .detalle {
+    margin: 2rem 5rem 1rem 5rem;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .detalle h3{
+    grid-column: span 2;
+  }
+  
+}
+@media (max-width: 865px) {
+  .bloque_detalle{
+    margin: 1rem 0 1rem 0;
+  }
+  
+  .detalle {
+    margin: 2rem 5rem 1rem 4rem;
+    grid-template-columns: repeat(1, 1fr);
+
+  }
+  .detalle h3{
+    grid-column: span 1;
+    
+  }
+  
+}
+@media (max-width: 445px) {
+  .detalle{
+    margin: 2rem 1rem 1rem 1rem;
+    
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  
+}
+  
+
 </style>
