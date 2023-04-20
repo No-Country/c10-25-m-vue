@@ -1,34 +1,27 @@
 <template>
-  <div class="abstract">
-    <HeroAppointment />
-    <div class="detalle">
-      <h3>Turnos confirmados</h3>
-      <MyTurnCard />
-      <h3>Turnos cancelados</h3>
-    </div>
-    <div class="otros_turnos">
-      <p>Todavía no tenés turnos cancelados.</p>
-    </div>
+  <img
+    class="pawprint"
+    src="../../assets/home_img/Veterinaria_logotipo.png"
+    alt="logo"
+  />
+  <div class="bg_portada">
+    <h2>Mis turnos</h2>
+    <img
+      class="dog"
+      src="../../assets/appointment_img_png/dog-turnos.png"
+      alt="perro con computadora"
+    />
+  </div>
+  <div class="pawprint_bg">
+    <img :src="Huellas" alt="huellas" />
   </div>
 </template>
 
-<script lang="ts" setup>
-import MyTurnCard from "../components/MyTurnCard.vue";
-import HeroAppointment from "../components/HeroAppointment.vue";
+<script setup lang="ts">
+import Huellas from "../../assets/user_img/bg-pawprint.png";
 </script>
 
-datos fecha vet btns btn_reprogramar btn_cancelar
-
 <style scoped>
-.abstract {
-  height: 100%;
-  color: var(--text-footer);
-  background-color: var(--color-bg);
-  font-family: Jost;
-  font-size: 1rem;
-  font-weight: 500;
-  overflow: hidden;
-}
 .pawprint {
   width: 7%;
   margin-top: 1rem;
@@ -69,13 +62,6 @@ datos fecha vet btns btn_reprogramar btn_cancelar
   position: absolute;
   top: 5rem;
   right: 10%;
-}
-.detalle h3 {
-  color: var(--bg-btn);
-
-  text-align: left;
-  font-size: 1.5rem;
-  font-weight: 700;
 }
 .otros_turnos {
   height: 10rem;
