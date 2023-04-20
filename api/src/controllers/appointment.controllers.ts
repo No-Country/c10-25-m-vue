@@ -32,77 +32,45 @@ export const findAllAppointment = catchAsync(
 /*  */
 export const getMyAppointments = catchAsync(
   async (req: URequest, res: Response, next: NextFunction) => {
-    const status = req.query.status
-    const { sessionUser } = req
-    if (!status) {
-      const appointments = await db.user.findUnique({
-        where: {
-          id: sessionUser.id
-        },
-        select: {
-          Pet: {
-            select: {
-              Appointment: {
-                select: {
-                  id: true,
-                  date: true,
-                  reason: true,
-                  vet: true,
-                  status: true
-                }
-              },
-              animal: {
-                select: {
-                  id: true,
-                  name: true,
-                  image: true
-                }
-              }
-            }
-          }
-        }
-      })
-      return res.status(StatusCodes.OK).json({
-        status: 'success',
-        appointments: appointments
-      })
-    }
+    const { status } = req.query;
+    const { sessionUser } = req;
 
-    const appointments = await db.user.findUnique({
+    const statusList: AppointmentStatus[] = [
+      'pending',
+      'completed',
+      'cancelled',
+    ];
+
+    const appointments = await db.appointment.findMany({
       where: {
-        id: sessionUser.id
+        pet: {
+          user_id: sessionUser.id,
+        },
+        status: status ? status : { in: statusList },
       },
-      select: {
-        Pet: {
-          select: {
-            Appointment: {
-              where: {
-                status: status
-              },
+      include: {
+        pet: true,
+        vet: {
+          include: {
+            user: {
               select: {
-                id: true,
-                date: true,
-                reason: true,
-                vet: true,
-                pet: {
-                  select: {
-                    animal: true
-                  }
-                }
-
-              }
-            }
-          }
-        }
-      }
-    })
+                name: true,
+                surname: true,
+                email: true,
+                phone: true,
+              },
+            },
+          },
+        },
+      },
+    });
 
     return res.status(StatusCodes.OK).json({
-    status : 'success',
-    appointments:appointments
-    })
-  }
-)
+      status: 'success',
+      appointments: appointments,
+    });
+  },
+);
 
 /* This code exports a function named `findOneAppointment` which is an asynchronous function that
 retrieves a single appointment from the database using the `req.appointment` property. It then sends
