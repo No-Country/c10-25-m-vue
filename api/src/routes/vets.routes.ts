@@ -1,9 +1,12 @@
 import { Router } from "express";
 import { createVet, deleteVet, findVetById, readVets, updateVet, vetSpeciality } from "../controllers/vets.controllers";
 import { createVetValidator, updateVetValidator } from "../middlewares/validations.middlewares";
+import { protect } from "../middlewares/auth.middlewares";
 
 
 const router = Router();
+
+router.use(protect);
 
 router.get("/", readVets);
 

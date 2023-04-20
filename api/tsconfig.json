@@ -4,7 +4,6 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "noImplicitAny": false,
-    "ignoreDeprecations": "5.0",
     "suppressImplicitAnyIndexErrors": true,
     "target": "ES5",
     "strict": true,
