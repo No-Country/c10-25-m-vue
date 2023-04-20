@@ -44,10 +44,7 @@ router
 
 router
   .route('/myAppointments')
-  .get(
-    protect,
-    getMyAppointments
-    )
+  .get(getMyAppointments)
 
   router
     .route('/:id')
