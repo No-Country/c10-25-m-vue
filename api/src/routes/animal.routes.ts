@@ -3,8 +3,11 @@ import { createAnimal, deleteAnimals, readAnimal, readAnimals, updateAnimals } f
 import { createAnimalValidator, validIfExistAnimalByName, validIfExistAnimalById, updateAnimalValidator } from "../middlewares/animal.middlewares";
 import upload from "../utils/multer";
 import { isParamsIdANumber } from "../utils/isParamsIdANumber";
+import { protect } from "../middlewares/auth.middlewares";
 
 const router = Router()
+
+router.use(protect);
 
 router
   .route('/')

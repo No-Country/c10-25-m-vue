@@ -4,9 +4,11 @@ import { validIfExistUserById } from '../middlewares/user.middlewares'
 import { createNewPet, deletePet, getAllPets, getPetById, getUserPetsByUser, updateMyPet, updatePetImage, updatePetName, updatePetStatus } from '../controllers/pet.controllers'
 import upload from '../utils/multer'
 import { createPetValidator, validPetExistenceById } from '../middlewares/pet.middlewares'
-import { restrictTo } from '../middlewares/auth.middlewares'
+import { protect, restrictTo } from '../middlewares/auth.middlewares'
 
 const router = Router()
+
+router.use(protect);
 
 router
   .route('/')
