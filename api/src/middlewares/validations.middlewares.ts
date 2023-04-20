@@ -76,8 +76,10 @@ export const updateUserValidator = [
 //CreateVetValidator
 
 export const createVetValidator = [
-  body('user_id').not().isEmpty().withMessage('user_id is required'),
+  body('user_id').not().isEmpty().withMessage('user_id is required').isNumeric().withMessage('Must be a number'),
   body('speciality').not().isEmpty().withMessage('the speciality is required'),
+  body('phone').not().isEmpty().withMessage('a valid number is required'),
+
   validateFields,
 ];
 
@@ -86,6 +88,8 @@ export const createVetValidator = [
 export const updateVetValidator = [
   body('speciality').not().isEmpty().withMessage('the speciality is required'),
   body('user_id').not().isEmpty().withMessage('user_id is required'),
+  body('phone').not().isEmpty().withMessage('a valid number is required'),
+
   validateFields,
 ]
 export const createAppointmentValidation = [
