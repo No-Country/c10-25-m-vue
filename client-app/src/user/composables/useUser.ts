@@ -7,7 +7,7 @@ import { useUserStore } from "../../store/user";
 import getConfig from "../../utils/getConfig";
 
 const getUser = async (id: number): Promise<User> => {
-  const { data } = await clinicApi.get<UserRes>(`/users/${id}`);
+  const { data } = await clinicApi.get<UserRes>(`/users/${id}`, getConfig());
 
   return data.user;
 };
