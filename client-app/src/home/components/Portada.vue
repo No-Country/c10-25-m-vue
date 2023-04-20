@@ -54,6 +54,7 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 .grid-container {
   display: grid;
   grid-template-columns: 15% 70% 15%;
+  width:100%;
 }
 
 .grid-item {

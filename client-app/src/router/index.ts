@@ -79,7 +79,7 @@ const router = createRouter({
     {
       ...appointmentRouter,
       path: "/appointment",
-      beforeEnter: requireAuth,
+      // beforeEnter: requireAuth,
     },
     {
       path: "/:pathMatch(.*)*",
