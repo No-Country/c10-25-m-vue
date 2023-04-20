@@ -11,13 +11,14 @@
 
 <style scoped>
 .datos_user {
+  width: max-content;
   color: var(--text-footer);
   margin: 2rem 4rem 2rem 4rem;
   font-family: Jost;
   font-weight: 600;
   font-size: larger;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
 }
 .logo_chico_user {
   gap: 1rem;
@@ -29,4 +30,5 @@
   width: 2rem;
   height: 2rem;
 }
+
 </style>

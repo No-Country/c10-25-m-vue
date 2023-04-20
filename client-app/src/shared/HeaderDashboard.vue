@@ -2,22 +2,26 @@
   <div class="header-container-with-logo-nav-registration">
     <div class="movile-nav" :class="{'activo':!movileNavActivo}">
     <Logo />
-    <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
-      link.title
-    }}</RouterLink>
-    <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
-    <div class="btn-container-session">
-      <button
-        @click="toggleLogoutModal"
-        :class="
-          !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-        "
-      >
-        <img src="./../assets/home_img/A.png" alt="" />
-      </button>
-      <span v-if="isLogoutModalOpen" class="logout-btn">
-        <p @click="logout">Cerrar Sesión</p>
-      </span>
+    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+      <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
+        link.title
+      }}</RouterLink>
+      <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
+      <div class="btn-container-session">
+        <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+        ">
+          <img src="./../assets/home_img/A.png" alt="" />
+        </button>
+        <span v-if="isLogoutModalOpen" class="logout-btn">
+          <p @click="logout">
+            Cerrar Sesión</p>
+        </span>
+      </div>
+    </div>
+    <div class="burger">
+      <button @click="movileNavActivo=!movileNavActivo">
+        <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa">
+      </button>  
     </div>
     
     </div>
@@ -182,6 +186,7 @@ a {
     width: 100%;
     height: max-content;
     margin: 15rem 0 0 0;
+    z-index: 11;
 
     background-color: var(--bg-menu-user);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -206,31 +211,37 @@ a {
   .header-container-with-logo-nav-registration li {
     padding: 15px;
   }
-
   .btn-container-session {
     width: 10rem;
     margin: auto;
     margin-bottom: 15px;
     gap: 30px;
 
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    
   }
-
+  .btn-container-session button{
+    margin: auto;
+  }
   .btn-container-session .btn__on-background {
     border-radius: 20px;
     padding: 10px;
   }
-
   .btn-container-session .no-backgroundLogin {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+    justify-content: center;
+    align-content: center;
   }
   .burger {
     background-color: var(--bg-menu-user);
     margin-right: 3rem;
     display: block;
-    z-index: 10;
+    z-index: 12;
     cursor: pointer;
   }
 }

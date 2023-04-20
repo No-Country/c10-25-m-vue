@@ -24,7 +24,7 @@ export interface URequest extends Request {
   user?: any;
   sessionUser?: any;
   query:{
-    status: AppointmentStatus
+    status?: AppointmentStatus
   }
 }
 

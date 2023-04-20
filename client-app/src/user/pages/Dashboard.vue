@@ -51,12 +51,160 @@ const hasAppointments = ref(true);
               >
             </div>
           </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="" />
+              Moreira, Valentina - Cardióloga</span
+            >
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="" />
+              Terry</span
+            >
+          </div>
         </span>
+
+        <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
+
+        <div class="appoinments">
+          <div class="time-appoinment">
+            <span>
+              <img src="../../assets/appoinment_img/calender.svg" alt="">
+              18/18/1990</span>
+            <span>
+              <img src="../../assets/appoinment_img/time.svg" alt="">
+              10:00</span>
+          </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="">
+              Moreira, Valentina - Cardióloga</span>
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="">
+              Terry</span>
+          </div>
+        </div>
+
+
+        <div class="appoinments">
+          <div class="time-appoinment">
+            <span>
+              <img src="../../assets/appoinment_img/calender.svg" alt="">
+              18/18/1990</span>
+            <span>
+              <img src="../../assets/appoinment_img/time.svg" alt="">
+              10:00</span>
+          </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="">
+              Moreira, Valentina - Cardióloga</span>
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="">
+              Terry</span>
+          </div>
+        </div>
+
+
+        <div class="appoinments">
+          <div class="time-appoinment">
+            <span>
+              <img src="../../assets/appoinment_img/calender.svg" alt="">
+              18/18/1990</span>
+            <span>
+              <img src="../../assets/appoinment_img/time.svg" alt="">
+              10:00</span>
+          </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="">
+              Moreira, Valentina - Cardióloga</span>
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="">
+              Terry</span>
+          </div>
+        </div>
+
+
+        <div class="appoinments">
+          <div class="time-appoinment">
+            <span>
+              <img src="../../assets/appoinment_img/calender.svg" alt="">
+              18/18/1990</span>
+            <span>
+              <img src="../../assets/appoinment_img/time.svg" alt="">
+              10:00</span>
+          </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="">
+              Moreira, Valentina - Cardióloga</span>
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="">
+              Terry</span>
+          </div>
+        </div>
+
+
+        <div class="appoinments">
+          <div class="time-appoinment">
+            <span>
+              <img src="../../assets/appoinment_img/calender.svg" alt="">
+              18/18/1990</span>
+            <span>
+              <img src="../../assets/appoinment_img/time.svg" alt="">
+              10:00</span>
+          </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="">
+              Moreira, Valentina - Cardióloga</span>
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="">
+              Terry</span>
+          </div>
+        </div>
+
+
+        <div class="appoinments">
+          <div class="time-appoinment">
+            <span>
+              <img src="../../assets/appoinment_img/calender.svg" alt="">
+              18/18/1990</span>
+            <span>
+              <img src="../../assets/appoinment_img/time.svg" alt="">
+              10:00</span>
+          </div>
+          <div class="locations">
+            <span>
+              <img src="../../assets/appoinment_img/female.svg" alt="">
+              Moreira, Valentina - Cardióloga</span>
+          </div>
+          <div class="pets-icon">
+            <span>
+              <img src="../../assets/appoinment_img/pets.svg" alt="">
+              Terry</span>
+          </div>
+        </div>
+
+
+      -->
         <button>Reservar un turno</button>
 
         <div class="pawprint_user">
-      <img src="../../assets/user_img/bg-pawprint.png" alt="huellas">
-    </div>
+          <img src="../../assets/user_img/bg-pawprint.png" alt="huellas" />
+        </div>
       </div>
     </div>
 
@@ -67,16 +215,15 @@ const hasAppointments = ref(true);
   </div>
 </template>
 <style lang="scss" scoped>
-
-.pawprint_user{
+.pawprint_user {
   position: absolute;
-    top: -17%;
-    right: 9%;
+  top: -17%;
+  right: 9%;
 }
 
-.time-appoinment{
-  display:inline-flex;
-  gap:10px;
+.time-appoinment {
+  display: inline-flex;
+  gap: 10px;
   justify-content: space-between;
   align-content: center;
   align-items: center;
@@ -122,7 +269,10 @@ const hasAppointments = ref(true);
 
 .container-info-appoinment {
   width: 100%;
-  padding-left: 5%;
+  padding: 0 5% 0 5%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 .welcome-container {
   background-color: #fffefe;
@@ -202,9 +352,9 @@ const hasAppointments = ref(true);
   width: 100%;
 }
 
-.container-welcome-reservas{
-  background: #e5e5e5;
-height: 515px;
+.container-welcome-reservas {
+  background: #fffefe;
+  height: 515px;
 }
 .container-welcome--perfil h1 {
   font-family: "Jost";
@@ -215,5 +365,24 @@ height: 515px;
   text-align: center;
   letter-spacing: 0.05em;
   color: #3a57e8;
+}
+@media (max-width: 1040px) {
+  .container-info-appoinment {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .container-info-appoinment {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+@media (min-width: 1444px) {
+  .container-info-appoinment {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 </style>

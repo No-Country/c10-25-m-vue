@@ -9,7 +9,7 @@
     </main>
     <footer>
       <!-- footer content goes here -->
-      <!-- <Footer /> -->
+      <Footer />
     </footer>
   </div>
 </template>
@@ -20,10 +20,10 @@ import HeaderDashboard from "../../shared/HeaderDashboard.vue";
 import { routeLink } from "../../router/link-routes";
 </script>
 <style lang="scss" scoped>
-.container-appointment{
+.container-appointment {
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 </style>

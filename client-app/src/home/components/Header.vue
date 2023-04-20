@@ -10,15 +10,19 @@
     />
       <nav>
         <ul v-for="(elementosNav, index) in navItems" :key="index">
-          <li><a :href="elementosNav.value">{{ elementosNav.name }}</a></li>
+          <li>
+            <a :href="elementosNav.value">{{ elementosNav.name }}</a>
+          </li>
         </ul>
       </nav>
-  
+
       <div class="btn-container-session">
         <button
           @click="toggleBackground(), goToLogin()"
           :class="
-            !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'">
+            !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+          "
+        >
           Iniciar sesión
         </button>
         <button
@@ -41,11 +45,10 @@
 import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 
-
 const navItems = ref([
-  {name: 'Inicio', value:'/'},
-  {name:'Servicios', value:'#servicios'},
-  {name:'Por qué elegirnos', value:'#eleginos'}
+  { name: "Inicio", value: "/" },
+  { name: "Servicios", value: "#servicios" },
+  { name: "Por qué elegirnos", value: "#eleginos" },
 ]);
 
 const noBackground: Ref<boolean> = ref(false);
@@ -66,10 +69,9 @@ function goToHome() {
 
 function toggleBackground() {
   noBackground.value = !noBackground.value;
-};
+}
 
-let movileNavActivo = false
-
+let movileNavActivo = false;
 </script>
 
 <style lang="scss" scoped>
@@ -126,7 +128,6 @@ let movileNavActivo = false
   justify-content:space-between;
   align-content: center;
   align-items: center;
-
 }
 .header-container-with-logo-nav-registration nav {
   display: inline-flex;
@@ -208,39 +209,38 @@ let movileNavActivo = false
 .no-background:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.burger{
+.burger {
   display: none;
 }
-@media (max-width:930px) {
-  .movile-nav{
+@media (max-width: 930px) {
+  .movile-nav {
     width: 100%;
     height: max-content;
     margin: 15rem 0 0 0;
     z-index: 11;
-    
+
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    
-    display:none; 
+
+    display: none;
     // inline-flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     gap: 30px;
-    
   }
-  .activo{
+  .activo {
     display: inline-flex;
   }
-  .header-container-with-logo-nav-registration nav{
+  .header-container-with-logo-nav-registration nav {
     display: inline-block;
   }
-  .header-container-with-logo-nav-registration li{
+  .header-container-with-logo-nav-registration li {
     padding: 15px;
   }
-  .btn-container-session{
+  .btn-container-session {
     width: 10rem;
     margin: auto;
     margin-bottom: 15px;
@@ -255,43 +255,41 @@ let movileNavActivo = false
     border-radius: 20px;
     padding: 10px;
   }
-  .btn-container-session .no-backgroundLogin{
+  .btn-container-session .no-backgroundLogin {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
-
   }
-  .burger{
+  .burger {
     background-color: transparent;
     margin-right: 3rem;
     display: block;
     z-index: 12;
     cursor: pointer;
   }
-  
 }
 @media (max-width: 530px) {
-  .header-container-with-logo-nav-registration{
+  .header-container-with-logo-nav-registration {
     justify-content: space-around;
   }
-  .header-container-with-logo-nav-registration .logo{
+  .header-container-with-logo-nav-registration .logo {
     width: 30%;
     z-index: 1;
   }
-  .burger{
+  .burger {
     margin-right: 5%;
   }
-  .movile-nav{
+  .movile-nav {
     width: 90%;
   }
 }
-@media (max-width:410px) {
-  .movile-nav{
+@media (max-width: 410px) {
+  .movile-nav {
     position: absolute;
     right: 5%;
     top:-220px;
   }
-  .burger{
+  .burger {
     position: absolute;
     right: 5%;
 
@@ -299,6 +297,5 @@ let movileNavActivo = false
       background:none;
     }
   }
-  
 }
 </style>

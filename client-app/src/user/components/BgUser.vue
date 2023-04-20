@@ -4,6 +4,7 @@
       <img :src="LogoVeter" alt="Logo" id="logo_user">
     </div>
     <div class="fondo_azul">
+      <img class="fondo_grande" src="../../assets/user_img/bg-user.png" alt="fondo">
       <div class="perfil_deco">
         <img :src="CatPrefil" alt="gato">
         <h1>Mi perfil</h1>
@@ -40,6 +41,9 @@ return {
 
 </script>
 <style scoped>
+.fondo_grande{
+  display: none;
+}
 .bg_container{
   width: 100%;
   position: relative;
@@ -70,9 +74,10 @@ return {
 }
 .fondo_azul{
   background-image: url(../../assets/user_img/bg-user.png);
-  height: max-content;
+  height: 184px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 .perfil_deco{
   height: 10rem;
@@ -83,13 +88,35 @@ return {
   
 }
 .perfil_deco img{
-
+  margin-bottom: -1.5rem;
 }
 .perfil_deco h1{
   font-family: Jost;
   font-weight: 700;
   color: white;
   align-self: center;
+  
+}
+@media (min-width: 1280px) {
+  .fondo_azul{
+    height: auto;
+    background-image: none;
+  }
+  .fondo_grande{
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    z-index: -1;
+    position: relative;
+
+  }
+  .perfil_deco{
+    z-index: 2;
+    position: absolute;
+    right: 33%;
+    bottom: 1%;
+    
+  }
   
 }
 
