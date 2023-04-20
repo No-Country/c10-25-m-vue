@@ -45,8 +45,23 @@ const { user, isError, isLoading } = useUser();
 .detalle_user li {
   margin: 2rem;
 }
-
 .btn__changed-password {
   margin-bottom: 2rem;
+}
+@media (max-width: 663px) {
+  .detalle_user{
+    height: max-content;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+  }
+  .detalle_user li{
+    margin: 2rem 0 1rem 0;
+  }
+  .btn__changed-password{
+    margin: 2rem 0 2rem 0;
+  }
+  
 }
 </style>

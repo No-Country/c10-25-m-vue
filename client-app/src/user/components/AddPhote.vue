@@ -3,7 +3,6 @@
 <template>
   <div class="agregar_foto">
     <div class="letra_nombre">
-      <img src="../../assets/user_img/circulo_perfil.png" alt="circulo" />
       <p>A</p>
       <!-- funcion para que selecicione la primera letra del nombre -->
     </div>
@@ -22,21 +21,23 @@
   gap: 0.8rem;
 }
 .letra_nombre {
-  display: block;
-  justify-items: center;
+  width: 65px;
+  background-image: url(../../assets/user_img/circulo_perfil.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
   align-items: center;
-  position: relative;
-}
-.letra_nombre img {
-  width: 2.5rem;
 }
 .letra_nombre p {
   font-family: Jost;
   font-weight: 700;
   font-size: small;
-  position: absolute;
-  top: 0.5em;
-  left: 0.98rem;
+  margin-bottom: 10px;
+
 }
 .agregar_foto button {
   height: 2.3em;

@@ -45,4 +45,23 @@ const changeIsOpen = () => {
 .button__position {
   margin-top: 2.3rem;
 }
+@media (max-width: 700px) {
+  .content{
+    height: max-content;
+    display: inline-flex;
+    justify-content: center;
+    align-content: center;
+  }
+  
+}
+@media (max-width:435px) {
+  .content{
+    width: 80%;
+    margin: 0;
+    flex-direction:column;
+  }
+  .button__position{
+    margin:2rem 0 2rem 0;
+  }
+}
 </style>

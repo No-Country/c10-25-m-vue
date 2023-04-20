@@ -13,7 +13,7 @@ export const routeLink: RouterLink[] = [
   {
     path: "/user/profile",
     name: "profile",
-    title: "Mi Perfil",
+    title: "Mi perfil",
   },
   // {
   //   path: "/pet/user",

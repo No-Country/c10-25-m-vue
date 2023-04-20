@@ -1,22 +1,26 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
     <Logo />
-    <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
-      link.title
-    }}</RouterLink>
-    <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
-    <div class="btn-container-session">
-      <button
-        @click="toggleLogoutModal"
-        :class="
-          !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-        "
-      >
-        <img src="./../assets/home_img/A.png" alt="" />
-      </button>
-      <span v-if="isLogoutModalOpen" class="logout-btn">
-        <p @click="logout">Cerrar Sesión</p>
-      </span>
+    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+      <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
+        link.title
+      }}</RouterLink>
+      <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
+      <div class="btn-container-session">
+        <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+        ">
+          <img src="./../assets/home_img/A.png" alt="" />
+        </button>
+        <span v-if="isLogoutModalOpen" class="logout-btn">
+          <p @click="logout">
+            Cerrar Sesión</p>
+        </span>
+      </div>
+    </div>
+    <div class="burger">
+      <button @click="movileNavActivo=!movileNavActivo">
+        <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa">
+      </button>  
     </div>
   </div>
 </template>
@@ -43,6 +47,9 @@ const props = withDefaults(defineProps<Props>(), {
 const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
+
+let movileNavActivo = false
+
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +66,6 @@ const router = useRouter();
   padding-left: 10px;
   padding: 12px;
 }
-
 .logout-btn {
   width: 225px;
   height: 72px;
@@ -112,11 +118,13 @@ a {
   /* identical to box height, or 42px */
   color: #2e46ba;
 }
-
-.movile-nav {
+.movile-nav{
   width: 80%;
-  display: flex;
-  justify-content: space-evenly;
+  display: inline-flex;
+  justify-content:space-evenly;
+  align-content: center;
+  align-items: center;
+
 }
 
 .header-container-with-logo-nav-registration nav {
@@ -160,6 +168,7 @@ a {
     width: 100%;
     height: max-content;
     margin: 15rem 0 0 0;
+    z-index: 11;
 
     background-color: var(--bg-menu-user);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -184,32 +193,60 @@ a {
   .header-container-with-logo-nav-registration li {
     padding: 15px;
   }
-
   .btn-container-session {
     width: 10rem;
     margin: auto;
     margin-bottom: 15px;
     gap: 30px;
 
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    
   }
-
+  .btn-container-session button{
+    margin: auto;
+  }
   .btn-container-session .btn__on-background {
     border-radius: 20px;
     padding: 10px;
   }
-
   .btn-container-session .no-backgroundLogin {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+    justify-content: center;
+    align-content: center;
   }
   .burger {
     background-color: var(--bg-menu-user);
     margin-right: 3rem;
     display: block;
-    z-index: 10;
+    z-index: 12;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 530px) {
+  .header-container-with-logo-nav-registration{
+    justify-content: space-around;
+  }
+  .burger{
+    margin-right: 5%;
+  }
+  .movile-nav{
+    width: 90%;
+  }
+}
+@media (max-width:410px) {
+  .movile-nav{
+    position: absolute;
+    right: 5%;
+  }
+  .burger{
+    position: absolute;
+    right: 5%;
   }
 }
 </style>
