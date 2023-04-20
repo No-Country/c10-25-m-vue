@@ -1,25 +1,20 @@
 <template>
-      <!-- Contenido de la vista de inicio aquí -->
-      <Portada></Portada>
-      <Servicios></Servicios>
-      <Diferentes></Diferentes>
+  <!-- Contenido de la vista de inicio aquí -->
+  <header>
+    <Header></Header>
+  </header>
+  <Portada></Portada>
+  <Servicios></Servicios>
+  <Eleginos></Eleginos>
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import Portada from '../components/Portada.vue'
-import Servicios from '../components/Servicios.vue'
-import Diferentes from '../components/Diferentes.vue'
-export default defineComponent({
-  name: 'Home',
-  components: {
-    Portada,
-    Servicios,
-    Diferentes
-  },
-  setup() {
-    const message = 'This is my Contenido del component!';
-    return { message };
-  },
-});
+<script lang="ts" setup>
+import Header from "../components/Header.vue";
+import Portada from "../components/Portada.vue";
+import Servicios from "../components/Servicios.vue";
+import Eleginos from "../components/Eleginos.vue";
+import Footer from "../../shared/Footer.vue";
 </script>

@@ -14,7 +14,7 @@ import { URequest } from './../interfaces/user.interfaces';
 in a request, response, and next function as parameters. */
 export const signup = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, surname, email, password } = req.body;
+    const { name, surname, email, password, phone } = req.body;
     //TODO: CREAR MIDDLEWARE PARA VALIDAR EL BUFFER
     const imgRef = ref(
       storage,
@@ -32,6 +32,7 @@ export const signup = catchAsync(
         surname: surname.toLowerCase(),
         email: email.toLowerCase(),
         password: encryptedPassword,
+        phone,
         role: 'user',
         profileImageUrl: imgUploaded.metadata.fullPath,
       },
@@ -40,6 +41,7 @@ export const signup = catchAsync(
         name: true,
         surname: true,
         email: true,
+        phone: true,
         profileImageUrl: true,
       },
     });

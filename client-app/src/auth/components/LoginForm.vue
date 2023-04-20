@@ -11,11 +11,11 @@
         
         <form @submit="onSubmit">
 
-          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="state.email"
-            @blur="validateEmail" :errors="state.errors.email" />
+          <InputWithLabel placeholder="Correo electronico" type="text" id="email" label="Email" v-model:value="loginFormState.email"
+            @blur="validateEmail" :errors="loginFormState.errors.email" />
 
-          <InputWithLabel placeholder="Password" type="password" :errors="state.errors.password" id="password" label="Password"
-            @blur="validatePassword" v-model:value="state.password" />
+          <InputWithLabel placeholder="Password" type="password" :errors="loginFormState.errors.password" id="password" label="Password"
+            @blur="validatePassword" v-model:value="loginFormState.password" />
 
           <div class="form-options">
             <label>
@@ -26,7 +26,7 @@
           <div class="container_btn">
             <button type="submit">Iniciar sesión</button>
           </div>
-          <span class="error_form">{{ state.serverError }}</span> <!-- Mostrar el mensaje de error del -->
+          <span class="error_form">{{ loginFormState.serverError }}</span> <!-- Mostrar el mensaje de error del -->
         </form>
         <p>¿No tienes cuenta? <router-link to="/register">Regístrate</router-link></p>
       </div>
@@ -35,14 +35,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
-import { ErrorMessage, useForm } from "vee-validate";
 import LogoInterno from "../../shared/LogoInterno.vue";
 import InputWithLabel from "../../shared/InputWithLabel.vue";
-import useLoginForm from '../composables/useLoginForm';
-// import { useRouter } from 'vue-router'; 
-// import { useUserStore } from '../../store/auth/user';
+import useLoginRequest from '../composables/useLoginRequest';
 import imagenPortadaLogin from "../../assets/auth/gato-domestico.png";
+import { defineComponent, ref, reactive } from "vue";
+import { ErrorMessage  } from "vee-validate";
 import * as yup from "yup";
 
 interface FormValues {
@@ -71,8 +69,7 @@ export default defineComponent({
   },
 
   setup() {
-    const { state, onSubmit } = useLoginForm();
-    // const userStore = useUserStore();
+    const { loginFormState, onSubmit } = useLoginRequest();
     const terms = ref(false);
     const email = ref('');
     const password = ref('');
@@ -104,52 +101,6 @@ export default defineComponent({
       }
     };
 
-
-    // const onSubmit = handleSubmit(async (values) => {
-    //   try {
-    //     await schema.validateSync(
-    //       { email: email.value, password: password.value },
-    //       { abortEarly: false }
-    //     );
-        
-    //   // Enviar petición HTTP POST al endpoint de inicio de sesión
-    //   const response = await fetch('http://localhost:3001/api/v1/auth/signin', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       email: email.value,
-    //       password: password.value
-    //     })
-    //   });
-
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     // Actualizar estado de la aplicación con información del usuario autenticado
-    //     userStore.user = data.user;
-    //     goToWelcome();
-    //     email.value = "",
-    //       password.value = ""
-    //   } else {
-    //     // Manejar error
-    //     alert("Error...");
-    //   }
-       
-    //   } catch (err) {
-    //     if (err instanceof yup.ValidationError) {
-    //       err.inner.forEach((error) => {
-    //         if (error.path === 'email') {
-    //           errors.email = error.message;
-    //         } else if (error.path === 'password') {
-    //           errors.password = error.message;
-    //         }
-    //       });
-    //     }
-    //   }
-    // });
-
-
     return {
       email,
       password,
@@ -159,7 +110,7 @@ export default defineComponent({
       imagenPortadaLogin,
       validateEmail,
       validatePassword,
-      state, 
+      loginFormState, 
       onSubmit
     };
   },

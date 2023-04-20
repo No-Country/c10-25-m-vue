@@ -1,32 +1,20 @@
 <template>
- <div class="App">
+  <div class="App">
     <router-view></router-view>
-</div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-
-export default defineComponent({
-  name: 'MyComponent',
-  components: {
-   
-  },
-  setup() {
-    const message = 'This is my Contenido del component!';
-    return { message };
-  },
-});
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss">
-
-
-.App{
+.App {
   text-align: center;
   position: relative;
   width: 100%;
-  height: 100%;        
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
 }
 </style>
