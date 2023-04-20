@@ -293,6 +293,5 @@ let movileNavActivo = false
     position: absolute;
     right: 5%;
   }
-  
 }
 </style>

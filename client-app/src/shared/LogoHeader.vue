@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="logo_movile">
         <div class="logo_container" @click="goToHome()">
             <img :src="imagenLogoLogin" alt="Logo" class="logo" width="63px" height="63px" />
             <div class="titulo_footer">
@@ -63,5 +63,16 @@ font-weight: 400;
 font-size: regular;
 color: #000000;
 }
-
+@media (max-width:600px) {
+  .logo_movile{
+    width: 30%;
+    z-index: 1;
+    margin-left: 1rem;
+  }  
+}
+// @media (max-width:410px) {
+//   .logo_movile{
+//     margin-left: 5%;
+//   }  
+// }
 </style>
