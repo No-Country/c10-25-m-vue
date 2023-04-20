@@ -1,5 +1,6 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
+    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
     <Logo />
     <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
       link.title
@@ -18,6 +19,14 @@
         <p @click="logout">Cerrar Sesión</p>
       </span>
     </div>
+    
+    </div>
+    <div class="burger">
+      <button @click="movileNavActivo=!movileNavActivo">
+        <img src="../assets/home_img/menu_icon.svg" alt="menu hamburguesa">
+      </button>  
+    </div>
+   
   </div>
 </template>
 
@@ -43,6 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
+let movileNavActivo = false
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +70,14 @@ const router = useRouter();
   padding: 12px;
 }
 
+.movile-nav{
+  width: 100%;
+  display: inline-flex;
+  justify-content:space-between;
+  align-content: center;
+  align-items: center;
+
+}
 .logout-btn {
   width: 225px;
   height: 72px;
@@ -114,7 +132,7 @@ a {
 }
 
 .movile-nav {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
@@ -154,6 +172,10 @@ a {
 
 .burger {
   display: none;
+
+  button{
+    background:none;
+  }
 }
 @media (max-width: 930px) {
   .movile-nav {
@@ -211,5 +233,39 @@ a {
     z-index: 10;
     cursor: pointer;
   }
+}
+
+// @media (max-width: 530px) {
+//   .header-container-with-logo-nav-registration{
+//     justify-content: space-around;
+//   }
+//   .header-container-with-logo-nav-registration .logo{
+//     width: 30%;
+//     z-index: 1;
+//   }
+//   .burger{
+//     margin-right: 5%;
+//   }
+//   .movile-nav{
+//     width: 380px;
+//     right: 5%;
+  
+//   }
+// }
+@media (max-width:60px) {
+  .movile-nav{
+    position: absolute;
+    right: 5%;
+    top:-220px;
+  }
+  .burger{
+    position: absolute;
+    right: 5%;
+
+    button {
+      background:none;
+    }
+  }
+  
 }
 </style>
