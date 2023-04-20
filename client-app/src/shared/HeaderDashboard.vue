@@ -30,10 +30,13 @@ import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
 import Logo from "./LogoHeader.vue";
 import type { RouterLink } from "../router/link-routes";
-import useLogoutModal from '../auth/composables/useLogoutModal';
+import useLogoutModal from "../auth/composables/useLogoutModal";
+import useRenew from "../composables/useRenew";
 interface Props {
   links: RouterLink[];
 }
+
+useRenew();
 
 const userid = 2;
 
@@ -69,14 +72,14 @@ let movileNavActivo = false
   position: absolute;
   top: 81px;
   right: -80px;
-  background: #EBF1FA;
-  border: 3px solid #3A57E8;
+  background: #ebf1fa;
+  border: 3px solid #3a57e8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   display: flex;
 
   p {
-    font-family: 'Jost';
+    font-family: "Jost";
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -90,11 +93,11 @@ let movileNavActivo = false
     width: 100%;
     background: none;
     border: none;
-    color: #383B43;
-    cursor:pointer
+    color: #383b43;
+    cursor: pointer;
   }
 
-  p:hover{
+  p:hover {
     text-decoration: underline;
   }
 }
@@ -107,7 +110,7 @@ let movileNavActivo = false
 a {
   text-decoration: none;
   color: inherit;
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -177,7 +180,6 @@ a {
     justify-content: center;
     align-content: center;
     gap: 30px;
-
   }
   .activo {
     display: inline-flex;

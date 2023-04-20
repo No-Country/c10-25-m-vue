@@ -4,11 +4,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import useRenew from "./composables/useRenew";
-
-useRenew();
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss">
 .App {

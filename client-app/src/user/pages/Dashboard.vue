@@ -9,9 +9,8 @@ import { useUserStore } from "../../store/user";
 
 const store = useUserStore();
 const { user } = storeToRefs(store);
-const loginStore = useLoginStore()
+const loginStore = useLoginStore();
 const hasAppointments = ref(true);
-
 </script>
 
 <template>
@@ -21,21 +20,34 @@ const hasAppointments = ref(true);
       <h1>¡Hola {{ user?.name }}!</h1>
       <img class="portada-img" :src="PortadaImg" alt="" />
     </div>
-    <div  class="container-welcome-reservas">
-      <span class="title-next">
-        Próximos turnos
-      </span>
+    <div class="container-welcome-reservas">
+      <span class="title-next"> Próximos turnos </span>
       <div class="container-info-inter">
         <span class="container-info-appoinment">
-        <span v-if="!hasAppointments" class="texto-interno">Todavía no tenés próximos turnos.</span>
-        <div class="appoinments">
-          <div class="time-appoinment">
-            <span>
-              <img src="../../assets/appoinment_img/calender.svg" alt="">
-              18/18/1990</span>
-            <span>
-              <img src="../../assets/appoinment_img/time.svg" alt="">
-              10:00</span>
+          <span v-if="!hasAppointments" class="texto-interno"
+            >Todavía no tenés próximos turnos.</span>
+          <div class="appoinments">
+            <div class="time-appoinment">
+              <span>
+                <img src="../../assets/appoinment_img/calender.svg" alt="" />
+                18/18/1990</span
+              >
+              <span>
+                <img src="../../assets/appoinment_img/time.svg" alt="" />
+                10:00</span
+              >
+            </div>
+            <div class="locations">
+              <span>
+                <img src="../../assets/appoinment_img/female.svg" alt="" />
+                Moreira, Valentina - Cardióloga</span
+              >
+            </div>
+            <div class="pets-icon">
+              <span>
+                <img src="../../assets/appoinment_img/pets.svg" alt="" />
+                Terry</span>
+            </div>
           </div>
           <div class="locations">
             <span>
@@ -47,7 +59,7 @@ const hasAppointments = ref(true);
               <img src="../../assets/appoinment_img/pets.svg" alt="">
               Terry</span>
           </div>
-        </div>
+        </span>
 
 <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
 
@@ -184,7 +196,6 @@ const hasAppointments = ref(true);
 
 
       -->
-      </span>
         <button>Reservar un turno</button>
       </div>
     </div>
@@ -193,20 +204,17 @@ const hasAppointments = ref(true);
       :type="'success'"
       :message="loginStore.serverSuccess ?? undefined"
     />
-
-
   </div>
 </template>
 <style lang="scss" scoped>
-
-.time-appoinment{
-  display:inline-flex;
-  gap:10px;
+.time-appoinment {
+  display: inline-flex;
+  gap: 10px;
   justify-content: space-between;
   align-content: center;
   align-items: center;
   width: 100%;
-  span{
+  span {
     display: flex;
     gap: 5px;
     justify-content: center;
@@ -214,17 +222,18 @@ const hasAppointments = ref(true);
   }
 }
 
-.pets-icon, .locations{
+.pets-icon,
+.locations {
   display: flex;
-    justify-content: space-between  ;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 
-    span{
-      display: flex;
+  span {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    }
+  }
 }
 .appoinments{
     background: #FFFFFF;
@@ -253,7 +262,7 @@ const hasAppointments = ref(true);
   
 }
 .welcome-container {
-  background: #e5e5e5;
+  background-color: #fffefe;
   display: flex;
   flex-direction: column;
 }
@@ -266,15 +275,15 @@ const hasAppointments = ref(true);
   gap: 1.5rem;
 }
 
-.container-info-inter button{
-  background-color: #3A57E8;
+.container-info-inter button {
+  background-color: #3a57e8;
   color: white;
-  font-family: 'Jost', sans-serif;
+  font-family: "Jost", sans-serif;
   border: none;
   padding: 8px 16px;
   gap: 10px;
   height: 62px;
-  background: #3A57E8;
+  background: #3a57e8;
   box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
   border-radius: 10px;
   font-style: normal;
@@ -282,59 +291,57 @@ const hasAppointments = ref(true);
   font-size: 26px;
   margin-top: 3%;
   cursor: pointer;
-  color: #FFFFFF;
-
+  color: #ffffff;
 }
 
-.container-info-inter{
+.container-info-inter {
   display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    max-height: max-content;
-    position: relative;
-    height: 100%;
-    padding-top:3%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  max-height: max-content;
+  position: relative;
+  height: 100%;
+  padding-top: 3%;
 }
 
-.title-next{
-  font-family: 'Jost';
-font-style: normal;
-font-weight: 700;
-font-size: 24px;
-line-height: 175%;
-/* identical to box height, or 42px */
-padding-left: 5%;
-display: flex;
-align-items: center;
-text-align: center;
+.title-next {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 175%;
+  /* identical to box height, or 42px */
+  padding-left: 5%;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-color: #3A57E8;
+  color: #3a57e8;
 }
 
-.texto-interno{
-  font-family: 'Jost';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 175%;
-/* identical to box height, or 35px */
+.texto-interno {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 175%;
+  /* identical to box height, or 35px */
 
-display: flex;
-align-items: center;
-text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-color: #383B43;
+  color: #383b43;
 }
 
 .container-welcome--perfil .portada-img {
   width: 100%;
 }
 
-.container-welcome-reservas{
-  background: #e5e5e5;
-  min-height: 405px;
-
+.container-welcome-reservas {
+  background-color: #fffefe;
+  height: 405px;
 }
 .container-welcome--perfil h1 {
   font-family: "Jost";

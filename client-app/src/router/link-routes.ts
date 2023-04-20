@@ -20,9 +20,9 @@ export const routeLink: RouterLink[] = [
   //   name: "pets",
   //   title: "Mis mascotas",
   // },
-  // {
-  //   path: "/user/my-turns",
-  //   name: "turns",
-  //   title: "Mis turnos",
-  // },
+  {
+    path: "/appointment/my-turns",
+    name: "turns",
+    title: "Mis turnos",
+  },
 ];
