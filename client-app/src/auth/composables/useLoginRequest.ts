@@ -1,39 +1,45 @@
-import axios from 'axios';
+import axios from "axios";
+import { AxiosError } from "axios";
 import { reactive } from "vue";
-import { useLoginStore } from '../../store/auth/login'
+import { useLoginStore } from "../../store/auth/login";
 import { useRouter } from "vue-router"; // Importar goToWelcome
-import { LoginFormValues } from '../interfaces/InterfacesAuth';
-import { useUserStore } from '../../store/auth/user';
+import { LoginFormValues } from "../interfaces/InterfacesAuth";
+import { useUserStore } from "../../store/user";
 import * as yup from "yup";
 
 const URL_API = "http://localhost:3001/api/v1/auth/signin";
 
 export default function useLoginForm() {
-
   const loginStore = useLoginStore();
   const userStore = useUserStore();
-  //Aqui uso la interface, especifico el tipo de objeto que se está creando con la función 
-  const loginFormState = reactive<LoginFormValues & { errors: LoginFormValues; serverError: string | null; serverSuccess: string | null;  }>({
-      email: '',
-      password: '',
-      errors: {
-        email: '',
-        password: ''
-      },
-      serverError: loginStore.serverError,
-      serverSuccess: loginStore.serverSuccess,
+  //Aqui uso la interface, especifico el tipo de objeto que se está creando con la función
+  const loginFormState = reactive<
+    LoginFormValues & {
+      errors: LoginFormValues;
+      serverError: string | null;
+      serverSuccess: string | null;
+    }
+  >({
+    email: "",
+    password: "",
+    errors: {
+      email: "",
+      password: "",
+    },
+    serverError: loginStore.serverError,
+    serverSuccess: loginStore.serverSuccess,
   });
 
-    const router = useRouter();
+  const router = useRouter();
 
-    const schema = yup.object().shape({
-      email: yup.string().email().required(),
-      password: yup.string().min(8).required(),
-    });
+  const schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().min(8).required(),
+  });
 
-    function goToWelcome() {
-      router.push("/user/home");
-    }
+  function goToWelcome() {
+    router.push("/user/home");
+  }
 
   const onSubmit = async (event: Event) => {
     event.preventDefault();
@@ -52,28 +58,27 @@ export default function useLoginForm() {
       if (response.status === 200) {
         const data = await response.data;
 
-        localStorage.setItem('token', data.token);
-   
+        localStorage.setItem("token", data.token);
+
         userStore.setUser(data.user);
         // Actualizar estado de la aplicación con información del usuario autenticado
         goToWelcome();
-        
-        loginStore.setServerSuccess(data.message)
+
+        loginStore.setServerSuccess(data.message);
         setTimeout(() => {
-          loginStore.setServerSuccess('')
-        }, 5000)
+          loginStore.setServerSuccess("");
+        }, 5000);
 
         loginFormState.email = "";
         loginFormState.password = "";
       } else {
         // Manejar error del servidor
         const data = await response.data;
-        
-        loginStore.setServerError(data.message)
+
+        loginStore.setServerError(data.message);
         setTimeout(() => {
-          loginStore.setServerError('')
-        }, 5000)
-        
+          loginStore.setServerError("");
+        }, 5000);
       }
     } catch (err) {
       if (err instanceof yup.ValidationError) {
@@ -84,11 +89,18 @@ export default function useLoginForm() {
             loginFormState.errors.password = error.message;
           }
         });
-      } else if (err instanceof TypeError) {
+      } else if (
+        (err as AxiosError).isAxiosError &&
+        (err as AxiosError).message === "Network Error"
+      ) {
         // Manejar error de red
+
         loginStore.setServerError(
-          'Error de conexión. Por favor, inténtelo de nuevo más tarde.'
+          "Error de conexión. Por favor, inténtelo de nuevo más tarde."
         );
+        setTimeout(() => {
+          loginStore.setServerError("");
+        }, 5000);
       }
     }
   };

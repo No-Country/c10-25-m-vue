@@ -189,7 +189,6 @@ setup() {
 <style scoped lang="scss">
 .container__subtitle {
   display: flex;
-
   flex-direction: column;
   line-height: 25px;
   padding-top: 5%;
@@ -247,6 +246,31 @@ form button:hover {
   align-items: center;
 }
 
+@media (min-width: 800px) {
+
+  form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 15px;
+  width: 100%;
+  width: 436px;
+}
+
+  .login-image {
+  display: flex;
+  justify-content: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+  height: 90%;
+}
+
 .form-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -256,35 +280,55 @@ form button:hover {
   padding-top: 15px;
 }
 
-.login-image {
-  display: flex;
-  justify-content: center;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 .form-row {
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 250px;
 }
+}
 
+@media (max-width: 800px) {
+  .form-row {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: auto;
+}
+
+.login-image{
+  display:none;
+}
+/* Estilos específicos para dispositivos móviles */
+.login-grid {
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 15px;
+  justify-content: center;
+  width: 89%;
+ 
+}
 form {
   display: flex;
-  flex-direction: column;
-  text-align: left;
-  gap: 15px;
-  width: 100%;
-  width: 436px;
+    flex-direction: column;
+    text-align: left;
+    gap: 15px;
+    padding: 11px; 
+    align-items:center;
 }
+
+}
+
+
+
+
 
 .container__form--login {
   display: flex;

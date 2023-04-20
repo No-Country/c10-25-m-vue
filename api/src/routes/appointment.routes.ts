@@ -14,6 +14,7 @@ import {
   deleteAppointment,
   findAllAppointment,
   findOneAppointment,
+  getMyAppointments,
   markCompletedAppointment,
   updateAppointment,
 } from '../controllers/appointment.controllers';
@@ -42,19 +43,26 @@ router
   );
 
 router
-  .route('/:id')
-  .get(validExistAppointmen, findOneAppointment)
-  .patch(
-    validExistAppointmen,
-    updateAppointmentValidation,
-    validateDate,
-    validVetIdReqBody,
-    validPetIdReqBody,
-    verifyVetAvailability,
-    protectAccountOwner,
-    updateAppointment,
-  )
-  .delete(validExistAppointmen, protectAccountOwner, deleteAppointment);
+  .route('/myAppointments')
+  .get(
+    protect,
+    getMyAppointments
+    )
+
+  router
+    .route('/:id')
+    .get(validExistAppointmen, findOneAppointment)
+    .patch(
+      validExistAppointmen,
+      updateAppointmentValidation,
+      validateDate,
+      validVetIdReqBody,
+      validPetIdReqBody,
+      verifyVetAvailability,
+      protectAccountOwner,
+      updateAppointment,
+    )
+    .delete(validExistAppointmen, protectAccountOwner, deleteAppointment);
 
 router.patch(
   '/:id/completed',

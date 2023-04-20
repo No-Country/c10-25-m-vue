@@ -49,11 +49,10 @@
   right: 2%;
 }
 .fondo_azul{
-  height: 10rem;
   background-image: url(../../assets/user_img/bg-user.png);
+  height: max-content;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
 }
 .mascotas_deco{
   height: 12rem;

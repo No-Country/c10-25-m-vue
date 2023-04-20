@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div style="display: flex; flex-direction: column; min-height: 100vh;">
     <header>
       <!-- header contentsp goes here -->
       <HeaderDashboard :links="routeLink" />
     </header>
-    <main>
+    <main style="flex-grow: 1;">
       <router-view></router-view>
     </main>
-    <footer>
-      <!-- footer content goes here -->
+
+    <div>
       <Footer />
-    </footer>
+    </div>
   </div>
 </template>
 

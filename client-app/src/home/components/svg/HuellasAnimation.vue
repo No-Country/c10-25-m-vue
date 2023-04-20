@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="movile">
         <div class="pawprints">
             <img class="pawprint" src="../../../assets/home_img/pawprint.svg" alt="Pawprint" />
             <img class="pawprint" src="../../../assets/home_img/pawprint.svg" alt="Pawprint" />
@@ -112,4 +112,12 @@ export default defineComponent({
         transform: translateY(0);
         animation-timing-function: ease-in-out;
     }
-}</style>
+}
+@media (max-width: 1000px) {
+    .movile{
+        display:none
+    }
+    
+}
+
+</style>

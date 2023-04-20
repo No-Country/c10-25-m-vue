@@ -1,6 +1,8 @@
 <template>
   <div class="portada-container-with-fondo">
-    <div alt="" class="portada_veterinaria"></div>
+    <div alt="" class="portada_veterinaria">
+      <img src="../../assets/home_img/dog-portada.png" alt="">
+    </div>
     <div class="grid-container">
       <div class="grid-item huellas">
         <HuellasAnimation />
@@ -27,12 +29,17 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 .portada-container-with-fondo {
   width: 100%;
   height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .portada-container-with-fondo .portada_veterinaria {
   width: 100%;
-  height: 572px;
-  background-image: url(../../assets/home_img/dog-portada.png);
+  // background-image: url(../../assets/home_img/dog-portada.png);
   position: relative;
   background-size: cover;
   margin-top: -2.5%;
@@ -40,10 +47,14 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
   z-index: 8;
   background-position: bottom;
 }
+.portada-container-with-fondo .portada_veterinaria img{
+  width: 100%;
+}
 
 .grid-container {
   display: grid;
   grid-template-columns: 15% 70% 15%;
+  width:100%;
 }
 
 .grid-item {
@@ -102,6 +113,9 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
 }
 
 @media (max-width:986px) {
+  .portada-container-with-fondo .portada_veterinaria img {
+    display: none;
+  }
   .portada-container-with-fondo .portada_veterinaria {
   height: 368px;
   background-image: url(../../assets/home_img/dog-portada-movile1.png);
