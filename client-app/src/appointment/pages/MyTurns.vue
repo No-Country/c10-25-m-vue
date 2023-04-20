@@ -1,13 +1,38 @@
 <template>
   <div class="abstract">
     <HeroAppointment />
-    <div class="detalle">
-      <h3>Turnos confirmados</h3>
-      <MyTurnCard />
-      <h3>Turnos cancelados</h3>
+    <div class="detalle" v-if="confirmedAppointments.length > 0">
+      <h3>Turnos Pendientes</h3>
+      <MyTurnCard
+        v-for="appointment of confirmedAppointments"
+        :appointment="appointment"
+        :key="appointment.id"
+      />
     </div>
-    <div class="otros_turnos">
-      <p>Todavía no tenés turnos cancelados.</p>
+    <div class="detalle" v-else>
+      <h3>No tienes turnos pendientes</h3>
+    </div>
+    <div class="detalle" v-if="cancelledAppointments.length > 0">
+      <h3>Turno cancelados</h3>
+      <MyTurnCard
+        v-for="appointment of cancelledAppointments"
+        :appointment="appointment"
+        :key="appointment.id"
+      />
+    </div>
+    <div class="otros_turnos" v-else>
+      <p>Todavía no tienes turnos cancelados</p>
+    </div>
+    <div class="detalle" v-if="completedAppointments.length > 0">
+      <h3>Turno Realizados</h3>
+      <MyTurnCard
+        v-for="appointment of completedAppointments"
+        :appointment="appointment"
+        :key="appointment.id"
+      />
+    </div>
+    <div class="otros_turnos" v-else>
+      <p>Todavía no tienes turnos cancelados</p>
     </div>
   </div>
 </template>
@@ -15,6 +40,38 @@
 <script lang="ts" setup>
 import MyTurnCard from "../components/MyTurnCard.vue";
 import HeroAppointment from "../components/HeroAppointment.vue";
+import useAppointments from "../composables/useAppointments";
+import { computed } from "@vue/reactivity";
+
+const { appointments } = useAppointments("pending");
+
+// Filtra los turnos confirmados
+const confirmedAppointments = computed(() => {
+  if (!appointments.value) {
+    return [];
+  }
+  return appointments.value.filter(
+    (appointment) => appointment.status === "pending"
+  );
+});
+
+const cancelledAppointments = computed(() => {
+  if (!appointments.value) {
+    return [];
+  }
+  return appointments.value.filter(
+    (appointment) => appointment.status === "cancelled"
+  );
+});
+
+const completedAppointments = computed(() => {
+  if (!appointments.value) {
+    return [];
+  }
+  return appointments.value.filter(
+    (appointment) => appointment.status === "completed"
+  );
+});
 </script>
 
 datos fecha vet btns btn_reprogramar btn_cancelar

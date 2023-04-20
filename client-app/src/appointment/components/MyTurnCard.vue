@@ -1,3 +1,14 @@
+<script lang="ts" setup>
+import { Appointment } from "../interfaces/appointments";
+import moment from "moment";
+
+interface Props {
+  appointment: Appointment;
+}
+
+const props = defineProps<Props>();
+</script>
+
 <template>
   <div class="bloque_detalle">
     <div class="datos">
@@ -7,21 +18,27 @@
             src="../../assets/appoinment_img/calender.svg"
             alt="calendario"
           />
-          <p>18/04/2023</p>
+          <p>
+            {{ moment(props.appointment.date).format("DD/MM/YYYY") }}
+          </p>
         </li>
         <li>
           <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
-          <p>10:00</p>
+          <p>{{ moment(props.appointment.date).format("HH:mm:ss") }}</p>
         </li>
       </ul>
       <ul class="vet">
         <li>
           <img src="../../assets/appoinment_img/female.svg" alt="veterinario" />
-          <p>Moreira, Valentina - cardiólogia</p>
+          <p>
+            {{ props.appointment.vet.user.surname }},
+            {{ props.appointment.vet.user.name }} -
+            {{ props.appointment.vet.speciality }}
+          </p>
         </li>
         <li>
           <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
-          <p>Terry</p>
+          <p>{{ props.appointment.pet.name }}</p>
         </li>
       </ul>
     </div>
@@ -31,8 +48,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup></script>
 
 <style lang="css" scoped>
 .bloque_detalle {
