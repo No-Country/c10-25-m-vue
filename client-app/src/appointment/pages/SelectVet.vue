@@ -6,7 +6,7 @@
                 <div class="header">
                   Seleccionar profesionales
                 </div>
-            
+            <SearchVets/>
               </div>
               <ul class="professionals-list">
                 <li v-for="(item, index) in 10" :key="index" class="professional-item">
@@ -24,6 +24,7 @@
 <script lang="ts" setup>
 import SubHeader from '../components/subHeader.vue'
 import ReservationFlow from '../components/ReservationFlow.vue'; 
+import SearchVets from '../components/SearchVets.vue'
 import { ref } from 'vue';
 
 const items = ref([
@@ -70,11 +71,6 @@ $font-family: 'Jost';
 
 
 
-.search-icon {
-   position:absolute; 
-   top:10px; 
-   left:10px; 
-}
 
 .professionals-list {
    list-style:none; 
@@ -94,16 +90,17 @@ $font-family: 'Jost';
       align-items: center;
       align-content: center;
       padding-left:9px;
-     .professional-item {
-       display:flex; 
-       align-items:center; 
-       padding-left:7px;
-
-       &:hover {
+      &:hover {
          cursor:pointer; 
          background:#B6C2FF; 
          border-bottom:1px solid $primary-color; 
        }
+      .professional-item {
+       display:flex; 
+       align-items:center; 
+       padding-left:7px;
+
+      
      }
 
      .avatar {
