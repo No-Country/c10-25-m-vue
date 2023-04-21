@@ -6,8 +6,7 @@ import { useRouter } from "vue-router"; // Importar goToWelcome
 import { LoginFormValues } from "../interfaces/InterfacesAuth";
 import { useUserStore } from "../../store/user";
 import * as yup from "yup";
-
-const URL_API = import.meta.env.VITE_API_URL;
+import clinicApi from "../../api/clinic-api";
 
 export default function useLoginForm() {
   const loginStore = useLoginStore();
@@ -50,7 +49,7 @@ export default function useLoginForm() {
       );
 
       // Enviar petición HTTP POST al endpoint de inicio de sesión
-      const response = await axios.post(URL_API, {
+      const response = await clinicApi.post("/auth/signin", {
         email: loginFormState.email,
         password: loginFormState.password,
       });
