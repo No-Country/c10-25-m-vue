@@ -71,6 +71,14 @@
   font-family: 'Jost';
   font-size: 1.375rem;
   font-weight: 500;
+  cursor: pointer;
+
+}
+.bloque_confirmation button:hover{
+  
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
 
 }
 </style>
