@@ -128,6 +128,11 @@ a {
   /* identical to box height, or 42px */
   color: #2e46ba;
 }
+a:hover{
+  text-decoration: underline;
+  color: #0e1c5f;
+
+}
 .movile-nav {
   width: 80%;
   display: inline-flex;

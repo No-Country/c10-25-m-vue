@@ -108,10 +108,26 @@ h2 {
 }
 
 .modal-form button:hover {
-  background-color: var(--text-nav);
+  
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
 }
 
 .modal-form button:active {
   box-shadow: 2px 2px 3px var(--text-light-btnLogin) inset;
+}
+@media (max-width: 590px) {
+  .modal-content{
+    width: 300px;
+    padding: 10px;
+  }
+  .close{
+    right: 15px;
+  }
+  .modal-form{
+    height: max-content;
+  }
+  
 }
 </style>

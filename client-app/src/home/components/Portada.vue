@@ -108,8 +108,11 @@ import HuellasAnimation from '../components/svg/HuellasAnimation.vue'
   color: #FFFFFF;
 }
 .grid-item button:hover {
-  background: #4f62c1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
+
 }
 
 @media (max-width:986px) {

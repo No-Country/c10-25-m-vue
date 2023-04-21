@@ -43,8 +43,37 @@ const { isLoading, pets } = usePets(+id);
 .content-pets {
   min-height: 43vh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4,1fr);
   gap: 2rem;
   padding: 3rem;
+}
+@media (max-width:1444px) {
+  .content-pets{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+}
+@media (max-width: 1250px) {
+  .content-pets{
+    grid-template-columns: repeat(2,1fr);
+  }
+  
+}
+@media (max-width:865px) {
+  .content-pets{
+    grid-template-columns: repeat(1,1fr);
+    gap: 1rem;
+  }
+  
+}
+@media (max-width: 445px) {
+  .content-pets{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  
 }
 </style>
