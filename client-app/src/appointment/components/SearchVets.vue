@@ -1,24 +1,23 @@
-
-
 <template>
   <div>
     <div class="search-container">
-      <input type="text" placeholder="Buscar..." v-model="searchSpeciality" @input="updateSearch" />
+      <input type="text" placeholder="Busqueda por especialista..." v-model="searchSpeciality" @input="updateSearch" />
       <img src="../../assets/appoinment_img/seacrh_icon.svg" class="search-icon" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, inject, ref, provide } from 'vue';
+import { useAppointmentStore } from '../../store/appointment';
 export default defineComponent({
   setup() {
+    const storeSearchVets = useAppointmentStore();
     const searchSpeciality = ref('');
+    const noMatches = ref(false);
     const searchResults = inject<{ id: number; reason: string; speciality: string }[]>('searchResults')!;
-
-
+    provide('noMatches', noMatches);  
     const updateSearch = (event: Event) => {
-      const searchSpeciality = (event.target as HTMLInputElement).value;
       // Realiza la búsqueda en el array de items
       const items = [
         { id: 1, reason: 'Moreira, Valentina - Cardióloga', speciality: 'cardiología' },
@@ -29,11 +28,22 @@ export default defineComponent({
         { id: 6, reason: 'González, Pablo - Médico clínico', speciality: 'medicina clínica' },
       ];
       const results = items.filter((item) => 
-      item.speciality.includes(searchSpeciality));
-      // Actualiza los resultados de la búsqueda
-      searchResults.value = [...results];
-    }
+      item.speciality.includes(searchSpeciality.value));
+   
+       // Check if results array is empty
+         // Check if results array is empty
+      if (results.length === 0) {
+        // Update noMatches ref
+        storeSearchVets.setNoMatches(true);
+        searchResults.value = [];     
 
+      } else {
+        // Actualiza los resultados de la búsqueda
+        searchResults.value = [...results];
+        storeSearchVets.setNoMatches(false);
+      } 
+    }
+     
     return {
       updateSearch,
       searchSpeciality,

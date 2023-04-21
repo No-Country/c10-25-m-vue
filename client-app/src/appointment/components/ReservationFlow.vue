@@ -2,9 +2,9 @@
     <div>
         <div class="detalle">
       <div class="container-contador-proceso">
-        <span v-for="(item, index) in items" :key="index" :class="{ 'inactive': item.id !== activeItem }"
-          :style="{ backgroundColor: item.id !== activeItem ? '#8A8F97' : '' }">
-          {{ index + 1 }}
+        <span v-for="(item, index) in routesFlow" :key="index" :class="{ 'inactive': index !== activeItem }"
+          :style="{ backgroundColor: index !== activeItem ? '#8A8F97' : '' }">
+          {{ index +1 }}
         </span>
       </div>
       <div class="bloque_detalle">
@@ -13,17 +13,22 @@
         </div>
       </div>
       <div class="btn-group-reserva">
-        <button class="btn-atras">Atrás</button>
-        <button class="btn_active">Siguiente</button>
+        <button class="btn-atras" @click="prevRoute">Atrás</button>
+        <button class="btn_active" @click="nextRoute">Siguiente</button>
       </div>
     </div>
     </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref, defineComponent, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAppointmentStore } from '../../store/appointment';
+
 export default defineComponent({
   setup() {
+    const router = useRouter();
+    const currentRoute = router.currentRoute.value.path;
 
     const items = ref([
   { id: 1, name: 'Item 1' },
@@ -32,9 +37,30 @@ export default defineComponent({
   { id: 4, name: 'Item 4' },
 ]);
 
-const activeItem = ref(1);
+  const storeSearchVets = useAppointmentStore();
+  const currentRouteIndexRefresh = storeSearchVets.routes.indexOf(currentRoute);
+  const currentRouteIndex = storeSearchVets.currentRouteIndex;
+  const routesFlow = storeSearchVets.routes
 
-    return {}
+  if (currentRouteIndexRefresh !== -1) {
+      storeSearchVets.currentRouteIndex = currentRouteIndexRefresh;
+    }
+    
+    
+  watch(() => storeSearchVets.currentRouteIndex, () => {
+    router.push(storeSearchVets.routes[storeSearchVets.currentRouteIndex]);
+  });
+
+  const nextRoute = () => {
+    console.log("click")
+    storeSearchVets.nextRoute();
+}
+  const prevRoute = () => {
+    storeSearchVets.prevRoute();
+  }
+  const activeItem = ref(currentRouteIndexRefresh); 
+  
+    return { activeItem, nextRoute, prevRoute, items, routesFlow }
   }
 });
 

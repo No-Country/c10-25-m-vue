@@ -4,7 +4,7 @@
      <ReservationFlow>
       <div class="container-header">
       <div class="header">
-                  Seleccionar profesionales
+        Completá los datos de tu mascota
                 </div>
         </div>
         <div class="professionals-list">

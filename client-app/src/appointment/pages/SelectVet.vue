@@ -12,36 +12,38 @@
       </ReservationFlow>
   </div>
 </template>
+
 <script lang="ts">
-import { defineComponent, provide, reactive, ref } from 'vue';
+import { defineComponent, provide, ref, computed } from 'vue';
 import SubHeader from '../components/subHeader.vue'
 import ReservationFlow from '../components/ReservationFlow.vue'; 
 import SearchVets from '../components/SearchVets.vue'
 import ListEspecalist from '../components/ListEspecialist.vue'
+import { useAppointmentStore } from '../../store/appointment';
 export default defineComponent({
+
   components: {
     SubHeader,
     ReservationFlow,
     SearchVets,
     ListEspecalist
   },
+
   setup() {
+    const storeSearchVets = useAppointmentStore();
     const searchResults = ref<{ id: number; reason: string; speciality: string }[]>([
-      { id: 1, reason: 'Moreira, Valentina - Cardióloga', speciality: 'cardiología' },
-      { id: 2, reason: 'Serra, Vicente - Cardiólogo', speciality: 'cardiología' },
-      { id: 3, reason: 'Zampa, Lucía - Laboratorio', speciality: 'laboratorio' },
-      { id: 4, reason: 'Ortiz, Adriana - Dermatóloga', speciality: 'dermatología' },
-      { id: 5, reason: 'Serna, Natalia - Médica clínica', speciality: 'medicina clínica' },
+      { id: 1, reason: 'Moreira, Valentina - Cardióloga',  speciality: 'cardiología' },
+      { id: 2, reason: 'Serra, Vicente - Cardiólogo',      speciality: 'cardiología' },
+      { id: 3, reason: 'Zampa, Lucía - Laboratorio',       speciality: 'laboratorio' },
+      { id: 4, reason: 'Ortiz, Adriana - Dermatóloga',     speciality: 'dermatología' },
+      { id: 5, reason: 'Serna, Natalia - Médica clínica',  speciality: 'medicina clínica' },
       { id: 6, reason: 'González, Pablo - Médico clínico', speciality: 'medicina clínica' },
     ]);
-
+    const selectedVetId = computed(() => storeSearchVets.selectedVetId);
     provide('searchResults', searchResults);
-
-    
-    return {};
+    return {selectedVetId};
   },
 });
-
 </script>
 
 <style scoped lang="scss">
@@ -75,11 +77,6 @@ $font-family: 'Jost';
    background:$primary-color; 
    @include font-styles(500,22px);
 }
-
-
-
-
-
 
 .professionals-list-container {
    width:400px; 

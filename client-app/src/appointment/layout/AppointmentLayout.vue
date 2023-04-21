@@ -9,7 +9,7 @@
     </main>
     <footer>
       <!-- footer content goes here -->
-      <Footer />
+      <!-- <Footer /> -->
     </footer>
   </div>
 </template>

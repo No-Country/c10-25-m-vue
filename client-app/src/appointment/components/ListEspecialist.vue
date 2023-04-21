@@ -1,23 +1,45 @@
 <template>
     <ul class="professionals-list">
-      <li v-for="(item, index) in searchResults" :key="index" class="professional-item">
+      <li v-for="(item, index) in searchResults" :key="index" 
+          class="professional-item" 
+         @click="selectVet(item.id, index)"
+         :class="{ 'selected': index === selectedIndex }"
+         >
         <img :src="`../../src/assets/appoinment_img/avatar-${index + 1}.png`" alt="Avatar" class="avatar" />
         <div class="professional-info">
           <div class="name">{{ item.reason }}</div>
+        </div>
+      </li>
+      <li v-if="noMatches" class="professional-item">
+        <div class="professional-info">
+        <div class="name">No hay coincidencias 🐶, intente una nueva busqueda.</div>
         </div>
       </li>
     </ul>
 </template>
   
   <script lang="ts">
-  import { defineComponent, inject } from 'vue';
-  
+  import { defineComponent, inject, computed, ref } from 'vue';
+  import { useAppointmentStore } from '../../store/appointment';
   export default defineComponent({
     setup() {
+      const storeSearchVets = useAppointmentStore();
       const searchResults = inject<{ id: number; reason: string; speciality: string }[]>('searchResults')!;
+      const noMatches = computed(() => storeSearchVets.noMatches);
+      const selectedIndex = ref<number>(); 
+      
+      const selectVet = (vetId: number, index: number) => {
+        storeSearchVets.setSelectedVetId(vetId);
+        selectedIndex.value = index;
+    }
+
+
 
       return {
         searchResults,
+        noMatches,
+        selectVet,
+        selectedIndex
       };
     },
   });
@@ -63,14 +85,15 @@ $font-family: 'Jost';
          background:#B6C2FF; 
          border-bottom:1px solid $primary-color; 
        }
+      &.selected {
+        background:#B6C2FF; 
+         border-bottom:1px solid $primary-color; 
+        }
       .professional-item {
        display:flex; 
        align-items:center; 
        padding-left:7px;
-      
-      
      }
-
      .avatar {
        width:34px; 
        height:35px; 
@@ -84,7 +107,7 @@ $font-family: 'Jost';
        gap:3px;
 
        .reason,
-       .city {
+       .name {
          @include font-styles(500,20px);
          line-height:29px;
          display:flex;
