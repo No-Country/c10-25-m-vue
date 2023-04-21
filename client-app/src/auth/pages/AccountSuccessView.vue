@@ -1,41 +1,27 @@
 <template>
-    <div class="login-container">
-      <div class="login-grid">
-        <div class="login-image">
-          <img :src="imagenPortadaRegister" alt="Login Image" />
-        </div>
-        <div class="login-form">
+  <div class="login-container">
+    <div class="login-grid">
+      <div class="login-image">
+        <img :src="imagenPortadaRegister" alt="Login Image" />
+      </div>
+      <div class="login-form">
         <AccountCreationSuccess />
       </div>
-      </div>
-      <ServerMessage :type="'error'" :message="signupStore.serverError ?? undefined" />
     </div>
+    <ServerMessage
+      :type="'error'"
+      :message="signupStore.serverError ?? undefined"
+    />
+  </div>
 </template>
-  
 
-
-<script lang="ts">
+<script lang="ts" setup>
 import AccountCreationSuccess from "../components/AccountCreationSuccess.vue";
 import imagenPortadaRegister from "../../assets/auth/primer-plano-gato-lamiendo-oreja-conejo-aislado-blanco-removebg-preview 1.png";
-import LogoInterno from "../../shared/LogoInterno.vue";
-import ServerMessage from "../components/ServerMessage.vue"
-import { useSignupStore } from '../../store/auth/signup'
-import { defineComponent  } from "vue";
-export default defineComponent({
-  components: {
-    LogoInterno,
-    ServerMessage,
-    AccountCreationSuccess
-  },
-  
-setup() {
-    const signupStore = useSignupStore()
-    return{
-        imagenPortadaRegister,
-        signupStore
-    }
-}
-});
+import ServerMessage from "../components/ServerMessage.vue";
+import { useSignupStore } from "../../store/auth/signup";
+
+const signupStore = useSignupStore();
 </script>
 
 <style scoped lang="scss">
@@ -63,15 +49,14 @@ form button:hover {
 
 @media (min-width: 800px) {
   .login-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-}
-.login-image {
-  display: flex;
-  justify-content: center;
-}
-
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+  .login-image {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 // mobile
@@ -85,11 +70,9 @@ form button:hover {
   }
 
   .login-image {
- display: none;
- 
+    display: none;
+  }
 }
-}
-
 
 .container_btn {
   display: flex;
@@ -123,7 +106,6 @@ form button:hover {
   color: #383b43;
 }
 
-
 .form-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -132,6 +114,4 @@ form button:hover {
   justify-content: center;
   padding-top: 15px;
 }
-
-
 </style>
