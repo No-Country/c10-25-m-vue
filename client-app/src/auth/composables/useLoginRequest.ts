@@ -7,7 +7,7 @@ import { LoginFormValues } from "../interfaces/InterfacesAuth";
 import { useUserStore } from "../../store/user";
 import * as yup from "yup";
 
-const URL_API = "http://localhost:3001/api/v1/auth/signin";
+const URL_API = import.meta.env.VITE_API_URL;
 
 export default function useLoginForm() {
   const loginStore = useLoginStore();
