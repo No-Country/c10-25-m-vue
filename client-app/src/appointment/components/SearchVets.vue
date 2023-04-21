@@ -1,14 +1,42 @@
+
+
 <template>
-    <div>
-        <div class="search-container">
-                  <input type="text" placeholder="Buscar..." />
-                  <img src="../../assets/appoinment_img/seacrh_icon.svg" class="search-icon">
-                </div>
+  <div>
+    <div class="search-container">
+      <input type="text" placeholder="Buscar..." v-model="searchSpeciality" />
+      <img src="../../assets/appoinment_img/seacrh_icon.svg" class="search-icon" />
     </div>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent, inject, ref, watch } from 'vue';
+export default defineComponent({
+  setup() {
+    const searchSpeciality = ref('');
+    const searchResults = inject<{ id: number; reason: string; speciality: string }[]>('searchResults')!;
 
+    watch(searchSpeciality, () => {
+      // Realiza la búsqueda en el array de items
+      const items = [
+        { id: 1, reason: 'Moreira, Valentina - Cardióloga', speciality: 'cardiología' },
+        { id: 2, reason: 'Serra, Vicente - Cardiólogo', speciality: 'cardiología' },
+        { id: 3, reason: 'Zampa, Lucía - Laboratorio', speciality: 'laboratorio' },
+        { id: 4, reason: 'Ortiz, Adriana - Dermatóloga', speciality: 'dermatología' },
+        { id: 5, reason: 'Serna, Natalia - Médica clínica', speciality: 'medicina clínica' },
+        { id: 6, reason: 'González, Pablo - Médico clínico', speciality: 'medicina clínica' },
+      ];
+      const results = items.filter((item) => item.speciality.includes(searchSpeciality.value));
+      // Actualiza los resultados de la búsqueda
+      searchResults.splice(0, searchResults.length,...results);
+    });
+
+    return {
+      searchSpeciality,
+     
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">
