@@ -1,26 +1,32 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
     <Logo />
-    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
-      <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
-        link.title
-      }}</RouterLink>
+    <div class="movile-nav" :class="{ activo: !movileNavActivo }">
+      <RouterLink
+        v-for="link of props.links"
+        :key="link.path"
+        :to="link.path"
+        >{{ link.title }}</RouterLink
+      >
       <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
       <div class="btn-container-session">
-        <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-        ">
+        <button
+          @click="toggleLogoutModal"
+          :class="
+            !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+          "
+        >
           <img src="./../assets/home_img/A.png" alt="" />
         </button>
         <span v-if="isLogoutModalOpen" class="logout-btn">
-          <p @click="logout">
-            Cerrar Sesión</p>
+          <p @click="logout">Cerrar Sesión</p>
         </span>
       </div>
     </div>
     <div class="burger">
-      <button @click="movileNavActivo=!movileNavActivo">
-        <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa">
-      </button>  
+      <button @click="movileNavActivo = !movileNavActivo">
+        <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa" />
+      </button>
     </div>
   </div>
 </template>
@@ -32,13 +38,18 @@ import Logo from "./LogoHeader.vue";
 import type { RouterLink } from "../router/link-routes";
 import useLogoutModal from "../auth/composables/useLogoutModal";
 import useRenew from "../composables/useRenew";
+import { useUserStore } from "../store/user";
+import { storeToRefs } from "pinia";
 interface Props {
   links: RouterLink[];
 }
 
 useRenew();
 
-const userid = 2;
+const store = useUserStore();
+const { user } = storeToRefs(store);
+
+const userid = user.value?.id;
 
 const props = withDefaults(defineProps<Props>(), {
   links: () => [],
@@ -48,8 +59,7 @@ const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
 
-let movileNavActivo = false
-
+let movileNavActivo = false;
 </script>
 
 <style lang="scss" scoped>
@@ -118,13 +128,12 @@ a {
   /* identical to box height, or 42px */
   color: #2e46ba;
 }
-.movile-nav{
+.movile-nav {
   width: 80%;
   display: inline-flex;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   align-content: center;
   align-items: center;
-
 }
 
 .header-container-with-logo-nav-registration nav {
@@ -203,9 +212,8 @@ a {
     flex-direction: column;
     justify-self: center;
     align-self: center;
-    
   }
-  .btn-container-session button{
+  .btn-container-session button {
     margin: auto;
   }
   .btn-container-session .btn__on-background {
@@ -229,22 +237,22 @@ a {
 }
 
 @media (max-width: 530px) {
-  .header-container-with-logo-nav-registration{
+  .header-container-with-logo-nav-registration {
     justify-content: space-around;
   }
-  .burger{
+  .burger {
     margin-right: 5%;
   }
-  .movile-nav{
+  .movile-nav {
     width: 90%;
   }
 }
-@media (max-width:410px) {
-  .movile-nav{
+@media (max-width: 410px) {
+  .movile-nav {
     position: absolute;
     right: 5%;
   }
-  .burger{
+  .burger {
     position: absolute;
     right: 5%;
   }
