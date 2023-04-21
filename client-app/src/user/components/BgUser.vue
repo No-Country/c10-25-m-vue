@@ -106,12 +106,12 @@ return {
     width: 100%;
     display: inline-flex;
     flex-direction: column;
-    z-index: -1;
+    z-index: -3;
     position: relative;
 
   }
   .perfil_deco{
-    z-index: 2;
+    z-index: -2;
     position: absolute;
     right: 33%;
     bottom: 1%;

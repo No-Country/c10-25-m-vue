@@ -15,7 +15,7 @@ const props = defineProps<Props>();
     <div class="card-pet__data">
       <h3>{{ props.pet.name }}</h3>
       <p>{{ props.pet.animal.name }}</p>
-      <p>Macho</p>
+      
     </div>
     <div class="card-pet__options-icons">
       <i class="fa-solid fa-pen"></i>
@@ -31,7 +31,8 @@ const props = defineProps<Props>();
   align-items: center;
   border-radius: 5px;
   border: 1px solid #ccc;
-  width: 100%;
+  width: min-max(300px, 100%);
+  /* 100%; */
   height: 200px;
   box-shadow: 2px 2px 4px #ddd;
   overflow: hidden;
@@ -76,6 +77,7 @@ const props = defineProps<Props>();
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .card-pet__options-icons i {
@@ -110,6 +112,7 @@ const props = defineProps<Props>();
     width: 100%;
     justify-content: center;
     margin-top: 1rem;
+    gap: 8px;
   }
 }
 </style>

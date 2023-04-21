@@ -51,14 +51,16 @@ const props = defineProps<Props>();
 
 <style lang="css" scoped>
 .bloque_detalle {
-  width: 45%;
+  width: min-max (300px, 400px);
+  
   margin: 2rem 0 2rem 0;
+
   background-color: var(--bg-header);
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 15px;
-}
 
+}
 .datos {
   margin: 3rem 2rem 1rem 2rem;
   display: inline-flex;
@@ -104,6 +106,12 @@ const props = defineProps<Props>();
   border: 3px solid #3a57e8;
   box-shadow: 0px 2px 4px #8a8f97;
   border-radius: 10px;
+  cursor: pointer;
+}
+.btn_reprogramar:hover{
+  background-color: var(--bg-btn);
+  color:var(--color-bg);
+  border: 3px solid #3A57E8;
 }
 .btn_cancelar {
   height: max-content;
@@ -118,5 +126,31 @@ const props = defineProps<Props>();
 
   box-shadow: 0px 2px 4px #8a8f97;
   border-radius: 10px;
+  cursor: pointer;
+}
+.btn_cancelar:hover{
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
+}
+
+@media (max-width: 865px) {
+  .bloque_detalle{
+    margin: 1rem 0 1rem 0;
+  } 
+}
+
+@media (max-width: 445px) {
+  .btns{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  .btn_cancelar{
+    margin: auto;
+  }
+  
 }
 </style>
