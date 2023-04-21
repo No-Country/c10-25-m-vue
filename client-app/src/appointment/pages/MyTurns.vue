@@ -2,7 +2,7 @@
   <div class="abstract">
     <HeroAppointment />
     <div class="detalle" v-if="confirmedAppointments.length > 0">
-      <h3>Turnos Pendientes</h3>
+      <h3>Turnos Confirmados</h3>
       <MyTurnCard
         v-for="appointment of confirmedAppointments"
         :appointment="appointment"
@@ -12,12 +12,10 @@
     <div class="detalle" v-else>
       <h3>No tienes turnos pendientes</h3>
     </div>
-    <div class="detalle">
-      <h3>Turnos confirmados</h3>
-
+    
+    
     <!-- !agregando turnos, hay 2 lineas vacias por bloque
-
-
+      
       <div class="bloque_detalle">
         <div class="datos">
           <ul class="fecha">
@@ -26,7 +24,7 @@
                 src="../../assets/appoinment_img/calender.svg"
                 alt="calendario"
               />
-              <p>18/04/2023</p>
+              <p>20/04/2023</p>
             </li>
             <li>
               <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
@@ -36,8 +34,8 @@
           <ul class="vet">
             <li>
               <img
-                src="../../assets/appoinment_img/female.svg"
-                alt="veterinario"
+              src="../../assets/appoinment_img/female.svg"
+              alt="veterinario"
               />
               <p>Moreira, Valentina - cardiólogia</p>
             </li>
@@ -52,7 +50,7 @@
           <button class="btn_cancelar">Cancelar</button>
         </div>
       </div>
-
+      
       
       <div class="bloque_detalle">
         <div class="datos">
@@ -162,28 +160,99 @@
       </div>
       -->
 
-      <h3>Turnos cancelados</h3>
     <div class="detalle" v-if="cancelledAppointments.length > 0">
-      <MyTurnCard
-        v-for="appointment of cancelledAppointments"
-        :appointment="appointment"
-        :key="appointment.id"
-      />
+      <h3>Turnos cancelados</h3>
+        <MyTurnCard
+          v-for="appointment of cancelledAppointments"
+          :appointment="appointment"
+          :key="appointment.id"
+        />
+      <!-- <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+                src="../../assets/appoinment_img/calender.svg"
+                alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+                src="../../assets/appoinment_img/female.svg"
+                alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div>
+      </div> -->
     </div>
     <div class="otros_turnos" v-else>
       <p>Todavía no tienes turnos cancelados</p>
     </div>
+    
+    
     <div class="detalle" v-if="completedAppointments.length > 0">
       <h3>Turno Realizados</h3>
-      <MyTurnCard
-        v-for="appointment of completedAppointments"
-        :appointment="appointment"
-        :key="appointment.id"
-      />
+        <MyTurnCard
+          v-for="appointment of completedAppointments"
+          :appointment="appointment"
+          :key="appointment.id"
+        />
     </div>
-  </div>
+      <!-- <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+                src="../../assets/appoinment_img/calender.svg"
+                alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+                src="../../assets/appoinment_img/female.svg"
+                alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div> 
+      </div>-->
     
   </div>
+    
+
 </template>
 
 <script lang="ts" setup>
