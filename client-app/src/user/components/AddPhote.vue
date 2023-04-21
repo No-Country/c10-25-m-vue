@@ -22,6 +22,7 @@
 }
 .letra_nombre {
   width: 65px;
+  height: 63px;
   background-image: url(../../assets/user_img/circulo_perfil.png);
   background-repeat: no-repeat;
   background-size: cover;
