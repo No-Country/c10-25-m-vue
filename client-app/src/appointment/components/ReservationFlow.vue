@@ -20,10 +20,12 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script lang="ts">
+import { ref, defineComponent } from 'vue';
+export default defineComponent({
+  setup() {
 
-const items = ref([
+    const items = ref([
   { id: 1, name: 'Item 1' },
   { id: 2, name: 'Item 2' },
   { id: 3, name: 'Item 3' },
@@ -31,6 +33,11 @@ const items = ref([
 ]);
 
 const activeItem = ref(1);
+
+    return {}
+  }
+});
+
 </script>
 
 <style scoped lang="scss">

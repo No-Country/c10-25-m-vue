@@ -8,7 +8,6 @@
                   </div>
             <SearchVets/>
               </div>
-              {{ searchResults }}
               <ListEspecalist/>
       </ReservationFlow>
   </div>
@@ -19,7 +18,6 @@ import SubHeader from '../components/subHeader.vue'
 import ReservationFlow from '../components/ReservationFlow.vue'; 
 import SearchVets from '../components/SearchVets.vue'
 import ListEspecalist from '../components/ListEspecialist.vue'
-import { Appointment } from '../interfaces/appointments';
 export default defineComponent({
   components: {
     SubHeader,

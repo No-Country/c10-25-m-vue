@@ -15,9 +15,15 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
   import Huellas from "../../assets/appoinment_img/huellas_appointment.png"
-  
+  import { defineComponent } from 'vue';
+export default defineComponent({
+  setup() {
+    return {}
+  }
+});
+
 </script>
 
 <style scoped lang="scss">

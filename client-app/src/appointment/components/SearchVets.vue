@@ -3,20 +3,22 @@
 <template>
   <div>
     <div class="search-container">
-      <input type="text" placeholder="Buscar..." v-model="searchSpeciality" />
+      <input type="text" placeholder="Buscar..." v-model="searchSpeciality" @input="updateSearch" />
       <img src="../../assets/appoinment_img/seacrh_icon.svg" class="search-icon" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref, watch } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
 export default defineComponent({
   setup() {
     const searchSpeciality = ref('');
     const searchResults = inject<{ id: number; reason: string; speciality: string }[]>('searchResults')!;
 
-    watch(searchSpeciality, () => {
+
+    const updateSearch = (event: Event) => {
+      const searchSpeciality = (event.target as HTMLInputElement).value;
       // Realiza la búsqueda en el array de items
       const items = [
         { id: 1, reason: 'Moreira, Valentina - Cardióloga', speciality: 'cardiología' },
@@ -26,12 +28,14 @@ export default defineComponent({
         { id: 5, reason: 'Serna, Natalia - Médica clínica', speciality: 'medicina clínica' },
         { id: 6, reason: 'González, Pablo - Médico clínico', speciality: 'medicina clínica' },
       ];
-      const results = items.filter((item) => item.speciality.includes(searchSpeciality.value));
+      const results = items.filter((item) => 
+      item.speciality.includes(searchSpeciality));
       // Actualiza los resultados de la búsqueda
-      searchResults.splice(0, searchResults.length,...results);
-    });
+      searchResults.value = [...results];
+    }
 
     return {
+      updateSearch,
       searchSpeciality,
      
     };
