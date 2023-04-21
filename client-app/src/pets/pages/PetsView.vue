@@ -3,7 +3,7 @@
   <section class="section-main" v-if="pets">
     <div class="content-h3" v-if="pets.length <= 0">
       <h3>
-        Acá vas a encontrar los datos de tu mascota después de que reserver un
+        Acá vas a encontrar los datos de tu mascota después de que reserves un
         turno
       </h3>
     </div>

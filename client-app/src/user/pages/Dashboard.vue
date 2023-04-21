@@ -27,6 +27,7 @@ const hasAppointments = ref(true);
           <span v-if="!hasAppointments" class="texto-interno"
             >Todavía no tenés próximos turnos.</span
           >
+          <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
           <div class="appoinments">
             <div class="time-appoinment">
               <span>
@@ -53,9 +54,8 @@ const hasAppointments = ref(true);
           </div>
           
           
-        </span>
+        
 
-        <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
 
         <div class="appoinments">
           <div class="time-appoinment">
@@ -190,6 +190,7 @@ const hasAppointments = ref(true);
 
 
       -->
+        </span>
         <button>Reservar un turno</button>
 
         <div class="pawprint_user">

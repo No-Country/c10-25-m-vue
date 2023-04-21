@@ -14,6 +14,10 @@
     </div>
     <div class="detalle">
       <h3>Turnos confirmados</h3>
+
+    <!-- !agregando turnos, hay 2 lineas vacias por bloque
+
+
       <div class="bloque_detalle">
         <div class="datos">
           <ul class="fecha">
@@ -121,7 +125,6 @@
         </div>
       </div>
       
-      <!-- !agregando turnos, hay 2 lineas vacias por bloque
 
       <div class="bloque_detalle">
         <div class="datos">
