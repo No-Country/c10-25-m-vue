@@ -51,6 +51,7 @@ const changeIsOpen = () => {
     display: inline-flex;
     justify-content: center;
     align-content: center;
+  
   }
   
 }

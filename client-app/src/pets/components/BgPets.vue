@@ -53,18 +53,25 @@
   height: max-content;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 .mascotas_deco{
   height: 12rem;
-  margin-left: 11rem;
+  margin-left: -4rem;
   display:inline-flex;
   flex-direction: row-reverse;
   justify-content: center;
+  align-content: baseline;
+  align-items: baseline;
+  position: relative;
 
 }
 .mascotas_deco img{
   height: 14.2rem;
   margin-top: -3rem;
+  position: absolute;
+  top: 19%;
+  left: 80%;
 }
 .mascotas_deco h1{
   font-family: Jost;
@@ -73,6 +80,14 @@
   align-self: center;
   
 }
-
+@media (max-width:417px) {
+  .mascotas_deco{
+    margin-left: -8rem;
+  }
+  .mascotas_deco img{
+    left: 70%;
+  }
+  
+}
 
 </style>

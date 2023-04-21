@@ -2,13 +2,13 @@
   <footer
     :style="!isOnHomePage && isOnDashboardPage ? 'background:#fffefe;' : ''"
   >
-    <div
+    <div 
       :class="
         isAuthenticated && !isOnHomePage
           ? 'fondo-footer-sessionOn'
           : 'container-footer'
       "
-    >
+      >
       <div class="logo_footer" @click="goToHome()">
         <img :src="imagenLogo" alt="Logo" />
         <div class="titulo_footer">
@@ -113,18 +113,27 @@ export default defineComponent({
 <style lang="scss" scoped>
 .fondo-footer-sessionOn {
   background-image: url(/src/assets/home_img/footer_logeado.png);
-  height: 308px;
+  height: max-content;
+  // height: 308px;
   background-repeat: no-repeat;
   background-size: cover;
   justify-content: space-around;
   padding: 3em 1em 0em 1em;
-  display: flex;
+
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  align-items: center;
   max-width: 100%;
+  
   color: var(--text-footer);
   font-family: Jost;
   font-size: 1.125rem;
   position: relative;
   align-items: center;
+  
 }
 
 .seguinos-sessionOn {
@@ -222,6 +231,9 @@ export default defineComponent({
   display: none;
 }
 @media (min-width: 618px) {
+  .fondo-footer-sessionOn{
+    display: flex;
+  }
   .container-footer {
     width: 100%;
   }
@@ -230,6 +242,12 @@ export default defineComponent({
   }
 }
 @media (min-width: 1200px) {
+  .fondo-footer-sessionOn{
+    height: 308px;
+    flex-direction: row;
+    justify-self: center;
+    align-items:flex-start;
+  }
   .container-footer {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr 1fr;

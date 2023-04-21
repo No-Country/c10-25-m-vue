@@ -25,5 +25,14 @@ const props = defineProps({
   padding: 8px 16px;
   box-shadow: 0 2px 4px rgba(58, 87, 232, 0.3);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
 }
+.editar_btn:hover{
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
+}
+
 </style>

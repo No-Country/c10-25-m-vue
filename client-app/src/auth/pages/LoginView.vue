@@ -221,8 +221,10 @@ form button {
 }
 
 form button:hover {
-  background: #4f62c1;
+  background:var(--bg-btnLight);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: var(--bg-btn);
+  border: 2px solid var(--bg-btn);
 }
 
 input[type="checkbox"] {

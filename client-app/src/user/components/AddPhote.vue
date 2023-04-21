@@ -12,19 +12,22 @@
 
 <style scoped>
 .agregar_foto {
-  width: 10rem;
+  width:max-content;
   color: var(--bg-btn);
   margin-left: 3.8rem;
   display: flex;
   justify-content: left;
+  align-content: center;
+  
 
   gap: 0.8rem;
 }
 .letra_nombre {
-  width: 65px;
+  width: 63px;
+  height: 63px;
   background-image: url(../../assets/user_img/circulo_perfil.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:contain;
   background-position: center;
 
   display: inline-flex;
@@ -35,15 +38,17 @@
 .letra_nombre p {
   font-family: Jost;
   font-weight: 700;
-  font-size: small;
+  font-size: 1.25rem;
   margin-bottom: 10px;
 
 }
 .agregar_foto button {
-  height: 2.3em;
+  width: max-content;
+  height: 3rem;
   color: var(--bg-btn);
   background-color: white;
   cursor: pointer;
-  font-size: medium;
+  font-weight: 400;
+  font-size: 20px;
 }
 </style>
