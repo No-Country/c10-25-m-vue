@@ -49,79 +49,79 @@
         </div>
       </div>
 
+      
+      <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+              src="../../assets/appoinment_img/calender.svg"
+              alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+              src="../../assets/appoinment_img/female.svg"
+              alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div>
+      </div>
+      
+      
+      <div class="bloque_detalle">
+        <div class="datos">
+          <ul class="fecha">
+            <li>
+              <img
+                src="../../assets/appoinment_img/calender.svg"
+                alt="calendario"
+              />
+              <p>18/04/2023</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
+              <p>10:00</p>
+            </li>
+          </ul>
+          <ul class="vet">
+            <li>
+              <img
+              src="../../assets/appoinment_img/female.svg"
+              alt="veterinario"
+              />
+              <p>Moreira, Valentina - cardiólogia</p>
+            </li>
+            <li>
+              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
+              <p>Terry</p>
+            </li>
+          </ul>
+        </div>
+        <div class="btns">
+          <button class="btn_reprogramar">Reprogramar</button>
+          <button class="btn_cancelar">Cancelar</button>
+        </div>
+      </div>
+      
       <!-- !agregando turnos, hay 2 lineas vacias por bloque
-
-      <div class="bloque_detalle">
-        <div class="datos">
-          <ul class="fecha">
-            <li>
-              <img
-                src="../../assets/appoinment_img/calender.svg"
-                alt="calendario"
-              />
-              <p>18/04/2023</p>
-            </li>
-            <li>
-              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
-              <p>10:00</p>
-            </li>
-          </ul>
-          <ul class="vet">
-            <li>
-              <img
-                src="../../assets/appoinment_img/female.svg"
-                alt="veterinario"
-              />
-              <p>Moreira, Valentina - cardiólogia</p>
-            </li>
-            <li>
-              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
-              <p>Terry</p>
-            </li>
-          </ul>
-        </div>
-        <div class="btns">
-          <button class="btn_reprogramar">Reprogramar</button>
-          <button class="btn_cancelar">Cancelar</button>
-        </div>
-      </div>
-
-
-      <div class="bloque_detalle">
-        <div class="datos">
-          <ul class="fecha">
-            <li>
-              <img
-                src="../../assets/appoinment_img/calender.svg"
-                alt="calendario"
-              />
-              <p>18/04/2023</p>
-            </li>
-            <li>
-              <img src="../../assets/appoinment_img/time.svg" alt="reloj" />
-              <p>10:00</p>
-            </li>
-          </ul>
-          <ul class="vet">
-            <li>
-              <img
-                src="../../assets/appoinment_img/female.svg"
-                alt="veterinario"
-              />
-              <p>Moreira, Valentina - cardiólogia</p>
-            </li>
-            <li>
-              <img src="../../assets/appoinment_img/pets.svg" alt="perro" />
-              <p>Terry</p>
-            </li>
-          </ul>
-        </div>
-        <div class="btns">
-          <button class="btn_reprogramar">Reprogramar</button>
-          <button class="btn_cancelar">Cancelar</button>
-        </div>
-      </div>
-
 
       <div class="bloque_detalle">
         <div class="datos">
@@ -161,7 +161,6 @@
 
       <h3>Turnos cancelados</h3>
     <div class="detalle" v-if="cancelledAppointments.length > 0">
-      <h3>Turno cancelados</h3>
       <MyTurnCard
         v-for="appointment of cancelledAppointments"
         :appointment="appointment"
@@ -179,10 +178,8 @@
         :key="appointment.id"
       />
     </div>
-    <div class="otros_turnos" v-else>
-      <p>Todavía no tienes turnos cancelados</p>
-    </div>
   </div>
+    
   </div>
 </template>
 
@@ -289,7 +286,7 @@ datos fecha vet btns btn_reprogramar btn_cancelar
   grid-column: span 3;
 }
 .bloque_detalle {
-  width: min-max(300px, 45%);
+  width: min-max (300px, 400px);
   
   margin: 2rem 0 2rem 0;
 
@@ -344,6 +341,12 @@ datos fecha vet btns btn_reprogramar btn_cancelar
   border: 3px solid #3a57e8;
   box-shadow: 0px 2px 4px #8a8f97;
   border-radius: 10px;
+  cursor: pointer;
+}
+.btn_reprogramar:hover{
+  background-color: var(--bg-btn);
+  color:var(--color-bg);
+  border: 3px solid #3A57E8;
 }
 .btn_cancelar {
   height: max-content;
@@ -358,12 +361,21 @@ datos fecha vet btns btn_reprogramar btn_cancelar
 
   box-shadow: 0px 2px 4px #8a8f97;
   border-radius: 10px;
+  cursor: pointer;
+}
+.btn_cancelar:hover{
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
 }
 .otros_turnos {
+  width: 100%;
   height: 10rem;
   color: black;
   margin: 1rem;
   font-size: 1.25rem;
+
+  grid-column: span 3;
 }
 @media (max-width: 1243px) {
   .detalle {
@@ -374,10 +386,14 @@ datos fecha vet btns btn_reprogramar btn_cancelar
   .detalle h3{
     grid-column: span 2;
   }
-  
+  .otros_turnos{
+    grid-column: span 2;
+
+  }
 }
 @media (max-width: 865px) {
   .bloque_detalle{
+    width: min-max(300px, 400px);
     margin: 1rem 0 1rem 0;
   }
   
@@ -390,7 +406,9 @@ datos fecha vet btns btn_reprogramar btn_cancelar
     grid-column: span 1;
     
   }
-  
+  .otros_turnos{
+    grid-column: span 1;
+  }
 }
 @media (max-width: 445px) {
   .detalle{
@@ -402,8 +420,28 @@ datos fecha vet btns btn_reprogramar btn_cancelar
     align-content: center;
     align-items: center;
   }
+  .btns{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  .btn_cancelar{
+    margin: auto;
+  }
   
 }
-  
+@media (min-width: 1444px) {
+  .detalle{
+    grid-template-columns: repeat(4,1fr);
+  }
+  .detalle h3{
+    grid-column: span 4;
+  }
+}
 
 </style>
+
+
+

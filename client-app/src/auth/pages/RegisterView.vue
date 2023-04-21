@@ -215,6 +215,13 @@ form button:hover {
   align-content: center;
   padding: 9px;
 }
+.container_btn button:hover{
+  background:var(--bg-btnLight);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: var(--bg-btn);
+  border: 2px solid var(--bg-btn);
+
+}
 
 .login-form h1 {
   font-family: "Jost";
