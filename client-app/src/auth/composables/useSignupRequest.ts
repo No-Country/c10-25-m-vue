@@ -6,7 +6,7 @@ import { useRouter } from "vue-router";
 import { RegisterFormValues, RegisterFormErrors } from '../interfaces/InterfacesAuth';
 import * as yup from "yup";
 
-const URL_API = "http://localhost:3001/api/v1/auth/signup";
+const URL_API = import.meta.env.VITE_API_URL;
 
 export default function useRegistroForm() {
    const signupStore = useSignupStore()
