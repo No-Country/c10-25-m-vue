@@ -12,6 +12,7 @@ Este backend pertenece al proyecto _Huellitas Clínica Veterinaria_
 >       - [Variables de Entorno](#variables-de-entorno)
 >   - [Scripts](#scripts-del-proyecto)
 >- [Desarrolladores](#desarolladores-del-backend)
+>- [API Documentación](#documentacion)
 
 ### Las tecnologías utilizadas son las siguientes:
 
@@ -104,3 +105,7 @@ npm run prisma:push
 - Luis Miguel Avedaño
 - Gabriel Isaac Jalil
 - Juan Pablo Morales
+
+## Documentacion
+
+https://documenter.getpostman.com/view/24568701/2s93Y2TMiW
