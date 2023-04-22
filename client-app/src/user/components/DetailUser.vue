@@ -33,7 +33,7 @@ const { user, isError, isLoading } = useUser();
 
   font-family: Jost;
   font-weight: 600;
-  font-size: large;
+  font-size: 1.25rem;
   text-align: left;
 
   position: relative;
@@ -54,7 +54,14 @@ const { user, isError, isLoading } = useUser();
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    align-items: center;
     margin: 0;
+
+    font-size: 1.125rem;
+  
+  }
+  .detalle_user ul{
+    align-self: center;
   }
   .detalle_user li{
     margin: 2rem 0 1rem 0;

@@ -173,7 +173,10 @@ let movileNavActivo = false;
   font-family: "Jost", sans-serif;
 }
 .btn-container-session .btn__on-background:hover {
-  background: #4f62c1;
+  background:var(--bg-btnLight);
+  color:var(--bg-btn);
+  border: 1px solid #2e46ba;
+
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .btn-container-session .btn__on-backgroundLogin {
@@ -208,6 +211,7 @@ let movileNavActivo = false;
 }
 .no-background:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 .burger {
   display: none;

@@ -27,6 +27,7 @@ const hasAppointments = ref(true);
           <span v-if="!hasAppointments" class="texto-interno"
             >Todavía no tenés próximos turnos.</span
           >
+          <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
           <div class="appoinments">
             <div class="time-appoinment">
               <span>
@@ -51,21 +52,10 @@ const hasAppointments = ref(true);
               >
             </div>
           </div>
-          <div class="locations">
-            <span>
-              <img src="../../assets/appoinment_img/female.svg" alt="" />
-              Moreira, Valentina - Cardióloga</span
-            >
-          </div>
-          <div class="pets-icon">
-            <span>
-              <img src="../../assets/appoinment_img/pets.svg" alt="" />
-              Terry</span
-            >
-          </div>
-        </span>
+          
+          
+        
 
-        <!-- agregando turnos, hay dos lineas vacias entre el codigo de cada tarjeta
 
         <div class="appoinments">
           <div class="time-appoinment">
@@ -200,6 +190,7 @@ const hasAppointments = ref(true);
 
 
       -->
+        </span>
         <button>Reservar un turno</button>
 
         <div class="pawprint_user">
@@ -305,6 +296,12 @@ const hasAppointments = ref(true);
   margin-top: 3%;
   cursor: pointer;
   color: #ffffff;
+}
+.container-info-appoinment button:hover{
+  
+  background-color: var(--color-bg);
+  color:var(--bg-btn);
+  border: 3px solid #3A57E8;
 }
 
 .container-info-inter {

@@ -14,13 +14,16 @@
       <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
       
       <div class="btn-container-session">
-        <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
-        ">
+        <button
+          @click="toggleLogoutModal"
+          :class="
+            !noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
+          "
+        >
           <img src="./../assets/home_img/A.png" alt="" />
         </button>
         <span v-if="isLogoutModalOpen" class="logout-btn">
-          <p @click="logout">
-            Cerrar Sesión</p>
+          <p @click="logout">Cerrar Sesión</p>
         </span>
       </div>
     </div>
@@ -43,13 +46,18 @@ import Logo from "./LogoHeader.vue";
 import type { RouterLink } from "../router/link-routes";
 import useLogoutModal from "../auth/composables/useLogoutModal";
 import useRenew from "../composables/useRenew";
+import { useUserStore } from "../store/user";
+import { storeToRefs } from "pinia";
 interface Props {
   links: RouterLink[];
 }
 
 useRenew();
 
-const userid = 2;
+const store = useUserStore();
+const { user } = storeToRefs(store);
+
+const userid = user.value?.id;
 
 const props = withDefaults(defineProps<Props>(), {
   links: () => [],
@@ -253,9 +261,8 @@ a {
     flex-direction: column;
     justify-self: center;
     align-self: center;
-    
   }
-  .btn-container-session button{
+  .btn-container-session button {
     margin: auto;
   }
   .btn-container-session .btn__on-background {
