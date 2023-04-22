@@ -1,7 +1,11 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
- 
-    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+    <div class="logo__">
+    <Logo />
+  </div>
+    <div class="movile-nav" 
+    :class="[isMenuOpen ? 'activo' : '', isMenuOpen ? 'flex-mobile' : 'flex-desktop']"
+    >
       <img
       @click="goToHome()"
       src="../../assets/home_img/logo_huellitas.png"
@@ -33,8 +37,9 @@
         </button>
       </div>
     </div>
-    <div class="burger">
-      <button @click="movileNavActivo=!movileNavActivo">
+
+    <div class="burger" @click="toggleMenu">
+      <button >
         <img src="../../assets/home_img/menu_icon.svg" alt="menu hamburguesa">
       </button>  
     </div>
@@ -44,7 +49,7 @@
 <script lang="ts" setup>
 import { ref, Ref } from "vue";
 import { useRouter } from "vue-router";
-
+import Logo from "../../shared/LogoHeader.vue";
 const navItems = ref([
   { name: "Inicio", value: "/" },
   { name: "Servicios", value: "#servicios" },
@@ -54,6 +59,13 @@ const navItems = ref([
 const noBackground: Ref<boolean> = ref(false);
 
 const router = useRouter();
+
+const isMenuOpen = ref(false);
+
+function toggleMenu() {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
 
 function goToLogin() {
   router.push("/auth/login");
@@ -75,6 +87,11 @@ let movileNavActivo = false;
 </script>
 
 <style lang="scss" scoped>
+
+
+.logo__{
+ display:none;
+}
 .no-background {
   background-color: transparent !important;
   color: #2e46ba;
@@ -217,6 +234,10 @@ let movileNavActivo = false;
   display: none;
 }
 @media (max-width: 930px) {
+
+  .logo__{
+ display:flex;
+}
   .movile-nav {
     width: 100%;
     height: max-content;
@@ -272,7 +293,21 @@ let movileNavActivo = false;
     cursor: pointer;
   }
 }
-@media (max-width: 530px) {
+@media (max-width: 930px) {
+
+  .flex-desktop{
+    display:none;
+  }
+  .flex-mobile{
+    display:flex;
+  }
+
+  .logo__{
+    position: absolute;
+    top: 15%;
+    left: 38%;
+    display:flex;
+  }
   .header-container-with-logo-nav-registration {
     justify-content: space-around;
   }
@@ -287,11 +322,25 @@ let movileNavActivo = false;
     width: 90%;
   }
 }
-@media (max-width: 410px) {
+@media (max-width: 600px) {
+
+  .flex-desktop{
+    display:none;
+  }
+  .flex-mobile{
+    display:flex;
+  }
+  .logo__{
+    position: absolute;
+    top: 15%;
+    left: 38%;
+  }
+
+
   .movile-nav {
     position: absolute;
     right: 5%;
-    top:-220px;
+    top:-229px;
   }
   .burger {
     position: absolute;
