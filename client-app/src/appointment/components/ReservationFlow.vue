@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <div class="detalle">
+  <div>
+    <div class="detalle">
       <div class="container-contador-proceso">
         <span v-for="(item, index) in routesFlow" :key="index" :class="{ 'inactive': index !== activeItem }"
           :style="{ backgroundColor: index !== activeItem ? '#8A8F97' : '' }">
-          {{ index +1 }}
+          {{ index + 1 }}
         </span>
       </div>
       <div class="bloque_detalle">
         <div class="container-interno">
-          <slot  @date-selected="handleDateSelected"></slot>
+          <slot @date-selected="handleDateSelected"></slot>
         </div>
       </div>
       <div class="btn-group-reserva">
@@ -17,7 +17,7 @@
         <button class="btn_active" @click="nextRoute">Siguiente</button>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -36,56 +36,49 @@ export default defineComponent({
   setup(props) {
     const router = useRouter();
     const currentRoute = router.currentRoute.value.path;
-  
+
 
     const items = ref([
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' },
-  { id: 3, name: 'Item 3' },
-  { id: 4, name: 'Item 4' },
-]);
+      { id: 1, name: 'Item 1' },
+      { id: 2, name: 'Item 2' },
+      { id: 3, name: 'Item 3' },
+      { id: 4, name: 'Item 4' },
+    ]);
 
-  const storeSearchVets = useAppointmentStore();
- 
-      console.log("padre: "+ storeSearchVets.selectedDate);
-    
-    
-  const currentRouteIndexRefresh = storeSearchVets.routes.indexOf(currentRoute);
-  const currentRouteIndex = storeSearchVets.currentRouteIndex;
-  const routesFlow = storeSearchVets.routes
+    const storeSearchVets = useAppointmentStore();
 
-  if (currentRouteIndexRefresh !== -1) {
+    console.log("padre: " + storeSearchVets.selectedDate);
+
+
+    const currentRouteIndexRefresh = storeSearchVets.routes.indexOf(currentRoute);
+    const currentRouteIndex = storeSearchVets.currentRouteIndex;
+    const routesFlow = storeSearchVets.routes
+
+    if (currentRouteIndexRefresh !== -1) {
       storeSearchVets.currentRouteIndex = currentRouteIndexRefresh;
     }
+
+    watch(() => storeSearchVets.currentRouteIndex, () => {
+      router.push(storeSearchVets.routes[storeSearchVets.currentRouteIndex]);
+    });
     
-   
-  
-  
-    
-  watch(() => storeSearchVets.currentRouteIndex, () => {
-    router.push(storeSearchVets.routes[storeSearchVets.currentRouteIndex]);
-  });
+    const nextRoute = () => {
+      console.log("click")
+      storeSearchVets.nextRoute();
+    }
+    const prevRoute = () => {
+      storeSearchVets.prevRoute();
+    }
+    const activeItem = ref(currentRouteIndexRefresh);
 
+    const selectedDate = ref<string | null>(null);
 
+    const handleDateSelected = (date: string) => {
+      console.log('Received date-selected event with value:', date);
+      alert(selectedDate.value);
+    }
 
-
-  const nextRoute = () => {
-    console.log("click")
-    storeSearchVets.nextRoute();
-}
-  const prevRoute = () => {
-    storeSearchVets.prevRoute();
-  }
-  const activeItem = ref(currentRouteIndexRefresh); 
-    
-  const selectedDate = ref<string | null>(null);
-
-const handleDateSelected = (date: string) => {
-  console.log('Received date-selected event with value:', date);
-  alert(selectedDate.value);
-}
-
-    return { activeItem, nextRoute, prevRoute, items, routesFlow, handleDateSelected}
+    return { activeItem, nextRoute, prevRoute, items, routesFlow, handleDateSelected }
   }
 });
 
@@ -115,7 +108,7 @@ $font-family: 'Jost';
   line-height: 175%;
   color: $primary-color;
   border: 2px solid $primary-color;
-  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   @extend %button-styles;
 
   &:hover {
@@ -124,48 +117,48 @@ $font-family: 'Jost';
 }
 
 .btn_active:hover {
-   text-decoration: underline;
+  text-decoration: underline;
 }
 
 .btn-group-reserva {
-   display:flex;
-   justify-content:flex-end;
-   width:82%;
-   gap:3rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 82%;
+  gap: 3rem;
 
-   .btn_active {
-      width:112px;
-      height:51px;
-      @include font-styles(400,20px);
-      line-height:175%;
-      color:#FFFFFF;
-      background:$primary-color;
-      box-shadow:0px 2px 4px rgba(58,87,232,0.3);
-      @extend %button-styles;
-   }
+  .btn_active {
+    width: 112px;
+    height: 51px;
+    @include font-styles(400, 20px);
+    line-height: 175%;
+    color: #FFFFFF;
+    background: $primary-color;
+    box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+    @extend %button-styles;
+  }
 }
 
 
 .container-contador-proceso {
-   display:inline-flex; 
-   gap:3.3rem;
+  display: inline-flex;
+  gap: 3.3rem;
 
-   span {
-     width:50px; 
-     height:50px; 
-     border-radius:50%; 
-     display:flex; 
-     justify-content:center; 
-     align-items:center; 
-     background:$primary-color; 
-     box-shadow:0px 4px 4px rgba(0,0,0,0.25); 
-     @include font-styles(700,32px);
-     line-height:46px;
-     display:flex;
-     cursor:pointer;
-     padding:4px;
-     color:$secondary-color;
-   }
+  span {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $primary-color;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    @include font-styles(700, 32px);
+    line-height: 46px;
+    display: flex;
+    cursor: pointer;
+    padding: 4px;
+    color: $secondary-color;
+  }
 }
 
 
@@ -178,19 +171,19 @@ $font-family: 'Jost';
 
 
 .abstract {
-   height:100%; 
-   color:var(--text-footer); 
-   background-color:var(--color-bg); 
-   font-family:$font-family; 
-   font-size:1rem; 
-   font-weight:500; 
-   overflow:hidden; 
+  height: 100%;
+  color: var(--text-footer);
+  background-color: var(--color-bg);
+  font-family: $font-family;
+  font-size: 1rem;
+  font-weight: 500;
+  overflow: hidden;
 }
 
 .pawprint {
-   width:7%; 
-   margin-top:1rem; 
-   display:inline; 
+  width: 7%;
+  margin-top: 1rem;
+  display: inline;
 }
 
 
@@ -198,26 +191,26 @@ $font-family: 'Jost';
 
 
 .detalle {
-   width:80%; 
-   margin:2rem 0 1rem 0; 
-   display:inline-block; 
+  width: 80%;
+  margin: 2rem 0 1rem 0;
+  display: inline-block;
 }
 
 
 
 .detalle h3 {
-  color:$primary-color;
-  text-align:left;
-  font-size:1.5rem;
-  font-weight:700;
+  color: $primary-color;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .bloque_detalle {
-  width:100%;
-  height:502px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  width: 100%;
+  height: 502px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .datos {
