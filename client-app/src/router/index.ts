@@ -69,7 +69,7 @@ const router = createRouter({
     {
       ...userRouter,
       path: "/user",
-      // beforeEnter: requireAuth,
+      beforeEnter: requireAuth,
     },
     {
       ...petRouter,
@@ -79,7 +79,7 @@ const router = createRouter({
     {
       ...appointmentRouter,
       path: "/appointment",
-      // beforeEnter: requireAuth,
+      beforeEnter: requireAuth,
     },
     {
       path: "/:pathMatch(.*)*",
