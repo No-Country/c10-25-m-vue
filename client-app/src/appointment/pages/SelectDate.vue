@@ -9,34 +9,25 @@
       </div>
       <div class="professionals-list">
         <div class="calender-selectdate">
-          
-       
-           <DatePicker 
-           :initial-page="{ month: 4, year: 2023 }"
-           
-          borderless
-          v-model="customer.Selectdate" :masks="masks"
-           />
+          <DatePicker :initial-page="{ month: 4, year: 2023 }" borderless v-model="customer.Selectdate" :masks="masks" />
         </div>
 
-        <div class="time-conmtainer">
+        <div v-if="customer.Selectdate" class="time-conmtainer">
           <div class="time-appointments">
             <div v-for="(time, index) in times" :key="time" class="time" @click="selectTime(index)"
               :class="{ 'selected': index === selectedIndex }">
-              <span @click="handleDateSelect()">{{ time }}</span>
+              <span @click="handleEmitReservationflow">{{ time }}</span>
             </div>
           </div>
         </div>
         <!-- <div>Fecha y hora seleccionadas: {{ formattedDateTime }}</div> -->
-
-
       </div>
     </ReservationFlow>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, computed } from 'vue';
+import { defineComponent, ref, reactive, computed, watch } from 'vue';
 import SubHeader from '../components/subHeader.vue'
 import ReservationFlow from '../components/ReservationFlow.vue';
 import { Calendar, DatePicker } from 'v-calendar';
@@ -49,19 +40,18 @@ export default defineComponent({
     Calendar,
     DatePicker,
   },
-  setup() {
+  setup(props, { emit }) {
     const SelectDateAppoitmentStore = useAppointmentStore();
-    const selectedColor = ref('#ABB9F9');
     const date = ref();
     const selectedIndex = ref<number>();
-      const selectedTime = ref('');
+    const selectedTime = ref<string>('');
 
     const selectTime = (index: number) => {
       selectedIndex.value = index;
       selectedTime.value = times[index];
     }
-    const customer = reactive({Selectdate:'1983-01-22'});
-    const masks = ref({ 
+    const customer = reactive({ Selectdate: '' });
+    const masks = ref({
       modelValue: 'YYYY-MM-DD',
     });
     const selectedDate = ref(null);
@@ -86,13 +76,20 @@ export default defineComponent({
 
 
     const times = ['7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30']
+
+
+    const handleEmitReservationflow = () => {
+      console.log('Emitting date-selected event with value:', formattedDateTime.value);
+      SelectDateAppoitmentStore.setSelectedDate(formattedDateTime.value)
     
-    
-    const handleDateSelect = () => {
-      SelectDateAppoitmentStore.setSelectedDate(formattedDateTime.value);
     }
- 
-    return { date, times, selectedColor, selectedIndex, selectTime, handleDateSelect, customer, formattedDateTime, masks, selectedDate, formattedDate }
+    watch(formattedDateTime, (dateTime) => {
+      if (dateTime) {
+
+      }
+    });
+
+    return { date, times, selectedIndex, selectTime, customer, handleEmitReservationflow, formattedDateTime, masks, selectedDate, formattedDate }
   },
 });
 </script>

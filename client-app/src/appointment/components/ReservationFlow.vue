@@ -8,8 +8,8 @@
         </span>
       </div>
       <div class="bloque_detalle">
-        <div class="container-interno">
-          <slot></slot>
+        <div class="container-interno" style="border:3px solid red;">
+          <slot  @date-selected="handleDateSelected"></slot>
         </div>
       </div>
       <div class="btn-group-reserva">
@@ -26,9 +26,16 @@ import { useRouter } from 'vue-router';
 import { useAppointmentStore } from '../../store/appointment';
 
 export default defineComponent({
-  setup() {
+  props: {
+    selectedDate: {
+      type: String,
+      required: false,
+    },
+  },
+  setup(props) {
     const router = useRouter();
     const currentRoute = router.currentRoute.value.path;
+  
 
     const items = ref([
   { id: 1, name: 'Item 1' },
@@ -38,6 +45,10 @@ export default defineComponent({
 ]);
 
   const storeSearchVets = useAppointmentStore();
+ 
+      console.log("padre: "+ storeSearchVets.selectedDate);
+    
+    
   const currentRouteIndexRefresh = storeSearchVets.routes.indexOf(currentRoute);
   const currentRouteIndex = storeSearchVets.currentRouteIndex;
   const routesFlow = storeSearchVets.routes
@@ -59,8 +70,15 @@ export default defineComponent({
     storeSearchVets.prevRoute();
   }
   const activeItem = ref(currentRouteIndexRefresh); 
-  
-    return { activeItem, nextRoute, prevRoute, items, routesFlow }
+    
+  const selectedDate = ref<string | null>(null);
+
+const handleDateSelected = (date: string) => {
+  console.log('Received date-selected event with value:', date);
+  alert(selectedDate.value);
+}
+
+    return { activeItem, nextRoute, prevRoute, items, routesFlow, handleDateSelected  }
   }
 });
 

@@ -3,6 +3,7 @@
     <SubHeader/>
      <ReservationFlow>
       <div class="container-header">
+        {{ storeSearchPets.selectedDate }}
       <div class="header">
         Completá los datos de tu mascota
                 </div>
@@ -14,10 +15,25 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import { defineComponent, ref, computed } from 'vue';
 import SubHeader from '../components/subHeader.vue'
 import ReservationFlow from '../components/ReservationFlow.vue'; 
+import { useAppointmentStore } from '../../store/appointment';
+export default defineComponent({
 
+components: {
+  SubHeader,
+  ReservationFlow,
+},
+
+setup() {
+  const storeSearchPets = useAppointmentStore();
+
+  return { storeSearchPets }
+
+},
+});
 </script>
 <style scoped lang="scss">
 .container-date {

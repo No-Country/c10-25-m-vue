@@ -1,15 +1,15 @@
 <template>
   <div class="abstract">
     <SubHeader/>
-    <ReservationFlow>
-              <div class="container-header">
-                  <div class="header">
-                    Seleccionar profesionales
+        <ReservationFlow >
+                  <div class="container-header">
+                      <div class="header">
+                        Seleccionar profesionales
+                      </div>
+                <SearchVets/>
                   </div>
-            <SearchVets/>
-              </div>
-              <ListEspecalist/>
-      </ReservationFlow>
+                  <ListEspecalist/>
+          </ReservationFlow>
   </div>
 </template>
 
