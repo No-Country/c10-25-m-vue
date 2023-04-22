@@ -7,7 +7,7 @@
          >
         <img :src="`../../src/assets/appoinment_img/avatar-${index + 1}.png`" alt="Avatar" class="avatar" />
         <div class="professional-info">
-          <div class="name">{{ item.reason }}</div>
+          <div class="name">{{ item.speciality }}</div>
         </div>
       </li>
       <li v-if="noMatches" class="professional-item">
@@ -21,10 +21,11 @@
   <script lang="ts">
   import { defineComponent, inject, computed, ref } from 'vue';
   import { useAppointmentStore } from '../../store/appointment';
+  
   export default defineComponent({
     setup() {
       const storeSearchVets = useAppointmentStore();
-      const searchResults = inject<{ id: number; reason: string; speciality: string }[]>('searchResults')!;
+      const searchResults = inject<{ id: number; user_id: string; speciality: string }[]>('searchResults')!;
       const noMatches = computed(() => storeSearchVets.noMatches);
       const selectedIndex = ref<number>(); 
       

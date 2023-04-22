@@ -6,7 +6,6 @@ import ServerMessage from "../../auth/components/ServerMessage.vue";
 import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
 import { ref } from "vue";
 import { useUserStore } from "../../store/user";
-
 const store = useUserStore();
 const { user } = storeToRefs(store);
 const loginStore = useLoginStore();
