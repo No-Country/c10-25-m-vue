@@ -84,6 +84,8 @@ export default defineComponent({
     SubHeader,
     ReservationFlow,
   },
+// Interface Aqui
+
 
   setup() {
     const storeSearchPets = useAppointmentStore();
@@ -128,7 +130,7 @@ export default defineComponent({
       showSelect.value = false;
       arrow_close.value = true;
     };
-    return { filteredOptions, storeSearchPets, selectedPetInputRatio, hasPet, arrowSex_close, filteredSexOptions, showSexSelect, selectedSexOption, selectOption, toggleSexSelect, selectSexOption, options, selectedOption, showSelect, toggleSelect, selectOption, arrow_close }
+    return { filteredOptions, storeSearchPets, selectedPetInputRatio, hasPet, arrowSex_close, filteredSexOptions, showSexSelect, selectedSexOption, toggleSexSelect, selectSexOption, options, selectedOption, showSelect, toggleSelect, selectOption, arrow_close }
 
   },
 });
