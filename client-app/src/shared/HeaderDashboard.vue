@@ -1,12 +1,17 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
-    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+    <div class="" :class="{'movile-nav activo':isMenuOpen}">
+      <div class="logo__">
     <Logo />
-    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+  </div>
+    <div class="" :class="{'movile-nav activo':isMenuOpen}"
+    :style="{display: isMenuOpen ? 'flex' : 'none'}"
+    >
       <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
         link.title
       }}</RouterLink>
       <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
+      
       <div class="btn-container-session">
         <button @click="toggleLogoutModal" :class="!noBackground ? 'no-backgroundLogin' : 'btn__on-backgroundLogin'
         ">
@@ -18,18 +23,14 @@
         </span>
       </div>
     </div>
-    <div class="burger">
-      <button @click="movileNavActivo=!movileNavActivo">
+    <div class="burger" @click="toggleMenu">
+      <button >
         <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa">
       </button>  
     </div>
     
     </div>
-    <div class="burger">
-      <button @click="movileNavActivo=!movileNavActivo">
-        <img src="../assets/home_img/menu_icon.svg" alt="menu hamburguesa">
-      </button>  
-    </div>
+
    
   </div>
 </template>
@@ -53,6 +54,13 @@ const props = withDefaults(defineProps<Props>(), {
   links: () => [],
 });
 
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+
 const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
@@ -60,6 +68,10 @@ let movileNavActivo = false
 </script>
 
 <style lang="scss" scoped>
+
+.burger{
+  cursor:pointer;
+}
 .header-container-with-logo-nav-registration {
   width: 100%;
   height: 100%;
@@ -182,14 +194,20 @@ a {
   }
 }
 @media (max-width: 930px) {
+
+  .logo__{
+    position: absolute;
+    top: 15%;
+    left: 38%;
+  }
   .movile-nav {
-    width: 100%;
+    width: 85%;
     height: max-content;
     margin: 15rem 0 0 0;
     z-index: 11;
 
     background-color: var(--bg-menu-user);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+ 
     border-radius: 10px;
 
     display: inline-flex;
@@ -263,18 +281,31 @@ a {
   
 //   }
 // }
-@media (max-width:60px) {
+
+
+@media (max-width:600px) {
   .movile-nav{
-    position: absolute;
-    right: 5%;
-    top:-220px;
+    // position: absolute;
+    // right: 5%;
+    // top:-220px;
   }
+  .logo__{
+    position: absolute;
+    top: 15%;
+    left: 38%;
+  }
+
+  // .logo__{
+  //   display:none;
+  // }
   .burger{
     position: absolute;
     right: 5%;
-
+    top:30%;
+cursor:pointer;
     button {
       background:none;
+      cursor:pointer;
     }
   }
   

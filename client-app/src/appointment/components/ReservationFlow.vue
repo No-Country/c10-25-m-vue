@@ -8,7 +8,7 @@
         </span>
       </div>
       <div class="bloque_detalle">
-        <div class="container-interno" style="border:3px solid red;">
+        <div class="container-interno">
           <slot  @date-selected="handleDateSelected"></slot>
         </div>
       </div>

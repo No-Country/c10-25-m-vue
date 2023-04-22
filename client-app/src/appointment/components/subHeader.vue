@@ -47,6 +47,7 @@ $font-family: 'Jost';
      position:absolute; 
      top:2rem; 
      right:10%; 
+     z-index:-1000;
    }
 }
 .titulo-portada {

@@ -9,6 +9,24 @@
                   </div>
           </div>
           <div class="professionals-list">
+            <div class="container">
+  <div class="row">
+    <span class="titulo-confirmacion">Profesional y especialidad</span>
+    <span class="appointments-confirmado">Elemento 2</span>
+  </div>
+  <div class="row">
+    <span class="titulo-confirmacion">Día</span>
+    <span class="appointments-confirmado">Elemento 4</span>
+  </div>
+  <div class="row">
+    <span class="titulo-confirmacion">Hora</span>
+    <span class="appointments-confirmado">Elemento 6</span>
+  </div>
+  <div class="row">
+    <span class="titulo-confirmacion">Mascota</span>
+    <span class="appointments-confirmado">Elemento 8</span>
+  </div>
+</div>
           </div>
         </ReservationFlow>
     </div>
@@ -20,6 +38,55 @@
   
   </script>
   <style scoped lang="scss">
+
+
+
+
+.titulo-confirmacion{
+   font-family: 'Jost';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 29px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+
+color: #63676F;
+}
+
+.appointments-confirmado{
+
+font-family: 'Jost';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 29px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+
+color: #383B43;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    height:85%;
+  }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    margin:10px;
+    height:100%;
+    gap:5px;
+   flex-direction: column;
+  }
+  .row span {
+    margin-right: 10px;
+  }
+
   .container-date {
      width:80%; 
      margin:2rem 0 1rem 0; 

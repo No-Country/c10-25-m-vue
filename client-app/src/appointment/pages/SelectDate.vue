@@ -16,7 +16,7 @@
           <div class="time-appointments">
             <div v-for="(time, index) in times" :key="time" class="time" @click="selectTime(index)"
               :class="{ 'selected': index === selectedIndex }">
-              <span @click="handleEmitReservationflow">{{ time }}</span>
+              <span>{{ time }}</span>
             </div>
           </div>
         </div>
@@ -49,6 +49,8 @@ export default defineComponent({
     const selectTime = (index: number) => {
       selectedIndex.value = index;
       selectedTime.value = times[index];
+      console.log('selectedTime.value:', selectedTime.value);
+      handleEmitReservationflow();
     }
     const customer = reactive({ Selectdate: '' });
     const masks = ref({
