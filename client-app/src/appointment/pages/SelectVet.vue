@@ -35,7 +35,7 @@ export default defineComponent({
   setup() {
     const storeSearchVets = useAppointmentStore();
       // Inicializa searchResults como una matriz vacía
-  const searchResults = ref<{ id: number;  user_id: string; speciality: string }[]>([]);
+  const searchResults = ref<{ id: number;  user_id: string; speciality: string, status: string }[]>([]);
     // const searchResults = ref<{ id: number; reason: string; speciality: string }[]>([
     //   { id: 1, reason: 'Moreira, Valentina - Cardióloga',  speciality: 'cardiología' },
     //   { id: 2, reason: 'Serra, Vicente - Cardiólogo',      speciality: 'cardiología' },

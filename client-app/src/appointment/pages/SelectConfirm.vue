@@ -10,23 +10,23 @@
           </div>
           <div class="professionals-list">
             <div class="container">
-  <div class="row">
-    <span class="titulo-confirmacion">Profesional y especialidad</span>
-    <span class="appointments-confirmado">Elemento 2</span>
-  </div>
-  <div class="row">
-    <span class="titulo-confirmacion">Día</span>
-    <span class="appointments-confirmado">Elemento 4</span>
-  </div>
-  <div class="row">
-    <span class="titulo-confirmacion">Hora</span>
-    <span class="appointments-confirmado">Elemento 6</span>
-  </div>
-  <div class="row">
-    <span class="titulo-confirmacion">Mascota</span>
-    <span class="appointments-confirmado">Elemento 8</span>
-  </div>
-</div>
+            <div class="row">
+              <span class="titulo-confirmacion">Profesional y especialidad</span>
+              <span class="appointments-confirmado">Elemento</span>
+            </div>
+            <div class="row">
+              <span class="titulo-confirmacion">Día</span>
+              <span class="appointments-confirmado">Elemento</span>
+            </div>
+            <div class="row">
+              <span class="titulo-confirmacion">Hora</span>
+              <span class="appointments-confirmado">Elemento</span>
+            </div>
+            <div class="row">
+              <span class="titulo-confirmacion">Mascota</span>
+              <span class="appointments-confirmado">Elemento</span>
+            </div>
+          </div>
           </div>
         </ReservationFlow>
     </div>
@@ -76,12 +76,13 @@ color: #383B43;
     height:85%;
   }
   .row {
-    display: flex;
+   display: flex;
     align-items: flex-start;
-    margin:10px;
-    height:100%;
-    gap:5px;
-   flex-direction: column;
+    margin: 8px;
+    /* height: 58%; */
+    gap: -2px;
+    flex-direction: column;
+    gap: 4px;
   }
   .row span {
     margin-right: 10px;

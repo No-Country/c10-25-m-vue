@@ -25,7 +25,7 @@
   export default defineComponent({
     setup() {
       const storeSearchVets = useAppointmentStore();
-      const searchResults = inject<{ id: number; user_id: string; speciality: string }[]>('searchResults')!;
+      const searchResults = inject<{ id: number; user_id: string; speciality: string, status: string }[]>('searchResults')!;
       const noMatches = computed(() => storeSearchVets.noMatches);
       const selectedIndex = ref<number>(); 
       

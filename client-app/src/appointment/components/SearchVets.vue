@@ -6,43 +6,34 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import { defineComponent, inject, ref, provide } from 'vue';
 import { useAppointmentStore } from '../../store/appointment';
+import { useSearchResultsStore } from '../../store/searchresult';
+
 export default defineComponent({
   setup() {
     const storeSearchVets = useAppointmentStore();
+    const searchResultsStore = useSearchResultsStore();
     const searchSpeciality = ref('');
     const noMatches = ref(false);
-    const searchResults = inject<{ id: number; reason: string; speciality: string }[]>('searchResults')!;
+    const searchResults = inject<{ id: number; user_id: string; speciality: string, status: string }[]>('searchResults')!;
+    
+    console.log("Sear " + searchResults)
     provide('noMatches', noMatches);  
     const updateSearch = (event: Event) => {
-      // Realiza la búsqueda en el array de items
-      const items = [
-        { id: 1, reason: 'Moreira, Valentina - Cardióloga', speciality: 'cardiología' },
-        { id: 2, reason: 'Serra, Vicente - Cardiólogo', speciality: 'cardiología' },
-        { id: 3, reason: 'Zampa, Lucía - Laboratorio', speciality: 'laboratorio' },
-        { id: 4, reason: 'Ortiz, Adriana - Dermatóloga', speciality: 'dermatología' },
-        { id: 5, reason: 'Serna, Natalia - Médica clínica', speciality: 'medicina clínica' },
-        { id: 6, reason: 'González, Pablo - Médico clínico', speciality: 'medicina clínica' },
-      ];
-      const results = items.filter((item) => 
-      item.speciality.includes(searchSpeciality.value));
-   
-       // Check if results array is empty
-         // Check if results array is empty
-      if (results.length === 0) {
-        // Update noMatches ref
-        storeSearchVets.setNoMatches(true);
-        searchResults.value = [];     
+      const results = searchResultsStore.results.filter((item) =>
+        item.speciality.includes(searchSpeciality.value)
+      );
 
+      if (results.length === 0) {
+        storeSearchVets.setNoMatches(true);
+        searchResultsStore.setResults([]);
       } else {
-        // Actualiza los resultados de la búsqueda
-        searchResults.value = [...results];
+        searchResultsStore.setResults(results);
         storeSearchVets.setNoMatches(false);
-      } 
-    }
+      }
+    };
      
     return {
       updateSearch,
