@@ -25,6 +25,7 @@ import { ref, defineComponent, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppointmentStore } from '../../store/appointment';
 
+
 export default defineComponent({
   props: {
     selectedDate: {
@@ -57,10 +58,16 @@ export default defineComponent({
       storeSearchVets.currentRouteIndex = currentRouteIndexRefresh;
     }
     
+   
+  
+  
     
   watch(() => storeSearchVets.currentRouteIndex, () => {
     router.push(storeSearchVets.routes[storeSearchVets.currentRouteIndex]);
   });
+
+
+
 
   const nextRoute = () => {
     console.log("click")
@@ -78,7 +85,7 @@ const handleDateSelected = (date: string) => {
   alert(selectedDate.value);
 }
 
-    return { activeItem, nextRoute, prevRoute, items, routesFlow, handleDateSelected  }
+    return { activeItem, nextRoute, prevRoute, items, routesFlow, handleDateSelected}
   }
 });
 
