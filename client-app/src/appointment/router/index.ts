@@ -4,9 +4,11 @@ import AppointmentLayout from "../layout/AppointmentLayout.vue";
 import SelectVet from "../pages/SelectVet.vue";
 import SelectDate from "../pages/SelectDate.vue";
 import PetData from "../pages/PetData.vue";
+import SelectConfirm from "../pages/SelectConfirm.vue"
 import Confirmation from "../pages/Confirmation.vue";
 import MyTurns from "../pages/MyTurns.vue";
 import Abstract from "../pages/Abstract.vue";
+
 
 export const appointmentRouter: RouteRecordRaw = {
   path: "/${}",
@@ -27,6 +29,11 @@ export const appointmentRouter: RouteRecordRaw = {
       path: "/appointment/pet-data",
       name: "appointment-pet-data",
       component: PetData,
+    },
+    {
+      path: "/appointment/vet-confirm",
+      name: "appointment-vet-confirm",
+      component: SelectConfirm,
     },
     {
       path: "/appointment/confirmation",

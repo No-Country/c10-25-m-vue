@@ -62,6 +62,7 @@ import Huellas from "../../assets/user_img/bg-pawprint.png";
   position: absolute;
   top: 5rem;
   right: 10%;
+ 
 }
 .otros_turnos {
   height: 10rem;

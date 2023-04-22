@@ -4,13 +4,19 @@ import { useLoginStore } from "../../store/auth/login";
 import LogoImg from "../../assets/welcome_img/Veterinaria_logotipo-removebg-preview 5.png";
 import ServerMessage from "../../auth/components/ServerMessage.vue";
 import PortadaImg from "../../assets/welcome_img/imagen header 1.png";
+import { useRouter } from 'vue-router'; 
 import { ref } from "vue";
 import { useUserStore } from "../../store/user";
-
 const store = useUserStore();
 const { user } = storeToRefs(store);
 const loginStore = useLoginStore();
 const hasAppointments = ref(true);
+
+const router = useRouter();
+
+function goToAppoitments() {
+router.push('/appointment/vet');
+}
 </script>
 
 <template>
@@ -191,7 +197,7 @@ const hasAppointments = ref(true);
 
       -->
         </span>
-        <button>Reservar un turno</button>
+        <button @click="goToAppoitments">Reservar un turno</button>
 
         <div class="pawprint_user">
           <img src="../../assets/user_img/bg-pawprint.png" alt="huellas" />

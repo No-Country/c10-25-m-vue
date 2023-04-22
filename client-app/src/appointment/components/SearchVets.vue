@@ -1,14 +1,47 @@
 <template>
-    <div>
-        <div class="search-container">
-                  <input type="text" placeholder="Buscar..." />
-                  <img src="../../assets/appoinment_img/seacrh_icon.svg" class="search-icon">
-                </div>
+  <div>
+    <div class="search-container">
+      <input type="text" placeholder="Busqueda por especialista..." v-model="searchSpeciality" @input="updateSearch" />
+      <img src="../../assets/appoinment_img/seacrh_icon.svg" class="search-icon" />
     </div>
+  </div>
 </template>
+<script lang="ts">
+import { defineComponent, inject, ref, provide } from 'vue';
+import { useAppointmentStore } from '../../store/appointment';
+import { useSearchResultsStore } from '../../store/searchresult';
 
-<script setup lang="ts">
+export default defineComponent({
+  setup() {
+    const storeSearchVets = useAppointmentStore();
+    const searchResultsStore = useSearchResultsStore();
+    const searchSpeciality = ref('');
+    const noMatches = ref(false);
+    const searchResults = inject<{ id: number; user_id: string; speciality: string, status: string }[]>('searchResults')!;
+    
+    console.log("Sear " + searchResults)
+    provide('noMatches', noMatches);  
+    const updateSearch = (event: Event) => {
+      const results = searchResultsStore.results.filter((item) =>
+        item.speciality.includes(searchSpeciality.value)
+      );
 
+      if (results.length === 0) {
+        storeSearchVets.setNoMatches(true);
+        searchResultsStore.setResults([]);
+      } else {
+        searchResultsStore.setResults(results);
+        storeSearchVets.setNoMatches(false);
+      }
+    };
+     
+    return {
+      updateSearch,
+      searchSpeciality,
+     
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">

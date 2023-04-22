@@ -2,35 +2,93 @@
     <div>
         <div class="detalle">
       <div class="container-contador-proceso">
-        <span v-for="(item, index) in items" :key="index" :class="{ 'inactive': item.id !== activeItem }"
-          :style="{ backgroundColor: item.id !== activeItem ? '#8A8F97' : '' }">
-          {{ index + 1 }}
+        <span v-for="(item, index) in routesFlow" :key="index" :class="{ 'inactive': index !== activeItem }"
+          :style="{ backgroundColor: index !== activeItem ? '#8A8F97' : '' }">
+          {{ index +1 }}
         </span>
       </div>
       <div class="bloque_detalle">
         <div class="container-interno">
-          <slot></slot>
+          <slot  @date-selected="handleDateSelected"></slot>
         </div>
       </div>
       <div class="btn-group-reserva">
-        <button class="btn-atras">Atrás</button>
-        <button class="btn_active">Siguiente</button>
+        <button class="btn-atras" @click="prevRoute">Atrás</button>
+        <button class="btn_active" @click="nextRoute">Siguiente</button>
       </div>
     </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script lang="ts">
+import { ref, defineComponent, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAppointmentStore } from '../../store/appointment';
 
-const items = ref([
+
+export default defineComponent({
+  props: {
+    selectedDate: {
+      type: String,
+      required: false,
+    },
+  },
+  setup(props) {
+    const router = useRouter();
+    const currentRoute = router.currentRoute.value.path;
+  
+
+    const items = ref([
   { id: 1, name: 'Item 1' },
   { id: 2, name: 'Item 2' },
   { id: 3, name: 'Item 3' },
   { id: 4, name: 'Item 4' },
 ]);
 
-const activeItem = ref(1);
+  const storeSearchVets = useAppointmentStore();
+ 
+      console.log("padre: "+ storeSearchVets.selectedDate);
+    
+    
+  const currentRouteIndexRefresh = storeSearchVets.routes.indexOf(currentRoute);
+  const currentRouteIndex = storeSearchVets.currentRouteIndex;
+  const routesFlow = storeSearchVets.routes
+
+  if (currentRouteIndexRefresh !== -1) {
+      storeSearchVets.currentRouteIndex = currentRouteIndexRefresh;
+    }
+    
+   
+  
+  
+    
+  watch(() => storeSearchVets.currentRouteIndex, () => {
+    router.push(storeSearchVets.routes[storeSearchVets.currentRouteIndex]);
+  });
+
+
+
+
+  const nextRoute = () => {
+    console.log("click")
+    storeSearchVets.nextRoute();
+}
+  const prevRoute = () => {
+    storeSearchVets.prevRoute();
+  }
+  const activeItem = ref(currentRouteIndexRefresh); 
+    
+  const selectedDate = ref<string | null>(null);
+
+const handleDateSelected = (date: string) => {
+  console.log('Received date-selected event with value:', date);
+  alert(selectedDate.value);
+}
+
+    return { activeItem, nextRoute, prevRoute, items, routesFlow, handleDateSelected}
+  }
+});
+
 </script>
 
 <style scoped lang="scss">
@@ -137,9 +195,7 @@ $font-family: 'Jost';
 
 
 
-.dog {
-   margin-top:-1.9375rem; 
-}
+
 
 .detalle {
    width:80%; 

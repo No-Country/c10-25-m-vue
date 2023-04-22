@@ -1,14 +1,18 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
+    <div class="movile-nav" :class="{' activo':isMenuOpen}">
+      <div class="logo__">
     <Logo />
-    <div class="movile-nav" :class="{ activo: !movileNavActivo }">
-      <RouterLink
-        v-for="link of props.links"
-        :key="link.path"
-        :to="link.path"
-        >{{ link.title }}</RouterLink
-      >
+  </div>
+    <div class="movile-nav" 
+    :class="[isMenuOpen ? 'activo' : '', isMenuOpen ? 'flex-mobile' : 'flex-desktop']"
+   
+    >
+      <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
+        link.title
+      }}</RouterLink>
       <RouterLink :to="'/pet/user/' + userid"> Mis mascotas </RouterLink>
+      
       <div class="btn-container-session">
         <button
           @click="toggleLogoutModal"
@@ -23,11 +27,15 @@
         </span>
       </div>
     </div>
-    <div class="burger">
-      <button @click="movileNavActivo = !movileNavActivo">
-        <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa" />
-      </button>
+    <div class="burger" @click="toggleMenu">
+      <button >
+        <img src="../assets/home_img/menu-burger1.png" alt="menu hamburguesa">
+      </button>  
     </div>
+    
+    </div>
+
+   
   </div>
 </template>
 
@@ -55,14 +63,24 @@ const props = withDefaults(defineProps<Props>(), {
   links: () => [],
 });
 
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+
 const { isLogoutModalOpen, toggleLogoutModal, logout } = useLogoutModal();
 const noBackground: Ref<boolean> = ref(false);
 const router = useRouter();
-
-let movileNavActivo = false;
+let movileNavActivo = false
 </script>
 
 <style lang="scss" scoped>
+
+.burger{
+  cursor:pointer;
+}
 .header-container-with-logo-nav-registration {
   width: 100%;
   height: 100%;
@@ -75,6 +93,15 @@ let movileNavActivo = false;
   position: relative;
   padding-left: 10px;
   padding: 12px;
+}
+
+.movile-nav{
+  width: 100%;
+  display: inline-flex;
+  justify-content:space-between;
+  align-content: center;
+  align-items: center;
+
 }
 .logout-btn {
   width: 225px;
@@ -128,17 +155,11 @@ a {
   /* identical to box height, or 42px */
   color: #2e46ba;
 }
-a:hover{
-  text-decoration: underline;
-  color: #0e1c5f;
 
-}
 .movile-nav {
-  width: 80%;
-  display: inline-flex;
+  width: 100%;
+  display: flex;
   justify-content: space-evenly;
-  align-content: center;
-  align-items: center;
 }
 
 .header-container-with-logo-nav-registration nav {
@@ -176,16 +197,39 @@ a:hover{
 
 .burger {
   display: none;
+
+  button{
+    background:none;
+  }
 }
+
+.flex-desktop{
+    display:flex;
+  }
+  .flex-mobile{
+    display:none;
+  }
 @media (max-width: 930px) {
+  .flex-desktop{
+    display:none;
+  }
+  .flex-mobile{
+    display:flex;
+  }
+
+  .logo__{
+    position: absolute;
+    top: 15%;
+    left: 38%;
+  }
   .movile-nav {
-    width: 100%;
+    width: 85%;
     height: max-content;
     margin: 15rem 0 0 0;
     z-index: 11;
 
     background-color: var(--bg-menu-user);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+ 
     border-radius: 10px;
 
     display: inline-flex;
@@ -241,25 +285,58 @@ a:hover{
   }
 }
 
-@media (max-width: 530px) {
-  .header-container-with-logo-nav-registration {
-    justify-content: space-around;
+// @media (max-width: 530px) {
+//   .header-container-with-logo-nav-registration{
+//     justify-content: space-around;
+//   }
+//   .header-container-with-logo-nav-registration .logo{
+//     width: 30%;
+//     z-index: 1;
+//   }
+//   .burger{
+//     margin-right: 5%;
+//   }
+//   .movile-nav{
+//     width: 380px;
+//     right: 5%;
+  
+//   }
+// }
+
+
+@media (max-width:600px) {
+  .movile-nav{
+    // position: absolute;
+    // right: 5%;
+    // top:-220px;
   }
-  .burger {
-    margin-right: 5%;
+
+
+  .flex-desktop{
+    display:none;
   }
-  .movile-nav {
-    width: 90%;
+  .flex-mobile{
+    display:flex;
   }
-}
-@media (max-width: 410px) {
-  .movile-nav {
+  .logo__{
+    position: absolute;
+    top: 15%;
+    left: 38%;
+  }
+
+  // .logo__{
+  //   display:none;
+  // }
+  .burger{
     position: absolute;
     right: 5%;
+    top:30%;
+cursor:pointer;
+    button {
+      background:none;
+      cursor:pointer;
+    }
   }
-  .burger {
-    position: absolute;
-    right: 5%;
-  }
+  
 }
 </style>

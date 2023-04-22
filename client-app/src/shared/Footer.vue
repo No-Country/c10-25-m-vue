@@ -148,7 +148,7 @@ export default defineComponent({
   display: inline-flex;
   flex-direction: column;
   justify-self: center;
-  height: 262px;
+  height: auto;
   color: var(--text-footer);
   font-family: Jost;
   font-size: 1.125rem;

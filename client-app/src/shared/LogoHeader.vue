@@ -62,6 +62,8 @@ font-style: normal;
 font-weight: 400;
 font-size: regular;
 color: #000000;
+display: inline-flex;
+    width: max-content;
 }
 @media (max-width:600px) {
   .logo_movile{

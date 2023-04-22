@@ -15,9 +15,17 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
   import Huellas from "../../assets/appoinment_img/huellas_appointment.png"
-  
+  import { defineComponent } from 'vue';
+export default defineComponent({
+  setup() {
+    return {
+      Huellas
+    }
+  }
+});
+
 </script>
 
 <style scoped lang="scss">
@@ -39,6 +47,7 @@ $font-family: 'Jost';
      position:absolute; 
      top:2rem; 
      right:10%; 
+     z-index:-1000;
    }
 }
 .titulo-portada {
@@ -77,5 +86,9 @@ $font-family: 'Jost';
      font-size:2.5rem; 
      font-weight:700; 
    }
+}
+
+.dog {
+   margin-top:-1.9375rem; 
 }
 </style>

@@ -1,12 +1,13 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
-    <img
+ 
+    <div class="movile-nav" :class="{'activo':!movileNavActivo}">
+      <img
       @click="goToHome()"
       src="../../assets/home_img/logo_huellitas.png"
       alt=""
       class="logo"
     />
-    <div class="movile-nav" :class="{ activo: !movileNavActivo }">
       <nav>
         <ul v-for="(elementosNav, index) in navItems" :key="index">
           <li>
@@ -33,9 +34,9 @@
       </div>
     </div>
     <div class="burger">
-      <button @click="movileNavActivo = !movileNavActivo">
-        <img src="../../assets/home_img/menu_icon.png" alt="menu hamburguesa" />
-      </button>
+      <button @click="movileNavActivo=!movileNavActivo">
+        <img src="../../assets/home_img/menu_icon.svg" alt="menu hamburguesa">
+      </button>  
     </div>
   </div>
 </template>
@@ -121,10 +122,10 @@ let movileNavActivo = false;
   margin-left: 15px;
   cursor: pointer;
 }
-.movile-nav {
-  width: 80%;
+.movile-nav{
+  width: 100%;
   display: inline-flex;
-  justify-content: space-evenly;
+  justify-content:space-between;
   align-content: center;
   align-items: center;
 }
@@ -290,10 +291,15 @@ let movileNavActivo = false;
   .movile-nav {
     position: absolute;
     right: 5%;
+    top:-220px;
   }
   .burger {
     position: absolute;
     right: 5%;
+
+    button {
+      background:none;
+    }
   }
 }
 </style>

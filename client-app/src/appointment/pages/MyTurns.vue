@@ -347,6 +347,7 @@ datos fecha vet btns btn_reprogramar btn_cancelar
   position: absolute;
   top: 5rem;
   right: 10%;
+   z-index:-1000;
 }
 .detalle h3 {
   color: var(--bg-btn);
