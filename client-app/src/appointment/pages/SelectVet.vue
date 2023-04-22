@@ -23,6 +23,7 @@ import { useAppointmentStore } from '../../store/appointment';
 import getConfig from "../../utils/getConfig";
 import { onMounted } from 'vue';
 import axios from 'axios';
+import clinicApi from "../../api/clinic-api";
 export default defineComponent({
 
   components: {
@@ -36,20 +37,13 @@ export default defineComponent({
     const storeSearchVets = useAppointmentStore();
       // Inicializa searchResults como una matriz vacía
   const searchResults = ref<{ id: number;  user_id: string; speciality: string, status: string }[]>([]);
-    // const searchResults = ref<{ id: number; reason: string; speciality: string }[]>([
-    //   { id: 1, reason: 'Moreira, Valentina - Cardióloga',  speciality: 'cardiología' },
-    //   { id: 2, reason: 'Serra, Vicente - Cardiólogo',      speciality: 'cardiología' },
-    //   { id: 3, reason: 'Zampa, Lucía - Laboratorio',       speciality: 'laboratorio' },
-    //   { id: 4, reason: 'Ortiz, Adriana - Dermatóloga',     speciality: 'dermatología' },
-    //   { id: 5, reason: 'Serna, Natalia - Médica clínica',  speciality: 'medicina clínica' },
-    //   { id: 6, reason: 'González, Pablo - Médico clínico', speciality: 'medicina clínica' },
-    // ]);
     const selectedVetId = computed(() => storeSearchVets.selectedVetId);
     
     
     onMounted(async () => {
   // Reemplaza esta URL con la URL real de tu API
-  const response = await axios.get('http://localhost:3001/api/v1/vets', getConfig());
+  // const response = await axios.get('http://localhost:3001/api/v1/vets', getConfig());
+  const response = await clinicApi.get("/vets", getConfig());
   searchResults.value = response.data.vets;
   console.log(response.data.vets)
 });
