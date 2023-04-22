@@ -1,11 +1,12 @@
 <template>
   <div class="header-container-with-logo-nav-registration">
-    <div class="" :class="{'movile-nav activo':isMenuOpen}">
+    <div class="movile-nav" :class="{' activo':isMenuOpen}">
       <div class="logo__">
     <Logo />
   </div>
-    <div class="" :class="{'movile-nav activo':isMenuOpen}"
-    :style="{display: isMenuOpen ? 'flex' : 'none'}"
+    <div class="movile-nav" 
+    :class="[isMenuOpen ? 'activo' : '', isMenuOpen ? 'flex-mobile' : 'flex-desktop']"
+   
     >
       <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{
         link.title
@@ -193,7 +194,20 @@ a {
     background:none;
   }
 }
+
+.flex-desktop{
+    display:flex;
+  }
+  .flex-mobile{
+    display:none;
+  }
 @media (max-width: 930px) {
+  .flex-desktop{
+    display:none;
+  }
+  .flex-mobile{
+    display:flex;
+  }
 
   .logo__{
     position: absolute;
@@ -288,6 +302,14 @@ a {
     // position: absolute;
     // right: 5%;
     // top:-220px;
+  }
+
+
+  .flex-desktop{
+    display:none;
+  }
+  .flex-mobile{
+    display:flex;
   }
   .logo__{
     position: absolute;
